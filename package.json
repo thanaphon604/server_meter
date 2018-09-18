@@ -1,8 +1,8 @@
 {
-  "name": "server_meter",
+  "name": "pop",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +11,6 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
-    "mongoose": "^5.2.3"
+    "mongoose": "^5.2.15"
   }
 }
