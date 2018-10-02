@@ -23,7 +23,7 @@ var BuildingSchema = new Schema({
                         }
                     ],
                     roomStatus: String,
-                    payStatud: Boolean,
+                    payStatus: Boolean,
                     roomNumber: {
                         type: String,
                         unique: true

@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const hbs = require('hbs')
 
 const {Admin} = require('./model/AdminSchema')
 const {Building} = require('./model/BuildingSchema')
@@ -14,6 +15,11 @@ mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/serDB')
 
 var app = express()
 
+app.set('view engine', 'hbs')
+
+app.use(bodyParser.urlencoded({
+    extended:true
+}));
 
 app.use(bodyParser.json())
 
@@ -25,9 +31,6 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', (req, res) => {
-    res.send('helloo')
-})
-app.post('/testPost', (req, res) => {
     res.send('helloo')
 })
 
@@ -43,6 +46,7 @@ app.post('/postAdmin', (req, res ) => {
     })
     // res.send(req.body.username+'  '+req.body.password)
 })
+
 app.get('/getAdmin', (req, res) => {
     Admin.find().then((doc) => {
         res.send(doc)
@@ -50,9 +54,28 @@ app.get('/getAdmin', (req, res) => {
         res.status(404).send(err)
     })
 })
-app.get('/getAdminn', (req, res) => {
-    let usernameInput = req.headers['username']
-    let passwordInput = req.headers['password']
+
+app.post('/signin',(req,res) =>{
+    let usernameInput =  req.body.username
+    let passwordInput = req.body.password
+ //find หาusername password สำหรับ 
+ Admin.find({
+        username: usernameInput,
+        password: passwordInput        
+    }).then((admin) =>{
+        if(admin.length == 1 ){
+         res.send(admin[0])
+        }else if(admin.length ==0){
+             res.status(400).send('sory not found is user')
+        }
+    },(err) =>{
+         res.status(400).send(err)
+    })
+ })
+
+app.post('/postAdminn', (req, res) => {
+    let usernameInput = req.body['username']
+    let passwordInput = req.body['password']
     //find หาusername password สำหรับ login
     Admin.find({
         username: usernameInput,
