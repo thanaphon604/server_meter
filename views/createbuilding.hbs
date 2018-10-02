@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>สร้างหอพัก</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center display-4">สร้างหอพัก</h2>
+
+
+        <form action="" method="" name="form1" id="my-form">
+            <div class="form-group">
+                <label for="exampleInputEmail1">ชื่อหอพัก</label>
+                <input name="nameBuilding" type="text" class="form-control" id="nameBuilding" placeholder="ชื่อหอพัก">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">เบอร์โทรติดต่อหอพัก</label>
+                <input name="phone" type="text" class="form-control" id="phone" placeholder="เบอร์โทรติดต่อหอพัก">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">emailติดต่อหอพัก</label>
+                <input name="email" type="email" class="form-control" id="email" placeholder="email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">ค่าไฟฟ้าต่อหน่วย/บาท</label>
+                <input name="unitmeter" type="number" class="form-control" id="unitmeter" placeholder="ค่าไฟฟ้าต่อหน่วย">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">กำหนดวันสิ้นสุดการชำระเงิน</label>
+                <input name="enddate" type="date" class="form-control" id="enddate" placeholder="email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">จำนวนชั้น</label>
+                <input max="99" name="inputfloor" type="number" class="form-control" id="inputfloor" placeholder="จำนวนชั้น">
+            </div>
+            <div id="divPost"></div>
+
+
+
+
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <script>
+
+        let username = "{{username}}"
+        alert(username)
+
+        $(document).ready(function () {
+
+            $('#inputfloor').on('input', function (e) {
+                var input = $(this);
+                var val = input.val();
+                if (val > 99) {
+                    let s = val + ""
+                    s = s.substring(0, s.length - 1)
+                    let n = parseInt(s)
+                    input.val(n);
+                }
+            })
+
+            var htmlString = ''
+            console.log('running')
+            $('#inputfloor').on('input', function (e) {
+                htmlString = ''
+                var divPost = document.getElementById('divPost')
+                divPost.innerHTML = ''
+                var input = $(this);
+                var val = input.val();
+                console.log(val)
+                for (i = 1; i <= val; i++) {
+                    htmlString += '<p>ชั้น' + (i) + '<input  id="' + "floor" + i + '" type="number" /> ห้อง</p>'
+                }
+                divPost.insertAdjacentHTML('beforeend', htmlString);
+            });
+
+            $(document).on('submit', '#my-form', function () {
+                console.log('######')
+                var NameBuild = document.getElementById("nameBuilding").value;
+                var Phone = document.getElementById("phone").value;
+                var Email = document.getElementById("email").value;
+                var Unitmeter = document.getElementById("unitmeter").value;
+                var Enddate = document.getElementById("enddate").value;
+                var Inputfloor = document.getElementById("inputfloor").value;
+                let floor = []
+                
+                for(let i=0;i<Inputfloor;i++) {
+                    let f = $('#floor'+(i+1)).val()
+                    floor.push(parseInt(f))
+                }
+
+
+                console.log(NameBuild)
+                console.log(Phone)
+                console.log(Email)
+                console.log(Unitmeter)
+                console.log(Enddate)
+                console.log(Inputfloor)
+                console.log(floor)
+
+                let myData = {}
+                myData.adminAllow = 'testAdmin001'
+                myData.buildingName = NameBuild
+
+                let floorArray = []
+                for(let i=0;i<Inputfloor;i++) {
+                    let floorData = {}
+                    let roomArrayPerFloor = []
+
+
+                    for(let j=0;j<floor[i];j++) {
+                        let roomNumber = ''
+                        if((i+1)<=9) {
+                            roomNumber = '0' + (i+1)
+                        }else{
+                            roomNumber = '' + (i+1)
+                        }
+                        if((j+1)<=9) {
+                            roomNumber += ('0' + (j+1))
+                        }else{
+                            roomNumber += (j+1)
+                        }
+                         
+                        let roomData = {
+                            roomStatus: 'emply',
+                            payStatus: false,
+                            roomNumber,
+                            user: []
+                        }
+                        roomArrayPerFloor.push(roomData)
+                    }
+                    floorData.room = roomArrayPerFloor
+                    floorData.number = ''+(i+1)
+                    floorArray.push(floorData)
+                }
+
+                myData.floor = floorArray
+
+                console.log('Data is', myData)
+                
+
+
+
+
+
+
+
+                 return false;
+            });
+
+        });
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

@@ -36,7 +36,12 @@ var BuildingSchema = new Schema({
     adminAllow: {
         type: String,
         required: true
+    },
+    BuildingName:{
+        type: String,
+        required:true
     }
+
 })
 
 var Building = mongoose.model('Building', BuildingSchema)

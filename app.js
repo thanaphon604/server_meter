@@ -33,15 +33,25 @@ app.use(function (req, res, next) {
 app.get('/', (req, res) => {
     res.send('helloo')
 })
+app.post('/createbuilding',(req,res) =>{
+    res.render('createbuild.hbs', {
+        username: req.body.username
+    })
+})
 
 app.post('/postAdmin', (req, res ) => {
+    //console.log(JSON.stringify(req.body))
     let newAdmin = new Admin({
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        fname: req.body.fname,
+        lname: req.body.lname,
+        phone: req.body.phone,
     })
     newAdmin.save().then((d) => {
         res.send(d)
     }, (e) => {
+        console.log(e)
         res.status(400).send(e)
     })
     // res.send(req.body.username+'  '+req.body.password)
@@ -64,7 +74,10 @@ app.post('/signin',(req,res) =>{
         password: passwordInput        
     }).then((admin) =>{
         if(admin.length == 1 ){
-         res.send(admin[0])
+            res.render('homebuild.hbs', {
+                username: usernameInput
+            })
+            //res.send(admin[0])
         }else if(admin.length ==0){
              res.status(400).send('sory not found is user')
         }
@@ -73,23 +86,6 @@ app.post('/signin',(req,res) =>{
     })
  })
 
-app.post('/postAdminn', (req, res) => {
-    let usernameInput = req.body['username']
-    let passwordInput = req.body['password']
-    //find หาusername password สำหรับ login
-    Admin.find({
-        username: usernameInput,
-        password: passwordInput
-    }).then((Admin) => {
-        if (Admin.length == 1) {
-            res.send(Admin[0])
-        } else if (Admin.length == 0) {
-            res.status(404).send('sory not found is user')
-        }
-    }, (err) => {
-        res.status(404).send(err)
-    })
-})
 
 app.post('/postBuilding', (req, res ) => {
     let newBuilding = new Building({

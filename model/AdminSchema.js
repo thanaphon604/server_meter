@@ -13,6 +13,18 @@ var AdminSchema = new Schema({
         type: String, 
         required: true,
         minlength: 6
+    },
+    fname: {
+        type: String,
+        required: true
+    },
+    lname: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
     }
 })
 
