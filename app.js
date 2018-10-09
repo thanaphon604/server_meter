@@ -31,7 +31,10 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', (req, res) => {
-    res.send('helloo')
+    res.render('test.hbs')
+})
+app.get('/test', (req, res) => {
+    res.render('UseElectricity3.hbs')
 })
 app.post('/createbuilding',(req,res) =>{
     res.render('createbuild.hbs', {
@@ -95,6 +98,7 @@ app.post('/postBuilding', (req, res ) => {
     newBuilding.save().then((d) => {
         res.send(d)
     }, (e) => {
+        console.log('you :',d)
         res.status(400).send(e)
     })
 })

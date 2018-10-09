@@ -1,0 +1,22 @@
+#Head {
+    font-size: 20px;
+    background-color: yellowgreen;
+    color: black;
+    border: 2px
+  }
+  div.bigroom{
+    width: 100px;
+    height: 150px;
+    margin-left: 5%
+  }
+  div.room{
+    border: 2px solid black;
+    width: 100px;
+    height: 90px;
+  }
+  .TextHead{
+    font-size: 50px
+    
+  }
+ 
+ 
