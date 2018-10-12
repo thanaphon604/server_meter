@@ -40,7 +40,19 @@ var BuildingSchema = new Schema({
     BuildingName:{
         type: String,
         required:true
+    },
+    UnitMeter:{
+        type:Number,
+        required: true
+    },
+    BuildingPhone:{
+        type:String,
+        
+    },
+    BuildingEmail:{
+        type: String,
     }
+
 
 })
 

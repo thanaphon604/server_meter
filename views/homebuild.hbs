@@ -178,7 +178,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <div class="container">
         <div class="row">
             <div class="form-popup" id="myForm">
-                <form action="" class="form-container" method="" name="form1" id="my-form">
+                <form action="" class="form-container" method="" name="form1" id="my-form" onsubmit="return true">
                     <h1>สร้างหอพัก</h1>
                     <div class="form-group">
                         <label for="exampleInputEmail1">ชื่อหอพัก</label>
@@ -195,10 +195,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     <div class="form-group">
                         <label for="exampleInputEmail1">ค่าไฟฟ้าต่อหน่วย/บาท</label>
                         <input name="unitmeter" type="number" class="form-control" id="unitmeter" placeholder="ค่าไฟฟ้าต่อหน่วย">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">กำหนดวันสิ้นสุดการชำระเงิน</label>
-                        <input name="enddate" type="date" class="form-control" id="enddate" placeholder="email">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">จำนวนชั้น</label>
@@ -221,6 +217,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
         crossorigin="anonymous"></script>
 
     <script>
+        let username = "{{username}}"
         function openForm() {
             document.getElementById("myForm").style.display = "block";
         }
@@ -256,13 +253,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 divPost.insertAdjacentHTML('beforeend', htmlString);
             });
 
-            $(document).on('submit', '#my-form', function () {
+            $(document).on('submit', '#myForm', function () {
                 console.log('######')
                 var NameBuild = document.getElementById("nameBuilding").value;
                 var Phone = document.getElementById("phone").value;
                 var Email = document.getElementById("email").value;
                 var Unitmeter = document.getElementById("unitmeter").value;
-                var Enddate = document.getElementById("enddate").value;
                 var Inputfloor = document.getElementById("inputfloor").value;
                 let floor = []
 
@@ -272,17 +268,16 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 }
 
 
-                console.log(NameBuild)
-                console.log(Phone)
-                console.log(Email)
-                console.log(Unitmeter)
-                console.log(Enddate)
-                console.log(Inputfloor)
-                console.log(floor)
+
 
                 let myData = {}
-                myData.adminAllow = 'thanaphon'
+                myData.adminAllow = username
                 myData.buildingName = NameBuild
+                myData.UnitMeter = Unitmeter
+                myData.BuildingPhone = Phone
+                myData.BuildingEmail = Email
+
+
 
                 let floorArray = []
                 for (let i = 0; i < Inputfloor; i++) {
@@ -319,7 +314,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 myData.floor = floorArray
 
                 console.log('Data is', myData)
-                
                 postData(myData)
                 return false;
             });
@@ -327,19 +321,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
         });
         function postData(myData) {
             var url = "http://localhost:3000/postBuilding";
-            // console.log('===============')
-            // console.log(myData.username)
-            //  console.log(newAdmin.password)
-            //  console.log(newAdmin.fname)
-            // console.log(newAdmin.lname)
-            //  console.log(newAdmin.phone)
-            // console.log('===============')
-            // let res = $.post(url, { username: newAdmin.username, password: newAdmin.password }) 
-            // let res = $.post(url, { username: newAdmin.username, password: newAdmin.password },  function(data, status){
-            //     console.log('data:'+ data)
-            //     console.log('status'+ status)
-            // })
-
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/json");
@@ -347,13 +328,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     console.log('res is', xhr.responseText)
                     // if success go login page
-                    console.log('so ')
-                    // window.location.href = 'login.html'
+                    alert('success')
                 } else {
                     //alert('can not create user! Pls try again.')
+                    alert('fail')
                 }
             };
-          //  var data = JSON.stringify({ nameBuilding: myData.nameBuilding, phone: myData.phone, email: myData.email, unitmeter: myData.unitmeter, enddate: myData.unitmeter, inputfloor: myData.inputfloor, floor: myData.floor });
+            var myData = JSON.stringify({ myData });
             xhr.send(myData);
         }
     </script>

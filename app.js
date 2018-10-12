@@ -31,10 +31,10 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', (req, res) => {
-    res.render('test.hbs')
+    res.send('hello')
 })
 app.get('/test', (req, res) => {
-    res.render('UseElectricity3.hbs')
+    res.render('test.hbs')
 })
 app.post('/createbuilding',(req,res) =>{
     res.render('createbuild.hbs', {
@@ -93,12 +93,18 @@ app.post('/signin',(req,res) =>{
 app.post('/postBuilding', (req, res ) => {
     let newBuilding = new Building({
         floor: req.body.floor,
-        adminAllow: req.body.adminAllow
+        adminAllow: req.body.adminAllow,
+        BuildingName:req.body.BuildingName,
+        UnitMeter:req.body.UnitMeter,
+        BuildingPhone:req.body.BuildingPhone,
+        BuildingEmail:req.body.BuildingEmail,
+
     })
     newBuilding.save().then((d) => {
+        console.log('you is tttttttt is:',d)
         res.send(d)
     }, (e) => {
-        console.log('you :',d)
+        console.log('you have pop is :',d)
         res.status(400).send(e)
     })
 })
