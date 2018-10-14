@@ -47,10 +47,12 @@ var BuildingSchema = new Schema({
     },
     BuildingPhone:{
         type:String,
+        required: true
         
     },
     BuildingEmail:{
         type: String,
+        required: true
     }
 
 
