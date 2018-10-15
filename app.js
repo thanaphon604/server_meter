@@ -93,31 +93,23 @@ app.post('/signin', (req, res) => {
 
 app.post('/postBuilding', (req, res) => {
     let newBuilding = new Building({
-        floor: req.body.floor,
-        adminAllow: req.body.adminAllow,
-        BuildingName: req.body.BuildingName,
-        UnitMeter: req.body.UnitMeter,
-        BuildingPhone: req.body.BuildingPhone,
-        BuildingEmail: req.body.BuildingEmail,
+        floor: req.body.myData.floor,
+        adminAllow: req.body.myData.adminAllow,
+        BuildingName: req.body.myData.BuildingName,
+        UnitMeter: req.body.myData.UnitMeter,
+        BuildingPhone: req.body.myData.BuildingPhone,
+        BuildingEmail: req.body.myData.BuildingEmail,
 
     })
-    res.send('ERROR DFKFDKF',newBuilding)
-    // newBuilding.save().then((d) => {
-    //     res.send(d)
-    // }, (e) => {
-    //     console.log(e)
-    //     res.send('ERROR DFKFDKF',myData)
-    //     res.status(400).send(e)
-    // })
-    
-    // newBuilding.save().then((d) => {
-    //     console.log('you is tttttttt is:',d)
-    //     res.send(d)
-    // }, (e) => {
-    //     console.log('you have pop is :',d)
-    //     res.status(400).send(e) 
-    //     res.render('error.hbs')
-    // })
+
+    newBuilding.save().then((d) => {
+        res.send(d)
+    }, (e) => {
+        console.log(req.body)
+        res.send('ERROR ')
+        res.status(400).send(e)
+    })
+
 })
 
 

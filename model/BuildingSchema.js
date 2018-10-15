@@ -26,7 +26,7 @@ var BuildingSchema = new Schema({
                     payStatus: Boolean,
                     roomNumber: {
                         type: String,
-                        unique: true
+                       
                     },
                 }
             ],
