@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    
+
     <style>
         #Head {
     font-size: 20px;
@@ -123,10 +123,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
         <div class="class col-sm-12 ">
             <div class="row justify-content-center">
                 <ul>
-                    {{!-- <img src="https://www.bpicc.com/images/2018/10/09/Logo_Intregrate.png" width="90px" height="90px"alt=""> --}}
+                    <img src="https://www.bpicc.com/images/2018/10/09/Logo_Intregrate.png" width="90px" height="90px"
+                        alt="">
                 </ul>
                 <ul>
-                    {{!-- <img src="https://www.bpicc.com/images/2018/10/09/lg_wu.png" width="80px" height="90px" alt=""> --}}
+                    <img src="https://www.bpicc.com/images/2018/10/09/lg_wu.png" width="80px" height="90px" alt="">
+
                 </ul>
                 <div>
                     <ul>
@@ -151,12 +153,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-8 col-sm-12 text-center">
-                <div id="box" class="col-sm-5 col-12 ">
+
+                <div id=" divPostNameBuild" ></div>
+                {{!-- <div id="box" class="col-sm-5 col-12 ">
                     <div class="row mt-4">
                         <div class="col">
                             <h5 text-center>หอพักpop</h5>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col">
@@ -166,12 +169,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
                             ห้องว่าง 10 ห้อง
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary mt-4" style="width:50%">จัดการหอพัก</button>
-
-                </div>
-
+                    <button  type="button" class="btn btn-primary mt-4" style="width:50%">จัดการหอพัก</button>
+                </div> --}}
             </div>
             <button onclick="openForm()" type="button" class="btn btn-primary btn-md btn-block mt-4" style="width:50%;">เพิ่มหอพัก</button>
+
 
         </div>
 
@@ -179,7 +181,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <div class="container">
         <div class="row">
             <div class="form-popup" id="myForm">
-                <form action="" class="form-container" method="" name="form1" id="my-form" >
+                <form action="" class="form-container" method="" name="form1" id="my-form">
                     <h1>สร้างหอพัก</h1>
                     <div class="form-group">
                         <label for="exampleInputEmail1">ชื่อหอพัก</label>
@@ -208,8 +210,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                 </form>
             </div>
-
-
         </div>
 
     </div>
@@ -217,7 +217,29 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script>
-        let username = "{{username}}"
+        var divPostNameBuild = document.getElementById('divPostNameBuild')
+        var htmlStringg = '';
+        var username = "{{username}}"
+        var doc = "{{doc}}"
+        var Admin = JSON.parse(decodeURI(doc))
+        var data_admin = [];
+        var long_nameBuild = Admin.length
+
+        for (let i = 0; i < long_nameBuild; i++) {
+            data_admin[i] = Admin[i]
+            var nameB = data_admin[i].BuildingName;
+            htmlStringg += '<div id="box" class="col-sm-5 col-12 "style="margin-bottom:5%"><div class="row mt-4"><div class="col"><h3text-center>ชื่อหอพัก ' + data_admin[i].BuildingName + '</h3></div></div><button value="'+ nameB + '" onclick="FunctionBuild()" type="button" class="btn btn-primary mt-4" style="width:50%">จัดการหอพัก</button></div>'
+        }
+        document.getElementById(" divPostNameBuild").innerHTML = htmlStringg;
+
+
+        console.log('nameAdmin', Admin)
+        console.log('##################')
+        console.log(data_admin[1].BuildingName)
+
+        function FunctionBuild() {
+            console.log('hello pop',data_admin[i].BuildingName)
+        }
         function openForm() {
             document.getElementById("myForm").style.display = "block";
         }
@@ -267,9 +289,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     floor.push(parseInt(f))
                 }
 
-
-
-
                 let myData = {}
                 myData.adminAllow = username
                 myData.BuildingName = NameBuild
@@ -318,7 +337,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 return false;
             });
 
-        }); 
+        });
         function postData(myData) {
             var url = "http://localhost:3000/postBuilding";
             var xhr = new XMLHttpRequest();
@@ -330,15 +349,15 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     // if success go login page
                     alert('success')
                     window.location.reload(true);
-                    
+
                 } else {
                     //alert('can not create user! Pls try again.')
                 }
             };
-            var data = JSON.stringify({myData });
+            var data = JSON.stringify({ myData });
             xhr.send(data);
         }
-        
+
     </script>
 
 

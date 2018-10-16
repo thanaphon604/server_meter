@@ -39,7 +39,8 @@ app.get('/test', (req, res) => {
 })
 app.post('/createbuilding', (req, res) => {
     res.render('createbuild.hbs', {
-        username: req.body.username
+        username: req.body.username,
+
     })
 })
 
@@ -78,8 +79,13 @@ app.post('/signin', (req, res) => {
         password: passwordInput
     }).then((admin) => {
         if (admin.length == 1) {
-            res.render('homebuild.hbs', {
-                username: usernameInput
+            Building.find({
+                adminAllow: req.body.username
+            }).then((doc) => {
+                res.render('homebuild.hbs', {
+                    username: usernameInput,
+                    doc: encodeURI(JSON.stringify(doc))
+                })
             })
             //res.send(admin[0])
         } else if (admin.length == 0) {
@@ -89,7 +95,13 @@ app.post('/signin', (req, res) => {
         res.status(400).send(err)
     })
 })
-
+app.get('/getuser', (req, res) => {
+    Building.find().then((doc) => {
+        res.send(doc)
+    }, (err) => {
+        res.status(404).send(err)
+    })
+})
 
 app.post('/postBuilding', (req, res) => {
     let newBuilding = new Building({
@@ -101,7 +113,6 @@ app.post('/postBuilding', (req, res) => {
         BuildingEmail: req.body.myData.BuildingEmail,
 
     })
-
     newBuilding.save().then((d) => {
         res.send(d)
     }, (e) => {
