@@ -154,7 +154,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
         <div class="row justify-content-center">
             <div class="col-8 col-sm-12 text-center">
 
-                <div id=" divPostNameBuild" ></div>
+                <div id=" divPostNameBuild"></div>
                 {{!-- <div id="box" class="col-sm-5 col-12 ">
                     <div class="row mt-4">
                         <div class="col">
@@ -169,7 +169,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                             ห้องว่าง 10 ห้อง
                         </div>
                     </div>
-                    <button  type="button" class="btn btn-primary mt-4" style="width:50%">จัดการหอพัก</button>
+                    <button type="button" class="btn btn-primary mt-4" style="width:50%">จัดการหอพัก</button>
                 </div> --}}
             </div>
             <button onclick="openForm()" type="button" class="btn btn-primary btn-md btn-block mt-4" style="width:50%;">เพิ่มหอพัก</button>
@@ -211,45 +211,30 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 </form>
             </div>
         </div>
-
+       
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script>
+        var username = "{{username}}"
         var divPostNameBuild = document.getElementById('divPostNameBuild')
         var htmlStringg = '';
-        var username = "{{username}}"
         var doc = "{{doc}}"
         var Admin = JSON.parse(decodeURI(doc))
         var data_admin = [];
         var long_nameBuild = Admin.length
-
-        for (let i = 0; i < long_nameBuild; i++) {
-            data_admin[i] = Admin[i]
-            var nameB = data_admin[i].BuildingName;
-            htmlStringg += '<div id="box" class="col-sm-5 col-12 "style="margin-bottom:5%"><div class="row mt-4"><div class="col"><h3text-center>ชื่อหอพัก ' + data_admin[i].BuildingName + '</h3></div></div><button value="'+ nameB + '" onclick="FunctionBuild()" type="button" class="btn btn-primary mt-4" style="width:50%">จัดการหอพัก</button></div>'
-        }
-        document.getElementById(" divPostNameBuild").innerHTML = htmlStringg;
-
-
-        console.log('nameAdmin', Admin)
-        console.log('##################')
-        console.log(data_admin[1].BuildingName)
-
-        function FunctionBuild() {
-            console.log('hello pop',data_admin[i].BuildingName)
-        }
-        function openForm() {
-            document.getElementById("myForm").style.display = "block";
-        }
-
-        function closeForm() {
-            document.getElementById("myForm").style.display = "none";
-        }
         $(document).ready(function () {
-
+            for (let i = 0; i < long_nameBuild; i++) {
+                data_admin[i] = Admin[i]
+                htmlStringg += '<div id="box" class="col-sm-5 col-12 "style="margin-bottom:5%"><div class="row mt-4"><div class="col"><h3 text-center id="NameB[' + i + ']">ชื่อหอพัก ' + data_admin[i].BuildingName + '</h3></div></div><button onclick="FunctionBuild(this.id)" type="button" class="btn btn-primary mt-4" style="width:50%"id="' + data_admin[i].BuildingName + ' "">จัดการหอพัก</button></div>'
+            }
+            document.getElementById(" divPostNameBuild").innerHTML = htmlStringg;
+            console.log('nameAdmin', Admin)
+            console.log('#########ppp#########')
             $('#inputfloor').on('input', function (e) {
+                console.log('กดเพิ่มชั้น')
                 var input = $(this);
                 var val = input.val();
                 if (val > 99) {
@@ -356,6 +341,42 @@ body {font-family: Arial, Helvetica, sans-serif;}
             };
             var data = JSON.stringify({ myData });
             xhr.send(data);
+        }
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+         function FunctionBuild(Bid) {
+            console.log('-----------------------')
+            console.log("หอพัก :", Bid)
+             postBuild(Bid);
+            return false;
+            
+        }
+         function postBuild(Bid) {
+           
+            var url = "http://localhost:3000/getHome";
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('res is', xhr.responseText)
+                    // if success go login page
+                    alert('success')
+                    window.location.reload(true);
+
+                } else {
+                    //alert('can not create user! Pls try again.')
+                }
+            }; 
+            console.log('he',Bid)
+            
+           var dataBuild = JSON.stringify({ BuildingName:Ab.Bid  });
+            xhr.send(dataBuild );
         }
 
     </script>

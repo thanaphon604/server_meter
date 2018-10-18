@@ -95,6 +95,8 @@ app.post('/signin', (req, res) => {
         res.status(400).send(err)
     })
 })
+
+
 app.get('/getuser', (req, res) => {
     Building.find().then((doc) => {
         res.send(doc)
@@ -111,9 +113,10 @@ app.post('/postBuilding', (req, res) => {
         UnitMeter: req.body.myData.UnitMeter,
         BuildingPhone: req.body.myData.BuildingPhone,
         BuildingEmail: req.body.myData.BuildingEmail,
-
     })
     newBuilding.save().then((d) => {
+
+        res.send('###############')
         res.send(d)
     }, (e) => {
         console.log(req.body)
@@ -121,6 +124,28 @@ app.post('/postBuilding', (req, res) => {
         res.status(400).send(e)
     })
 
+})
+app.post('/getHome', (req, res) => {
+    let nameBuildInput = req.body.BuildingName
+    //find หาusername password สำหรับ 
+    Building.find({
+        BuildingName: req.body.BuildingName
+    }).then((build) => {
+        if (build.length == 1) {
+            res.render('home.hbs', {
+                build: encodeURI(JSON.stringify(build))
+            })
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('Fail !!!')
+        }
+    }, (err) => {
+        res.send('###########')
+        res.status(400).send(err)
+        res.send(nameBuildInput)
+        res.send('###########')
+
+    })
 })
 
 

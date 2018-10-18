@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <title>ระบบบันทึกหน่วยไฟฟ้าอัจฉริยะ</title>
+    <link rel="stylesheet" href="css/home.css">
+    <style>
+        #Head {
+    font-size: 20px;
+    background-color: yellowgreen;
+    color: black;
+    border: 2px
+  }
+  div.bigroom{
+    width: 100px;
+    height: 150px;
+    margin-left: 5%
+  }
+  div.room{
+    border: 2px solid black;
+    width: 100px;
+    height: 90px;
+  }
+  .TextHead{
+    font-size: 50px
+    
+  }
+ 
+ 
+    
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" id="Head">
+        <div class="class col-sm-12 ">
+            <div class="row justify-content-center">
+                <ul>
+                    <img src="https://www.bpicc.com/images/2018/10/09/Logo_Intregrate.png" width="90px" height="90px"
+                        alt="">
+                </ul>
+                <ul>
+                    <img src="https://www.bpicc.com/images/2018/10/09/lg_wu.png" width="80px" height="90px" alt="">
+                </ul>
+                <div>
+                    <ul>
+                        <h1>ระบบบันทึกหน่วยไฟฟ้าอัจฉริยะ </h1>
+                    </ul>
+                    <ul>
+                        <h5>(Smart energy monitoring system)</h2>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+  Extra small <576px   col
+  small > 576      px  col-sm
+  mediu, >= 768        col-md
+  Large >=992 px       com-lg
+  Extra Large >= 120px col-xl
+-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                        aria-controls="pills-home" aria-selected="true">ผังห้อง</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                        aria-controls="pills-profile" aria-selected="false">ผู้เช่า</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab1" data-toggle="pill" href="#pills-contact1" role="tab"
+                        aria-controls="pills-contact" aria-selected="false">จดมิเตอร์</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab2" data-toggle="pill" href="#pills-contact2" role="tab"
+                        aria-controls="pills-contact" aria-selected="false">วิเคราะห์การใช้พลังงาน</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab3" data-toggle="pill" href="#pills-contact3" role="tab"
+                        aria-controls="pills-contact" aria-selected="false">ออกใบเเจ้งหนี้&ใบเสร็จ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab4" data-toggle="pill" href="#pills-contact4" role="tab"
+                        aria-controls="pills-contact" aria-selected="false">จัดการหอพัก</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0 fixed-right">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
+            </form>
+        </div>
+    </nav>
+    <div class="tab-content" id="pills-tabContent">
+        <!-- ผังห้อง -->
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+        </div>
+        <!-- ผู้เช่า -->
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                        aria-controls="nav-home" aria-selected="true">ผู้เช่าใหม่</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">ผู้เช่าเก่า</a>
+
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+
+            </div>
+        </div>
+        <!--จดมิเตอร์ -->
+        <div class="tab-pane fade" id="pills-contact1" role="tabpanel" aria-labelledby="pills-contact-tab1">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-saveunit1" role="tab"
+                        aria-controls="nav-home" aria-selected="true">บันทึกค่าไฟฟ้าเเต่ละห้อง</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-saveunit2" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">บันทึกค่าไฟฟ้าประจำเดือนของหอพัก</a>
+
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-saveunit1" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                </div>
+                <div class="tab-pane fade" id="nav-saveunit2" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+
+                </div>
+
+            </div>
+        </div>
+        <!-- วิเคราะห์การใช้พลังงาน  -->
+        <div class="tab-pane fade" id="pills-contact2" role="tabpanel" aria-labelledby="pills-contact-tab2">
+
+        </div>
+        <!-- ออกใบเเจ้งหนี้ใบเสร็จ -->
+        <div class="tab-pane fade" id="pills-contact3" role="tabpanel" aria-labelledby="pills-contact-tab3">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-invoice" role="tab"
+                        aria-controls="nav-home" aria-selected="true">ใบเเจ้งหนี้</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-bill" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">ใบเสร็จ</a>
+
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-invoicec" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+                <div class="tab-pane fade" id="nav-bill" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+
+            </div>
+        </div>
+        <!-- จัดการหอพัก -->
+        <div class="tab-pane fade" id="pills-contact4" role="tabpanel" aria-labelledby="pills-contact-tab4">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-unit" role="tab"
+                        aria-controls="nav-home" aria-selected="true">หน่วยมิเตอร์</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-update" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">อัพเดทผังห้อง</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-set" role="tab"
+                        aria-controls="nav-contact" aria-selected="false">เเจ้งปรับปรุง</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-setbuild" role="tab"
+                        aria-controls="nav-contact" aria-selected="false">เเก้ไขข้อมูลหอพัก</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-unit" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+                <div class="tab-pane fade" id="nav-update" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                <div class="tab-pane fade" id="nav-set" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                <div class="tab-pane fade" id="nav-setbuild" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
