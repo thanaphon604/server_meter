@@ -107,27 +107,25 @@ app.get('/getuser', (req, res) => {
 
 app.post('/postBuilding', (req, res) => {
     let newBuilding = new Building({
-        floor: req.body.myData.floor,
-        adminAllow: req.body.myData.adminAllow,
-        BuildingName: req.body.myData.BuildingName,
-        UnitMeter: req.body.myData.UnitMeter,
-        BuildingPhone: req.body.myData.BuildingPhone,
-        BuildingEmail: req.body.myData.BuildingEmail,
+        floor: req.body.floor,
+        adminAllow: req.body.adminAllow,
+        BuildingName: req.body.BuildingName,
+        UnitMeter: req.body.UnitMeter,
+        BuildingPhone: req.body.BuildingPhone,
+        BuildingEmail: req.body.BuildingEmail,
+        
     })
     newBuilding.save().then((d) => {
-
-        res.send('###############')
         res.send(d)
     }, (e) => {
-        console.log(req.body)
-        res.send('ERROR ')
+        console.log(e)
         res.status(400).send(e)
     })
-
 })
+
 app.post('/getHome', (req, res) => {
     let nameBuildInput = req.body.BuildingName
-    //find หาusername password สำหรับ 
+   // find หาusername password สำหรับ 
     Building.find({
         BuildingName: req.body.BuildingName
     }).then((build) => {

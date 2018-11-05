@@ -14,6 +14,9 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <style>
+        body{
+           
+        }
         #Head {
     font-size: 20px;
     background-color: yellowgreen;
@@ -181,7 +184,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <div class="container">
         <div class="row">
             <div class="form-popup" id="myForm">
-                <form action="" class="form-container" method="" name="form1" id="my-form">
+                <form action="" class="form-container" method="" name="myForm" id="myForm">
                     <h1>สร้างหอพัก</h1>
                     <div class="form-group">
                         <label for="exampleInputEmail1">ชื่อหอพัก</label>
@@ -193,7 +196,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">emailติดต่อหอพัก</label>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="email">
+                        <input name="email" type="email" class="form-control" id="email" placeholder="email ">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">ค่าไฟฟ้าต่อหน่วย/บาท</label>
@@ -211,21 +214,22 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 </form>
             </div>
         </div>
-       
+
     </div>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script>
-        var username = "{{username}}"
-        var divPostNameBuild = document.getElementById('divPostNameBuild')
-        var htmlStringg = '';
-        var doc = "{{doc}}"
-        var Admin = JSON.parse(decodeURI(doc))
-        var data_admin = [];
-        var long_nameBuild = Admin.length
+
         $(document).ready(function () {
+            var username = "{{username}}"
+            var divPostNameBuild = document.getElementById('divPostNameBuild')
+            var htmlStringg = '';
+            var doc = "{{doc}}"
+            var Admin = JSON.parse(decodeURI(doc))
+            var data_admin = [];
+            var long_nameBuild = Admin.length
             for (let i = 0; i < long_nameBuild; i++) {
                 data_admin[i] = Admin[i]
                 htmlStringg += '<div id="box" class="col-sm-5 col-12 "style="margin-bottom:5%"><div class="row mt-4"><div class="col"><h3 text-center id="NameB[' + i + ']">ชื่อหอพัก ' + data_admin[i].BuildingName + '</h3></div></div><button onclick="FunctionBuild(this.id)" type="button" class="btn btn-primary mt-4" style="width:50%"id="' + data_admin[i].BuildingName + ' "">จัดการหอพัก</button></div>'
@@ -324,6 +328,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
         });
         function postData(myData) {
+
             var url = "http://localhost:3000/postBuilding";
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
@@ -339,7 +344,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     //alert('can not create user! Pls try again.')
                 }
             };
-            var data = JSON.stringify({ myData });
+            var data = JSON.stringify({ adminAllow: myData.adminAllow, BuildingName: myData.BuildingName, UnitMeter: myData.UnitMeter, BuildingPhone: myData.BuildingPhone, BuildingEmail: myData.BuildingEmail, floor: myData.floor });
             xhr.send(data);
         }
         function openForm() {
@@ -349,15 +354,16 @@ body {font-family: Arial, Helvetica, sans-serif;}
         function closeForm() {
             document.getElementById("myForm").style.display = "none";
         }
-         function FunctionBuild(Bid) {
-            console.log('-----------------------')
-            console.log("หอพัก :", Bid)
-             postBuild(Bid);
-            return false;
-            
-        }
-         function postBuild(Bid) {
-           
+
+        function FunctionBuild(myBuild) {
+            let myBuild = {
+                BuildingName,
+            }
+            myBuild.BuildingName = myBuild
+            console.log('p-----------------------')
+            console.log(myBuild.BuildingName)
+            console.log('p-----------------------')
+            console.log("หอพักชื่่อ :", myBuild)
             var url = "http://localhost:3000/getHome";
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
@@ -367,16 +373,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     console.log('res is', xhr.responseText)
                     // if success go login page
                     alert('success')
-                    window.location.reload(true);
+
 
                 } else {
                     //alert('can not create user! Pls try again.')
                 }
-            }; 
-            console.log('he',Bid)
-            
-           var dataBuild = JSON.stringify({ BuildingName:Ab.Bid  });
-            xhr.send(dataBuild );
+            };
+            var dataBuild = JSON.stringify({ BuildingName: myBuild.BuildingName });
+            xhr.send(dataBuild);
         }
 
     </script>
