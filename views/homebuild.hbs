@@ -15,7 +15,7 @@
 
     <style>
         body{
-           
+            background-color:rgb(236, 236, 236)
         }
         #Head {
     font-size: 20px;
@@ -39,10 +39,13 @@
   }
  
  
-        #box { 
+     #box { 
     border: 3px solid rgb(10, 10, 10);
     display: block;
     margin: auto;
+    border-radius: 5%;
+    padding: 10px;
+    background-color: rgb(190, 225, 248)
 }
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
@@ -220,18 +223,30 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
     <script>
 
+
+
+
         $(document).ready(function () {
+            //    { { !--console.log($.cookie('name')) --} }
+            console.log('cookie:', document.cookie)
+            var myBuild
             var username = "{{username}}"
             var divPostNameBuild = document.getElementById('divPostNameBuild')
             var htmlStringg = '';
             var doc = "{{doc}}"
             var Admin = JSON.parse(decodeURI(doc))
             var data_admin = [];
+            console.log('###################')
+            console.log(Admin )
             var long_nameBuild = Admin.length
+            console.log(long_nameBuild)
             for (let i = 0; i < long_nameBuild; i++) {
                 data_admin[i] = Admin[i]
+                console.log( data_admin[i])
                 htmlStringg += '<div id="box" class="col-sm-5 col-12 "style="margin-bottom:5%"><div class="row mt-4"><div class="col"><h3 text-center id="NameB[' + i + ']">ชื่อหอพัก ' + data_admin[i].BuildingName + '</h3></div></div><button onclick="FunctionBuild(this.id)" type="button" class="btn btn-primary mt-4" style="width:50%"id="' + data_admin[i].BuildingName + ' "">จัดการหอพัก</button></div>'
             }
             document.getElementById(" divPostNameBuild").innerHTML = htmlStringg;
@@ -355,33 +370,33 @@ body {font-family: Arial, Helvetica, sans-serif;}
             document.getElementById("myForm").style.display = "none";
         }
 
-        function FunctionBuild(myBuild) {
-            let myBuild = {
-                BuildingName,
-            }
-            myBuild.BuildingName = myBuild
-            console.log('p-----------------------')
-            console.log(myBuild.BuildingName)
-            console.log('p-----------------------')
-            console.log("หอพักชื่่อ :", myBuild)
-            var url = "http://localhost:3000/getHome";
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log('res is', xhr.responseText)
-                    // if success go login page
-                    alert('success')
+        function FunctionBuild(BuildingName) {
+            console.log("หอพักชื่่อ :", BuildingName)
+            // window.location.href = 'http://localhost:3000/test';
+
+            window.location.href = 'http://localhost:3000/HOME?BuildingName='+BuildingName
 
 
-                } else {
-                    //alert('can not create user! Pls try again.')
-                }
-            };
-            var dataBuild = JSON.stringify({ BuildingName: myBuild.BuildingName });
-            xhr.send(dataBuild);
+
+            /*  var url = "http://localhost:3000/getHome";
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", url, true);
+              xhr.setRequestHeader("Content-Type", "application/json");
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === 4 && xhr.status === 200) {
+                      document.documentElement.innerHTML = xhr.responseText
+                      //console.log('res is', xhr.responseText)
+                      // if success go login page
+                      // alert('success')
+                  } else {
+                      //alert('can not create user! Pls try again.')
+                  }
+              };
+              var data = JSON.stringify({ BuildingName });
+              xhr.send(data); 
+              */
         }
+
 
     </script>
 

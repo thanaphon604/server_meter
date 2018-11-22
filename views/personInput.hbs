@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <title>ระบบบันทึกหน่วยไฟฟ้าอัจฉริยะ</title>
+    <link rel="stylesheet">
+    <style>
+        #Head {
+    font-size: 20px;
+    background-color: yellowgreen;
+    color: black;
+    border: 2px
+  }
+  div.bigroom{
+    width: 100px;
+    height: 150px;
+    margin-left: 5%
+  }
+  div.room{
+    border: 2px solid black;
+    width: 100px;
+    height: 90px;
+  }
+  .TextHead{
+    font-size: 50px
+    
+  }.divform{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color:whitesmoke;
+
+  }body{
+         background-color:rgb(236, 236, 236)
+  }
+ 
+ 
+
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" id="Head">
+        <div class="class col-sm-12 ">
+            <div class="row justify-content-center">
+                <ul>
+                    <img src="https://www.bpicc.com/images/2018/10/09/Logo_Intregrate.png" width="90px" height="90px"
+                        alt="">
+                </ul>
+                <ul>
+                    <img src="https://www.bpicc.com/images/2018/10/09/lg_wu.png" width="80px" height="90px" alt="">
+                </ul>
+                <div>
+                    <ul>
+                        <h1>ระบบบันทึกหน่วยไฟฟ้าอัจฉริยะ </h1>
+                    </ul>
+                    <ul>
+                        <h5>(Smart energy monitoring system)</h2>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--
+  Extra small <576px   col
+  small > 576      px  col-sm
+  mediu, >= 768        col-md
+  Large >=992 px       com-lg
+  Extra Large >= 120px col-xl
+-->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" col-sm-5 col-8  col-md-5 col-lg-5 ">
+                <br>
+                <hr>
+
+                <div class="divform">
+                    <form name="form" id="form" action="" method="">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">วันที่ทำสัญญา</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="contract" placeholder="ที่อยุ่" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">บันทึก</button>
+                            </div>
+                        </div>
+                        <p>*กรอกข้อมูลเฉพาะครั้งเเรกเท่านั้น </p>
+                    </form>
+                </div>
+                <div class="divform">
+                    <form name="form1" id="form1" action="http://localhost:3000/postUser" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">เลขบัตรประจำตัวประชาชน</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="personID" placeholder="เลขบัตรประจำตัวประชาชน"
+                                    onkeyup="autoTab2(this,1)">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">ชื่อ</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="firstName" placeholder="ชื่อ">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">นามสกุล</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="lastName" placeholder="นามสกุล">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">วันเดือนปีเกิด</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="birthday" placeholder="วันเดือนปีเกิด">
+                            </div>
+                        </div>
+
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-2 pt-0">เพศ</legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radio" id="radio1" value="">
+                                        <label class="form-check-label" for="radio">
+                                            ชาย
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radio" id="radio2" value="">
+                                        <label class="form-check-label" for="radio">
+                                            หญิง
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">ที่อยู่</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="address" placeholder="ที่อยุ่">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">หมายเลขโทรศัพท์</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="phoneNumber" placeholder="หมายเลขโทรศัพท์"
+                                    onkeyup="autoTab2(this,2)">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">บันทึก</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-5" style="margin-left: 3%">
+                <ul>
+                    <p class="h2">ข้อมูลห้อง</p>
+                </ul>
+                <br>
+
+                <form>
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="h4">หมายเลขห้อง</p>
+                        </div>
+                        <div class="col-3">
+                            <p id="nameR">101</p>
+                        </div>
+
+                        <div class="col-3">
+                            <p class="h4">อาคาร</p>
+                        </div>
+                        <div class="col-3">
+                            <p id="nameB">A</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+
+
+                        <div class="col-3">
+                            <p class="h4">วันที่ทำสัญญา</p>
+                        </div>
+                        <div class="col-3">
+                            <p>12/05/2558</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+
+                    </div>
+                </form>
+                <br>
+                <br>
+
+                <table border="1" width="100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ลำดับที่</th>
+                            <th scope="col">ชื่อ</th>
+                            <th scope="col">นามสกุล</th>
+                            <th scope="col">บัตรประชาชน</th>
+                            <th scope="col">เบอร์โทรศัพท์</th>
+                            <th scope="col">เเก้ไขข้อมูล</th>
+                            <th scope="col">ลบข้อมูล</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablePos">
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script>
+        //ข้อมูลห้อง
+        var url_string = window.location.href
+        var url = new URL(url_string);
+        let roomNumber = url.searchParams.get("roomNumber");
+        let BuildingName = url.searchParams.get("BuildingName");
+        let contract = url.searchParams.get("contract");
+        console.log(BuildingName)
+        console.log(roomNumber)
+        console.log(contract)
+        document.getElementById("nameR").innerHTML = roomNumber;
+        document.getElementById("nameB").innerHTML = BuildingName;
+        console.log('###')
+
+        //เช็คข้อความบัตรประชาชนกับเบอร์โทรศัพท์
+        function autoTab2(obj, typeCheck) {
+            if (typeCheck == 1) {
+                var pattern = new String("_-____-_____-_-__"); // กำหนดรูปแบบในนี้
+                var pattern_ex = new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้     
+            } else {
+                var pattern = new String("__-____-____"); // กำหนดรูปแบบในนี้
+                var pattern_ex = new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้                 
+            }
+            var returnText = new String("");
+            var obj_l = obj.value.length;
+            var obj_l2 = obj_l - 1;
+            for (i = 0; i < pattern.length; i++) {
+                if (obj_l2 == i && pattern.charAt(i + 1) == pattern_ex) {
+                    returnText += obj.value + pattern_ex;
+                    obj.value = returnText;
+                }
+            }
+            if (obj_l >= pattern.length) {
+                obj.value = obj.value.substr(0, pattern.length);
+            }
+        }
+        $(document).ready(function () {
+            // เมื่อเกิดเหตุการ submit form
+            $('#form').submit(function () {
+                let contract = document.getElementById('contract').value
+                console.log(contract)
+                console.log(BuildingName)
+                console.log(roomNumber)
+                var url = "http://localhost:3000/postcontract";
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log('res is', xhr.responseText)
+                        // if success go login page
+                        alert('success')
+                        window.location.reload(false);
+
+                    } else {
+                        //alert('can not create user! Pls try again.')
+                    }
+                };
+                var data = JSON.stringify({ contract: contract, BuildingName:BuildingName,roomNumber:roomNumber});
+                xhr.send(data);
+                return false;
+
+            });
+            $('#form1').submit(function () {
+                if (document.getElementById('personID').value == "") {
+                    alert('PLEASE INPUT Person ID');
+                    return false;
+                } else if (document.getElementById('firstName').value == "") {
+                    alert('PLEASE INPUT FirstNmae');
+                    return false;
+                } else if (document.getElementById('lastName').value == "") {
+                    alert('PLEASE INPUT LastNmae');
+                    return false;
+                } else if (document.getElementById('birthday').value == "") {
+                    alert('PLEASE INPUT birthday');
+                    return false;
+                } else if (document.getElementById('radio1').checked == true && document.getElementById('radio2').checked == false) {
+                    var input5 = document.getElementById('radio1').value;
+
+                    return false;
+                } else if (document.getElementById('radio1').checked == false && document.getElementById('radio2').checked == true) {
+                    var input5 = document.getElementById('radio2').value;
+
+                    return false;
+                } else if (document.getElementById('radio1').checked == false && document.getElementById('radio2').checked == false) {
+                    alert('PLEASE CHECK radio1 OR radio2  TRUE');
+                } else if (document.getElementById('address').value == "") {
+                    alert('PLEASE INPUT address');
+                    return false;
+                } else if (document.getElementById('phoneNumber').value == "") {
+                    alert('PLEASE INPUT phoneNumber');
+                    return false;
+                } else if (document.getElementById('dataCopy').value == "") {
+                    alert('PLEASE INPUT  Contract date');
+                    return false;
+                }
+
+                var input1 = document.getElementById("personID").value;
+                var input2 = document.getElementById("firstName").value;
+                var input3 = document.getElementById("lastName").value;
+                var input4 = document.getElementById("birthday").value;
+                var input6 = document.getElementById("address").value;
+                var input7 = document.getElementById(" phoneNumber").value;
+                var input8 = document.getElementById("dateCopy").value;
+
+            });
+        })
+
+        function renderHTML(ourData) {
+            for (let i = 0; i < ourData.length; i++) {
+                htmlString += '<tr><th scope="row">' + (i + 1) + '</th><td>' + ourData[i].personID + '</td><td>'
+                    + ourData[i].firstName + '</td><td>' + ourData[i].lastName + '</td><td>' + ourData[i].phoneNumber + '</td><td>'
+                    + '<img class="edit no' + (i + 1) + '" width="20px" height="20px" src="https://png.icons8.com/windows/1600/new-by-copy.png"></td><td>'
+                    + '<img class="remove no' + (i + 1) + '" width="20px" height="20px" src="https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/close_red.png"></td></tr>'
+            }
+            tablePos.insertAdjacentHTML('beforeend', htmlString);
+        }
+
+        function makeClick() {
+            $('.edit').click(function (e) {
+                alert('edit ' + e.target.classList[1])
+            })
+
+            $('.remove').click(function (e) {
+                alert('remove ' + e.target.classList[1])
+            })
+        }
+
+    </script>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

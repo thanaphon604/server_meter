@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <title>ระบบบันทึกหน่วยไฟฟ้าอัจฉริยะ</title>
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="">
     <style>
         #Head {
     font-size: 20px;
@@ -28,6 +28,8 @@
   .TextHead{
     font-size: 50px
     
+  }body{
+         background-color:rgb(236, 236, 236)
   }
  
  
@@ -105,8 +107,59 @@
     <div class="tab-content" id="pills-tabContent">
         <!-- ผังห้อง -->
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 order-2 order-sm-2 order-md-2 order-lg-2 col-lg-6  col-xl-7 order-xl-1 ">
+                        <div>
+                            <div class="" id=" divPostHome" style="margin-top:5%">
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div id="divPosthr"></div>
+                    </div>
+
+
+                    <div class="col-12 order-1 col-lg-6 order-md-1 order-sm-1 order-lg-1 col-xl-5 " style="margin-top: 15%">
+                        <div class="row">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="background-color: green ; height: 50px;">ห้องว่าง</th>
+                                        <th scope="col" style="background-color: orange">ห้องไม่ว่าง</th>
+                                        <th scope="col" style="background-color: grey">กำลังปรับปรุง</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <th scope="row">10</th>
+                                        <td scope="row"> 30</td>
+                                        <td scope="row">1</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
+
+
+
+
+
+
+
+
+
         <!-- ผู้เช่า -->
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
             <nav>
@@ -177,7 +230,7 @@
                         aria-controls="nav-profile" aria-selected="false">อัพเดทผังห้อง</a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-set" role="tab"
                         aria-controls="nav-contact" aria-selected="false">เเจ้งปรับปรุง</a>
-                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-setbuild" role="tab"
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-setbuild" role="tab"
                         aria-controls="nav-contact" aria-selected="false">เเก้ไขข้อมูลหอพัก</a>
                 </div>
             </nav>
@@ -191,6 +244,57 @@
         </div>
 
     </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //script หน้าผังห้อง
+            var url_string = window.location.href
+            var url = new URL(url_string);
+            let BuildingName = url.searchParams.get("BuildingName");
+            console.log(BuildingName)
+            var htmlString1 = '';
+            //sear data building
+            var ourRequest = new XMLHttpRequest();
+            ourRequest.open('GET', 'http://localhost:3000/getbuild/' + BuildingName)
+            ourRequest.onload = function () {
+                var ourData = JSON.parse(ourRequest.responseText);
+                console.log(ourData)
+                renderHome(ourData);
+            }
+            ourRequest.send();
+            function renderHome(ourData) {
+                console.log(ourData[0].floor[0].room.length)
+                for (let i = 0; i < ourData[0].floor.length; i++) {
+                    htmlString1 += '<br><p>ชั้น' + (i + 1) + '</p><hr style="border: 1px solid black;"<br><div class="row" >'
+                    for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
+
+                        htmlString1 += '<div class="bigroom"><div> <a href="http://localhost:3000/Person?BuildingName=' + BuildingName + '&room='+ourData[0].floor[i].room[j].contract+'&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> </div><div class="room">  <br>  <p>15230.5kw/h</p></div></div> '
+                        console.log(ourData[0].floor[i].room[j])
+                        console.log('#')
+                        //   htmlString3 = htmlString1 + htmlString2
+                        // console.log('ห้อง',j)
+                        //  console.log('ชั้น',i)
+                        console.log('p',ourData[0].floor[i].room[j].contract)
+                    }
+                    htmlString1 += '</div>'
+                }
+                document.getElementById(" divPostHome").innerHTML = htmlString1;
+            }
+            // กรอกข้อมูลของ user
+            function FunctionUser(user) {
+
+                alert('success')
+            }
+
+        });
+
+
+    </script>
 
 
 

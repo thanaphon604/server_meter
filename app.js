@@ -34,9 +34,7 @@ app.use(function (req, res, next) {
 app.get('/', (req, res) => {
     res.send('hello')
 })
-app.get('/test', (req, res) => {
-    res.render('test.hbs')
-})
+
 app.post('/createbuilding', (req, res) => {
     res.render('createbuild.hbs', {
         username: req.body.username,
@@ -113,7 +111,6 @@ app.post('/postBuilding', (req, res) => {
         UnitMeter: req.body.UnitMeter,
         BuildingPhone: req.body.BuildingPhone,
         BuildingEmail: req.body.BuildingEmail,
-        
     })
     newBuilding.save().then((d) => {
         res.send(d)
@@ -122,30 +119,72 @@ app.post('/postBuilding', (req, res) => {
         res.status(400).send(e)
     })
 })
-
+/*
 app.post('/getHome', (req, res) => {
     let nameBuildInput = req.body.BuildingName
-   // find หาusername password สำหรับ 
+    //find หาusername password สำหรับ 
     Building.find({
         BuildingName: req.body.BuildingName
     }).then((build) => {
+        console.log(nameBuildInput)
+        res.render('home.hbs', {
+            build: encodeURI(JSON.stringify(build))
+        })
+        //res.send(admin[0])
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+*/
+// run Person/.hbs
+app.get('/Person', (req, res) => {
+    res.render('personInput.hbs')
+})
+//run Home.hbs
+app.get('/HOME', (req, res) => {
+    res.render('home.hbs')
+})
+
+app.get('/getbuild/:BuildingName', (req, res) => {
+    Building.find({
+        BuildingName: req.params.BuildingName
+    }).then((doc) => {
+        res.send(doc)
+    }, (err) => {
+        res.status(404).send(err)
+    })
+})
+//inout contract  in room
+app.post('/postcontract', (req, res) => {
+    let contractInput = req.body.contract
+    let BuildingNameInput = req.body.BuildingName
+    let roomNumber = req.body.roomNumber
+    //find หาusername password สำหรับ 
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
         if (build.length == 1) {
-            res.render('home.hbs', {
-                build: encodeURI(JSON.stringify(build))
+            Building.find({
+
+            })
+            console.log(contract)
+            newBuilding.save().then((d) => {
+                res.send(d)
+            }, (e) => {
+                console.log(e)
+                res.status(400).send(e)
+                console.log(contract)
             })
             //res.send(admin[0])
         } else if (build.length == 0) {
-            res.status(400).send('Fail !!!')
+            console.log(contract)
+            res.status(400).send('sory not found is user')
         }
     }, (err) => {
-        res.send('###########')
         res.status(400).send(err)
-        res.send(nameBuildInput)
-        res.send('###########')
-
+        console.log(contract)
     })
 })
-
 
 
 app.listen(3000, () => {

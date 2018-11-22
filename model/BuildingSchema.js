@@ -19,11 +19,12 @@ var BuildingSchema = new Schema({
                             sex: Boolean,
                             address: String,
                             tel: String,
-                            birthday: Date,
+                          
                         }
                     ],
                     roomStatus: String,
                     payStatus: Boolean,
+                    contract :Date,
                     roomNumber: {
                         type: String,
                        
