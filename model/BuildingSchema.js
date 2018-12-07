@@ -9,22 +9,24 @@ var BuildingSchema = new Schema({
                 {
                     user : [
                         {
-                            cardID: {
+                            personID: {
                                 type: String,
                                 
                             },
                             firstName: String,
                             lastName: String,     
-                            birthday: Date,
-                            sex: Boolean,
+                            birthday: String,
+                            //sex: Boolean,
                             address: String,
-                            tel: String,
+                            phoneNumber: String,
+                            License: String,
                           
                         }
                     ],
                     roomStatus: String,
                     payStatus: Boolean,
-                    contract :Date,
+                    contract :{ type : String
+                    },
                     roomNumber: {
                         type: String,
                        

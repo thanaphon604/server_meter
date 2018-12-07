@@ -154,37 +154,129 @@ app.get('/getbuild/:BuildingName', (req, res) => {
         res.status(404).send(err)
     })
 })
+
 //inout contract  in room
 app.post('/postcontract', (req, res) => {
+    // let newBuilding= new Building({
+    //     contract: req.body.contract,
+    //     roomNumber: req.body.roomNumber, 
+    // })
+    
+    let roomNumber = String
+    let contract = Date
     let contractInput = req.body.contract
     let BuildingNameInput = req.body.BuildingName
-    let roomNumber = req.body.roomNumber
+    let roomNumberInput = req.body.roomNumber
     //find หาusername password สำหรับ 
     Building.find({
         BuildingName: BuildingNameInput,
     }).then((build) => {
         if (build.length == 1) {
-            Building.find({
+            for (let i = 0; i < build[0].floor.length; i++) {
+                for (let j = 0; j < build[0].floor[i].room.length; j++) {
+                    if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
+                        let id = build[0].floor[i].room[j].id
+                        let rNumber = build[0].floor[i].room[j].roomNumber
+                        let cont = build[0].floor[i].room[j].contract
+                        //     console.log(rNumber)
+                        //        console.log(contractInput)
+                        build[0].floor[i].room[j].contract = contractInput
 
-            })
-            console.log(contract)
-            newBuilding.save().then((d) => {
-                res.send(d)
-            }, (e) => {
-                console.log(e)
-                res.status(400).send(e)
-                console.log(contract)
-            })
+                        build[0].save().then((suc) => {
+                            console.log('res contract : ', suc)
+                            res.send(suc)
+                        }, (e) => {
+                            consoel.log('error contract :', e)
+                            res.status(400).send(e)
+                        })
+                        // Building.findByIdAndUpdate(id, { contract: contractInput }, { new: true, upsert: true }, (err) => {
+                        //     if (err) console.log(err);
+                        //     // console.log('Building.findOneAndUpdate | ', data);
+                        // });
+                    }
+                }
+            }
             //res.send(admin[0])
         } else if (build.length == 0) {
-            console.log(contract)
             res.status(400).send('sory not found is user')
         }
     }, (err) => {
         res.status(400).send(err)
-        console.log(contract)
     })
 })
+
+//post user 
+app.post('/postUser', (req, res) => {
+    // let newUser = new Building({
+    //     personID: req.body.personID,
+    //     firstName: req.body.firstName,
+    //     lastName: req.body.lastName,
+    //     birthday: req.body.birthday,
+    //     //   sex: req.body.sex,
+    //     address: req.body.address,
+    //     phoneNumber: req.body.phoneNumber,
+    //     License: req.body.License
+    //     //    dateCopy: req.body.dateCopy,
+    // })
+    let BuildingNameInput = req.body.BuildingName
+    let roomNumberInput = req.body.roomNumber
+
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            for (let i = 0; i < build[0].floor.length; i++) {
+                for (let j = 0; j < build[0].floor[i].room.length; j++) {
+                    if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
+
+                        build[0].floor[i].room[j].user.push({
+                            personID: req.body.personID,
+                            firstName: req.body.firstName,
+                            lastName: req.body.lastName,
+                            birthday: req.body.birthday,
+                            address: req.body.address,
+                            phoneNumber: req.body.phoneNumber,
+                            License: req.body.License
+                        })
+
+                        build[0].save().then((suc) => {
+                            console.log('res person : ', suc)
+                            res.send(suc)
+                        }, (e) => {
+                            consoel.log('error person :', e)
+                            res.status(400).send(e)
+                        })
+                        // console.log(contractInput)
+                        // build[0].floor[i].room[j].user.push(newUser)
+                        // user.push(newUser).then((d) => {
+                        //     res.send(d)
+                        // }, (e) => {
+                        //     console.log(e)
+                        //     res.status(400).send(e)
+                        // })
+                    }
+                }
+            }
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+///app.get('/getUser/:room/:floor/:build', (req, res) => {
+// api getUser หน้า personInput
+app.get('/getUser/:BuildingName/', (req, res) => {
+    Building.find({
+        BuildingName: req.params.BuildingName
+    }).then((doc) => {
+        res.send(doc)
+    }, (err) => {
+        res.status(404).send(err)
+    })
+})
+
 
 
 app.listen(3000, () => {

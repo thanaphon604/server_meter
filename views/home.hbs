@@ -11,7 +11,7 @@
     <style>
         #Head {
     font-size: 20px;
-    background-color: yellowgreen;
+    background-color: #FFA500;
     color: black;
     border: 2px
   }
@@ -273,13 +273,13 @@
                     htmlString1 += '<br><p>ชั้น' + (i + 1) + '</p><hr style="border: 1px solid black;"<br><div class="row" >'
                     for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
 
-                        htmlString1 += '<div class="bigroom"><div> <a href="http://localhost:3000/Person?BuildingName=' + BuildingName + '&room='+ourData[0].floor[i].room[j].contract+'&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> </div><div class="room">  <br>  <p>15230.5kw/h</p></div></div> '
-                        console.log(ourData[0].floor[i].room[j])
+                        htmlString1 += '<div class="bigroom"><div> <a href="http://localhost:3000/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> </div><div class="room">  <br>  <p>15230.5kw/h</p></div></div> '
+                        console.log('t', ourData[0].floor[i].room[j])
                         console.log('#')
                         //   htmlString3 = htmlString1 + htmlString2
                         // console.log('ห้อง',j)
                         //  console.log('ชั้น',i)
-                        console.log('p',ourData[0].floor[i].room[j].contract)
+                        console.log('p', ourData[0].floor[i].room[j].contract)
                     }
                     htmlString1 += '</div>'
                 }

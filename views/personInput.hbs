@@ -84,7 +84,6 @@
             <div class=" col-sm-5 col-8  col-md-5 col-lg-5 ">
                 <br>
                 <hr>
-
                 <div class="divform">
                     <form name="form" id="form" action="" method="">
                         <div class="form-group row">
@@ -102,12 +101,11 @@
                     </form>
                 </div>
                 <div class="divform">
-                    <form name="form1" id="form1" action="http://localhost:3000/postUser" method="post">
+                    <form name="form1" id="form1" action="" method="">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">เลขบัตรประจำตัวประชาชน</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="personID" placeholder="เลขบัตรประจำตัวประชาชน"
-                                    onkeyup="autoTab2(this,1)">
+                                <input type="text" class="form-control" id="personID" placeholder="เลขบัตรประจำตัวประชาชน">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -129,7 +127,7 @@
                             </div>
                         </div>
 
-                        <fieldset class="form-group">
+                        {{!-- <fieldset class="form-group">
                             <div class="row">
                                 <legend class="col-form-label col-sm-2 pt-0">เพศ</legend>
                                 <div class="col-sm-10">
@@ -148,20 +146,26 @@
 
                                 </div>
                             </div>
-                        </fieldset>
+                        </fieldset> --}}
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">ที่อยู่</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="address" placeholder="ที่อยุ่">
+                                <input type="text" class="form-control" id="address" placeholder="ที่อยู่">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">หมายเลขโทรศัพท์</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="phoneNumber" placeholder="หมายเลขโทรศัพท์"
-                                    onkeyup="autoTab2(this,2)">
+                                <input type="text" class="form-control" id="phoneNumber" placeholder="หมายเลขโทรศัพท์">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">ป้ายทะเบียนยานพาหนะ</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="License" placeholder="ป้ายทะเบียนยานพาหนะ">
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <button type="submit" class="btn btn-primary">บันทึก</button>
@@ -200,7 +204,7 @@
                             <p class="h4">วันที่ทำสัญญา</p>
                         </div>
                         <div class="col-3">
-                            <p>12/05/2558</p>
+                            <p id="showcontract"></p>
                         </div>
                     </div>
                     <br>
@@ -219,6 +223,7 @@
                             <th scope="col">นามสกุล</th>
                             <th scope="col">บัตรประชาชน</th>
                             <th scope="col">เบอร์โทรศัพท์</th>
+                            <th scope="col">ป้ายทะเบียนยานพาหนะ</th>
                             <th scope="col">เเก้ไขข้อมูล</th>
                             <th scope="col">ลบข้อมูล</th>
                         </tr>
@@ -236,45 +241,55 @@
         crossorigin="anonymous"></script>
     <script>
         //ข้อมูลห้อง
-        var url_string = window.location.href
-        var url = new URL(url_string);
-        let roomNumber = url.searchParams.get("roomNumber");
-        let BuildingName = url.searchParams.get("BuildingName");
-        let contract = url.searchParams.get("contract");
-        console.log(BuildingName)
-        console.log(roomNumber)
-        console.log(contract)
-        document.getElementById("nameR").innerHTML = roomNumber;
-        document.getElementById("nameB").innerHTML = BuildingName;
-        console.log('###')
 
-        //เช็คข้อความบัตรประชาชนกับเบอร์โทรศัพท์
-        function autoTab2(obj, typeCheck) {
-            if (typeCheck == 1) {
-                var pattern = new String("_-____-_____-_-__"); // กำหนดรูปแบบในนี้
-                var pattern_ex = new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้     
-            } else {
-                var pattern = new String("__-____-____"); // กำหนดรูปแบบในนี้
-                var pattern_ex = new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้                 
+        $(document).ready(function () {
+            var url_string = window.location.href
+            var url = new URL(url_string);
+            let roomNumber = url.searchParams.get("roomNumber");
+            let BuildingName = url.searchParams.get("BuildingName");
+            let contract = url.searchParams.get("contract");
+            document.getElementById("nameR").innerHTML = roomNumber;
+            document.getElementById("nameB").innerHTML = BuildingName;
+            var ourRequest = new XMLHttpRequest();
+            var tablePos = document.getElementById('tablePos')
+            var htmlString = ''
+
+            // get ข้อมูลทั้งตึกมา
+            var ourRequest = new XMLHttpRequest();
+            ourRequest.open('GET', 'http://localhost:3000/getUser/' + BuildingName)
+            ourRequest.onload = function () {
+                var ourData = JSON.parse(ourRequest.responseText);
+                console.log(ourData)
+                renderHTML(ourData);
             }
-            var returnText = new String("");
-            var obj_l = obj.value.length;
-            var obj_l2 = obj_l - 1;
-            for (i = 0; i < pattern.length; i++) {
-                if (obj_l2 == i && pattern.charAt(i + 1) == pattern_ex) {
-                    returnText += obj.value + pattern_ex;
-                    obj.value = returnText;
+            ourRequest.send();
+
+            //เช็คข้อความบัตรประชาชนกับเบอร์โทรศัพท์
+            function autoTab2(obj, typeCheck) {
+                if (typeCheck == 1) {
+                    var pattern = new String("_-____-_____-_-__"); // กำหนดรูปแบบในนี้
+                    var pattern_ex = new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้     
+                } else {
+                    var pattern = new String("__-____-____"); // กำหนดรูปแบบในนี้
+                    var pattern_ex = new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้                 
+                }
+                var returnText = new String("");
+                var obj_l = obj.value.length;
+                var obj_l2 = obj_l - 1;
+                for (i = 0; i < pattern.length; i++) {
+                    if (obj_l2 == i && pattern.charAt(i + 1) == pattern_ex) {
+                        returnText += obj.value + pattern_ex;
+                        obj.value = returnText;
+                    }
+                }
+                if (obj_l >= pattern.length) {
+                    obj.value = obj.value.substr(0, pattern.length);
                 }
             }
-            if (obj_l >= pattern.length) {
-                obj.value = obj.value.substr(0, pattern.length);
-            }
-        }
-        $(document).ready(function () {
             // เมื่อเกิดเหตุการ submit form
             $('#form').submit(function () {
                 let contract = document.getElementById('contract').value
-                console.log(contract)
+                console.log('sss2', contract)
                 console.log(BuildingName)
                 console.log(roomNumber)
                 var url = "http://localhost:3000/postcontract";
@@ -286,13 +301,14 @@
                         console.log('res is', xhr.responseText)
                         // if success go login page
                         alert('success')
-                        window.location.reload(false);
+                        window.location.reload(true);
 
                     } else {
                         //alert('can not create user! Pls try again.')
                     }
                 };
-                var data = JSON.stringify({ contract: contract, BuildingName:BuildingName,roomNumber:roomNumber});
+
+                var data = JSON.stringify({ contract: '' + contract, BuildingName: BuildingName, roomNumber: roomNumber });
                 xhr.send(data);
                 return false;
 
@@ -310,58 +326,85 @@
                 } else if (document.getElementById('birthday').value == "") {
                     alert('PLEASE INPUT birthday');
                     return false;
-                } else if (document.getElementById('radio1').checked == true && document.getElementById('radio2').checked == false) {
-                    var input5 = document.getElementById('radio1').value;
-
-                    return false;
-                } else if (document.getElementById('radio1').checked == false && document.getElementById('radio2').checked == true) {
-                    var input5 = document.getElementById('radio2').value;
-
-                    return false;
-                } else if (document.getElementById('radio1').checked == false && document.getElementById('radio2').checked == false) {
-                    alert('PLEASE CHECK radio1 OR radio2  TRUE');
                 } else if (document.getElementById('address').value == "") {
                     alert('PLEASE INPUT address');
                     return false;
                 } else if (document.getElementById('phoneNumber').value == "") {
                     alert('PLEASE INPUT phoneNumber');
                     return false;
-                } else if (document.getElementById('dataCopy').value == "") {
-                    alert('PLEASE INPUT  Contract date');
-                    return false;
+                }
+                var personID = document.getElementById("personID").value;
+                var firstName = document.getElementById("firstName").value;
+                var lastName = document.getElementById("lastName").value;
+                var birthday = document.getElementById("birthday").value;
+                var address = document.getElementById("address").value;
+                var phoneNumber = document.getElementById("phoneNumber").value;
+                var License = document.getElementById("License").value;
+
+                var newUser = {
+                    personID, firstName, lastName, birthday, address, phoneNumber, License, BuildingName, roomNumber
                 }
 
-                var input1 = document.getElementById("personID").value;
-                var input2 = document.getElementById("firstName").value;
-                var input3 = document.getElementById("lastName").value;
-                var input4 = document.getElementById("birthday").value;
-                var input6 = document.getElementById("address").value;
-                var input7 = document.getElementById(" phoneNumber").value;
-                var input8 = document.getElementById("dateCopy").value;
+                console.log(newUser)
+                postData(newUser)
 
-            });
-        })
+                return false;
+            })
 
-        function renderHTML(ourData) {
-            for (let i = 0; i < ourData.length; i++) {
-                htmlString += '<tr><th scope="row">' + (i + 1) + '</th><td>' + ourData[i].personID + '</td><td>'
-                    + ourData[i].firstName + '</td><td>' + ourData[i].lastName + '</td><td>' + ourData[i].phoneNumber + '</td><td>'
-                    + '<img class="edit no' + (i + 1) + '" width="20px" height="20px" src="https://png.icons8.com/windows/1600/new-by-copy.png"></td><td>'
-                    + '<img class="remove no' + (i + 1) + '" width="20px" height="20px" src="https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/close_red.png"></td></tr>'
+            function postData(newUser) {
+                var url = "http://localhost:3000/postUser";
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log('res is', xhr.responseText)
+                        // if success go login page
+                        alert('create user Successful ')
+                        window.location.reload(true);
+                        //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+
+                    } else {
+                        //alert('can not create user! Pls try again.')
+                    }
+                };
+                var data = JSON.stringify({
+                    personID: newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
+
+                });
+                xhr.send(data);
+
             }
-            tablePos.insertAdjacentHTML('beforeend', htmlString);
-        }
 
-        function makeClick() {
-            $('.edit').click(function (e) {
-                alert('edit ' + e.target.classList[1])
-            })
+            function renderHTML(ourData) {
 
-            $('.remove').click(function (e) {
-                alert('remove ' + e.target.classList[1])
-            })
-        }
+                for (let i = 0; i < ourData[0].floor.length; i++) {
+                    for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
+                        if (roomNumber == ourData[0].floor[i].room[j].roomNumber) {
+                            //    htmlString1 += '<div class="bigroom"><div> <a href="http://localhost:3000/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> </div><div class="room">  <br>  <p>15230.5kw/h</p></div></div> '
+                            document.getElementById("showcontract").innerHTML = ourData[0].floor[i].room[j].contract;
+                            console.log('ytyt', ourData[0].floor[i].room[j].user.length)
+                            for (let k = 0; k < ourData[0].floor[i].room[j].user.length; k++) {
+                                htmlString += '<tr><th scope="row">' + (k + 1) + '</th><td>' + ourData[0].floor[i].room[j].user[k].firstName + '</td><td>'
+                                    + ourData[0].floor[i].room[j].user[k].lastName + '</td><td>' + ourData[0].floor[i].room[j].user[k].personID + '</td><td>' + ourData[0].floor[i].room[j].user[k].phoneNumber + '</td><td>' + ourData[0].floor[i].room[j].user[k].License + '</td><td>'
+                                    + '<button type="button" class="btn btn-primary mt-8" onclick="edit(this.id)" id="' + (k) + '" width="20px" height="20px"</button></td><td>'
+                                    + '<img onclick="delete(this.id)" id="' + k + '" width="20px" height="20px" src="https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/close_red.png"</button></td></tr>'
+                            }
 
+                        }
+                    }
+                }
+                tablePos.insertAdjacentHTML('beforeend', htmlString);
+            }
+            function edit(cout) {
+                alert(cout)
+                console.log(cout)
+            }
+            
+
+
+
+        })
     </script>
 
 
