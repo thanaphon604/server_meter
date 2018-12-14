@@ -6,6 +6,7 @@ var path = require('path');
 
 const { Admin } = require('./model/AdminSchema')
 const { Building } = require('./model/BuildingSchema')
+const { Userdelete } = require('./model/UserdeleteSchema')
 
 
 mongoose.Promise = global.Promise;
@@ -157,13 +158,6 @@ app.get('/getbuild/:BuildingName', (req, res) => {
 
 //inout contract  in room
 app.post('/postcontract', (req, res) => {
-    // let newBuilding= new Building({
-    //     contract: req.body.contract,
-    //     roomNumber: req.body.roomNumber, 
-    // })
-    
-    let roomNumber = String
-    let contract = Date
     let contractInput = req.body.contract
     let BuildingNameInput = req.body.BuildingName
     let roomNumberInput = req.body.roomNumber
@@ -175,11 +169,6 @@ app.post('/postcontract', (req, res) => {
             for (let i = 0; i < build[0].floor.length; i++) {
                 for (let j = 0; j < build[0].floor[i].room.length; j++) {
                     if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
-                        let id = build[0].floor[i].room[j].id
-                        let rNumber = build[0].floor[i].room[j].roomNumber
-                        let cont = build[0].floor[i].room[j].contract
-                        //     console.log(rNumber)
-                        //        console.log(contractInput)
                         build[0].floor[i].room[j].contract = contractInput
 
                         build[0].save().then((suc) => {
@@ -189,10 +178,7 @@ app.post('/postcontract', (req, res) => {
                             consoel.log('error contract :', e)
                             res.status(400).send(e)
                         })
-                        // Building.findByIdAndUpdate(id, { contract: contractInput }, { new: true, upsert: true }, (err) => {
-                        //     if (err) console.log(err);
-                        //     // console.log('Building.findOneAndUpdate | ', data);
-                        // });
+
                     }
                 }
             }
@@ -207,17 +193,6 @@ app.post('/postcontract', (req, res) => {
 
 //post user 
 app.post('/postUser', (req, res) => {
-    // let newUser = new Building({
-    //     personID: req.body.personID,
-    //     firstName: req.body.firstName,
-    //     lastName: req.body.lastName,
-    //     birthday: req.body.birthday,
-    //     //   sex: req.body.sex,
-    //     address: req.body.address,
-    //     phoneNumber: req.body.phoneNumber,
-    //     License: req.body.License
-    //     //    dateCopy: req.body.dateCopy,
-    // })
     let BuildingNameInput = req.body.BuildingName
     let roomNumberInput = req.body.roomNumber
 
@@ -246,14 +221,7 @@ app.post('/postUser', (req, res) => {
                             consoel.log('error person :', e)
                             res.status(400).send(e)
                         })
-                        // console.log(contractInput)
-                        // build[0].floor[i].room[j].user.push(newUser)
-                        // user.push(newUser).then((d) => {
-                        //     res.send(d)
-                        // }, (e) => {
-                        //     console.log(e)
-                        //     res.status(400).send(e)
-                        // })
+
                     }
                 }
             }
@@ -265,7 +233,190 @@ app.post('/postUser', (req, res) => {
         res.status(400).send(err)
     })
 })
-///app.get('/getUser/:room/:floor/:build', (req, res) => {
+//updateUser หน้า personInput
+app.post('/updateUser', (req, res) => {
+    let BuildingNameInput = req.body.BuildingName
+    let roomNumberInput = req.body.roomNumber
+    let personIDInput = req.body.personID
+    let firstNameInput = req.body.firstName
+    let lastNameInput = req.body.lastName
+    let birthdayInput = req.body.birthday
+    let addressInput = req.body.address
+    let phoneNumberInput = req.body.phoneNumber
+    let LicenseInput = req.body.License
+
+    // console.log('test')
+    // console.log(BuildingNameInput )
+    // console.log(roomNumberInput)
+    // console.log(personIDInput)
+    // console.log(firstNameInput)
+    // console.log(lastNameInput)
+    // console.log(birthdayInput)
+    // console.log(addressInput)
+    // console.log(phoneNumberInput)
+    // console.log(LicenseInput)
+    // console.log('test###############')
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            for (let i = 0; i < build[0].floor.length; i++) {
+                for (let j = 0; j < build[0].floor[i].room.length; j++) {
+                    if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
+                        for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
+                            if (personIDInput == build[0].floor[i].room[j].user[k].personID) {
+
+                                build[0].floor[i].room[j].user[k].personID = personIDInput
+                                build[0].floor[i].room[j].user[k].firstName = firstNameInput
+                                build[0].floor[i].room[j].user[k].lastName = lastNameInput
+                                build[0].floor[i].room[j].user[k].birthday = birthdayInput
+                                build[0].floor[i].room[j].user[k].address = addressInput
+                                build[0].floor[i].room[j].user[k].phoneNumber = phoneNumberInput
+                                build[0].floor[i].room[j].user[k].License = LicenseInput
+                                console.log('test')
+                                console.log(build[0].floor[i].room[j].user[k].personID)
+                                console.log(build[0].floor[i].room[j].user[k].firstName)
+                                console.log(build[0].floor[i].room[j].user[k].lastName)
+                                console.log(build[0].floor[i].room[j].user[k].birthday)
+                                console.log(build[0].floor[i].room[j].user[k].address)
+                                console.log(build[0].floor[i].room[j].user[k].phoneNumber)
+                                console.log(build[0].floor[i].room[j].user[k].License)
+                                console.log('test###############')
+
+                                build[0].save().then((suc) => {
+                                    console.log('res person : ', suc)
+                                    res.send(suc)
+                                }, (e) => {
+                                    consoel.log('error person :', e)
+                                    res.status(400).send(e)
+                                })
+                            }
+                        }
+                    }
+                }
+            }
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+//deleteuser หน้า personInput
+app.post('/deleteUser', (req, res) => {
+    // let newUserdelete = new Userdelete({
+    //     BuildingNameAllow: req.body.BuildingName,
+    //     roomNumberAllow: req.body.roomNumber,
+    //     personIDAllow: req.body.personID,
+    //     firstNameAllow: req.body.firstName,
+    //     lastNameAllow: req.body.lastName,
+    //     birthdayAllow: req.body.birthday,
+    //     addressAllow: req.body.address,
+    //     phoneNumberAllow: req.body.phoneNumber,
+    //     LicenseAllow: req.body.License,
+    // })
+    // res.send('pop')
+    // res.send(newUserdelete)
+    // res.send('pop')
+    // // console.log(newUserdelete)
+    // // console.log(roomNumberAllow)
+    // // console.log(personIDAllow)
+    // // console.log( firstNameAllow)
+    // // console.log(lastNameAllow)
+    // // console.log(birthdayAllow)
+    // // console.log(addressAllow)
+    // // console.log(phoneNumberAllow)
+    // // console.log(LicenseAllow)
+
+    // newUserdelete.save().then((d) => {
+    //     res.send(d)
+    //     res.send(newUserdelete)
+    // }, (e) => {
+    //     console.log(e)
+    //     res.status(400).send(e)
+    // })
+    // let LicenseInput = req.body.License
+    // let addressInput = req.body.address
+    let BuildingNameInput = req.body.BuildingName
+    let roomNumberInput = req.body.roomNumber
+    let personIDInput = req.body.personID
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            for (let i = 0; i < build[0].floor.length; i++) {
+                for (let j = 0; j < build[0].floor[i].room.length; j++) {
+                    if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
+                        for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
+                            if (personIDInput == build[0].floor[i].room[j].user[k].personID) {
+                                let newUserdelete = new Userdelete({
+                                    BuildingNameAllow: req.body.BuildingName,
+                                    roomNumberAllow: req.body.roomNumber,
+                                    personIDAllow: req.body.personID,
+                                    firstNameAllow: req.body.firstName,
+                                    lastNameAllow: req.body.lastName,
+                                    birthdayAllow: req.body.birthday,
+                                    phoneNumberAllow: req.body.phoneNumber,
+                                    Li: req.body.License,
+                                    ad: req.body.address
+                                })
+                                console.log(newUserdelete)
+                                newUserdelete.save().then((d) => {
+                                    res.send(d)
+                                }, (e) => {
+                                    console.log(e)
+                                    res.status(400).send(e)
+                                })
+                                console.log('hhhhh')
+                                // console.log(addressInput)
+                                console.log('hhhhh')
+                                build[0].floor[i].room[j].user[k] = build[0].floor[i].room[j].user[k + 1]
+                                build[0].floor[i].room[j].user.pop()
+
+                                build[0].save().then((suc) => {
+                                    console.log('res person : ', suc)
+                                    res.send(suc)
+                                }, (e) => {
+                                    consoel.log('error person :', e)
+                                    res.status(400).send(e)
+                                })
+                            }
+
+                        }
+                    }
+                }
+            }
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+//หน้า api post หน้า delete user
+// app.post('/postUserdelete', (req, res) => {
+//     let newUserdelete = new Userdelete({
+//         BuildingNameAllow: req.body.BuildingName,
+//         roomNumberAllow: req.body.roomNumber,
+//         personIDAllow: req.body.personID,
+//         firstNameAllow: req.body.firstName,
+//         lastNameAllow: req.body.lastName,
+//         birthdayAllow: req.body.birthday,
+//         addressAllow: req.body.address,
+//         phoneNumberAllow: req.body.phoneNumber,
+//         LicenseAllow:req.body.License,
+//     })
+//     console.log(newUserdelete)
+//     newUserdelete.save().then((d) => {
+//         res.send(d)
+//     }, (e) => {
+//         console.log(e)
+//         res.status(400).send(e)
+//     })
+// })
+
 // api getUser หน้า personInput
 app.get('/getUser/:BuildingName/', (req, res) => {
     Building.find({
@@ -274,6 +425,43 @@ app.get('/getUser/:BuildingName/', (req, res) => {
         res.send(doc)
     }, (err) => {
         res.status(404).send(err)
+    })
+})
+//---------------------------------------------------------------
+//หน้าที่ 2 หน้าดึงข้อมูล user delete ของ user ที่ถูกลบ ในหน้าที่ 2
+app.get('/getUserdelete', (req, res) => {
+    Userdelete.find().then((doc) => {
+        res.send(doc)
+    }, (err) => {
+        res.status(404).send(err)
+    })
+})
+//-------------------------------------หน้าที่ 6 ---------------------------------------------
+//หน้าที่ 6 หน้า เเก้ไขunitmeter 
+app.post('/postUUnitmeter', (req, res) => {
+
+    let BuildingNameInput = req.body.BuildingName
+    let UnitMeterInput = req.body.UnitMeter
+    //find หาusername password สำหรับ 
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            build[0].UnitMeter = UnitMeterInput
+
+            build[0].save().then((suc) => {
+                console.log('res contract : ', suc)
+                res.send(suc)
+            }, (e) => {
+                consoel.log('error contract :', e)
+                res.status(400).send(e)
+            })
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
     })
 })
 

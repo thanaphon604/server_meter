@@ -41,6 +41,18 @@
   }body{
          background-color:rgb(236, 236, 236)
   }
+   #img_container{
+        
+        height: 25px;
+        width: 50px;
+        display: table-cell;
+        vertical-align: middle;
+      }
+      #img_container img{
+       
+        margin: auto auto;
+        display: block;
+      }
  
  
 
@@ -81,7 +93,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class=" col-sm-5 col-8  col-md-5 col-lg-5 ">
+            <div class=" col-md-12 col-lg-5 ">
                 <br>
                 <hr>
                 <div class="divform">
@@ -102,6 +114,7 @@
                 </div>
                 <div class="divform">
                     <form name="form1" id="form1" action="" method="">
+                        <p id="plus">เพิ่มข้อมูล</p>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">เลขบัตรประจำตัวประชาชน</label>
                             <div class="col-sm-10">
@@ -214,25 +227,27 @@
                 </form>
                 <br>
                 <br>
+                <div class="">
+                    <table border="2" width="100%" class=" table-responsive no-padding  table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
 
-                <table border="1" width="100%">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">ลำดับที่</th>
-                            <th scope="col">ชื่อ</th>
-                            <th scope="col">นามสกุล</th>
-                            <th scope="col">บัตรประชาชน</th>
-                            <th scope="col">เบอร์โทรศัพท์</th>
-                            <th scope="col">ป้ายทะเบียนยานพาหนะ</th>
-                            <th scope="col">เเก้ไขข้อมูล</th>
-                            <th scope="col">ลบข้อมูล</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablePos">
+                                <th scope="col">ลำดับที่</th>
+                                <th scope="col">บัตรประชาชน</th>
+                                <th scope="col">ชื่อ</th>
+                                <th scope="col">นามสกุล</th>
+                                <th scope="col">ที่อยู่</th>
+                                <th scope="col">เบอร์โทรศัพท์</th>
+                                <th scope="col">ป้ายทะเบียนยานพาหนะ</th>
+                                <th scope="col">เเก้ไขข้อมูล</th>
+                                <th scope="col">ลบข้อมูล</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablePos">
 
-                    </tbody>
-                </table>
-
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -240,6 +255,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script>
+
         //ข้อมูลห้อง
 
         $(document).ready(function () {
@@ -253,6 +269,8 @@
             var ourRequest = new XMLHttpRequest();
             var tablePos = document.getElementById('tablePos')
             var htmlString = ''
+            var Choice = ''
+
 
             // get ข้อมูลทั้งตึกมา
             var ourRequest = new XMLHttpRequest();
@@ -261,8 +279,11 @@
                 var ourData = JSON.parse(ourRequest.responseText);
                 console.log(ourData)
                 renderHTML(ourData);
+                makeClick(ourData);
+
             }
             ourRequest.send();
+
 
             //เช็คข้อความบัตรประชาชนกับเบอร์โทรศัพท์
             function autoTab2(obj, typeCheck) {
@@ -286,9 +307,10 @@
                     obj.value = obj.value.substr(0, pattern.length);
                 }
             }
+
             // เมื่อเกิดเหตุการ submit form
             $('#form').submit(function () {
-                let contract = document.getElementById('contract').value
+                var contract = document.getElementById('contract').value
                 console.log('sss2', contract)
                 console.log(BuildingName)
                 console.log(roomNumber)
@@ -301,7 +323,7 @@
                         console.log('res is', xhr.responseText)
                         // if success go login page
                         alert('success')
-                        window.location.reload(true);
+                        window.location.reload(false);
 
                     } else {
                         //alert('can not create user! Pls try again.')
@@ -314,6 +336,7 @@
 
             });
             $('#form1').submit(function () {
+
                 if (document.getElementById('personID').value == "") {
                     alert('PLEASE INPUT Person ID');
                     return false;
@@ -352,43 +375,73 @@
             })
 
             function postData(newUser) {
-                var url = "http://localhost:3000/postUser";
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", url, true);
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        console.log('res is', xhr.responseText)
-                        // if success go login page
-                        alert('create user Successful ')
-                        window.location.reload(true);
-                        //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+                var Choice = document.getElementById('plus').innerHTML
+                if (Choice == 'เพิ่มข้อมูล') {
+                    console.log(newUser)
 
-                    } else {
-                        //alert('can not create user! Pls try again.')
-                    }
-                };
-                var data = JSON.stringify({
-                    personID: newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
+                    console.log('pppp')
+                    var url = "http://localhost:3000/postUser";
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", url, true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            console.log('res is', xhr.responseText)
+                            // if success go login page
+                            alert('create user Successful ')
+                            window.location.reload(true);
+                            //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
 
-                });
-                xhr.send(data);
+                        } else {
+                            //alert('can not create user! Pls try again.')
+                        }
+                    };
+                    var data = JSON.stringify({
+                        personID: newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
 
+                    });
+                    xhr.send(data);
+                } else if (Choice == 'เเกไขข้อมูล') {
+                    console.log(newUser)
+                    console.log(Choice)
+                    console.log('ttt')
+                    var url = "http://localhost:3000/updateUser";
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", url, true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            console.log('res is', xhr.responseText)
+                            // if success go login page
+                            alert('create user Successful ')
+                            window.location.reload(true);
+                            //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+
+                        } else {
+                            //alert('can not create user! Pls try again.')
+                        }
+                    };
+                    var data = JSON.stringify({
+                        personID: newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
+
+                    });
+                    xhr.send(data);
+                }
             }
 
-            function renderHTML(ourData) {
 
+            function renderHTML(ourData) {
                 for (let i = 0; i < ourData[0].floor.length; i++) {
                     for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
                         if (roomNumber == ourData[0].floor[i].room[j].roomNumber) {
-                            //    htmlString1 += '<div class="bigroom"><div> <a href="http://localhost:3000/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> </div><div class="room">  <br>  <p>15230.5kw/h</p></div></div> '
+
                             document.getElementById("showcontract").innerHTML = ourData[0].floor[i].room[j].contract;
                             console.log('ytyt', ourData[0].floor[i].room[j].user.length)
                             for (let k = 0; k < ourData[0].floor[i].room[j].user.length; k++) {
-                                htmlString += '<tr><th scope="row">' + (k + 1) + '</th><td>' + ourData[0].floor[i].room[j].user[k].firstName + '</td><td>'
-                                    + ourData[0].floor[i].room[j].user[k].lastName + '</td><td>' + ourData[0].floor[i].room[j].user[k].personID + '</td><td>' + ourData[0].floor[i].room[j].user[k].phoneNumber + '</td><td>' + ourData[0].floor[i].room[j].user[k].License + '</td><td>'
-                                    + '<button type="button" class="btn btn-primary mt-8" onclick="edit(this.id)" id="' + (k) + '" width="20px" height="20px"</button></td><td>'
-                                    + '<img onclick="delete(this.id)" id="' + k + '" width="20px" height="20px" src="https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/close_red.png"</button></td></tr>'
+                                htmlString += '<tr><th scope="row">' + (k + 1) + '</th><td>' + ourData[0].floor[i].room[j].user[k].personID + '</td><td>'
+                                    + ourData[0].floor[i].room[j].user[k].firstName + '</td><td>' + ourData[0].floor[i].room[j].user[k].lastName + '</td><td>' + ourData[0].floor[i].room[j].user[k].address + '</td><td>' + ourData[0].floor[i].room[j].user[k].phoneNumber + '</td><td>' + ourData[0].floor[i].room[j].user[k].License + '</td><td>'
+                                    + '<div id="img_container"><img   class="edit ' + (k) + '" width="20px" height="20px" src="https://png.icons8.com/windows/1600/new-by-copy.png" ></div></td><td>'
+                                    + '<div id="img_container"><img class="remove ' + (k) + '" width="20px" height="20px" src="https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/close_red.png"></div></td></tr>'
                             }
 
                         }
@@ -396,11 +449,107 @@
                 }
                 tablePos.insertAdjacentHTML('beforeend', htmlString);
             }
-            function edit(cout) {
-                alert(cout)
-                console.log(cout)
+            function makeClick(ourData) {
+                $('.edit').click(function (e) {
+                    //   alert('edit ' + e.target.classList[1])
+                    let count = e.target.classList[1]
+                    for (let i = 0; i < ourData[0].floor.length; i++) {
+                        for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
+                            if (roomNumber == ourData[0].floor[i].room[j].roomNumber) {
+                                document.getElementById("personID").value = ourData[0].floor[i].room[j].user[count].personID;
+                                document.getElementById("firstName").value = ourData[0].floor[i].room[j].user[count].firstName;
+                                document.getElementById("lastName").value = ourData[0].floor[i].room[j].user[count].lastName;
+                                document.getElementById("birthday").value = ourData[0].floor[i].room[j].user[count].birthday;
+                                document.getElementById("address").value = ourData[0].floor[i].room[j].user[count].address;
+                                document.getElementById("phoneNumber").value = ourData[0].floor[i].room[j].user[count].phoneNumber;
+                                document.getElementById("License").value = ourData[0].floor[i].room[j].user[count].License;
+                                document.getElementById("plus").innerHTML = 'เเกไขข้อมูล'
+
+                            }
+                        }
+                    }
+
+                })
+
+                $('.remove').click(function (e) {
+                    //  alert('remove ' + e.target.classList[1])
+                    var r = confirm("Do you want to delete the person?");
+                    if (r == true) {
+
+                        let count = e.target.classList[1]
+                        for (let i = 0; i < ourData[0].floor.length; i++) {
+                            for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
+                                if (roomNumber == ourData[0].floor[i].room[j].roomNumber) {
+
+
+                                    var personID = ourData[0].floor[i].room[j].user[count].personID;
+                                    var firstName = ourData[0].floor[i].room[j].user[count].firstName;
+                                    var lastName = ourData[0].floor[i].room[j].user[count].lastName;
+                                    var birthday = ourData[0].floor[i].room[j].user[count].birthday;
+                                    var address = ourData[0].floor[i].room[j].user[count].address;
+                                    var phoneNumber = ourData[0].floor[i].room[j].user[count].phoneNumber;
+                                    var License = ourData[0].floor[i].room[j].user[count].License;
+                                }
+                            }
+                        }
+                         var newUser = {
+                            personID, firstName, lastName, birthday, address, phoneNumber, License, BuildingName, roomNumber
+                        }
+                        var url = "http://localhost:3000/deleteUser";
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", url, true);
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                console.log('res is', xhr.responseText)
+                                // if success go login page
+                                //   alert('Delete ser Successful ')
+                                window.location.reload(true);
+                                //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+
+                            } else {
+                                //alert('can not create user! Pls try again.')
+                            }
+                        };
+                        var data = JSON.stringify({
+                            personID: newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
+
+                        });
+                        xhr.send(data); 
+
+                      /*  {{!-- var url = "http://localhost:3000/postUserdelete";
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", url, true);
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                console.log('res is', xhr.responseText)
+                                // if success go login page
+                                //   alert('Delete ser Successful ')
+                                window.location.reload(true);
+                                //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+
+                            } else {
+                                //alert('can not create user! Pls try again.')
+                            }
+                        };
+                        var datauser = JSON.stringify({
+                            personID: newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
+
+                        });
+                        xhr.send(datauser);
+                        console.log('ggg')
+                        console.log(datauser)
+                        console.log('ggg') --}}*/
+
+
+
+                    } else {
+                        //   alert('no')
+                    }
+                })
             }
-            
+
 
 
 
