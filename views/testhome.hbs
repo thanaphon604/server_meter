@@ -286,29 +286,11 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-saveunit1" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 col-lg-8">
-                            <br> <br>
-                            <div class="">
-                                <label for="start">จดมิเตอร์ประจำเดือน:</label>
-                                <input type="month" type="" id="start" name="start" min="2018-03" value="" >
-                                <div id="tablePostUnitMeter">
-                                    <div id="tablePostUnitMeterbody">
 
-                                    </div>
-
-                                </div>
-
-                                <form action="" name="formUpdateUnitMeter" id="formUpdateUnitMeter" onsubmit="return false">
-                                    <button name="formUpdateUnitMeter" type="submit" class="btn btn-primary">บันทึก</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="tab-pane fade" id="nav-saveunit2" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                    eeee
+
                 </div>
 
             </div>
@@ -396,25 +378,22 @@
                 </div>
                 {{!-- อัพเดทผังห้อง --}}
                 <div class="tab-pane fade" id="nav-update" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <div class="">
+                    <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-12 col-lg-8">
                                 <br> <br>
-                                <div class="">
-                                    <div id="tablePostedit">
-                                        <div id="tablePosteditthead">
+                                <div class="divform">
+                                    <table id="tablePostedit" border="2" width="100%" class="table">
+                                        <thead id="tablePosteditthead">
 
-                                        </div>
+                                        </thead>
 
-                                    </div>
-                                    <form id="myForm" class="container my-3" method="" enctype="" action="">
-
-                                        <a class="bg-success d-block text-center rounded mt-4" id="newNodeButton"
-                                            data-toggle="tooltip" data-placement="top" title="Add new node"><i class="fas fa-plus p-2"
-                                                style="color:white; font-size: 14px;"></i>เพิ่มชั้น</a>
-                                        <hr>
-                                        <a class="bg-success d-block text-center rounded mt-4" data-toggle="tooltip"
-                                            data-placement="top"><i class="fas fa-plus p-2" style="color:white; font-size: 14px;"></i>บันทึกทั้งหมด</a>
+                                    </table>
+                                    <form id="myForm" class="container my-3" method="POST" enctype="multipart/form-data"
+                                        action="">
+                                         <button id="" type="button" class="btn btn-primary mt-5 d-block">เพิ่มชั้น</button><br>
+                                         
+                                        <button id="createButton" type="submit" class="btn btn-primary md-12 lg-8 d-block">บันทึกทั้งหมด</button>
                                     </form>
                                 </div>
                             </div>
@@ -422,29 +401,10 @@
 
                         </div>
 
-
                     </div>
+
                 </div>
-                {{!-- อัพเดทห้องเเจ้งปรับปรุง --}}
-                <div class="tab-pane fade" id="nav-set" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 col-lg-8">
-                            <br> <br>
-                            <div class="">
-
-                                <div id="tablePostUpdate">
-                                    <div id="tablePostUpdatebody">
-
-                                    </div>
-
-                                </div>
-                                <form action="" name="formUpdate" id="formUpdate" onsubmit="return false">
-                                    <button name="formUpdate" type="submit" class="btn btn-primary">บันทึก</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="tab-pane fade" id="nav-set" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                 <div class="tab-pane fade" id="nav-setbuild" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="container-fluid">
                         <div class="row ">
@@ -493,83 +453,6 @@
 
     <script>
 
-        var node = []
-        var member = 0
-        function RemoveLink(id) {
-            console.log('now node isห :', node)
-            let num = id.substring(10);
-            let nodeName = $('#nodeInput' + num).val()
-            $('#blockAppend' + num).remove()
-            //clear node data and member
-            for (let i = 0; i < node.length; i++) {
-                if (nodeName == node[i]) {
-                    node[i] = ''
-                    for (let j = i; j < node.length - 1; j++) {
-                        node[j] = node[j + 1]
-                    }
-                    node.pop()
-                    console.log('now node is :', node)
-                    member--
-                    break
-                }
-            }
-        }
-        function Plusroom(id) {
-            let num = id.substring(10);
-            let nodeName = $('#nodeInput' + num).val()
-            $('#blockAppend' + num).remove()
-            //clear node data and member
-            for (let i = 0; i < node.length; i++) {
-                if (nodeName == node[i]) {
-                    node[i] = ''
-                    for (let j = i; j < node.length - 1; j++) {
-                        node[j] = node[j + 1]
-                    }
-                    node.push()
-                    console.log('now node is :', node)
-                    member--
-                    break
-                }
-            }
-        }
-
-
-        function AppendNewNode(val1, val2, val3) {
-            let appendString =
-                '<div id="blockAppend' + member + '" class="row justify-content-md-center">'
-                + '   <div class="divform"> '
-                + ' <div class="row justify-content-center"> '
-                + '  <div class="col-2 col-sm-2"><br>'
-                + '  <p class="h4">ชั้น</p> '
-                + '   </div> '
-                + '    <div class="col-2 col-sm-2"><br> '
-                + '       <p id="">5</p> '
-                + '        </div> '
-                + '         <div class="col-4 col-sm-3"> '
-                + '           <button onclick="Plusroom(this.id);" id="Plusroom' + member + '" style="margin-top: 6%" class="btn btn-primary " type="button">เพิ่มห้อง</button> '
-                + '       </div> '
-                + '       </div> '
-                + ' <table class="table table-bordered">'
-                + ' <thead>'
-                + '    <tr>'
-                + '      <th scope="col" style="background-color: grey ; height: 50px;">หมายเลขห้อง</th>'
-                + '     <th scope="col" style="background-color: grey">สถานะห้อง</th>'
-                + '     <th scope="col" style="background-color: grey">ลบข้อมูล</th>'
-                + '     </tr>'
-                + '   </thead>'
-                + '   <tbody>'
-                + '  </tbody>'
-                + '  </table>'
-                + '<button onclick="RemoveLink(this.id);" id="removeLink' + member + '"type="button" class="btnRemoveLink btn btn-danger btn-block">Remove</button>'
-                + ' </div> '
-                + ' </div> '
-
-
-            $(appendString).insertBefore('#newNodeButton')
-
-            member++
-        }
-
 
         $(document).ready(function () {
 
@@ -583,8 +466,7 @@
             var htmlStringUserdelete = ''
             var htmlStringedithome = ''
             var htmlStringedithomethead = ''
-            var htmlStringUpdate = ''
-            var htmlStringUnitMeter = ''
+
 
             //sear data building 
             var ourRequest = new XMLHttpRequest();
@@ -595,16 +477,10 @@
                 renderHome(ourData);
                 renderUser(ourData)
                 renderedithome(ourData)
-                makeClick(ourData);
-                renderUpdate(ourData);
-                renderPostUnitMeter(ourData);
-
-
                 return false;
             }
             ourRequest.send();
             Userdelete()
-
             //ดึงข้อมูล user delete
 
             /*
@@ -648,121 +524,6 @@
                 xhr.send(data);
 
 
-            })
-            //จดมิเตอร์--------------------------------------------------
-            function renderPostUnitMeter(ourData) {
-                let l = 1
-                for (let i = 0; i < ourData[0].floor.length; i++) {
-
-                    htmlStringUnitMeter +=
-                        ' <div  class="row justify-content-md-center">'
-                        + ' <div class="divform">'
-                        + '  <div class="row justify-content-center">'
-                        + '   <div class="col-2 col-sm-2"><br>'
-                        + '       <p class="h4">ชั้น</p>'
-                        + '   </div>'
-                        + '   <div class="col-2 col-sm-2"><br>'
-                        + '      <p id="Updatefloor">' + (i + 1) + '</p>'
-                        + '   </div>'
-                        + '  </div>'
-                        //class="table-responsive table table-striped"
-                          + ' <div class="table-responsive">'
-                        + '   <table class="table table-bordered " >'
-                        + '  <thead>'
-                        + '     <tr>'
-                        + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
-                        + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
-                        + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ก่อนหน้า</th>'
-                        + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ปัจจุบัน</th>'
-                        + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
-                        + '     </tr>'
-                        + '  </thead>'
-
-                    for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
-
-                        htmlStringUnitMeter +=
-                            '<tbody > <tr><td scope="row">' + ourData[0].floor[i].room[j].roomNumber + '</td>'
-                            + ' <td>' + ourData[0].floor[i].room[j].roomStatus + '</th>'
-                            + ' <td>comeback is real</th>'
-                            + ' <td><input type="number" name="UnitMeter" id="UnitMeter"style="width:95%; padding: 1px;"></th>'
-                            + ' <td>comeback is real</th>'
-                            + '</tbody> '
-                    }
-                    htmlStringUnitMeter += '</table></div></div></div><br>'
-                }
-                tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
-
-                $('.select_all').click(function (e) {
-                    let upfloor = e.target.classList[1]
-                    console.log(upfloor)
-                    if (this.checked) {
-                        $('.checkbox').each(function () {
-                            for (let i = 0; i < ourData[0].floor.length; i++) {
-                                for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
-                                    if (upfloor == (i + 1)) {
-                                        if (this.value == ourData[0].floor[i].room[j].roomNumber) {
-                                            this.checked = true;
-                                            console.log("ppppp")
-                                        }
-                                    }
-                                }
-                            }
-
-                        });
-                    } else {
-                        $('.checkbox').each(function () {
-                            this.checked = false;
-                        });
-                    }
-                });
-                $('#formUpdate').click(function () {
-                    let RoomUpdate = []
-                    $.each($("input[name='UpdateRoom']:checked"), function () {
-                        RoomUpdate.push($(this).val());
-                    });
-                    //  alert("My favourite value are: " + RoomUpdate.join(", "));
-                    var DataRoomUpdate = {
-                        BuildingName, RoomUpdate
-                    }
-                    console.log(DataRoomUpdate)
-
-                    var url = "http://localhost:3000/postRoomUpdate";
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", url, true);
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            console.log('res is', xhr.responseText)
-                            // if success go login page
-                            alert('create user Successful ')
-
-                            window.location.reload(true);
-                            //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
-
-                        } else {
-                            //alert('can not create user! Pls try again.')
-                        }
-                    };
-                    var data = JSON.stringify({
-                        BuildingName: DataRoomUpdate.BuildingName, RoomUpdate: DataRoomUpdate.RoomUpdate,
-                    });
-                    xhr.send(data);
-                    return false
-                });
-            }
-            //เเก้ไขหเองพัก----------------------------------------------------
-            //อัพเดทห้องพัก
-            $('#newNodeButton').on('click', function () {
-                AppendNewNode('', '', '')
-            })
-
-            $('#myForm').submit(function () {
-                if (CheckFormat()) {
-                    alert('Chart is created Success')
-                    return true;
-                }
-                alert('Can not create, Watch your data or images and reCreate!')
-                return false
             })
             //เเก้ไขหน้าตั้งค่าชื่อหอพัก
             $('#setName').click(function () {
@@ -840,162 +601,20 @@
                 document.getElementById("phone").value = ourData[0].BuildingPhone
                 document.getElementById("email").value = ourData[0].BuildingEmail
             }
-            //render หน้าเเก้ไขห้องพัก อัพเดทห้องพัก
+            //render หน้าเเก้ไขห้องพัก
             function renderedithome(ourData) {
                 let l = 1
                 for (let i = 0; i < ourData[0].floor.length; i++) {
-
-                    htmlStringedithome +=
-                        ' <div  class="row justify-content-md-center">'
-                        + ' <div class="divform">'
-                        + '  <div class="row justify-content-center">'
-                        + '   <div class="col-2 col-sm-2"><br>'
-                        + '       <p class="h4">ชั้น</p>'
-                        + '   </div>'
-                        + '   <div class="col-2 col-sm-2"><br>'
-                        + '      <p id="">' + (i + 1) + '</p>'
-                        + '   </div>'
-                        + '   <div class="col-4 col-sm-3">'
-                        + '   <button onclick="Plusroom(this.id);" id="Plusroom" style="margin-top: 6%" class="btn btn-primary "'
-                        + '       type="button">เพิ่มห้อง</button>'
-                        + '  </div>'
-                        + '  </div>'
-                        + '   <table class="table table-bordered" >'
-                        + '  <thead>'
-                        + '     <tr>'
-                        + '     <th scope="col" style="background-color: grey ; height: 50px;">หมายเลขห้อง</th>'
-                        + '       <th scope="col" style="background-color: grey">สถานะห้อง</th>'
-                        + '      <th scope="col" style="background-color: grey">ลบข้อมูล</th>'
-                        + '     </tr>'
-                        + '  </thead>'
-
-
-
+                    htmlStringedithome += '<div style="border: 2px solid black;text-align: center;">ชั้น ' + (i + 1) + '<br><br></div><thead   class="thead-dark"> <tr><th scope="col">หมายเลขห้อง</th> <th scope="col">สถานะห้อง</th><th scope="col">ลบข้อมูล</th></tr> </thead>'
                     for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
 
-                        htmlStringedithome += '<tbody > <tr><th scope="row">' + ourData[0].floor[i].room[j].roomNumber + '</th><td>' + ourData[0].floor[i].room[j].roomStatus + '</th><td><div id="img_container"><img class="remove ' + (ourData[0].floor[i].room[j].roomNumber) + '" width="20px" height="20px" src="https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/close_red.png"></div></td></tbody> '
+                        htmlStringedithome += '<tbody > <tr><th scope="row">' + ourData[0].floor[i].room[j].roomNumber + '</th><td>' + ourData[0].floor[i].room[j].roomNumber + '</th><td><div id="img_container"><img class="remove ' + (j) + '" width="20px" height="20px" src="https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/close_red.png"></div></td>'
                     }
-                    htmlStringedithome += '</table></div></div><br>'
+                    htmlStringedithome += '</tbody></div><a class="bg-success d-block text-center rounded mt-4" id="newNodeButton" data-toggle="tooltip" data-placement="top" title="Add new node"><i class="fas fa-plus p-2" style="color:white; font-size: 20px;"></i>เพิ่มห้อง</a><br>'
                 }
-                htmlStringedithome += '<a class="bg-success d-block text-center rounded mt-4" id="newNodeButton" data-toggle="tooltip"'
-                'data-placement="top" title="Add new node"><i class="fas fa-plus p-2" style="color:white; font-size: 14px;"></i></a>'
 
                 tablePostedit.insertAdjacentHTML('beforeend', htmlStringedithome);
 
-            }
-            function makeClick(ourData) {
-                $('.remove').click(function (e) {
-                    //  alert('remove ' + e.target.classList[1])
-                    var r = confirm("Do you want to delete the person?");
-                    if (r == true) {
-
-                        let count = e.target.classList[1]
-                        console.log(count)
-                        for (let i = 0; i < ourData[0].floor.length; i++) {
-                            for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
-                                if (count == ourData[0].floor[i].room[j].roomNumber) {
-                                    ourData[0].floor[i].room[j].pop()
-                                    console.log(ourData[0].floor[i].room[j])
-                                }
-                            }
-                        }
-                        var newUser = {
-                            personID, firstName, lastName, birthday, address, phoneNumber, License, BuildingName, roomNumber
-                        }
-                    } else {
-                        //   alert('no')
-                    }
-                })
-            }
-            //เเจ้งปรับปรุงห้องพัก
-            function renderUpdate(ourData) {
-                let l = 1
-                for (let i = 0; i < ourData[0].floor.length; i++) {
-
-                    htmlStringUpdate +=
-                        ' <div  class="row justify-content-md-center">'
-                        + ' <div class="divform">'
-                        + '  <div class="row justify-content-center">'
-                        + '   <div class="col-2 col-sm-2"><br>'
-                        + '       <p class="h4">ชั้น</p>'
-                        + '   </div>'
-                        + '   <div class="col-2 col-sm-2"><br>'
-                        + '      <p id="Updatefloor">' + (i + 1) + '</p>'
-                        + '   </div>'
-                        + '  </div>'
-                        + '   <table class="table table-bordered" >'
-                        + '  <thead>'
-                        + '     <tr>'
-                        + '     <th scope="col" style="background-color: grey ; height: 50px;"><input type="checkbox" value="' + (i + 1) + '" class="select_all ' + (i + 1) + '" id="select_all" /></th>'
-                        + '       <th scope="col" style="background-color: grey">หมายเลขห้อง</th>'
-                        + '     </tr>'
-                        + '  </thead>'
-
-                    for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
-
-                        htmlStringUpdate += '<tbody > <tr><th scope="row"><input type="checkbox" name="UpdateRoom" class="checkbox"value="' + ourData[0].floor[i].room[j].roomNumber + '" /></th><td>' + ourData[0].floor[i].room[j].roomNumber + '</th></tbody> '
-                    }
-                    htmlStringUpdate += '</table></div></div><br>'
-                }
-                tablePostUpdate.insertAdjacentHTML('beforeend', htmlStringUpdate);
-
-                $('.select_all').click(function (e) {
-                    let upfloor = e.target.classList[1]
-                    console.log(upfloor)
-                    if (this.checked) {
-                        $('.checkbox').each(function () {
-                            for (let i = 0; i < ourData[0].floor.length; i++) {
-                                for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
-                                    if (upfloor == (i + 1)) {
-                                        if (this.value == ourData[0].floor[i].room[j].roomNumber) {
-                                            this.checked = true;
-                                            console.log("ppppp")
-                                        }
-                                    }
-                                }
-                            }
-
-                        });
-                    } else {
-                        $('.checkbox').each(function () {
-                            this.checked = false;
-                        });
-                    }
-                });
-                $('#formUpdate').click(function () {
-                    let RoomUpdate = []
-                    $.each($("input[name='UpdateRoom']:checked"), function () {
-                        RoomUpdate.push($(this).val());
-                    });
-                    //  alert("My favourite value are: " + RoomUpdate.join(", "));
-                    var DataRoomUpdate = {
-                        BuildingName, RoomUpdate
-                    }
-                    console.log(DataRoomUpdate)
-
-                    var url = "http://localhost:3000/postRoomUpdate";
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", url, true);
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            console.log('res is', xhr.responseText)
-                            // if success go login page
-                            alert('create user Successful ')
-
-                            window.location.reload(true);
-                            //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
-
-                        } else {
-                            //alert('can not create user! Pls try again.')
-                        }
-                    };
-                    var data = JSON.stringify({
-                        BuildingName: DataRoomUpdate.BuildingName, RoomUpdate: DataRoomUpdate.RoomUpdate,
-                    });
-                    xhr.send(data);
-                    return false
-                });
             }
             // กรอกข้อมูลของ user
             function FunctionUser(user) {
@@ -1019,11 +638,14 @@
                                 + ourData[0].floor[i].room[j].user[k].firstName + '</td><td>' + ourData[0].floor[i].room[j].user[k].lastName + '</td><td>' + ourData[0].floor[i].room[j].user[k].birthday + '</td><td>' + ourData[0].floor[i].room[j].user[k].address + '</td><td>' + ourData[0].floor[i].room[j].user[k].phoneNumber + '</td><td>' + ourData[0].floor[i].room[j].user[k].License + '</td><td>'
 
                         }
+
+
                     }
                 }
                 tablePost.insertAdjacentHTML('beforeend', htmlString);
             }
             function Userdelete() {
+
                 var ourRequest = new XMLHttpRequest();
                 ourRequest.open('GET', 'http://localhost:3000/getUserdelete')
                 ourRequest.onload = function () {
@@ -1039,9 +661,19 @@
 
                 }
                 ourRequest.send();
+
             }
+
+
+
+
         });
+
+
     </script>
+
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

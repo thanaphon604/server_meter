@@ -7,7 +7,7 @@ var path = require('path');
 const { Admin } = require('./model/AdminSchema')
 const { Building } = require('./model/BuildingSchema')
 const { Userdelete } = require('./model/UserdeleteSchema')
-
+const { meterbuild } = require('./model/MeterSchema')
 
 mongoose.Promise = global.Promise;
 
@@ -32,8 +32,9 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/', (req, res) => {
-    res.send('hello')
+app.get('/p', (req, res) => {
+    // res.send('hello')
+    res.render('testhome.hbs')
 })
 
 app.post('/createbuilding', (req, res) => {
@@ -464,6 +465,75 @@ app.post('/postUUnitmeter', (req, res) => {
         res.status(400).send(err)
     })
 })
+//หน้าปรับปรุงห้องพัก
+app.post('/postRoomUpdate', (req, res) => {
+    let RoomUpdateInput = req.body.RoomUpdate
+    let BuildingNameInput = req.body.BuildingName
+    
+    //find หาusername password สำหรับ 
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            for (let i = 0; i < build[0].floor.length; i++) {
+                for (let j = 0; j < build[0].floor[i].room.length; j++) {
+                    if (RoomUpdateInput[j] == build[0].floor[i].room[j].roomNumber) {
+                        build[0].floor[i].room[j].roomStatus = 'Update'
+
+                        build[0].save().then((suc) => {
+                            console.log('res contract : ', suc)
+                            res.send(suc)
+                        }, (e) => {
+                            consoel.log('error contract :', e)
+                            res.status(400).send(e)
+                        })
+                        
+                    }
+                }
+            }
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+//เเกไขชื่อหอพัก
+app.post('/postDatabuild', (req, res) => {
+    let BuildingNameInput = req.body.BuildingName
+    let PhoneInput = req.body.Phone
+    let EmailInput = req.body.Email
+
+    //find หาusername password สำหรับ 
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+
+
+            build[0].BuildingPhone = PhoneInput
+            build[0].BuildingEmail = EmailInput
+
+
+            build[0].save().then((suc) => {
+                console.log('res contract : ', suc)
+                res.send(suc)
+            }, (e) => {
+                consoel.log('error contract :', e)
+                res.status(400).send(e)
+            })
+
+
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+
 
 
 
