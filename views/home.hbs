@@ -158,6 +158,12 @@
                             </div>
                         </div>
                         <div id="divPosthr"></div>
+                        <form id="myForm" class="container my-3" method="" enctype="" action="">
+
+                            <a class="bg-success d-block text-center rounded mt-4" id="newNodeButton" data-toggle="tooltip"
+                                data-placement="top" title="Add new node"><i class="fas fa-plus p-2" style="color:white; font-size: 14px;"></i>เพิ่มชั้น</a>
+
+                        </form>
                     </div>
 
 
@@ -167,21 +173,23 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" style="background-color: green ; height: 50px;">ห้องว่าง</th>
-                                        <th scope="col" style="background-color: orange">ห้องไม่ว่าง</th>
+                                        <th scope="col" style="background-color: orange">มีผู้เช่า</th>
                                         <th scope="col" style="background-color: grey">กำลังปรับปรุง</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <tr>
-                                        <th scope="row">10</th>
-                                        <td scope="row"> 30</td>
-                                        <td scope="row">1</td>
+                                        <th id="free" scope="row">10</th>
+                                        <td id="busy" scope="row"> 30</td>
+                                        <td id="remodel" scope="row">1</td>
                                     </tr>
 
                                 </tbody>
                             </table>
+
                         </div>
+
                     </div>
 
                 </div>
@@ -229,9 +237,6 @@
                                     </tbody>
                                 </table>
 
-
-
-
                             </div>
 
                         </div>
@@ -261,10 +266,6 @@
 
                                     </tbody>
                                 </table>
-
-
-
-
                             </div>
 
                         </div>
@@ -276,6 +277,7 @@
         <!--จดมิเตอร์ -->
         <div class="tab-pane fade" id="pills-contact1" role="tabpanel" aria-labelledby="pills-contact-tab1">
             <nav>
+
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-saveunit1" role="tab"
                         aria-controls="nav-home" aria-selected="true">บันทึกค่าไฟฟ้าเเต่ละห้อง</a>
@@ -291,7 +293,19 @@
                             <br> <br>
                             <div class="">
                                 <label for="start">จดมิเตอร์ประจำเดือน:</label>
-                                <input type="month" type="" id="start" name="start" min="2018-03" value="" >
+                                <input type="month" type="" id="start" name="start" min="2018-03" value="">
+                                <br>
+                                <div class="row justify-content-center col-lg-3 col-12">
+                                    <div class="col">
+                                        <h3 id="ShowMonth"></h3>
+                                    </div>
+                                    <div class="col">
+                                        <h3 id="ShowYear"></h3>
+                                    </div>
+
+                                </div>
+                                <div class="" id="divPostmeter" style="margin-top:5%">
+                                </div>
                                 <div id="tablePostUnitMeter">
                                     <div id="tablePostUnitMeterbody">
 
@@ -315,7 +329,7 @@
         </div>
         <!-- วิเคราะห์การใช้พลังงาน  -->
         <div class="tab-pane fade" id="pills-contact2" role="tabpanel" aria-labelledby="pills-contact-tab2">
-
+            <a href="pills-contact1">dddd</a>
         </div>
         <!-- ออกใบเเจ้งหนี้ใบเสร็จ -->
         <div class="tab-pane fade" id="pills-contact3" role="tabpanel" aria-labelledby="pills-contact-tab3">
@@ -340,8 +354,8 @@
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-unit" role="tab"
                         aria-controls="nav-home" aria-selected="true">หน่วยมิเตอร์</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-update" role="tab"
-                        aria-controls="nav-profile" aria-selected="false">อัพเดทผังห้อง</a>
+                    {{!-- <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-update" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">อัพเดทผังห้อง</a> --}}
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-set" role="tab"
                         aria-controls="nav-contact" aria-selected="false">เเจ้งปรับปรุง</a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-setbuild" role="tab"
@@ -400,6 +414,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-12 col-lg-8">
                                 <br> <br>
+                                <p id="setpage"></p>
                                 <div class="">
                                     <div id="tablePostedit">
                                         <div id="tablePosteditthead">
@@ -433,10 +448,10 @@
                             <div class="">
 
                                 <div id="tablePostUpdate">
+
                                     <div id="tablePostUpdatebody">
 
                                     </div>
-
                                 </div>
                                 <form action="" name="formUpdate" id="formUpdate" onsubmit="return false">
                                     <button name="formUpdate" type="submit" class="btn btn-primary">บันทึก</button>
@@ -492,92 +507,142 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
     <script>
+        let _data
+        let _buildingName
+        function myFunction() {
+            alert('Hello');
+        }
+        function loadPage() {
+            // setInterval(function () { alert("Hello"); }, 3000);
+            //   $('#navbarTogglerDemo02 a[href="#pills-contact3"]').tab('show') 
+        }
+        function SendPost(url, jsonData) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    //  window.location.reload(forceget);
+                    window.location.reload(true);
+                    //     document.getElementById("setpage").innerHTML = 'เเก้ไข'
+                    //   setTimeout(myFunction, 3000)
+                    //    $('a[data-toggle="tab"]').on('hidden.bs.tab', function (e) {
+                    //  //      localStorage.setItem('activeTab', $(e.target).attr('#pills-contact3'));
+                    ////   });
+                    //   var activeTab = localStorage.getItem('activeTab');
+                    //    if (activeTab) {
+                    //      $('#navbarTogglerDemo02 a[href="#pills-contact3"]').tab('show');
+                    //  }
+
+                    //console.log('res is', xhr.responseText)
+                    //window.location.reload($('#pills-contact4 a[href="#nav-update"]').tab('show'));
+                    //  window.location.reload(true);
+                    //S alert('dd')
+                    //gg  $('#navbarTogglerDemo02 a[href="#pills-contact3"]').tab('show')
+                    // $('#nav-contact-tab').foundation('reveal','open');
+
+                    return true
+
+                    // if success go login page
+                    //alert('create user Successful ')
+                    // window.location.reload(true);
+                    //  window.location.href = 'http://localhost:3000/HOME?BuildingName=gg?pills-contact1';
+
+                } else {
+                    return false
+                    //alert('can not create user! Pls try again.')
+                }
+            }.bind(this);
+            var data = JSON.stringify(jsonData);
+            xhr.send(data);
+        }
 
         var node = []
         var member = 0
         function RemoveLink(id) {
-            console.log('now node isห :', node)
-            let num = id.substring(10);
-            let nodeName = $('#nodeInput' + num).val()
-            $('#blockAppend' + num).remove()
-            //clear node data and member
-            for (let i = 0; i < node.length; i++) {
-                if (nodeName == node[i]) {
-                    node[i] = ''
-                    for (let j = i; j < node.length - 1; j++) {
-                        node[j] = node[j + 1]
-                    }
-                    node.pop()
-                    console.log('now node is :', node)
-                    member--
-                    break
-                }
+            let r = confirm("Do you want to remove the room?");
+            if (r == true) {
+                let num = id.substring(10);
+                console.log('now node isห :', num)
+                SendPost('http://localhost:3000/remove-room', {
+                    numIndex: num,
+                    buildingNameIndex: _buildingName
+
+                })
+            } else {
+
             }
         }
+        //work
         function Plusroom(id) {
-            let num = id.substring(10);
-            let nodeName = $('#nodeInput' + num).val()
-            $('#blockAppend' + num).remove()
-            //clear node data and member
-            for (let i = 0; i < node.length; i++) {
-                if (nodeName == node[i]) {
-                    node[i] = ''
-                    for (let j = i; j < node.length - 1; j++) {
-                        node[j] = node[j + 1]
-                    }
-                    node.push()
-                    console.log('now node is :', node)
-                    member--
-                    break
-                }
+            let r = confirm("Do you want to add the room?");
+            if (r == true) {
+                let index = (id.split('Plusroom')[1]) - 1
+
+                SendPost('http://localhost:3000/add-room', {
+                    floorIndex: index,
+                    buildingNameIndex: _buildingName
+
+                })
+            } else {
+
             }
         }
+        $('#newNodeButton').on('click', function () {
+            let r = confirm("Do you want to add the floor?");
+            if (r == true) {
+                SendPost('http://localhost:3000/add-floor', {
 
+                    buildingNameIndex: _buildingName
 
-        function AppendNewNode(val1, val2, val3) {
-            let appendString =
-                '<div id="blockAppend' + member + '" class="row justify-content-md-center">'
-                + '   <div class="divform"> '
-                + ' <div class="row justify-content-center"> '
-                + '  <div class="col-2 col-sm-2"><br>'
-                + '  <p class="h4">ชั้น</p> '
-                + '   </div> '
-                + '    <div class="col-2 col-sm-2"><br> '
-                + '       <p id="">5</p> '
-                + '        </div> '
-                + '         <div class="col-4 col-sm-3"> '
-                + '           <button onclick="Plusroom(this.id);" id="Plusroom' + member + '" style="margin-top: 6%" class="btn btn-primary " type="button">เพิ่มห้อง</button> '
-                + '       </div> '
-                + '       </div> '
-                + ' <table class="table table-bordered">'
-                + ' <thead>'
-                + '    <tr>'
-                + '      <th scope="col" style="background-color: grey ; height: 50px;">หมายเลขห้อง</th>'
-                + '     <th scope="col" style="background-color: grey">สถานะห้อง</th>'
-                + '     <th scope="col" style="background-color: grey">ลบข้อมูล</th>'
-                + '     </tr>'
-                + '   </thead>'
-                + '   <tbody>'
-                + '  </tbody>'
-                + '  </table>'
-                + '<button onclick="RemoveLink(this.id);" id="removeLink' + member + '"type="button" class="btnRemoveLink btn btn-danger btn-block">Remove</button>'
-                + ' </div> '
-                + ' </div> '
+                })
+            } else {
 
-
-            $(appendString).insertBefore('#newNodeButton')
-
-            member++
-        }
-
-
+            }
+        })
+        /*
+                function AppendNewNode(val1, val2, val3) {
+        
+                    let appendString =
+                        '<div id="blockAppend' + member + '" class="row justify-content-md-center">'
+                        + '   <div class="divform"> '
+                        + ' <div class="row justify-content-center"> '
+                        + '  <div class="col-2 col-sm-2"><br>'
+                        + '  <p class="h4">ชั้น</p> '
+                        + '   </div> '
+                        + '    <div class="col-2 col-sm-2"><br> '
+                        + '       <p id="">5</p> '
+                        + '        </div> '
+                        + '         <div class="col-4 col-sm-3"> '
+                        + '           <button onclick="Plusroom(this.id);" id="Plusroom' + member + '" style="margin-top: 6%" class="btn btn-primary " type="button">เพิ่มห้อง</button> '
+                        + '       </div> '
+                        + '       </div> '
+                        + ' <table class="table table-bordered">'
+                        + ' <thead>'
+                        + '    <tr>'
+                        + '      <th scope="col" style="background-color: grey ; height: 50px;">หมายเลขห้อง</th>'
+                        + '     <th scope="col" style="background-color: grey">สถานะห้อง</th>'
+                        + '     <th scope="col" style="background-color: grey">ลบข้อมูล</th>'
+                        + '     </tr>'
+                        + '   </thead>'
+                        + '   <tbody>'
+                        + '  </tbody>'
+                        + '  </table>'
+                        + '<button onclick="RemoveLink(this.id);" id="' + member + '"type="button" class="btnRemoveLink btn btn-danger btn-block">Remove</button>'
+                        + ' </div> '
+                        + ' </div> '
+        
+                    $(appendString).insertBefore('#newNodeButton')
+        
+                    member++
+                } */
         $(document).ready(function () {
-
-            //script หน้าผังห้อง
-            var url_string = window.location.href
+            if (document.getElementById("ShowMonth").innerHTML = 'มกราคม')
+                //script หน้าผังห้อง
+                var url_string = window.location.href
             var url = new URL(url_string);
             var BuildingName = url.searchParams.get("BuildingName");
-            console.log(BuildingName)
+            //     console.log(BuildingName)
             var htmlString1 = '';
             var htmlString = ''
             var htmlStringUserdelete = ''
@@ -585,25 +650,8 @@
             var htmlStringedithomethead = ''
             var htmlStringUpdate = ''
             var htmlStringUnitMeter = ''
-
-            //sear data building 
-            var ourRequest = new XMLHttpRequest();
-            ourRequest.open('GET', 'http://localhost:3000/getbuild/' + BuildingName)
-            ourRequest.onload = function () {
-                var ourData = JSON.parse(ourRequest.responseText);
-                console.log(ourData)
-                renderHome(ourData);
-                renderUser(ourData)
-                renderedithome(ourData)
-                makeClick(ourData);
-                renderUpdate(ourData);
-                renderPostUnitMeter(ourData);
-
-
-                return false;
-            }
-            ourRequest.send();
-            Userdelete()
+            var htmlStringNow = ''
+            _buildingName = BuildingName
 
             //ดึงข้อมูล user delete
 
@@ -616,8 +664,162 @@
                             return false;
                         })
             */
+            //-------------------------จดมิเตอร์---------------------
+            var now = new Date()
+            //   console.log("Current Time is: " + now);
+            var currentYear = now.getFullYear()
+            //   console.log("Current year is: " + currentYear);
+            var month = now.getMonth() + 1
+            //   console.log("Current month is: " + month);
+
+            if (month = 1) {
+                var beformont = 12
+                var beforyear = currentYear - 1
+                var befordatemeter = beforyear + "-" + beformont
+                befordatemeter = '' + befordatemeter
+            } else {
+                var beformont = month - 1
+                var beforyear = currentYear
+                var befordatemeter = currentYear + "-" + beformont
+                befordatemeter = '' + befordatemeter
+            }
+            document.getElementById("start").innerHTML = currentYear
+            if (month == 1) {
+                document.getElementById("ShowMonth").innerHTML = 'มกราคม'
+                month = '0' + month
+            } else if (month == 2) {
+                document.getElementById("ShowMonth").innerHTML = 'กุมภาพันธ์'
+                month = '0' + month
+            } else if (month == 3) {
+                document.getElementById("ShowMonth").innerHTML = 'มีนาคม'
+                month = '0' + month
+            } else if (month == 4) {
+                document.getElementById("ShowMonth").innerHTML = 'เมษายน'
+                month = '0' + month
+            } else if (month == 5) {
+                document.getElementById("ShowMonth").innerHTML = 'พฤษภาคม'
+                month = '0' + month
+            } else if (month == 6) {
+                document.getElementById("ShowMonth").innerHTML = 'มิถุนายน'
+                month = '0' + month
+            } else if (month == 7) {
+                document.getElementById("ShowMonth").innerHTML = 'กรกฎาคม'
+                month = '0' + month
+            } else if (month == 8) {
+                document.getElementById("ShowMonth").innerHTML = 'สิงหาคม'
+                month = '0' + month
+            } else if (month == 9) {
+                document.getElementById("ShowMonth").innerHTML = 'กันยายน'
+                month = '0' + month
+            } else if (month == 10) {
+                document.getElementById("ShowMonth").innerHTML = 'ตุลาคม '
+            } else if (month == 11) {
+                document.getElementById("ShowMonth").innerHTML = 'พฤศจิกายน'
+            } else if (month == 12) {
+                document.getElementById("ShowMonth").innerHTML = 'ธันวาคม'
+            }
+            datemeter = currentYear + '-' + month
+            //    console.log('ddd')
+            //   console.log(datemeter)
+            //    console.log('ddd')
+            document.getElementById("ShowYear").innerHTML = currentYear
+            datemeter = '' + datemeter
+            //render จดมิเตอร์
+            //sear data building 
+            //เช็คมิเตอร์ก่อนหน้า
+
+            var ourRequest = new XMLHttpRequest();
+            ourRequest.open('GET', 'http://localhost:3000/getbuild/' + BuildingName)
+            ourRequest.onload = function () {
+                var ourData = JSON.parse(ourRequest.responseText);
+                _data = ourData[0]
+                console.log('data : ', _data)
+                renderHome(ourData);
+                renderUser(ourData)
+                renderedithome(ourData)
+                makeClick(ourData);
+                renderUpdate(ourData);
+                //renderPostUnitMeter(ourData);
+                //render meter
+
+                return false;
+            }
+            ourRequest.send();
+
+            var getdata = []
+            getdata.push(BuildingName)
+            getdata.push(datemeter)
+            getdata.push(befordatemeter)
+            console.log('data1', getdata)
+            var Request = new XMLHttpRequest();
+            Request.open('GET', 'http://localhost:3000/getmeter/' + getdata)
+            Request.onload = function () {
+                var Datameter = JSON.parse(Request.responseText);
+
+                renderPostUnitMeter(Datameter, datemeter, befordatemeter)
+            }
+            Request.send();
+
+
+            Userdelete()
+            $('#start').on('input', function (e) {
+                //     $("#tablePostUnitMeter").remove();
+                var currentVal = document.getElementById("start").value;
+                alert(currentVal)
+                document.getElementById("ShowMonth").innerHTML = ''
+                document.getElementById("ShowYear").innerHTML = currentVal
+                datemeter = '' + currentVal
+                let beforyear = ''
+                let beformont = ''
+                let i = 0
+                while (datemeter[i] != '-') {
+                    beforyear = beforyear + datemeter[i]
+                    i++;
+                }
+                i++
+                while (i < datemeter.length) {
+                    beformont = beformont + datemeter[i]
+                    i++;
+                }
+
+                if (beformont = '01') {
+                    beformont = '12'
+                    beforyear = '' + (parseInt(beforyear) - 1)
+                    var befordatemeter = beforyear + "-" + beformont
+                    befordatemeter = '' + befordatemeter
+                } else {
+                    beformont = '' + (parseInt(month) - 1)
+                    beforyear = beforyear
+                    var befordatemeter = beforyear + "-" + beformont
+                    befordatemeter = '' + befordatemeter
+                }
+                console.log('datamont', beformont)
+                console.log('datamont', beforyear)
+                console.log('databefor', befordatemeter)
+                getDataMeter(datemeter)
+            })
+
+            function getDataMeter(datemeter) {
+                //   document.getElementById("clear").innerHTML = ''
+                var getdata = []
+                getdata.push(BuildingName)
+                getdata.push(datemeter)
+                getdata.push(befordatemeter)
+                console.log('data2', getdata)
+                var Request = new XMLHttpRequest();
+                Request.open('GET', 'http://localhost:3000/getmeter/' + getdata)
+                Request.onload = function () {
+                    var Datameter = JSON.parse(Request.responseText);
+                    //  var element = document.getElementById("clear");
+                    //  element.parentNode.removeChild(element);
+                    renderPostUnitMeter(Datameter, datemeter, befordatemeter)
+                    return false;
+                }
+                Request.send();
+            }
 
             $('#me').click(function () {
+
                 if (document.getElementById('UnitMeter').value == "") {
                     alert('Please Input Unitmeter');
                     return false;
@@ -626,7 +828,7 @@
                 var dataUnit = {
                     UnitMeter, BuildingName,
                 }
-                var url = "http://localhost:3000/postUUnitmeter";
+                var url = "http://localhost:3000/postUnitmeter";
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", url, true);
                 xhr.setRequestHeader("Content-Type", "application/json");
@@ -649,112 +851,237 @@
 
 
             })
-            //จดมิเตอร์--------------------------------------------------
-            function renderPostUnitMeter(ourData) {
-                let l = 1
-                for (let i = 0; i < ourData[0].floor.length; i++) {
+            //จดมิเตอร์--------------------------------------------------(ourData, Datameter, datemeter)
+            function renderPostUnitMeter(Datameter, date, befordatemeter) {
+                // console.log('datameter', _data)
+                // console.log('datameterrender', Datameter[0])
 
+                var htmlStringUnitMeter = ''
+                if (Datameter[0] == "" && Datameter[1] == "") {
+                    alert('ไม่มีข้อมูล')
                     htmlStringUnitMeter +=
-                        ' <div  class="row justify-content-md-center">'
-                        + ' <div class="divform">'
-                        + '  <div class="row justify-content-center">'
-                        + '   <div class="col-2 col-sm-2"><br>'
-                        + '       <p class="h4">ชั้น</p>'
-                        + '   </div>'
-                        + '   <div class="col-2 col-sm-2"><br>'
-                        + '      <p id="Updatefloor">' + (i + 1) + '</p>'
-                        + '   </div>'
-                        + '  </div>'
-                        //class="table-responsive table table-striped"
-                          + ' <div class="table-responsive">'
-                        + '   <table class="table table-bordered " >'
-                        + '  <thead>'
-                        + '     <tr>'
-                        + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
-                        + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
-                        + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ก่อนหน้า</th>'
-                        + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ปัจจุบัน</th>'
-                        + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
-                        + '     </tr>'
-                        + '  </thead>'
-
-                    for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
-
+                        '<div id="clear" >'
+                    for (let i = 0; i < _data.floor.length; i++) {
+                        console.log('testdata', Datameter[i])
                         htmlStringUnitMeter +=
-                            '<tbody > <tr><td scope="row">' + ourData[0].floor[i].room[j].roomNumber + '</td>'
-                            + ' <td>' + ourData[0].floor[i].room[j].roomStatus + '</th>'
-                            + ' <td>comeback is real</th>'
-                            + ' <td><input type="number" name="UnitMeter" id="UnitMeter"style="width:95%; padding: 1px;"></th>'
-                            + ' <td>comeback is real</th>'
-                            + '</tbody> '
-                    }
-                    htmlStringUnitMeter += '</table></div></div></div><br>'
-                }
-                tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
 
-                $('.select_all').click(function (e) {
-                    let upfloor = e.target.classList[1]
-                    console.log(upfloor)
-                    if (this.checked) {
-                        $('.checkbox').each(function () {
-                            for (let i = 0; i < ourData[0].floor.length; i++) {
-                                for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
-                                    if (upfloor == (i + 1)) {
-                                        if (this.value == ourData[0].floor[i].room[j].roomNumber) {
-                                            this.checked = true;
-                                            console.log("ppppp")
-                                        }
-                                    }
-                                }
-                            }
+                            ' <div  class="row justify-content-md-center">'
+                            + ' <div class="divform">'
+                            + '  <div class="row justify-content-center">'
+                            + '   <div class="col-2 col-sm-2"><br>'
+                            + '       <p class="h4">ชั้น</p>'
+                            + '   </div>'
+                            + '   <div class="col-2 col-sm-2"><br>'
+                            + '      <p id="Updatefloor">' + (i + 1) + '</p>'
+                            + '   </div>'
+                            + '  </div>'
+                            //class="table-responsive table table-striped"
+                            + ' <div class="table-responsive">'
+                            + '   <table class="table table-bordered " >'
+                            + '  <thead>'
+                            + '     <tr>'
+                            + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
+                            + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
+                            + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ก่อนหน้า</th>'
+                            + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ปัจจุบัน</th>'
+                            + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
+                            + '     </tr>'
+                            + '  </thead>'
 
-                        });
-                    } else {
-                        $('.checkbox').each(function () {
-                            this.checked = false;
-                        });
-                    }
-                });
-                $('#formUpdate').click(function () {
-                    let RoomUpdate = []
-                    $.each($("input[name='UpdateRoom']:checked"), function () {
-                        RoomUpdate.push($(this).val());
-                    });
-                    //  alert("My favourite value are: " + RoomUpdate.join(", "));
-                    var DataRoomUpdate = {
-                        BuildingName, RoomUpdate
-                    }
-                    console.log(DataRoomUpdate)
+                        for (let j = 0; j < _data.floor[i].room.length; j++) {
 
-                    var url = "http://localhost:3000/postRoomUpdate";
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", url, true);
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            console.log('res is', xhr.responseText)
-                            // if success go login page
-                            alert('create user Successful ')
+                            htmlStringUnitMeter +=
+                                '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
+                                + ' <td>' + _data.floor[i].room[j].roomStatus + '</th>'
+                                + ' <td></th>'
+                                + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input type="number" value="" class="meter ' + (_data.floor[i].room[j].roomNumber) + '" name="UnitMeter" id=""style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                + ' <td></th>'
+                                + '</tbody> '
 
-                            window.location.reload(true);
-                            //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
-
-                        } else {
-                            //alert('can not create user! Pls try again.')
                         }
-                    };
-                    var data = JSON.stringify({
-                        BuildingName: DataRoomUpdate.BuildingName, RoomUpdate: DataRoomUpdate.RoomUpdate,
-                    });
-                    xhr.send(data);
-                    return false
-                });
+                        htmlStringUnitMeter += '</table></div></div></div><br>'
+                    }
+                    htmlStringUnitMeter += '</div>'
+                    document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
+                    //  tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
+                } else if (Datameter[1] == "") {
+                    alert('มีข้อมูล')
+                    var name = (Datameter[0].buildingnamemeter)
+                    htmlStringUnitMeter +=
+                        '<div id="clear" >'
+                    for (let i = 0; i < _data.floor.length; i++) {
+                        console.log(Datameter[i].datemeter)
+                        console.log('testdata',name)
+                        htmlStringUnitMeter +=
+
+                            ' <div  class="row justify-content-md-center">'
+                            + ' <div class="divform">'
+                            + '  <div class="row justify-content-center">'
+                            + '   <div class="col-2 col-sm-2"><br>'
+                            + '       <p class="h4">ชั้น</p>'
+                            + '   </div>'
+                            + '   <div class="col-2 col-sm-2"><br>'
+                            + '      <p id="Updatefloor">' + (i + 1) + '</p>'
+                            + '   </div>'
+                            + '  </div>'
+                            //class="table-responsive table table-striped"
+                            + ' <div class="table-responsive">'
+                            + '   <table class="table table-bordered " >'
+                            + '  <thead>'
+                            + '     <tr>'
+                            + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
+                            + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
+                            + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ก่อนหน้า</th>'
+                            + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ปัจจุบัน</th>'
+                            + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
+                            + '     </tr>'
+                            + '  </thead>'
+
+                        for (let j = 0; j < _data.floor[i].room.length; j++) {
+
+                            htmlStringUnitMeter +=
+                                '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
+                                + ' <td>' + _data.floor[i].room[j].roomStatus + '</th>'
+                                + ' <td></th>'
+                                + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input type="number" value="" class="meter ' + (_data.floor[i].room[j].roomNumber) + '" name="UnitMeter" id=""style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                + ' <td></th>'
+                                + '</tbody> '
+
+                        }
+                        htmlStringUnitMeter += '</table></div></div></div><br>'
+                    }
+                    htmlStringUnitMeter += '</div>'
+                    document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
+                    // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
+                }
+
+
             }
+            $('#formUpdateUnitMeter').submit(function () {
+                var eduarray = [];
+                $('.education-groupbox').each(function (index, el) {
+                    var _this = $(this);
+                    eduarray[index] = [];
+                    _this.find('input').each(function (key, v) {
+                        eduarray[index].push(v.value);
+                    });
+
+                });
+                console.log('eduarray[0] -->' + eduarray[0]);
+                console.log('eduarray[1] -->' + eduarray[1]);
+                console.log('eduarray    -->' + eduarray);
+
+                let floormeter = []
+                for (let i = 0; i < _data.floor.length; i++) {
+                    let f = _data.floor[i].room.length
+                    floormeter.push(f)
+                }
+                let k = 0
+                let myData = {}
+                myData.pricemeter = _data.UnitMeter
+                myData.buildingnamemeter = _data.BuildingName
+                myData.datemeter = datemeter
+                //  myData.allunitmeter = ''
+                //  myData.buymeter = ''
+
+                let floorArray = []
+                for (let i = 0; i < _data.floor.length; i++) {
+                    let floorData = {}
+                    let roomArrayPerFloor = []
+
+                    for (let j = 0; j < floormeter[i]; j++) {
+                        let roomNumbermeter = ''
+                        if ((i + 1) <= 9) {
+                            roomNumbermeter = '0' + (i + 1)
+                        } else {
+                            roomNumbermeter = '' + (i + 1)
+                        }
+                        if ((j + 1) <= 9) {
+                            roomNumbermeter += ('0' + (j + 1))
+                        } else {
+                            roomNumbermeter += (j + 1)
+                        }
+                        let usemeter = parseInt(eduarray[k])
+                        k++
+                        let roomData = {
+                            roomNumbermeter,
+                            usemeter
+                        }
+
+                        roomArrayPerFloor.push(roomData)
+
+                    }
+                    floorData.roommeter = roomArrayPerFloor
+                    floorData.Number = '' + (i + 1)
+                    floorArray.push(floorData)
+
+                }
+                myData.floormeter = floorArray
+
+                console.log('Data is', myData)
+                postData(myData);
+                return false;
+
+            });
+            function postData(myData) {
+                var url = "http://localhost:3000/postMeter";
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log('res is', xhr.responseText)
+                        // if success go login page
+                        alert('Add Success')
+                        window.location.reload(true);
+
+                    } else {
+                        //alert('can not create user! Pls try again.')
+                    }
+                };
+                var data = JSON.stringify({ floormeter: myData.floormeter, pricemeter: myData.pricemeter, buildingnamemeter: myData.buildingnamemeter, datemeter: myData.datemeter });
+                xhr.send(data);
+            }
+            $('#formUpdate').click(function () {
+                let RoomUpdate = []
+                $.each($("input[name='UpdateRoom']:checked"), function () {
+                    RoomUpdate.push($(this).val());
+                });
+                //  alert("My favourite value are: " + RoomUpdate.join(", "));
+                var DataRoomUpdate = {
+                    BuildingName, RoomUpdate
+                }
+                console.log(DataRoomUpdate)
+
+                var url = "http://localhost:3000/postRoomUpdate";
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log('res is', xhr.responseText)
+                        // if success go login page
+                        alert('create user Successful ')
+
+                        window.location.reload(true);
+                        //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+
+                    } else {
+                        //alert('can not create user! Pls try again.')
+                    }
+                };
+                var data = JSON.stringify({
+                    BuildingName: DataRoomUpdate.BuildingName, RoomUpdate: DataRoomUpdate.RoomUpdate,
+                });
+                xhr.send(data);
+                return false
+            });
+
             //เเก้ไขหเองพัก----------------------------------------------------
             //อัพเดทห้องพัก
-            $('#newNodeButton').on('click', function () {
-                AppendNewNode('', '', '')
-            })
+            //  $('#newNodeButton').on('click', function () {
+            //   alert('lll')
+            //})
 
             $('#myForm').submit(function () {
                 if (CheckFormat()) {
@@ -813,23 +1140,56 @@
                 }
             })
             function renderHome(ourData) {
+                var Roomfree = 0
+                var Roombusy = 0
+                var Roomremodel = 0
                 //         console.log(ourData[0].floor[0].room.length)
                 for (let i = 0; i < ourData[0].floor.length; i++) {
-                    htmlString1 += '<br><p>ชั้น' + (i + 1) + '</p><hr style="border: 1px solid black;"<br><div class="row" >'
+                    htmlString1 += ''
+                        + '  <div class="row justify-content-center">'
+                        + '   <div class="col-2 col-sm-2"><br>'
+                        + '       <p class="h4">ชั้น</p>'
+                        + '   </div>'
+                        + '   <div class="col-2 col-sm-2"><br>'
+                        + '      <p id="">' + (i + 1) + '</p>'
+                        + '   </div>'
+                        + '   <div class="col-4 col-sm-3">'
+                        + '   <button onclick="Plusroom(this.id);" id="Plusroom' + (i + 1) + '" style="margin-top: 6%" class="btn btn-primary "'
+                        + '       type="button">เพิ่มห้อง</button>'
+                        + '  </div>'
+                        + '  </div>'
+                        + '<br><div class="row" >'
+
                     for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
                         let p = 3
+                        if (ourData[0].floor[i].room[j].roomStatus == "ว่าง") {
+                            Roomfree = Roomfree + 1
+                            htmlString1 += '<div class="bigroom"><div> <a href="http://localhost:3000/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> '
+                                + ' </div >'
+                                //  if()
+                                + '     <div style="background-color: green" id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div>'
+                                + '     <button onclick="RemoveLink(this.id);" id="removeLink' + ourData[0].floor[i].room[j].roomNumber + '" type="button" class="btnRemoveLink btn btn-danger btn-block" style="height: 20%;">ลบห้อง</button>'
+                                + '     </div> '
+                        } else if (ourData[0].floor[i].room[j].roomStatus == "ไม่ว่าง") {
+                            Roombusy = Roombusy + 1
+                            htmlString1 += '<div class="bigroom"><div> <a href="http://localhost:3000/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> '
+                                + ' </div >'
+                                //  if()
+                                + '     <div style="background-color: orange" id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div>'
+                                + '     <button onclick="RemoveLink(this.id);" id="removeLink' + ourData[0].floor[i].room[j].roomNumber + '" type="button" class="btnRemoveLink btn btn-danger btn-block" style="height: 20%;">ลบห้อง</button>'
+                                + '     </div> '
 
-                        htmlString1 += '<div class="bigroom"><div> <a href="http://localhost:3000/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> </div><div id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div></div> '
-                        console.log('t', ourData[0].floor[i].room[j])
-                        console.log('#')
-
-
-                        //   htmlString3 = htmlString1 + htmlString2
-                        // console.log('ห้อง',j)
-                        //  console.log('ชั้น',i)
-                        console.log('p', ourData[0].floor[i].room[j].contract)
+                        } else if (ourData[0].floor[i].room[j].roomStatus == "กำลังปรับปรุง") {
+                            Roomremodel = Roomremodel + 1
+                            htmlString1 += '<div class="bigroom"><div> <a href="http://localhost:3000/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> '
+                                + ' </div >'
+                                //  if()
+                                + '     <div style="background-color: gray"  id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div>'
+                                + '     <button onclick="RemoveLink(this.id);" id="removeLink' + ourData[0].floor[i].room[j].roomNumber + '" type="button" class="btnRemoveLink btn btn-danger btn-block" style="height: 20%;">ลบห้อง</button>'
+                                + '     </div> '
+                        }
                     }
-                    htmlString1 += '</div>'
+                    htmlString1 += '</div><hr style="border: 1px solid black;">'
                 }
                 document.getElementById("divPostHome").innerHTML = htmlString1;
                 document.getElementById("meter").innerHTML = ourData[0].UnitMeter
@@ -839,8 +1199,12 @@
 
                 document.getElementById("phone").value = ourData[0].BuildingPhone
                 document.getElementById("email").value = ourData[0].BuildingEmail
+
+                document.getElementById("free").innerHTML = Roomfree
+                document.getElementById("busy").innerHTML = Roombusy
+                document.getElementById("remodel").innerHTML = Roomremodel
             }
-            //render หน้าเเก้ไขห้องพัก อัพเดทห้องพัก
+            //render หน้าเเก้ไขห้องพัก อัพเดทห้องพัก       
             function renderedithome(ourData) {
                 let l = 1
                 for (let i = 0; i < ourData[0].floor.length; i++) {
@@ -856,7 +1220,7 @@
                         + '      <p id="">' + (i + 1) + '</p>'
                         + '   </div>'
                         + '   <div class="col-4 col-sm-3">'
-                        + '   <button onclick="Plusroom(this.id);" id="Plusroom" style="margin-top: 6%" class="btn btn-primary "'
+                        + '   <button onclick="Plusroom(this.id);" id="Plusroom' + (i + 1) + '" style="margin-top: 6%" class="btn btn-primary "'
                         + '       type="button">เพิ่มห้อง</button>'
                         + '  </div>'
                         + '  </div>'
@@ -1028,8 +1392,8 @@
                 ourRequest.open('GET', 'http://localhost:3000/getUserdelete')
                 ourRequest.onload = function () {
                     var ourData = JSON.parse(ourRequest.responseText);
-                    console.log(ourData)
-                    console.log('sdsdsdsdsds')
+                    //      console.log(ourData)
+                    //     console.log('sdsdsdsdsds')
                     let l = 1
                     for (let i = 0; i < ourData.length; i++) {
                         htmlStringUserdelete += '<tr><th scope="row">' + (l++) + '</th><td>' + ourData[i].BuildingNameAllow + '</th><td>' + ourData[i].roomNumberAllow + '</th><td>' + ourData[i].personIDAllow + '</td><td>'

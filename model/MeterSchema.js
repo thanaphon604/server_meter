@@ -9,7 +9,11 @@ var MeterSchema = new Schema({
                 {
                     //ผู้ใช้หน่วยมิเตอร์ต่อห้อง
                     usemeter: {
-                        type:Number
+                        type: Number
+                    },
+                    allunitmeter: {
+                        type: Number,
+
                     },
                     roomNumbermeter: {
                         type: String,
@@ -22,24 +26,19 @@ var MeterSchema = new Schema({
     ],
     pricemeter: {
         type: Number,
-        required: true
+
     },
     buildingnamemeter: {
         type: String,
-        required: true
-    },
-    allunitmeter: {
-        type: Number,
-        required: true
+
     },
     buymeter: {
         type: Number,
-        required: true
 
     },
     datemeter: {
         type: String,
-        required: true
+
     }
 
 

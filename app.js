@@ -214,6 +214,7 @@ app.post('/postUser', (req, res) => {
                             phoneNumber: req.body.phoneNumber,
                             License: req.body.License
                         })
+                        build[0].floor[i].room[j].roomStatus = 'ไม่ว่าง'
 
                         build[0].save().then((suc) => {
                             console.log('res person : ', suc)
@@ -437,9 +438,115 @@ app.get('/getUserdelete', (req, res) => {
         res.status(404).send(err)
     })
 })
+//---------------------------------------------------------------------------------------
+//หน้า 3 เพิ่มมิเตอร์
+// app.post('/postMeter', (req, res) => {
+//     let newmeterbuild = new meterbuild({
+//         floormeter: req.body.floormeter,
+//         pricemeter: req.body.pricemeter,
+//         buildingnamemeter: req.body.buildingnamemeter,
+//         datemeter: req.body.datemeter,
+
+//     })
+//     newmeterbuild.save().then((d) => {
+//         res.send(d)
+//     }, (e) => {
+//         console.log(e)
+//         res.send(e)
+//         res.status(400).send(e)
+//     })
+// })
+app.post('/postMeter', (req, res) => {
+    let newmeterbuild = new meterbuild({
+        floormeter: req.body.floormeter,
+        pricemeter: req.body.pricemeter,
+        buildingnamemeter: req.body.buildingnamemeter,
+        datemeter: req.body.datemeter,
+
+    })
+    let floormeterInput = req.body.floormeter
+    let pricemeterInput = req.body.pricemeter
+    let buildingnamemeterInput = req.body.buildingnamemeter
+    let datemeterInput = req.body.datemeter
+    meterbuild.find({
+        buildingnamemeter: buildingnamemeterInput,
+        datemeter: datemeterInput
+        //    BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            build[0].floormeter = floormeterInput
+            build[0].pricemeter = pricemeterInput
+
+            build[0].save().then((suc) => {
+                res.send(suc)
+            }, (e) => {
+                res.status(400).send(e)
+            })
+
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            newmeterbuild.save().then((d) => {
+                res.send(d)
+            }, (e) => {
+                console.log(e)
+                res.send(e)
+                res.status(400).send(e)
+            })
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+
+app.get('/getmeter/:getdata/', (req, res) => {
+    let data = req.params.getdata
+    let getdata1 = ''
+    let getdata2 = ''
+    let getdata3 = ''
+    let i = 0
+    var datameter = []
+
+    while (data[i] != ',') {
+        getdata1 = getdata1 + data[i]
+        i++;
+    }
+    i++
+    while (data[i] != ',') {
+        getdata2 = getdata2 + data[i]
+        i++;
+    }
+    while (i < data.length) {
+        getdata3 = getdata3 + data[i]
+        i++;
+    }
+    console.log('ชื่อหอ', getdata1)
+    console.log('ปัจจุบัน', getdata2)
+    console.log('ก่อนหน้า', getdata3)
+
+    meterbuild.find({
+        buildingnamemeter: getdata1,
+        datemeter: getdata2
+    }).then((doc1) => {
+        datameter.push(doc1)
+        // res.send(doc)
+        meterbuild.find({
+            buildingnamemeter: getdata1,
+            datemeter: getdata3
+        }).then((doc2) => {
+            datameter.push(doc2)
+            res.send(datameter)
+               console.log(datameter)
+        }, (err) => {
+            res.status(404).send(err)
+        })
+    }, (err) => {
+        res.status(404).send(err)
+    })
+})
+
 //-------------------------------------หน้าที่ 6 ---------------------------------------------
 //หน้าที่ 6 หน้า เเก้ไขunitmeter 
-app.post('/postUUnitmeter', (req, res) => {
+app.post('/postUnitmeter', (req, res) => {
 
     let BuildingNameInput = req.body.BuildingName
     let UnitMeterInput = req.body.UnitMeter
@@ -465,11 +572,128 @@ app.post('/postUUnitmeter', (req, res) => {
         res.status(400).send(err)
     })
 })
+
+//หน้าเเก้ไขห้องพัก buildingNameIndex: _buildingName
+app.post('/remove-room', (req, res) => {
+    let RoomInput = req.body.numIndex
+    let BuildingNameInput = req.body.buildingNameIndex
+
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            console
+            for (let i = 0; i < build[0].floor.length; i++) {
+                for (let j = 0; j < build[0].floor[i].room.length; j++) {
+                    if (RoomInput == build[0].floor[i].room[j].roomNumber) {
+                        build[0].floor[i].room[j] = build[0].floor[i].room[j + 1]
+                        build[0].floor[i].room.pop()
+
+                        build[0].save().then((suc) => {
+                            console.log('res person : ', suc)
+                            res.send(suc)
+                        }, (e) => {
+                            consoel.log('error person :', e)
+                            res.status(400).send(e)
+                        })
+                    }
+                }
+            }
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+}) // save
+
+
+app.post('/add-floor', (req, res) => {
+
+    let BuildingNameInput = req.body.buildingNameIndex
+
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            let lastNumber = build[0].floor.length
+            console.log(lastNumber)
+            build[0].floor.push({
+                room: []
+            })
+            build[0].save().then((suc) => {
+                console.log('res person : ', suc)
+                res.send(suc)
+            }, (e) => {
+                consoel.log('error person :', e)
+                res.status(400).send(e)
+            })
+
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+
+app.post('/add-room', (req, res) => {
+    let fi = req.body.floorIndex
+    let count = (parseInt(fi)) + 1
+    let lastNumber = ''
+    console.log('data : ', fi)
+    //Building.findOne({BuildingNumber: req.body.BuildingName})
+    Building.findOne({ BuildingName: req.body.buildingNameIndex }).then((b) => {
+        if (b.floor[fi].room.length == 0 && count < 10) {
+            lastNumber = "0" + (count) + "01"
+            b.floor[fi].room.push({
+                user: [],
+                roomStatus: 'ว่าง',
+                payStatus: false,
+                contract: '',
+                roomNumber: lastNumber
+            })
+        } else if (b.floor[fi].room.length == 0 && count >= 10) {
+            lastNumber = (count) + "01"
+            console.log('number :', lastNumber)
+            b.floor[fi].room.push({
+                user: [],
+                roomStatus: 'ว่าง',
+                payStatus: false,
+                contract: '',
+                roomNumber: lastNumber
+            })
+        } else {
+            let lastNumber = b.floor[fi].room[b.floor[fi].room.length - 1].roomNumber
+
+            lastNumber.charAt(0) === '0' ? lastNumber = +lastNumber.slice(1) : lastNumber = +lastNumber
+            let nextNumber = '' + (lastNumber + 1)
+            nextNumber.length === 3 ? nextNumber = '0' + nextNumber : nextNumber = nextNumber + ''
+            b.floor[fi].room.push({
+                user: [],
+                roomStatus: 'ว่าง',
+                payStatus: false,
+                contract: '',
+                roomNumber: nextNumber
+            })
+        }
+        b.save().then((suc) => {
+            console.log('success :', suc)
+            res.send(suc)
+        }, (e) => {
+            console.log("error : ", e)
+            res.status(400).send(e)
+        })
+    }, (error) => {
+        res.status(400).send(error)
+    })
+})
+
 //หน้าปรับปรุงห้องพัก
 app.post('/postRoomUpdate', (req, res) => {
     let RoomUpdateInput = req.body.RoomUpdate
     let BuildingNameInput = req.body.BuildingName
-    
+
     //find หาusername password สำหรับ 
     Building.find({
         BuildingName: BuildingNameInput,
@@ -478,7 +702,7 @@ app.post('/postRoomUpdate', (req, res) => {
             for (let i = 0; i < build[0].floor.length; i++) {
                 for (let j = 0; j < build[0].floor[i].room.length; j++) {
                     if (RoomUpdateInput[j] == build[0].floor[i].room[j].roomNumber) {
-                        build[0].floor[i].room[j].roomStatus = 'Update'
+                        build[0].floor[i].room[j].roomStatus = 'กำลังปรับปรุง'
 
                         build[0].save().then((suc) => {
                             console.log('res contract : ', suc)
@@ -487,7 +711,7 @@ app.post('/postRoomUpdate', (req, res) => {
                             consoel.log('error contract :', e)
                             res.status(400).send(e)
                         })
-                        
+
                     }
                 }
             }

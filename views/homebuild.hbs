@@ -290,6 +290,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
                 for (let i = 0; i < Inputfloor; i++) {
                     let f = $('#floor' + (i + 1)).val()
+                      console.log('Data is ddd', f)
                     floor.push(parseInt(f))
                 }
 
@@ -322,7 +323,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         }
 
                         let roomData = {
-                            roomStatus: 'emply',
+                            roomStatus: 'ว่าง',
                             payStatus: false,
                             roomNumber,
                             contract : '',
