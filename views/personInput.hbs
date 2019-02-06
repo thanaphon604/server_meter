@@ -472,7 +472,7 @@
                 })
 
                 $('.remove').click(function (e) {
-                    //  alert('remove ' + e.target.classList[1])
+                    alert('remove ' + e.target.classList[1])
                     var r = confirm("Do you want to delete the person?");
                     if (r == true) {
 
@@ -492,7 +492,7 @@
                                 }
                             }
                         }
-                         var newUser = {
+                        var newUser = {
                             personID, firstName, lastName, birthday, address, phoneNumber, License, BuildingName, roomNumber
                         }
                         var url = "http://localhost:3000/deleteUser";
@@ -515,32 +515,32 @@
                             personID: newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
 
                         });
-                        xhr.send(data); 
+                        xhr.send(data);
 
-                      /*  {{!-- var url = "http://localhost:3000/postUserdelete";
-                        var xhr = new XMLHttpRequest();
-                        xhr.open("POST", url, true);
-                        xhr.setRequestHeader("Content-Type", "application/json");
-                        xhr.onreadystatechange = function () {
-                            if (xhr.readyState === 4 && xhr.status === 200) {
-                                console.log('res is', xhr.responseText)
-                                // if success go login page
-                                //   alert('Delete ser Successful ')
-                                window.location.reload(true);
-                                //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
-
-                            } else {
-                                //alert('can not create user! Pls try again.')
-                            }
-                        };
-                        var datauser = JSON.stringify({
-                            personID: newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
-
-                        });
-                        xhr.send(datauser);
-                        console.log('ggg')
-                        console.log(datauser)
-                        console.log('ggg') --}}*/
+                        /*  {{!-- var url = "http://localhost:3000/postUserdelete";
+                          var xhr = new XMLHttpRequest();
+                          xhr.open("POST", url, true);
+                          xhr.setRequestHeader("Content-Type", "application/json");
+                          xhr.onreadystatechange = function () {
+                              if (xhr.readyState === 4 && xhr.status === 200) {
+                                  console.log('res is', xhr.responseText)
+                                  // if success go login page
+                                  //   alert('Delete ser Successful ')
+                                  window.location.reload(true);
+                                  //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+  
+                              } else {
+                                  //alert('can not create user! Pls try again.')
+                              }
+                          };
+                          var datauser = JSON.stringify({
+                              personID: newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
+  
+                          });
+                          xhr.send(datauser);
+                          console.log('ggg')
+                          console.log(datauser)
+                          console.log('ggg') --}}*/
                     } else {
                         //   alert('no')
                     }

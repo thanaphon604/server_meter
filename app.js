@@ -462,12 +462,16 @@ app.post('/postMeter', (req, res) => {
         pricemeter: req.body.pricemeter,
         buildingnamemeter: req.body.buildingnamemeter,
         datemeter: req.body.datemeter,
+        somepricemeter: req.body.somepricemeter,
+        someunitmeter: req.body.someunitmeter,
 
     })
     let floormeterInput = req.body.floormeter
     let pricemeterInput = req.body.pricemeter
     let buildingnamemeterInput = req.body.buildingnamemeter
     let datemeterInput = req.body.datemeter
+    let somepricemeterInput = req.body.somepricemeter
+    let someunitmeterInput = req.body.someunitmeter
     meterbuild.find({
         buildingnamemeter: buildingnamemeterInput,
         datemeter: datemeterInput
@@ -476,6 +480,8 @@ app.post('/postMeter', (req, res) => {
         if (build.length == 1) {
             build[0].floormeter = floormeterInput
             build[0].pricemeter = pricemeterInput
+            build[0].somepricemeter = somepricemeterInput
+            build[0].someunitmeter = someunitmeterInput
 
             build[0].save().then((suc) => {
                 res.send(suc)
@@ -515,35 +521,115 @@ app.get('/getmeter/:getdata/', (req, res) => {
         getdata2 = getdata2 + data[i]
         i++;
     }
+    i++
     while (i < data.length) {
         getdata3 = getdata3 + data[i]
         i++;
     }
-    console.log('ชื่อหอ', getdata1)
-    console.log('ปัจจุบัน', getdata2)
-    console.log('ก่อนหน้า', getdata3)
+    console.log('namenow', getdata1)
+    console.log('now1', getdata2)
+    console.log('now2', getdata3)
 
     meterbuild.find({
         buildingnamemeter: getdata1,
         datemeter: getdata2
-    }).then((doc1) => {
-        datameter.push(doc1)
-        // res.send(doc)
-        meterbuild.find({
-            buildingnamemeter: getdata1,
-            datemeter: getdata3
-        }).then((doc2) => {
-            datameter.push(doc2)
-            res.send(datameter)
-               console.log(datameter)
-        }, (err) => {
-            res.status(404).send(err)
-        })
+    }).then((build) => {
+        // datameter.push(doc1)
+        res.send(build)
+        console.log(build)
+        // meterbuild.find({
+        //     buildingnamemeter: getdata1,
+        //     datemeter: getdata3
+        // // }).then((doc2) => {
+        // //     datameter.push(doc2)
+        // //     res.send(datameter)
+        // //        console.log(datameter)
+        // // }, (err) => {
+        // //     res.status(404).send(err)
+        // // })
     }, (err) => {
         res.status(404).send(err)
     })
 })
+//ดึงมิเตอร์ก่อนหน้า
+app.get('/getmeterbefor/:getdata/', (req, res) => {
+    let data = req.params.getdata
+    let getdata1 = ''
+    let getdata2 = ''
+    let getdata3 = ''
+    let i = 0
+    var datameter = []
 
+    while (data[i] != ',') {
+        getdata1 = getdata1 + data[i]
+        i++;
+    }
+    i++
+    while (data[i] != ',') {
+        getdata2 = getdata2 + data[i]
+        i++;
+    }
+    i++
+    while (i < data.length) {
+        getdata3 = getdata3 + data[i]
+        i++;
+    }
+    console.log('namebefor', getdata1)
+    console.log('befor1', getdata2)
+    console.log('befor2', getdata3)
+
+    meterbuild.find({
+        buildingnamemeter: getdata1,
+        datemeter: getdata3
+    }).then((build) => {
+        // datameter.push(doc1)
+        res.send(build)
+        console.log(build)
+        // meterbuild.find({
+        //     buildingnamemeter: getdata1,
+        //     datemeter: getdata3
+        // // }).then((doc2) => {
+        // //     datameter.push(doc2)
+        // //     res.send(datameter)
+        // //        console.log(datameter)
+        // // }, (err) => {
+        // //     res.status(404).send(err)
+        // // })
+    }, (err) => {
+        res.status(404).send(err)
+    })
+})
+//------------------------------------หน้าวิเคราห์ระบบ----------------------------------------
+app.get('/getmeteranalysis/:getdata/', (req, res) => {
+    let data = req.params.getdata
+    let getdata1 = ''
+    let getdata2 = ''
+    let i = 0
+    var datameter = []
+    console.log('dataana',data)
+
+    while (data[i] != ',') {
+        getdata1 = getdata1 + data[i]
+        i++;
+    }
+    i++
+    while (i < data.length) {
+        getdata2 = getdata2 + data[i]
+        i++;
+    }
+    console.log('ชื่อหอ', getdata1)
+    console.log('วันที่', getdata2)
+    meterbuild.find({
+        buildingnamemeter: getdata1,
+        datemeter: getdata2
+    }).then((build) => {
+        // datameter.push(doc1)
+        res.send(build)
+        console.log(build)
+    }, (err) => {
+        res.status(404).send(err)
+    })
+})
 //-------------------------------------หน้าที่ 6 ---------------------------------------------
 //หน้าที่ 6 หน้า เเก้ไขunitmeter 
 app.post('/postUnitmeter', (req, res) => {

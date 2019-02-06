@@ -7,11 +7,12 @@ var MeterSchema = new Schema({
         {
             roommeter: [
                 {
-                    //ผู้ใช้หน่วยมิเตอร์ต่อห้อง
+                    //หมายเลขมิเตอร์เดือนนั้น
                     usemeter: {
                         type: Number
                     },
-                    allunitmeter: {
+                    //จำนวนมิเตอร์ี่ใช้ในเดือนนั้น
+                    usemetermonth: {
                         type: Number,
 
                     },
@@ -19,6 +20,11 @@ var MeterSchema = new Schema({
                         type: String,
 
                     },
+                    meterstatus:{
+                        type: String,
+
+                    }
+
                 }
             ],
             floorNumbermeter: Number
@@ -39,8 +45,15 @@ var MeterSchema = new Schema({
     datemeter: {
         type: String,
 
+    },
+    somepricemeter:{
+        type: Number,
+        //จ่ายให้การไฟฟ้า
+    },
+    someunitmeter:{
+        type: Number,
+        //มิเตอร์ทั้งหอพัก
     }
-
 
 })
 

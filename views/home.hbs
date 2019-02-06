@@ -287,49 +287,102 @@
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 col-lg-8">
+                        <br> <br>
+                        <div class="">
+                            <label for="start">จดมิเตอร์ประจำเดือน:</label>
+                            <input type="month" type="" id="start" name="start" min="2018-03" value="">
+
+                            <div class="row justify-content-center col-lg-3 col-12">
+                                <div class="col">
+                                    <h3 id="ShowMonth"></h3>
+                                </div>
+                                <div class="col">
+                                    <h3 id="ShowYear"></h3>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                {{!-- จดประจำเดือนของห้อง --}}
                 <div class="tab-pane fade show active" id="nav-saveunit1" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row justify-content-center">
                         <div class="col-md-12 col-lg-8">
-                            <br> <br>
                             <div class="">
-                                <label for="start">จดมิเตอร์ประจำเดือน:</label>
-                                <input type="month" type="" id="start" name="start" min="2018-03" value="">
-                                <br>
-                                <div class="row justify-content-center col-lg-3 col-12">
-                                    <div class="col">
-                                        <h3 id="ShowMonth"></h3>
-                                    </div>
-                                    <div class="col">
-                                        <h3 id="ShowYear"></h3>
-                                    </div>
-
-                                </div>
                                 <div class="" id="divPostmeter" style="margin-top:5%">
                                 </div>
                                 <div id="tablePostUnitMeter">
                                     <div id="tablePostUnitMeterbody">
 
                                     </div>
-
                                 </div>
 
-                                <form action="" name="formUpdateUnitMeter" id="formUpdateUnitMeter" onsubmit="return false">
-                                    <button name="formUpdateUnitMeter" type="submit" class="btn btn-primary">บันทึก</button>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                {{!-- จดมิเตอร์ประจำเดือนของหอพัก(ภาพรวม)--}}
                 <div class="tab-pane fade" id="nav-saveunit2" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 col-lg-8">
+                            <div class="divform">
+                                <form name="form2" id="form2" action="" onsubmit="" method="">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">จำนวนการใช้ไฟฟ้าทั้งหมด (หน่วย)</label>
+                                        <input required name="examplesomemonth" type="number" class="form-control" id="examplesomemonth"
+                                            placeholder="จำนวนการใช้ไฟฟ้าทั้งหมด (หน่วย)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">รายจ่ายให้การไฟฟ้า (บาท)</label>
+                                        <input required name="exampleunit" type="number" class="form-control" id="exampleunit"
+                                            placeholder="รายจ่ายให้การไฟฟ้า (บาท)">
+                                    </div>
+                                </form>
 
-                    eeee
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
+                <div class="row justify-content-center">
+                    <div class="col-md-12 col-lg-8">
+                        <form action="" name="formUpdateUnitMeter" id="formUpdateUnitMeter" onsubmit="return false">
+                            <button name="formUpdateUnitMeter" type="submit" class="btn btn-primary">บันทึก</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- วิเคราะห์การใช้พลังงาน  -->
         <div class="tab-pane fade" id="pills-contact2" role="tabpanel" aria-labelledby="pills-contact-tab2">
-            <a href="pills-contact1">dddd</a>
+
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-8">
+                    <br> <br>
+                    <h2 style="text-align:center">วิเคราะห์การใช้พลังงานของหอพัก</h3>
+                        <br>
+                        <div class="">
+                            <label for="start">เลือกเดือนที่ต้องการ:</label>
+                            <input type="month" type="" id="analysis" name="analysis" min="2018-03" value="">
+
+                            <div class="row justify-content-center col-lg-3 col-12">
+                                <div class="col">
+                                    <h3 id="ShowMonthAnalysis"></h3>
+                                </div>
+                                <div class="col">
+                                    <h3 id="ShowYearAnalysis"></h3>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                </div>
+            </div>
+
         </div>
         <!-- ออกใบเเจ้งหนี้ใบเสร็จ -->
         <div class="tab-pane fade" id="pills-contact3" role="tabpanel" aria-labelledby="pills-contact-tab3">
@@ -509,6 +562,8 @@
     <script>
         let _data
         let _buildingName
+        let _dataNow
+        let _dataNow2
         function myFunction() {
             alert('Hello');
         }
@@ -637,9 +692,10 @@
                     member++
                 } */
         $(document).ready(function () {
-            if (document.getElementById("ShowMonth").innerHTML = 'มกราคม')
-                //script หน้าผังห้อง
-                var url_string = window.location.href
+
+
+            //script หน้าผังห้อง
+            var url_string = window.location.href
             var url = new URL(url_string);
             var BuildingName = url.searchParams.get("BuildingName");
             //     console.log(BuildingName)
@@ -666,30 +722,21 @@
             */
             //-------------------------จดมิเตอร์---------------------
             var now = new Date()
-            //   console.log("Current Time is: " + now);
+            //  console.log("Current Time is: " + now);
             var currentYear = now.getFullYear()
             //   console.log("Current year is: " + currentYear);
-            var month = now.getMonth() + 1
+            var month = (now.getMonth() + 1)
             //   console.log("Current month is: " + month);
 
-            if (month = 1) {
-                var beformont = 12
-                var beforyear = currentYear - 1
-                var befordatemeter = beforyear + "-" + beformont
-                befordatemeter = '' + befordatemeter
-            } else {
-                var beformont = month - 1
-                var beforyear = currentYear
-                var befordatemeter = currentYear + "-" + beformont
-                befordatemeter = '' + befordatemeter
-            }
             document.getElementById("start").innerHTML = currentYear
             if (month == 1) {
+
                 document.getElementById("ShowMonth").innerHTML = 'มกราคม'
                 month = '0' + month
             } else if (month == 2) {
                 document.getElementById("ShowMonth").innerHTML = 'กุมภาพันธ์'
                 month = '0' + month
+
             } else if (month == 3) {
                 document.getElementById("ShowMonth").innerHTML = 'มีนาคม'
                 month = '0' + month
@@ -718,12 +765,28 @@
             } else if (month == 12) {
                 document.getElementById("ShowMonth").innerHTML = 'ธันวาคม'
             }
-            datemeter = currentYear + '-' + month
+
+            if (month == "01") {
+
+                var beformont = 12
+                var beforyear = currentYear - 1
+                var befordatemeter = beforyear + "-" + beformont
+                befordatemeter = "" + befordatemeter
+            } else {
+
+                var beformont = "0" + (parseInt(month) - 1)
+                var beforyear = currentYear
+                var befordatemeter = beforyear + "-" + beformont
+                befordatemeter = "" + befordatemeter
+            }
+
+
+            datemeter = currentYear + "-" + month
             //    console.log('ddd')
             //   console.log(datemeter)
             //    console.log('ddd')
             document.getElementById("ShowYear").innerHTML = currentYear
-            datemeter = '' + datemeter
+            datemeter = "" + datemeter
             //render จดมิเตอร์
             //sear data building 
             //เช็คมิเตอร์ก่อนหน้า
@@ -733,33 +796,46 @@
             ourRequest.onload = function () {
                 var ourData = JSON.parse(ourRequest.responseText);
                 _data = ourData[0]
-                console.log('data : ', _data)
+                //       console.log('data : ', _data)
                 renderHome(ourData);
                 renderUser(ourData)
                 renderedithome(ourData)
                 makeClick(ourData);
                 renderUpdate(ourData);
-                //renderPostUnitMeter(ourData);
+
                 //render meter
 
                 return false;
             }
             ourRequest.send();
-
+            var databefor
             var getdata = []
             getdata.push(BuildingName)
             getdata.push(datemeter)
             getdata.push(befordatemeter)
             console.log('data1', getdata)
-            var Request = new XMLHttpRequest();
-            Request.open('GET', 'http://localhost:3000/getmeter/' + getdata)
-            Request.onload = function () {
-                var Datameter = JSON.parse(Request.responseText);
 
-                renderPostUnitMeter(Datameter, datemeter, befordatemeter)
+            var Request1 = new XMLHttpRequest();
+            Request1.open('GET', 'http://localhost:3000/getmeter/' + getdata)
+            Request1.onload = function () {
+                var Datameterunit = JSON.parse(Request1.responseText);
+                //   console.log('datanow_', Datameterunit)
+
+                _dataNow = Datameterunit
+                //      console.log('datanow_', _dataNow)
+                return false;
+            }
+            Request1.send();
+            var Request = new XMLHttpRequest();
+            Request.open('GET', 'http://localhost:3000/getmeterbefor/' + getdata)
+            Request.onload = function () {
+                var Datameterbefor = JSON.parse(Request.responseText);
+                //     console.log('databefor_', Datameterbefor)
+
+                renderPostUnitMeter(_dataNow, Datameterbefor, datemeter, befordatemeter)
+                return false;
             }
             Request.send();
-
 
             Userdelete()
             $('#start').on('input', function (e) {
@@ -768,11 +844,13 @@
                 alert(currentVal)
                 document.getElementById("ShowMonth").innerHTML = ''
                 document.getElementById("ShowYear").innerHTML = currentVal
-                datemeter = '' + currentVal
-                let beforyear = ''
-                let beformont = ''
+                // console.log('ปัจจุบัน',currentVal)
+                datemeter = "" + currentVal
+                // console.log('ปัจจุบันสตริง', datemeter)
+                let beforyear = ""
+                let beformont = ""
                 let i = 0
-                while (datemeter[i] != '-') {
+                while (datemeter[i] != "-") {
                     beforyear = beforyear + datemeter[i]
                     i++;
                 }
@@ -781,38 +859,55 @@
                     beformont = beformont + datemeter[i]
                     i++;
                 }
-
-                if (beformont = '01') {
-                    beformont = '12'
-                    beforyear = '' + (parseInt(beforyear) - 1)
+                //   console.log('ปัจจุบันmont', beformont)
+                //     console.log('ปัจจุบันyear',  beforyear)
+                if (beformont == "01") {
+                    alert('ทำ1')
+                    beformont = "12"
+                    beforyear = "" + (parseInt(beforyear) - 1)
                     var befordatemeter = beforyear + "-" + beformont
-                    befordatemeter = '' + befordatemeter
+                    befordatemeter = "" + befordatemeter
                 } else {
-                    beformont = '' + (parseInt(month) - 1)
+                    alert('ทำ2')
+                    beformont = "0" + (parseInt(beformont) - 1)
                     beforyear = beforyear
                     var befordatemeter = beforyear + "-" + beformont
-                    befordatemeter = '' + befordatemeter
+                    befordatemeter = "" + befordatemeter
                 }
-                console.log('datamont', beformont)
-                console.log('datamont', beforyear)
-                console.log('databefor', befordatemeter)
-                getDataMeter(datemeter)
-            })
-
-            function getDataMeter(datemeter) {
-                //   document.getElementById("clear").innerHTML = ''
+                console.log('databeformont', beformont)
+                console.log('databeforyear', beforyear)
+                console.log('databeforsome', befordatemeter)
                 var getdata = []
                 getdata.push(BuildingName)
                 getdata.push(datemeter)
                 getdata.push(befordatemeter)
-                console.log('data2', getdata)
+                //     console.log('data2ก่อนส่ง', getdata)
+                getDataMeter(getdata, datemeter, befordatemeter)
+                return false
+            })
+
+            function getDataMeter(getdata, datemeter, befordatemeter) {
+
+                //     console.log('data2ส่งมา', getdata)
+                var Request1 = new XMLHttpRequest();
+                Request1.open('GET', 'http://localhost:3000/getmeter/' + getdata)
+                Request1.onload = function () {
+                    var Datameterunit = JSON.parse(Request1.responseText);
+                    //  console.log('datanow2_', Datameterunit)
+
+                    _dataNow2 = Datameterunit
+                    console.log('datanow_change', _dataNow2)
+                    return false;
+                }
+                Request1.send();
+
                 var Request = new XMLHttpRequest();
-                Request.open('GET', 'http://localhost:3000/getmeter/' + getdata)
+                Request.open('GET', 'http://localhost:3000/getmeterbefor/' + getdata)
                 Request.onload = function () {
-                    var Datameter = JSON.parse(Request.responseText);
-                    //  var element = document.getElementById("clear");
-                    //  element.parentNode.removeChild(element);
-                    renderPostUnitMeter(Datameter, datemeter, befordatemeter)
+                    var Datameterbefor = JSON.parse(Request.responseText);
+                    console.log('databefor2_change', Datameterbefor)
+
+                    renderPostUnitMeter(_dataNow2, Datameterbefor, datemeter, befordatemeter)
                     return false;
                 }
                 Request.send();
@@ -852,17 +947,27 @@
 
             })
             //จดมิเตอร์--------------------------------------------------(ourData, Datameter, datemeter)
-            function renderPostUnitMeter(Datameter, date, befordatemeter) {
-                // console.log('datameter', _data)
-                // console.log('datameterrender', Datameter[0])
 
+            function renderPostUnitMeter(Datameternow, Datameterbefor, datemeter, befordatemeter) {
+                /*for (let i = 0; i < 1; i++) {
+                    alert(Datameternow[i].datemeter)
+                    console.log('สักที', Datameternow[i].datemeter)
+                    console.log('สักที', Datameterbefor[i].datemeter)
+                }
+                */
+                var y = 0
+                var z = 0
+                console.log('ปัจจุบัน', Datameternow)
+                console.log('อดีต', Datameterbefor)
                 var htmlStringUnitMeter = ''
-                if (Datameter[0] == "" && Datameter[1] == "") {
+                if (Datameternow == "" && Datameterbefor == "") {
                     alert('ไม่มีข้อมูล')
                     htmlStringUnitMeter +=
-                        '<div id="clear" >'
+                        '<div class="setmeter">'
+                        + '<div id="clear" >'
                     for (let i = 0; i < _data.floor.length; i++) {
-                        console.log('testdata', Datameter[i])
+
+
                         htmlStringUnitMeter +=
 
                             ' <div  class="row justify-content-md-center">'
@@ -891,61 +996,14 @@
                         for (let j = 0; j < _data.floor[i].room.length; j++) {
 
                             htmlStringUnitMeter +=
+
                                 '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
-                                + ' <td>' + _data.floor[i].room[j].roomStatus + '</th>'
-                                + ' <td></th>'
-                                + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input type="number" value="" class="meter ' + (_data.floor[i].room[j].roomNumber) + '" name="UnitMeter" id=""style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
-                                + ' <td></th>'
+                                + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
+                                + ' <td class="getmeterbefor" >' + y + '</th>'
+                                + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" value="' + y + '"  name="UnitMeter" class="change ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                + ' <td class="setmeterbefor"></th>'
                                 + '</tbody> '
-
-                        }
-                        htmlStringUnitMeter += '</table></div></div></div><br>'
-                    }
-                    htmlStringUnitMeter += '</div>'
-                    document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
-                    //  tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
-                } else if (Datameter[1] == "") {
-                    alert('มีข้อมูล')
-                    var name = (Datameter[0].buildingnamemeter)
-                    htmlStringUnitMeter +=
-                        '<div id="clear" >'
-                    for (let i = 0; i < _data.floor.length; i++) {
-                        console.log(Datameter[i].datemeter)
-                        console.log('testdata',name)
-                        htmlStringUnitMeter +=
-
-                            ' <div  class="row justify-content-md-center">'
-                            + ' <div class="divform">'
-                            + '  <div class="row justify-content-center">'
-                            + '   <div class="col-2 col-sm-2"><br>'
-                            + '       <p class="h4">ชั้น</p>'
-                            + '   </div>'
-                            + '   <div class="col-2 col-sm-2"><br>'
-                            + '      <p id="Updatefloor">' + (i + 1) + '</p>'
-                            + '   </div>'
-                            + '  </div>'
-                            //class="table-responsive table table-striped"
-                            + ' <div class="table-responsive">'
-                            + '   <table class="table table-bordered " >'
-                            + '  <thead>'
-                            + '     <tr>'
-                            + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
-                            + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
-                            + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ก่อนหน้า</th>'
-                            + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ปัจจุบัน</th>'
-                            + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
-                            + '     </tr>'
-                            + '  </thead>'
-
-                        for (let j = 0; j < _data.floor[i].room.length; j++) {
-
-                            htmlStringUnitMeter +=
-                                '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
-                                + ' <td>' + _data.floor[i].room[j].roomStatus + '</th>'
-                                + ' <td></th>'
-                                + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input type="number" value="" class="meter ' + (_data.floor[i].room[j].roomNumber) + '" name="UnitMeter" id=""style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
-                                + ' <td></th>'
-                                + '</tbody> '
+                                + '</div>'
 
                         }
                         htmlStringUnitMeter += '</table></div></div></div><br>'
@@ -953,9 +1011,210 @@
                     htmlStringUnitMeter += '</div>'
                     document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
                     // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
+                } else if (Datameternow != "" && Datameterbefor == "" || Datameternow == 'undefined') {
+                    alert('มีข้อมูลปัจจุบัน')
+                    console.log(Datameternow)
+                    for (let k = 0; k < Datameternow.length; k++) {
+                        console.log(Datameternow[k].datemeter)
+                        htmlStringUnitMeter +=
+                            '<div class="setmeter">'
+                            + '<div id="clear" >'
+                        for (let i = 0; i < _data.floor.length; i++) {
+
+
+                            htmlStringUnitMeter +=
+
+                                ' <div  class="row justify-content-md-center">'
+                                + ' <div class="divform">'
+                                + '  <div class="row justify-content-center">'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '       <p class="h4">ชั้น</p>'
+                                + '   </div>'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '      <p id="Updatefloor">' + (i + 1) + '</p>'
+                                + '   </div>'
+                                + '  </div>'
+                                //class="table-responsive table table-striped"
+                                + ' <div class="table-responsive">'
+                                + '   <table class="table table-bordered " >'
+                                + '  <thead>'
+                                + '     <tr>'
+                                + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ก่อนหน้า</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ปัจจุบัน</th>'
+                                + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
+                                + '     </tr>'
+                                + '  </thead>'
+
+                            for (let j = 0; j < _data.floor[i].room.length; j++) {
+
+                                htmlStringUnitMeter +=
+
+                                    '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
+                                    + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
+                                    + ' <td class="getmeterbefor" >0</th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="change ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td class="setmeterbefor">' + (Datameternow[k].floormeter[i].roommeter[j].usemeter) + '</th>'
+                                    + '</tbody> '
+                                    + '</div>'
+
+                            }
+                            htmlStringUnitMeter += '</table></div></div></div><br>'
+                        }
+                        htmlStringUnitMeter += '</div>'
+                        document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
+                        // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
+
+                    }
+                } else if (Datameternow == "" && Datameterbefor != "") {
+                    alert('มีข้อมูลอดีต')
+                    // console.log(Datameterunit[0].datameter)
+                    for (let k = 0; k < Datameterbefor.length; k++) {
+
+                        htmlStringUnitMeter +=
+                            '<div class="setmeter">'
+                            + '<div id="clear" >'
+                        for (let i = 0; i < _data.floor.length; i++) {
+
+
+                            htmlStringUnitMeter +=
+
+                                ' <div  class="row justify-content-md-center">'
+                                + ' <div class="divform">'
+                                + '  <div class="row justify-content-center">'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '       <p class="h4">ชั้น</p>'
+                                + '   </div>'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '      <p id="Updatefloor">' + (i + 1) + '</p>'
+                                + '   </div>'
+                                + '  </div>'
+                                //class="table-responsive table table-striped"
+                                + ' <div class="table-responsive">'
+                                + '   <table class="table table-bordered " >'
+                                + '  <thead>'
+                                + '     <tr>'
+                                + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ก่อนหน้า</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ปัจจุบัน</th>'
+                                + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
+                                + '     </tr>'
+                                + '  </thead>'
+
+                            for (let j = 0; j < _data.floor[i].room.length; j++) {
+
+                                htmlStringUnitMeter +=
+
+                                    '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
+                                    + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
+                                    + ' <td class="getmeterbefor" >' + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter) + '</th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" value="' + y + '"  name="UnitMeter" class="change ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td class="setmeterbefor"></th>'
+                                    + '</tbody> '
+                                    + '</div>'
+
+                            }
+                            htmlStringUnitMeter += '</table></div></div></div><br>'
+                        }
+                        htmlStringUnitMeter += '</div>'
+                        document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
+                        // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
+
+                    }
+                } else if (Datameternow != "" && Datameterbefor != "") {
+                    alert('มีข้อมูลอดีตเเละปัจจุบัน')
+                    // 
+
+                    for (let k = 0; k < Datameternow.length; k++) {
+                        console.log(Datameternow[k].datemeter)
+                        htmlStringUnitMeter +=
+                            '<div class="setmeter">'
+                            + '<div id="clear" >'
+                        for (let i = 0; i < _data.floor.length; i++) {
+
+
+                            htmlStringUnitMeter +=
+
+                                ' <div  class="row justify-content-md-center">'
+                                + ' <div class="divform">'
+                                + '  <div class="row justify-content-center">'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '       <p class="h4">ชั้น</p>'
+                                + '   </div>'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '      <p id="Updatefloor">' + (i + 1) + '</p>'
+                                + '   </div>'
+                                + '  </div>'
+                                //class="table-responsive table table-striped"
+                                + ' <div class="table-responsive">'
+                                + '   <table class="table table-bordered " >'
+                                + '  <thead>'
+                                + '     <tr>'
+                                + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ก่อนหน้า</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ปัจจุบัน</th>'
+                                + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
+                                + '     </tr>'
+                                + '  </thead>'
+
+                            for (let j = 0; j < _data.floor[i].room.length; j++) {
+
+                                htmlStringUnitMeter +=
+
+                                    '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
+                                    + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
+                                    + ' <td class="getmeterbefor" >' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '</th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="change ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td  class="setmeterbefor">' + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter - Datameternow[k].floormeter[i].roommeter[j].usemeter) + '</td></th>'
+                                    + '</tbody> '
+                                    + '</div>'
+
+                            }
+                            htmlStringUnitMeter += '</table></div></div></div><br>'
+                        }
+                        htmlStringUnitMeter += '</div>'
+                        document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
+                        // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
+
+                    }
                 }
+                $('.change').on('input', function (e) {
+                    let count = e.target.classList[1]
+                    var meternow = $(this).val();
+                    let sequence = ""
+                    let meterbefor = ""
+                    let i = 0
+                    var ans
+                    while (count[i] != "-") {
+                        sequence = sequence + count[i]
+                        i++;
+                    }
+                    i++
+                    while (i < count.length) {
+                        meterbefor = meterbefor + count[i]
+                        i++;
+                    }
+                    sequence = parseInt(sequence)
+                    meterbefor = parseInt(meterbefor)
+                    meternow = parseInt(meternow)
+                    if (isNaN(meterbefor)) meterbefor = 0;
+
+                    ans = meternow - meterbefor
+                    var list = document.getElementsByClassName("setmeter")[0];
+                    list.getElementsByClassName("setmeterbefor")[sequence].innerHTML = ans
+                    console.log('cout', count)
+                    console.log('meternow', meternow)
+                    console.log('sequence', sequence)
+                    console.log('meterbefor', meterbefor)
 
 
+                    // alert(valuenow)
+
+
+                })
             }
             $('#formUpdateUnitMeter').submit(function () {
                 var eduarray = [];
@@ -967,10 +1226,49 @@
                     });
 
                 });
+                var metermonthuse = [];
+                var meterst = []
+                var id = document.getElementsByClassName("setmeterbefor");
+                // alert (id[0]);
+
+                for (var i = 0; i < id.length; i++) {
+                    metermonthuse[i] = parseInt(id[i].innerHTML)
+                }
+                console.log('meterstatus', metermonthuse)
+
+                for (let i = 0; i < metermonthuse.length; i++) {
+                    if (isNaN(metermonthuse[i])) metermonthuse[i] = 0;
+
+                }
+                for (let i = 0; i < metermonthuse.length; i++) {
+
+                    if (metermonthuse[i] != 0) {
+                        meterst[i] = "ค้างชำระ"
+                        console.log('ค้างชำระ', metermonthuse[i])
+                    } else {
+                        meterst[i] = "ไม่มียอดค้างชำระ"
+                        console.log('ไม่ค้างชำระ', metermonthuse[i])
+                    }
+                }
+                /* $('.setmeterbefor').each(function (index, el) {
+                    var _thiss = $(this);
+                    metermonthuse[index] = [];
+                    _thiss.find("td").each(function (key, v) {
+                        metermonthuse[index].push(v.value);
+                    });
+
+                }); */
                 console.log('eduarray[0] -->' + eduarray[0]);
                 console.log('eduarray[1] -->' + eduarray[1]);
                 console.log('eduarray    -->' + eduarray);
-
+                console.log('metermonthuse[0] -->' + metermonthuse[0]);
+                console.log('metermonthuse[1] -->' + metermonthuse[1]);
+                console.log('metermonthuse   -->' + metermonthuse);
+                //ดึงค่าในหน้า ค่าไฟฟ้ารวมของมิเตอร์รวมของหอพัก
+                var somepricemeter = document.getElementById("examplesomemonth").value
+                var someunitmeter = document.getElementById("exampleunit").value
+                console.log('hh', somepricemeter)
+                console.log('hh', someunitmeter)
                 let floormeter = []
                 for (let i = 0; i < _data.floor.length; i++) {
                     let f = _data.floor[i].room.length
@@ -981,6 +1279,8 @@
                 myData.pricemeter = _data.UnitMeter
                 myData.buildingnamemeter = _data.BuildingName
                 myData.datemeter = datemeter
+                myData.somepricemeter = somepricemeter
+                myData.someunitmeter = someunitmeter
                 //  myData.allunitmeter = ''
                 //  myData.buymeter = ''
 
@@ -1002,10 +1302,14 @@
                             roomNumbermeter += (j + 1)
                         }
                         let usemeter = parseInt(eduarray[k])
+                        let usemetermonth = parseInt(metermonthuse[k])
+                        let meterstatus = "" + meterst[k]
                         k++
                         let roomData = {
                             roomNumbermeter,
-                            usemeter
+                            usemeter,
+                            usemetermonth,
+                            meterstatus
                         }
 
                         roomArrayPerFloor.push(roomData)
@@ -1032,16 +1336,18 @@
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         console.log('res is', xhr.responseText)
                         // if success go login page
-                        alert('Add Success')
-                        window.location.reload(true);
+                        alert('บันทึกสำเร็จ')
+                        //   window.location.reload(true);
 
                     } else {
                         //alert('can not create user! Pls try again.')
                     }
                 };
-                var data = JSON.stringify({ floormeter: myData.floormeter, pricemeter: myData.pricemeter, buildingnamemeter: myData.buildingnamemeter, datemeter: myData.datemeter });
+                var data = JSON.stringify({ floormeter: myData.floormeter, pricemeter: myData.pricemeter, buildingnamemeter: myData.buildingnamemeter, datemeter: myData.datemeter, somepricemeter: myData.somepricemeter, someunitmeter: myData.someunitmeter });
                 xhr.send(data);
             }
+            //บันทึกมิเตอร์รวมของหอพัก
+
             $('#formUpdate').click(function () {
                 let RoomUpdate = []
                 $.each($("input[name='UpdateRoom']:checked"), function () {
@@ -1076,8 +1382,49 @@
                 xhr.send(data);
                 return false
             });
+            //วิเคราห์หอพัก-----------------------------------------------
+            $('#analysis').on('input', function (e) {
+                //     $("#tablePostUnitMeter").remove();
+                var currentVal = document.getElementById("analysis").value;
+                alert(currentVal)
+                document.getElementById("ShowMonthAnalysis").innerHTML = ''
+                document.getElementById("ShowYearAnalysis").innerHTML = currentVal
+                // console.log('ปัจจุบัน',currentVal)
+                datemeter = "" + currentVal
+                // console.log('ปัจจุบันสตริง', datemeter)
 
-            //เเก้ไขหเองพัก----------------------------------------------------
+                let i = 0
+                while (datemeter[i] != "-") {
+                    beforyear = beforyear + datemeter[i]
+                    i++;
+                }
+                i++
+                while (i < datemeter.length) {
+                    beformont = beformont + datemeter[i]
+                    i++;
+                }
+
+                var getdata = []
+                getdata.push(BuildingName)
+                getdata.push(datemeter)
+                // getdata.push(befordatemeter)
+                console.log('data2ก่อนส่ง', getdata)
+                var Request = new XMLHttpRequest();
+                Request.open('GET', 'http://localhost:3000/getmeteranalysis/' + getdata)
+                Request.onload = function () {
+                    var Dataanalysis = JSON.parse(Request.responseText);
+                         console.log('meteranalysis', Dataanalysis)
+
+                  //  renderPostUnitMeter(_dataNow, Datameterbefor, datemeter, befordatemeter)
+                    return false;
+                }
+                Request.send();
+
+                //  getDataMeter(getdata, datemeter, befordatemeter)
+                return false
+            })
+
+            //เเก้ไขห้องพัก----------------------------------------------------
             //อัพเดทห้องพัก
             //  $('#newNodeButton').on('click', function () {
             //   alert('lll')
