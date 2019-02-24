@@ -77,6 +77,12 @@
         margin: auto auto;
         display: block;
       }
+      html, body, #container {
+  width: 100%;
+  height: 75%;
+  margin: 0;
+  padding: 0;
+}
     </style>
 </head>
 
@@ -360,7 +366,7 @@
         <div class="tab-pane fade" id="pills-contact2" role="tabpanel" aria-labelledby="pills-contact-tab2">
 
             <div class="row justify-content-center">
-                <div class="col-md-12 col-lg-8">
+                <div class="col-md-11 col-lg-8">
                     <br> <br>
                     <h2 style="text-align:center">วิเคราะห์การใช้พลังงานของหอพัก</h3>
                         <br>
@@ -376,11 +382,32 @@
                                     <h3 id="ShowYearAnalysis"></h3>
                                 </div>
                             </div>
+                            <div class="row ">
+                                <div class="col-md-12 col-lg-6 divform ">
+                                    <div id="piechart">
+
+                                    </div>
+                                    <div id="setchart">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-11 col-lg-6 divform">
+                                    <div id="container">
+
+                                    </div>
+                                    <br>
+                                    <div id="setchart2" style="text:center">
+
+                                    </div>
+                                </div>
+
+                            </div>
 
 
 
                         </div>
                 </div>
+
             </div>
 
         </div>
@@ -396,8 +423,29 @@
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-invoicec" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
-                <div class="tab-pane fade" id="nav-bill" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                <div class="tab-pane fade show active" id="nav-invoicec" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 col-lg-8">
+                            <br>
+                            <h5>*หน้าจอจะเเสดงห้องที่ค้างชำระเท่านั้น</h5>
+                            <div class="">
+                                <div class="" id="divPostmeterbuilds" style="margin-top:5%">
+                                </div>
+
+                            </div>
+                            <form action="" name="formmeter" id="formmeter" onsubmit="return false">
+                                <button name="formmeter" type="submit" class="btn btn-primary">ยืนยัน</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="nav-bill" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+
+                </div>
+
 
             </div>
         </div>
@@ -553,12 +601,14 @@
     </div>
 
     </div>
-
-
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-ui.1.11.2.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
         let _data
         let _buildingName
@@ -708,6 +758,7 @@
             var htmlStringUnitMeter = ''
             var htmlStringNow = ''
             _buildingName = BuildingName
+            var htmlStringmeterbuilds = ''
 
             //ดึงข้อมูล user delete
 
@@ -791,23 +842,28 @@
             //sear data building 
             //เช็คมิเตอร์ก่อนหน้า
 
-            var ourRequest = new XMLHttpRequest();
-            ourRequest.open('GET', 'http://localhost:3000/getbuild/' + BuildingName)
-            ourRequest.onload = function () {
-                var ourData = JSON.parse(ourRequest.responseText);
-                _data = ourData[0]
-                //       console.log('data : ', _data)
-                renderHome(ourData);
-                renderUser(ourData)
-                renderedithome(ourData)
-                makeClick(ourData);
-                renderUpdate(ourData);
+            renderpage()
+            function renderpage(){
+                var ourRequest = new XMLHttpRequest();
+                ourRequest.open('GET', 'http://localhost:3000/getbuild/' + BuildingName)
+                ourRequest.onload = function () {
+                    var ourData = JSON.parse(ourRequest.responseText);
+                    _data = ourData[0]
+                    //       console.log('data : ', _data)
+                    renderHome(ourData);
+                    renderUser(ourData)
+                    renderedithome(ourData)
+                    makeClick(ourData);
+                    renderUpdate(ourData);
 
-                //render meter
+                    //render meter
 
-                return false;
+                    return false;
+                }
+                ourRequest.send();
             }
-            ourRequest.send();
+
+
             var databefor
             var getdata = []
             getdata.push(BuildingName)
@@ -826,6 +882,7 @@
                 return false;
             }
             Request1.send();
+
             var Request = new XMLHttpRequest();
             Request.open('GET', 'http://localhost:3000/getmeterbefor/' + getdata)
             Request.onload = function () {
@@ -836,8 +893,114 @@
                 return false;
             }
             Request.send();
+            //ดึงข้อมูลของ ห้องพักทุกห้องที่ค้างค่าไฟ้า
+            getmeterbuilds()
 
             Userdelete()
+            //ดึงข้อมูลของ ห้องพักทุกห้องที่ค้างค่าไฟ้า
+            function getmeterbuilds() {
+
+                var Request = new XMLHttpRequest();
+                Request.open('GET', 'http://localhost:3000/getmeterbuilds/' + BuildingName)
+                Request.onload = function () {
+                    var Datameterbuilds = JSON.parse(Request.responseText);
+                    //  console.log('datametebuilds', Datameterbuilds)
+                    rendermeterbuilds(Datameterbuilds)
+                    return false;
+                }
+                Request.send();
+            }
+            //render หน้าจ่ายใบเเจ้งหนี้
+            function rendermeterbuilds(Datameterbuilds) {
+                console.log('datametebuilds', Datameterbuilds)
+                for (let l = 0; l < Datameterbuilds.length; l++) {
+                    htmlStringmeterbuilds +=
+                        ' <div  class="row justify-content-md-center">'
+                        + ' <div class="divform">'
+                        + '  <div class="row justify-content-center">'
+                        + '   <div class="col-2 col-sm-2"><br>'
+                        + '       <p class="h4">ประจำเดือนที่</p>'
+                        + '   </div>'
+                        + '   <div class="col-2 col-sm-2"><br>'
+                        + '      <p id="Updatefloor">' + (Datameterbuilds[l].datemeter) + '</p>'
+                        + '   </div>'
+                        + '  </div>'
+                        + '   <table class="table table-bordered" >'
+                        + '  <thead>'
+                        + '     <tr>'
+                        + '     <th scope="col" style="background-color: grey ; height: 50px;"><input type="checkbox" value="' + (l + 1) + '" class="select_allmeter ' + (l + 1) + '" id="select_allmeter" /></th>'
+                        + '       <th scope="col" style="background-color: grey">หมายเลขห้อง</th>'
+                        + '     </tr>'
+                        + '  </thead>'
+                    for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
+
+                        for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ") {
+                                htmlStringmeterbuilds += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkbox"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
+
+                            }
+                        }
+
+                    }
+                    htmlStringmeterbuilds += '</table></div></div><br>'
+                }
+                document.getElementById("divPostmeterbuilds").innerHTML = htmlStringmeterbuilds
+
+                $('.select_allmeter').click(function (e) {
+                    let upfloor = e.target.classList[1]
+
+                    console.log(upfloor)
+                    if (this.checked) {
+
+                        $('.checkbox').each(function () {
+                            let data = this.value
+                            let getdata1 = ''
+                            let getdata2 = ''
+                            let i = 0
+                            console.log('dataana', data)
+
+                            while (data[i] != ',') {
+                                getdata1 = getdata1 + data[i]
+                                i++;
+                            }
+                            i++
+                            while (i < data.length) {
+                                getdata2 = getdata2 + data[i]
+                                i++;
+                            }
+                            console.log('datemeter', getdata1)
+                            console.log('room', getdata2)
+                            for (let l = 0; l < Datameterbuilds.length; l++) {
+                                for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
+                                    for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
+                                        if (upfloor == (l + 1)) {
+                                            if (this.value == Datameterbuilds[l].datemeter) {
+                                                this.checked = true;
+                                                console.log("ppppp", this.value)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        });
+                    } else {
+                        $('.checkbox').each(function () {
+                            this.checked = false;
+                        });
+                    }
+                });
+                $('#formmeter').click(function () {
+
+                    let RoomUpdate = []
+                    $.each($("input[name='meterRoom']:checked"), function () {
+                        RoomUpdate.push($(this).val());
+                    });
+                    console.log('rommeter', RoomUpdate)
+                });
+
+
+            }
             $('#start').on('input', function (e) {
                 //     $("#tablePostUnitMeter").remove();
                 var currentVal = document.getElementById("start").value;
@@ -1011,8 +1174,8 @@
                     htmlStringUnitMeter += '</div>'
                     document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
                     // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
-                } else if (Datameternow != "" && Datameterbefor == "" || Datameternow == 'undefined') {
-                    alert('มีข้อมูลปัจจุบัน')
+                } else if (Datameternow != "" && Datameterbefor == "" || Datameternow == 'undefined' || _data.floor == 'undefined') {
+                    //alert('มีข้อมูลปัจจุบัน')
                     console.log(Datameternow)
                     for (let k = 0; k < Datameternow.length; k++) {
                         console.log(Datameternow[k].datemeter)
@@ -1124,7 +1287,7 @@
 
                     }
                 } else if (Datameternow != "" && Datameterbefor != "") {
-                    alert('มีข้อมูลอดีตเเละปัจจุบัน')
+                    // alert('มีข้อมูลอดีตเเละปัจจุบัน')
                     // 
 
                     for (let k = 0; k < Datameternow.length; k++) {
@@ -1265,8 +1428,9 @@
                 console.log('metermonthuse[1] -->' + metermonthuse[1]);
                 console.log('metermonthuse   -->' + metermonthuse);
                 //ดึงค่าในหน้า ค่าไฟฟ้ารวมของมิเตอร์รวมของหอพัก
-                var somepricemeter = document.getElementById("examplesomemonth").value
-                var someunitmeter = document.getElementById("exampleunit").value
+
+                var someunitmeter = document.getElementById("examplesomemonth").value
+                var somepricemeter = document.getElementById("exampleunit").value
                 console.log('hh', somepricemeter)
                 console.log('hh', someunitmeter)
                 let floormeter = []
@@ -1413,16 +1577,179 @@
                 Request.open('GET', 'http://localhost:3000/getmeteranalysis/' + getdata)
                 Request.onload = function () {
                     var Dataanalysis = JSON.parse(Request.responseText);
-                         console.log('meteranalysis', Dataanalysis)
+                    console.log('meteranalysis', Dataanalysis)
 
-                  //  renderPostUnitMeter(_dataNow, Datameterbefor, datemeter, befordatemeter)
-                    return false;
+                    renderAnalysis(Dataanalysis)
+
                 }
                 Request.send();
 
                 //  getDataMeter(getdata, datemeter, befordatemeter)
-                return false
+
             })
+            function renderAnalysis(Dataanalysis) {
+                // Profit กำไร ขาดทุน
+                // var unitcentral unitส่วนกลาง
+                // var countUnitAnalysis = 0 ผู้ใช้กี่หน่วยทั้งหอ
+                // var countsomepricemeter จ่ายให้การไฟฟ้า
+                // var countsomeunitmeter หน่วยที่จ่ายให้การไฟฟ้า
+                // var priceunit ราคาต่ออหน่วยที่เก็บ 
+                //income รายรับจากหอพัก
+                if (Dataanalysis == "") {
+                    alert('กรุณาบันทึกข้อมูลหน่วยมิเตอร์1')
+                    return false;
+                }
+                if (Dataanalysis[0].somepricemeter == "" || Dataanalysis[0].someunitmeter == "") {
+                    alert('กรุณาบันทึกข้อมูลหน่วยมิเตอร์รวมของหอพัก2')
+                    return false;
+                }
+                var htmlstringchart = ""
+                var htmlstringchart2 = ""
+                var Profit = 0
+                var unitcentral = 0
+                var income = 0
+                var countUnitAnalysis = 0
+                var countsomepricemeter = Dataanalysis[0].somepricemeter
+                var countsomeunitmeter = Dataanalysis[0].someunitmeter
+                var priceunit = Dataanalysis[0].pricemeter
+                for (let i = 0; i < Dataanalysis[0].floormeter.length; i++) {
+                    for (let j = 0; j < Dataanalysis[0].floormeter[i].roommeter.length; j++) {
+                        if (Dataanalysis[0].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ") {
+                            countUnitAnalysis = countUnitAnalysis + Dataanalysis[0].floormeter[i].roommeter[j].usemetermonth
+                        }
+                    }
+                }
+                if (countUnitAnalysis <= 0) {
+                    return false;
+                }
+
+                income = countUnitAnalysis * priceunit
+                unitcentral = countsomeunitmeter - countUnitAnalysis
+                Profit = income - countsomepricemeter
+                console.log('การใช้ไฟฟ้าของผู้เช่า (หน่วย) ', countUnitAnalysis)
+                console.log('การใช้ไฟฟ้าของส่วนกลาง(หน่วย) ', unitcentral)
+                console.log('การใช้ไฟฟ้าทั้งหมด(หน่วย) ', countsomeunitmeter)
+                console.log('รายรับค่าไฟฟ้าจากผู้เช่า(บาท) ', income)
+                console.log('รายจ่ายการไฟฟ้า(บาท) ', countsomeunitmeter)
+                console.log('กำไร/ขาดทุน ค่าไฟฟ้า(บาท) ', Profit)
+
+                google.charts.load('current', { 'packages': ['corechart'] });
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Task', ' per Month'],
+                        ['การใช้ไฟฟ้าของผู้เช่า (หน่วย)', countUnitAnalysis],
+                        ['การใช้ไฟฟ้าของส่วนกลาง(หน่วย)', unitcentral],
+
+
+                    ]);
+
+                    // Optional; add a title and set the width and height of the chart
+                    var options = { 'title': 'การใช้พลังงานของทั้งหอพัก ' + countsomeunitmeter + ' หน่วย', 'height': 400, 'width': 390, responsive: true };
+
+                    // Display the chart inside the <div> element with id="piechart"
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(data, options);
+                    htmlstringchart += ''
+                        + '<div class="row">'
+                        + '       <div class="col-5">'
+                        + '          <p class="h5">การใช้ไฟฟ้าของทั้งหอพัก</p>'
+                        + '       </div>'
+                        + '     <div class="col-2">'
+                        + '         <p>' + countsomeunitmeter + '</p>'
+                        + '      </div>'
+                        + '      <div class="col-1">'
+                        + '         <p>หน่วย</p>'
+                        + '      </div>'
+                        + '    </div>'
+                        + '    <div class="row">'
+                        + '       <div class="col-5">'
+                        + '          <p class="h5">การใช้ไฟฟ้าของผู้เช่า</p>'
+                        + '       </div>'
+                        + '     <div class="col-2">'
+                        + '         <p>' + countUnitAnalysis + '</p>'
+                        + '      </div>'
+                        + '      <div class="col-1">'
+                        + '         <p>หน่วย</p>'
+                        + '      </div>'
+                        + '    </div>'
+                        + '    <div class="row">'
+                        + '        <div class="col-5">'
+                        + '          <p class="h5">การใช้ไฟฟ้าของส่วนกลาง</p>'
+                        + '        </div>'
+                        + '       <div class="col-2">'
+                        + '           <p>' + unitcentral + '</p>'
+                        + '        </div>'
+                        + '         <div class="col-1">'
+                        + '            <p>หน่วย</p>'
+                        + '          </div>'
+                        + '       </div>'
+                    document.getElementById("setchart").innerHTML = htmlstringchart
+                }
+                anychart.onDocumentReady(function () {
+
+                    // set the data
+                    var data = {
+                        header: ["Name", "Death toll"],
+                        rows: [
+                            ["รายรับค่าไฟฟ้าจากผู้เช่า(บาท)", income],
+                            ["รายจ่ายการไฟฟ้า(บาท)", countsomepricemeter],
+                            ["กำไร/ขาดทุน ค่าไฟฟ้า(บาท)", Profit],
+
+                        ]
+                    };
+
+                    // create the chart
+                    var chart = anychart.column();
+
+                    // add data
+                    chart.data(data);
+
+                    // set the chart title
+                    chart.title("รายรับ-รายจ่ายของหอพัก");
+
+                    // draw
+                    chart.container("container");
+                    chart.draw();
+                    htmlstringchart2 += ''
+                        + '<div class="row">'
+                        + '       <div class="col-5">'
+                        + '          <p class="h5">รายรับค่าไฟฟ้าจากผู้เช่า</p>'
+                        + '       </div>'
+                        + '     <div class="col-2">'
+                        + '         <p>' + income + '</p>'
+                        + '      </div>'
+                        + '      <div class="col-1">'
+                        + '         <p>บาท</p>'
+                        + '      </div>'
+                        + '    </div>'
+                        + '    <div class="row">'
+                        + '       <div class="col-5">'
+                        + '          <p class="h5">รายจ่ายการไฟฟ้า(บาท)</p>'
+                        + '       </div>'
+                        + '     <div class="col-2">'
+                        + '         <p>' + countsomepricemeter + '</p>'
+                        + '      </div>'
+                        + '      <div class="col-1">'
+                        + '         <p>บาท</p>'
+                        + '      </div>'
+                        + '    </div>'
+                        + '    <div class="row">'
+                        + '        <div class="col-5">'
+                        + '          <p class="h5">กำไร/ขาดทุน ค่าไฟฟ้า</p>'
+                        + '        </div>'
+                        + '       <div class="col-2">'
+                        + '           <p>' + Profit + '</p>'
+                        + '        </div>'
+                        + '         <div class="col-1">'
+                        + '            <p>บาท</p>'
+                        + '          </div>'
+                        + '       </div>'
+                    document.getElementById("setchart2").innerHTML = htmlstringchart2
+                });
+
+
+            }
 
             //เเก้ไขห้องพัก----------------------------------------------------
             //อัพเดทห้องพัก

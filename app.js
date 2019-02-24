@@ -526,9 +526,9 @@ app.get('/getmeter/:getdata/', (req, res) => {
         getdata3 = getdata3 + data[i]
         i++;
     }
-    console.log('namenow', getdata1)
-    console.log('now1', getdata2)
-    console.log('now2', getdata3)
+  //  console.log('namenow', getdata1)
+  //  console.log('now1', getdata2)
+  //  console.log('now2', getdata3)
 
     meterbuild.find({
         buildingnamemeter: getdata1,
@@ -574,9 +574,9 @@ app.get('/getmeterbefor/:getdata/', (req, res) => {
         getdata3 = getdata3 + data[i]
         i++;
     }
-    console.log('namebefor', getdata1)
-    console.log('befor1', getdata2)
-    console.log('befor2', getdata3)
+   // console.log('namebefor', getdata1)
+   // console.log('befor1', getdata2)
+  //  console.log('befor2', getdata3)
 
     meterbuild.find({
         buildingnamemeter: getdata1,
@@ -617,8 +617,8 @@ app.get('/getmeteranalysis/:getdata/', (req, res) => {
         getdata2 = getdata2 + data[i]
         i++;
     }
-    console.log('ชื่อหอ', getdata1)
-    console.log('วันที่', getdata2)
+  //  console.log('ชื่อหอ', getdata1)
+ //   console.log('วันที่', getdata2)
     meterbuild.find({
         buildingnamemeter: getdata1,
         datemeter: getdata2
@@ -630,6 +630,19 @@ app.get('/getmeteranalysis/:getdata/', (req, res) => {
         res.status(404).send(err)
     })
 })
+//-------------------------------------หน้า5 ใบเเจ้งหนี้เเละใบเสร็จ-------------------------------
+app.get('/getmeterbuilds/:BuildingName', (req, res) => {
+    meterbuild.find({
+        buildingnamemeter: req.params.BuildingName
+    }).then((doc) => {
+        res.send(doc)
+        console.log('gggg',doc)
+    }, (err) => {
+        res.status(404).send(err)
+    })
+})
+
+
 //-------------------------------------หน้าที่ 6 ---------------------------------------------
 //หน้าที่ 6 หน้า เเก้ไขunitmeter 
 app.post('/postUnitmeter', (req, res) => {
