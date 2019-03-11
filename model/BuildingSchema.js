@@ -7,53 +7,66 @@ var BuildingSchema = new Schema({
         {
             room: [
                 {
-                    user : [
+                    user: [
                         {
                             personID: {
                                 type: String,
-                                
+
                             },
                             firstName: String,
-                            lastName: String,     
+                            lastName: String,
                             birthday: String,
                             //sex: Boolean,
                             address: String,
                             phoneNumber: String,
                             License: String,
-                          
+
+
                         }
                     ],
                     roomStatus: String,
                     payStatus: Boolean,
-                    contract :{ type : String
+                    contract: {
+                        type: String
                     },
                     roomNumber: {
                         type: String,
-                       
+
                     },
+                    rentroom: Number
                 }
             ],
-            floorNumber: Number 
+            floorNumber: Number
         }
     ],
     adminAllow: {
         type: String,
         required: true
     },
-    BuildingName:{
+    BuildingName: {
         type: String,
-        required:true
-    },
-    UnitMeter:{
-        type:Number,
         required: true
     },
-    BuildingPhone:{
-        type:String,
+    UnitMeter: {
+        type: Number,
         required: true
-        
     },
-    BuildingEmail:{
+    BuildingPhone: {
+        type: String,
+        required: true
+
+    },
+    BuildingEmail: {
+        type: String,
+        required: true
+    },
+    //ราคามิเตอร์น้ำ
+    plicewater: {
+        type: Number,
+        required: true
+    },
+    //วิธีคิดค่าน้ำ
+    methodwater: {
         type: String,
         required: true
     }

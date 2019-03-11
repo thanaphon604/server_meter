@@ -105,6 +105,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">ค่าเช่าห้อง</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="rentroom" placeholder="ค่าเช่าห้อง" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <div class="col-sm-10">
                                 <button type="submit" class="btn btn-primary">บันทึก</button>
                             </div>
@@ -219,6 +225,12 @@
                         <div class="col-3">
                             <p id="showcontract"></p>
                         </div>
+                         <div class="col-3">
+                            <p class="h4">ค่าเช่าห้อง</p>
+                        </div>
+                        <div class="col-3">
+                            <p id="showrentroom"></p>
+                        </div>
                     </div>
                     <br>
                     <div class="row">
@@ -311,9 +323,11 @@
             // เมื่อเกิดเหตุการ submit form
             $('#form').submit(function () {
                 var contract = document.getElementById('contract').value
+                var rentroom = document.getElementById('rentroom').value
                 console.log('sss2', contract)
                 console.log(BuildingName)
                 console.log(roomNumber)
+                  console.log(rentroom)
                 var url = "http://localhost:3000/postcontract";
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", url, true);
@@ -330,7 +344,7 @@
                     }
                 };
 
-                var data = JSON.stringify({ contract: '' + contract, BuildingName: BuildingName, roomNumber: roomNumber });
+                var data = JSON.stringify({ contract: '' + contract, BuildingName: BuildingName, roomNumber: roomNumber ,rentroom: rentroom});
                 xhr.send(data);
                 return false;
 
@@ -436,6 +450,7 @@
                         if (roomNumber == ourData[0].floor[i].room[j].roomNumber) {
 
                             document.getElementById("showcontract").innerHTML = ourData[0].floor[i].room[j].contract;
+                             document.getElementById("showrentroom").innerHTML = ourData[0].floor[i].room[j].rentroom;
                             console.log('ytyt', ourData[0].floor[i].room[j].user.length)
                             for (let k = 0; k < ourData[0].floor[i].room[j].user.length; k++) {
                                 htmlString += '<tr><th scope="row">' + (k + 1) + '</th><td>' + ourData[0].floor[i].room[j].user[k].personID + '</td><td>'

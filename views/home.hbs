@@ -289,7 +289,10 @@
                         aria-controls="nav-home" aria-selected="true">บันทึกค่าไฟฟ้าเเต่ละห้อง</a>
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-saveunit2" role="tab"
                         aria-controls="nav-profile" aria-selected="false">บันทึกค่าไฟฟ้าประจำเดือนของหอพัก</a>
-
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-saveunit3" role="tab"
+                        aria-controls="nav-profile2" aria-selected="false">บันทึกค่่าน้ำประจำเดือนของหอพัก</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-saveunit4" role="tab"
+                        aria-controls="nav-profile2" aria-selected="false">บันทึกค่าน้ำประจำเดือนของหอพัก</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -346,6 +349,46 @@
                                         <label for="exampleInputPassword1">รายจ่ายให้การไฟฟ้า (บาท)</label>
                                         <input required name="exampleunit" type="number" class="form-control" id="exampleunit"
                                             placeholder="รายจ่ายให้การไฟฟ้า (บาท)">
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{!-- จดน้ำประจำเดือนของห้อง --}}
+                <div class="tab-pane fade show active" id="nav-saveunit3" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 col-lg-8">
+                            <div class="">
+                                <div class="" id="divPostwater" style="margin-top:5%">
+
+                                </div>
+                                <div id="tablePostwater">
+                                    <div id="tablePostUnitMeterbody">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{!-- จดมิเตอร์น้ำประจำเดือนของหอพัก(ภาพรวม)--}}
+                <div class="tab-pane fade" id="nav-saveunit4" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 col-lg-8">
+                            <div class="divform">
+                                <form name="form2" id="form2" action="" onsubmit="" method="">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">จำนวนการใช้น้ำทั้งหมด (หน่วย)</label>
+                                        <input required name="examplesomemonth" type="number" class="form-control" id="examplesomemonth"
+                                            placeholder="จำนวนการใช้น้ำทั้งหมด (หน่วย)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">รายจ่ายให้การน้ำ (บาท)</label>
+                                        <input required name="exampleunit" type="number" class="form-control" id="exampleunit"
+                                            placeholder="รายจ่ายให้การประปา (บาท)">
                                     </div>
                                 </form>
 
@@ -759,6 +802,7 @@
             var htmlStringNow = ''
             _buildingName = BuildingName
             var htmlStringmeterbuilds = ''
+            var htmlStringwater = ''
 
             //ดึงข้อมูล user delete
 
@@ -843,7 +887,7 @@
             //เช็คมิเตอร์ก่อนหน้า
 
             renderpage()
-            function renderpage(){
+            function renderpage() {
                 var ourRequest = new XMLHttpRequest();
                 ourRequest.open('GET', 'http://localhost:3000/getbuild/' + BuildingName)
                 ourRequest.onload = function () {
@@ -855,7 +899,7 @@
                     renderedithome(ourData)
                     makeClick(ourData);
                     renderUpdate(ourData);
-
+                    alert('ทำในนี้')
                     //render meter
 
                     return false;
@@ -878,21 +922,24 @@
                 //   console.log('datanow_', Datameterunit)
 
                 _dataNow = Datameterunit
-                //      console.log('datanow_', _dataNow)
+                console.log('datanowgg_', _dataNow)
+                var Request = new XMLHttpRequest();
+                Request.open('GET', 'http://localhost:3000/getmeterbefor/' + getdata)
+                Request.onload = function () {
+                    var Datameterbefor = JSON.parse(Request.responseText);
+                    //     console.log('databefor_', Datameterbefor)
+
+                    renderPostUnitMeter(Datameterunit, Datameterbefor, datemeter, befordatemeter)
+                    renderwater(Datameterunit, Datameterbefor, datemeter, befordatemeter)
+
+                    return false;
+                }
+                Request.send();
                 return false;
             }
             Request1.send();
 
-            var Request = new XMLHttpRequest();
-            Request.open('GET', 'http://localhost:3000/getmeterbefor/' + getdata)
-            Request.onload = function () {
-                var Datameterbefor = JSON.parse(Request.responseText);
-                //     console.log('databefor_', Datameterbefor)
 
-                renderPostUnitMeter(_dataNow, Datameterbefor, datemeter, befordatemeter)
-                return false;
-            }
-            Request.send();
             //ดึงข้อมูลของ ห้องพักทุกห้องที่ค้างค่าไฟ้า
             getmeterbuilds()
 
@@ -928,7 +975,7 @@
                         + '   <table class="table table-bordered" >'
                         + '  <thead>'
                         + '     <tr>'
-                        + '     <th scope="col" style="background-color: grey ; height: 50px;"><input type="checkbox" value="' + (l + 1) + '" class="select_allmeter ' + (l + 1) + '" id="select_allmeter" /></th>'
+                        + '     <th scope="col" style="background-color: grey ; height: 50px;"></th>'
                         + '       <th scope="col" style="background-color: grey">หมายเลขห้อง</th>'
                         + '     </tr>'
                         + '  </thead>'
@@ -945,60 +992,77 @@
                     htmlStringmeterbuilds += '</table></div></div><br>'
                 }
                 document.getElementById("divPostmeterbuilds").innerHTML = htmlStringmeterbuilds
-
-                $('.select_allmeter').click(function (e) {
-                    let upfloor = e.target.classList[1]
-
-                    console.log(upfloor)
-                    if (this.checked) {
-
-                        $('.checkbox').each(function () {
-                            let data = this.value
-                            let getdata1 = ''
-                            let getdata2 = ''
-                            let i = 0
-                            console.log('dataana', data)
-
-                            while (data[i] != ',') {
-                                getdata1 = getdata1 + data[i]
-                                i++;
-                            }
-                            i++
-                            while (i < data.length) {
-                                getdata2 = getdata2 + data[i]
-                                i++;
-                            }
-                            console.log('datemeter', getdata1)
-                            console.log('room', getdata2)
-                            for (let l = 0; l < Datameterbuilds.length; l++) {
-                                for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
-                                    for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
-                                        if (upfloor == (l + 1)) {
-                                            if (this.value == Datameterbuilds[l].datemeter) {
-                                                this.checked = true;
-                                                console.log("ppppp", this.value)
+                /*
+                            $('.select_allmeter').click(function (e) {
+                                let upfloor = e.target.classList[1]
+            
+                                console.log(upfloor)
+                                if (this.checked) {
+            
+                                    $('.checkbox').each(function () {
+                                        let data = this.value
+                                        let getdata1 = ''
+                                        let getdata2 = ''
+                                        let i = 0
+                                        console.log('dataana', data)
+            
+                                        while (data[i] != ',') {
+                                            getdata1 = getdata1 + data[i]
+                                            i++;
+                                        }
+                                        i++
+                                        while (i < data.length) {
+                                            getdata2 = getdata2 + data[i]
+                                            i++;
+                                        }
+                                        console.log('datemeter', getdata1)
+                                        console.log('room', getdata2)
+                                        for (let l = 0; l < Datameterbuilds.length; l++) {
+                                            for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
+                                                for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
+                                                    if (upfloor == (l + 1)) {
+                                                        if (this.value == Datameterbuilds[l].datemeter) {
+                                                            this.checked = true;
+                                                            console.log("ppppp", this.value)
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
-                                    }
+            
+                                    });
+                                } else {
+                                    $('.checkbox').each(function () {
+                                        this.checked = false;
+                                    });
                                 }
-                            }
-
-                        });
-                    } else {
-                        $('.checkbox').each(function () {
-                            this.checked = false;
-                        });
-                    }
-                });
+                            });
+                            */
                 $('#formmeter').click(function () {
 
-                    let RoomUpdate = []
+                    let RoomPrint = []
                     $.each($("input[name='meterRoom']:checked"), function () {
-                        RoomUpdate.push($(this).val());
+                        RoomPrint.push($(this).val());
                     });
-                    console.log('rommeter', RoomUpdate)
+                    console.log('rommeter', RoomPrint)
+                    let dateprint = []
+                    let roomprint = []
+                    let i = 0
+                    console.log('rommeterdd', RoomPrint.length)
+                    for (let k = 0; k < RoomPrint.length; k++) {
+                        while (RoomPrint != ',') {
+                            dateprint[k] = dateprint[k] + RoomPrint[k]
+                            i++;
+                        }
+                        i++
+                        while (i < RoomPrint.length) {
+                            roomprin = roomprin + RoomPrint[i]
+                            i++;
+                        }
+                    }
+                    console.log('fdf', dateprint)
+                    console.log('fdfss', roomprint)
                 });
-
 
             }
             $('#start').on('input', function (e) {
@@ -1071,6 +1135,7 @@
                     console.log('databefor2_change', Datameterbefor)
 
                     renderPostUnitMeter(_dataNow2, Datameterbefor, datemeter, befordatemeter)
+                    renderwater(Datameterunit, Datameterbefor, datemeter, befordatemeter)
                     return false;
                 }
                 Request.send();
@@ -1379,6 +1444,267 @@
 
                 })
             }
+            //จดมิเตอรืน้ำ
+            function renderwater(Datameternow, Datameterbefor, datemeter, befordatemeter) {
+                var y = 0
+                var z = 0
+                console.log('ปัจจุบันน้ำ-', Datameternow)
+                console.log('อดีตน้ำ', Datameterbefor)
+                var htmlStringwater = ''
+                if (Datameternow == "" && Datameterbefor == "") {
+                    alert('ไม่มีข้อมูล')
+                    htmlStringwater +=
+                        '<div class="setwater">'
+                        + '<div id="clear" >'
+                    for (let i = 0; i < _data.floor.length; i++) {
+
+
+                        htmlStringwater +=
+
+                            ' <div  class="row justify-content-md-center">'
+                            + ' <div class="divform">'
+                            + '  <div class="row justify-content-center">'
+                            + '   <div class="col-2 col-sm-2"><br>'
+                            + '       <p class="h4">ชั้น</p>'
+                            + '   </div>'
+                            + '   <div class="col-2 col-sm-2"><br>'
+                            + '      <p id="Updatefloor">' + (i + 1) + '</p>'
+                            + '   </div>'
+                            + '  </div>'
+                            //class="table-responsive table table-striped"
+                            + ' <div class="table-responsive">'
+                            + '   <table class="table table-bordered " >'
+                            + '  <thead>'
+                            + '     <tr>'
+                            + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
+                            + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
+                            + '  <th scope="col" style="background-color: gray">เลขมิเตอร์น้ำก่อนหน้า</th>'
+                            + '  <th scope="col" style="background-color: gray">เลขมิเตอร์น้ำปัจจุบัน</th>'
+                            + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
+                            + '     </tr>'
+                            + '  </thead>'
+
+                        for (let j = 0; j < _data.floor[i].room.length; j++) {
+
+                            htmlStringwater +=
+
+                                '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
+                                + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
+                                + ' <td class="getmeterbefor" >' + y + '</th>'
+                                + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" value="' + y + '"  name="UnitMeter" class="changewater ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                + ' <td class="setwaterbefor"></th>'
+                                + '</tbody> '
+                                + '</div>'
+
+                        }
+                        htmlStringwater += '</table></div></div></div><br>'
+                    }
+                    htmlStringwater += '</div>'
+                    document.getElementById("divPostwater").innerHTML = htmlStringwater
+                    // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
+                } else if (Datameternow != "" && Datameterbefor == "" || Datameternow == 'undefined' || _data.floor == 'undefined') {
+                    //alert('มีข้อมูลปัจจุบัน')
+                    console.log(Datameternow)
+                    for (let k = 0; k < Datameternow.length; k++) {
+                        console.log(Datameternow[k].datemeter)
+                        htmlStringwater +=
+                            '<div class="setwater">'
+                            + '<div id="clear" >'
+                        for (let i = 0; i < _data.floor.length; i++) {
+
+
+                            htmlStringwater +=
+
+                                ' <div  class="row justify-content-md-center">'
+                                + ' <div class="divform">'
+                                + '  <div class="row justify-content-center">'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '       <p class="h4">ชั้น</p>'
+                                + '   </div>'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '      <p id="Updatefloor">' + (i + 1) + '</p>'
+                                + '   </div>'
+                                + '  </div>'
+                                //class="table-responsive table table-striped"
+                                + ' <div class="table-responsive">'
+                                + '   <table class="table table-bordered " >'
+                                + '  <thead>'
+                                + '     <tr>'
+                                + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์น้ำก่อนหน้า</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์น้ำปัจจุบัน</th>'
+                                + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
+                                + '     </tr>'
+                                + '  </thead>'
+
+                            for (let j = 0; j < _data.floor[i].room.length; j++) {
+
+                                htmlStringwater +=
+
+                                    '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
+                                    + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
+                                    + ' <td class="getmeterbefor" >0</th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="changewater ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td class="setwaterbefor">' + (Datameternow[k].floormeter[i].roommeter[j].usemeter) + '</th>'
+                                    + '</tbody> '
+                                    + '</div>'
+
+                            }
+                            htmlStringwater += '</table></div></div></div><br>'
+                        }
+                        htmlStringwater += '</div>'
+                        document.getElementById("divPostwater").innerHTML = htmlStringwater
+                        // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
+
+                    }
+                } else if (Datameternow == "" && Datameterbefor != "") {
+                    alert('มีข้อมูลอดีต')
+                    // console.log(Datameterunit[0].datameter)
+                    for (let k = 0; k < Datameterbefor.length; k++) {
+
+                        htmlStringwater +=
+                            '<div class="setwater">'
+                            + '<div id="clear" >'
+                        for (let i = 0; i < _data.floor.length; i++) {
+
+
+                            htmlStringwater +=
+
+                                ' <div  class="row justify-content-md-center">'
+                                + ' <div class="divform">'
+                                + '  <div class="row justify-content-center">'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '       <p class="h4">ชั้น</p>'
+                                + '   </div>'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '      <p id="Updatefloor">' + (i + 1) + '</p>'
+                                + '   </div>'
+                                + '  </div>'
+                                //class="table-responsive table table-striped"
+                                + ' <div class="table-responsive">'
+                                + '   <table class="table table-bordered " >'
+                                + '  <thead>'
+                                + '     <tr>'
+                                + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอรน้ำ์ก่อนหน้า</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์ปน้ำัจจุบัน</th>'
+                                + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
+                                + '     </tr>'
+                                + '  </thead>'
+
+                            for (let j = 0; j < _data.floor[i].room.length; j++) {
+
+                                htmlStringwater +=
+
+                                    '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
+                                    + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
+                                    + ' <td class="getmeterbefor" >' + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter) + '</th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" value="' + y + '"  name="UnitMeter" class="changewater ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td class="setwaterbefor"></th>'
+                                    + '</tbody> '
+                                    + '</div>'
+
+                            }
+                            htmlStringwater += '</table></div></div></div><br>'
+                        }
+                        htmlStringwater += '</div>'
+                        document.getElementById("divPostwater").innerHTML = htmlStringwater
+                        // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
+
+                    }
+                } else if (Datameternow != "" && Datameterbefor != "") {
+                    // alert('มีข้อมูลอดีตเเละปัจจุบัน')
+                    // 
+
+                    for (let k = 0; k < Datameternow.length; k++) {
+                        console.log(Datameternow[k].datemeter)
+                        htmlStringwater +=
+                            '<div class="setwater">'
+                            + '<div id="clear" >'
+                        for (let i = 0; i < _data.floor.length; i++) {
+
+
+                            htmlStringwater +=
+
+                                ' <div  class="row justify-content-md-center">'
+                                + ' <div class="divform">'
+                                + '  <div class="row justify-content-center">'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '       <p class="h4">ชั้น</p>'
+                                + '   </div>'
+                                + '   <div class="col-2 col-sm-2"><br>'
+                                + '      <p id="Updatefloor">' + (i + 1) + '</p>'
+                                + '   </div>'
+                                + '  </div>'
+                                //class="table-responsive table table-striped"
+                                + ' <div class="table-responsive">'
+                                + '   <table class="table table-bordered " >'
+                                + '  <thead>'
+                                + '     <tr>'
+                                + '   <th scope="col" style="background-color: gray">หมายเลขห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">สถานะห้อง</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์น้ำก่อนหน้า</th>'
+                                + '  <th scope="col" style="background-color: gray">เลขมิเตอร์น้ำปัจจุบัน</th>'
+                                + '   <th scope="col" style="background-color: gray">หน่วยที่ใช้</th>'
+                                + '     </tr>'
+                                + '  </thead>'
+
+                            for (let j = 0; j < _data.floor[i].room.length; j++) {
+
+                                htmlStringwater +=
+
+                                    '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
+                                    + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
+                                    + ' <td class="getmeterbefor" >' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '</th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="changewater ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td  class="setwaterbefor">' + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter - Datameternow[k].floormeter[i].roommeter[j].usemeter) + '</td></th>'
+                                    + '</tbody> '
+                                    + '</div>'
+
+                            }
+                            htmlStringwater += '</table></div></div></div><br>'
+                        }
+                        htmlStringwater += '</div>'
+                        document.getElementById("divPostwater").innerHTML = htmlStringwater
+                        // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
+
+                    }
+                }
+                $('.changewater').on('input', function (e) {
+                    let count = e.target.classList[1]
+                    var waternow = $(this).val();
+                    let sequence = ""
+                    let meterbefor = ""
+                    let i = 0
+                    var ans
+                    while (count[i] != "-") {
+                        sequence = sequence + count[i]
+                        i++;
+                    }
+                    i++
+                    while (i < count.length) {
+                        meterbefor = meterbefor + count[i]
+                        i++;
+                    }
+                    sequence = parseInt(sequence)
+                    meterbefor = parseInt(meterbefor)
+                    waternow = parseInt(waternow)
+                    if (isNaN(meterbefor)) meterbefor = 0;
+
+                    ans = waternow - meterbefor
+                    console.log('gg', ans)
+                    var list = document.getElementsByClassName("setwater")[0];
+                    list.getElementsByClassName("setwaterbefor")[sequence].innerHTML = ans
+                    console.log('cout', count)
+                    console.log('waternow', waternow)
+                    console.log('sequence', sequence)
+                    console.log('meterbefor', meterbefor)
+
+                    // alert(valuenow)
+                })
+            }
             $('#formUpdateUnitMeter').submit(function () {
                 var eduarray = [];
                 $('.education-groupbox').each(function (index, el) {
@@ -1548,6 +1874,7 @@
             });
             //วิเคราห์หอพัก-----------------------------------------------
             $('#analysis').on('input', function (e) {
+
                 //     $("#tablePostUnitMeter").remove();
                 var currentVal = document.getElementById("analysis").value;
                 alert(currentVal)

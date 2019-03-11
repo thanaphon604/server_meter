@@ -113,6 +113,8 @@ app.post('/postBuilding', (req, res) => {
         UnitMeter: req.body.UnitMeter,
         BuildingPhone: req.body.BuildingPhone,
         BuildingEmail: req.body.BuildingEmail,
+        methodwater : req.body.methodwater,
+        plicewater : req.body.plicewater
     })
     newBuilding.save().then((d) => {
         res.send(d)
@@ -146,6 +148,15 @@ app.get('/Person', (req, res) => {
 app.get('/HOME', (req, res) => {
     res.render('home.hbs')
 })
+app.get('/getwater/:BuildingName', (req, res) => {
+    Building.find({
+        BuildingName: req.params.BuildingName
+    }).then((doc) => {
+        res.send(doc)
+    }, (err) => {
+        res.status(404).send(err)
+    })
+})
 
 app.get('/getbuild/:BuildingName', (req, res) => {
     Building.find({
@@ -162,6 +173,7 @@ app.post('/postcontract', (req, res) => {
     let contractInput = req.body.contract
     let BuildingNameInput = req.body.BuildingName
     let roomNumberInput = req.body.roomNumber
+    let rentroomInput = req.body.rentroom
     //find หาusername password สำหรับ 
     Building.find({
         BuildingName: BuildingNameInput,
@@ -171,6 +183,7 @@ app.post('/postcontract', (req, res) => {
                 for (let j = 0; j < build[0].floor[i].room.length; j++) {
                     if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
                         build[0].floor[i].room[j].contract = contractInput
+                        build[0].floor[i].room[j].rentroom = rentroomInput
 
                         build[0].save().then((suc) => {
                             console.log('res contract : ', suc)

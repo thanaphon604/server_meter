@@ -202,6 +202,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         <input name="email" type="email" class="form-control" id="email" placeholder="email ">
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputEmail1">วิธีคิดค่าน้ำ</label><br>
+                        <input type="radio" name="water" value="rentmonth" required="required">คิดเเบบเหมาจ่ายต่อเดือน<br>
+                        <input type="radio" name="water" value="rentunit" required="required">คิดตาม Unit ที่ใช้<br>
+                        <input name="unitwater" type="number" class="form-control" id="unitwater" placeholder="ราคาค่าต่อเดือน หรือ ราคากี่บาทต่อ 1 uint">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputEmail1">ค่าไฟฟ้าต่อหน่วย/บาท</label>
                         <input name="unitmeter" type="number" class="form-control" id="unitmeter" placeholder="ค่าไฟฟ้าต่อหน่วย">
                     </div>
@@ -212,7 +218,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     </div>
                     <div id="divPost"></div>
 
-                    <button type="submit" class="btn">ADD</button>
+                    <button type="button" id="add" class="btn">ADD</button>
                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                 </form>
             </div>
@@ -241,12 +247,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
             var Admin = JSON.parse(decodeURI(doc))
             var data_admin = [];
             console.log('###################')
-            console.log(Admin )
+            console.log(Admin)
             var long_nameBuild = Admin.length
             console.log(long_nameBuild)
             for (let i = 0; i < long_nameBuild; i++) {
                 data_admin[i] = Admin[i]
-                console.log( data_admin[i])
+                console.log(data_admin[i])
                 htmlStringg += '<div id="box" class="col-sm-5 col-12 "style="margin-bottom:5%"><div class="row mt-4"><div class="col"><h3 text-center id="NameB[' + i + ']">ชื่อหอพัก ' + data_admin[i].BuildingName + '</h3></div></div><button onclick="FunctionBuild(this.id)" type="button" class="btn btn-primary mt-4" style="width:50%"id="' + data_admin[i].BuildingName + ' "">จัดการหอพัก</button></div>'
             }
             document.getElementById(" divPostNameBuild").innerHTML = htmlStringg;
@@ -279,8 +285,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 divPost.insertAdjacentHTML('beforeend', htmlString);
             });
 
-            $(document).on('submit', '#myForm', function () {
+            $('#add').click(function () {
                 console.log('######')
+                var methodwater = $("input[name='water']:checked").val();
+                var plicewater = document.getElementById("unitwater").value;
                 var NameBuild = document.getElementById("nameBuilding").value;
                 var Phone = document.getElementById("phone").value;
                 var Email = document.getElementById("email").value;
@@ -290,7 +298,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
                 for (let i = 0; i < Inputfloor; i++) {
                     let f = $('#floor' + (i + 1)).val()
-                      console.log('Data is ddd', f)
+                    console.log('Data is ddd', f)
                     floor.push(parseInt(f))
                 }
 
@@ -300,6 +308,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 myData.UnitMeter = Unitmeter
                 myData.BuildingPhone = Phone
                 myData.BuildingEmail = Email
+                myData.methodwater = methodwater
+                myData.plicewater = plicewater
 
 
 
@@ -326,8 +336,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
                             roomStatus: 'ว่าง',
                             payStatus: false,
                             roomNumber,
-                            contract : '',
-                            
+                            contract: '',
+
                         }
                         roomArrayPerFloor.push(roomData)
                     }
@@ -361,7 +371,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     //alert('can not create user! Pls try again.')
                 }
             };
-            var data = JSON.stringify({ adminAllow: myData.adminAllow, BuildingName: myData.BuildingName, UnitMeter: myData.UnitMeter, BuildingPhone: myData.BuildingPhone, BuildingEmail: myData.BuildingEmail, floor: myData.floor });
+            var data = JSON.stringify({ adminAllow: myData.adminAllow, BuildingName: myData.BuildingName, UnitMeter: myData.UnitMeter, BuildingPhone: myData.BuildingPhone, BuildingEmail: myData.BuildingEmail, floor: myData.floor, methodwater: myData.methodwater, plicewater: myData.plicewater });
             xhr.send(data);
         }
         function openForm() {
@@ -376,9 +386,26 @@ body {font-family: Arial, Helvetica, sans-serif;}
             console.log("หอพักชื่่อ :", BuildingName)
             // window.location.href = 'http://localhost:3000/test';
 
-            window.location.href = 'http://localhost:3000/HOME?BuildingName='+BuildingName
+            //  window.location.href = 'http://localhost:3000/HOME?BuildingName=' + BuildingName
 
+            var ourRequest = new XMLHttpRequest();
+            ourRequest.open('GET', 'http://localhost:3000/getwater/' + BuildingName)
+            ourRequest.onload = function () {
+                var ourData = JSON.parse(ourRequest.responseText);
 
+                console.log('data : ', ourData)
+                gethomewater(ourData, BuildingName)
+                return false;
+            }
+            ourRequest.send();
+            function gethomewater(ourData, BuildingName) {
+                //console.log(ourData[0].methodwater)
+                if (ourData[0].methodwater == 'rentmonth') {
+                    window.location.href = 'http://localhost:3000/HOME?BuildingName=' + BuildingName
+                } else if (ourData[0].methodwater == 'rentunit') {
+                    window.location.href = 'http://localhost:3000/HOME?BuildingName=' + BuildingName
+                }
+            }
 
             /*  var url = "http://localhost:3000/getHome";
               var xhr = new XMLHttpRequest();

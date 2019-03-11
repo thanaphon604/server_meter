@@ -7,12 +7,29 @@ var MeterSchema = new Schema({
         {
             roommeter: [
                 {
-                    //หมายเลขมิเตอร์เดือนนั้น
+                    //เลขมิเตอร์ไฟเดือนก่อนหน้า
+                    beforusemeter: {
+                        type: Number
+                    },
+                    //หมายเลขมิเตอร์ไฟเดือนนั้น
                     usemeter: {
                         type: Number
                     },
-                    //จำนวนมิเตอร์ี่ใช้ในเดือนนั้น
+                    //จำนวนมิเตอร์ี่ไฟใช้ในเดือนนั้น
                     usemetermonth: {
+                        type: Number,
+
+                    },
+                     //เลขมิเตอร์น้ำเดือนก่อนหน้า
+                     beforusewater: {
+                        type: Number
+                    },
+                    //หมายเลขมิเตอร์oheเดือนนั้น
+                    usewater: {
+                        type: Number
+                    },
+                    //จำนวนมิเตอร์ี่ไฟใช้ในเดือนนั้น
+                    usemonth: {
                         type: Number,
 
                     },
@@ -20,7 +37,13 @@ var MeterSchema = new Schema({
                         type: String,
 
                     },
-                    meterstatus:{
+                    //status meter ค้างค่าไฟฟ้า
+                    meterstatus: {
+                        type: String,
+
+                    },
+                    // status water ค้างค่าน้ำ
+                    waterstatus: {
                         type: String,
 
                     }
@@ -46,11 +69,11 @@ var MeterSchema = new Schema({
         type: String,
 
     },
-    somepricemeter:{
+    somepricemeter: {
         type: Number,
         //จ่ายให้การไฟฟ้า
     },
-    someunitmeter:{
+    someunitmeter: {
         type: Number,
         //มิเตอร์ทั้งหอพัก
     }
