@@ -189,6 +189,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
             <div class="form-popup" id="myForm">
                 <form action="" class="form-container" method="" name="myForm" id="myForm">
                     <h1>สร้างหอพัก</h1>
+                     <label for="exampleInputEmail1" style="color: red"><h5>*กรุณากรอกข้อมูลให้ครบทุกช่องไม่อย่างนั้นระบบจะไม่สามารถบันทึกได้</h5></label>
                     <div class="form-group">
                         <label for="exampleInputEmail1">ชื่อหอพัก</label>
                         <input name="nameBuilding" type="text" class="form-control" id="nameBuilding" placeholder="ชื่อหอพัก">
@@ -287,6 +288,22 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
             $('#add').click(function () {
                 console.log('######')
+                 if (document.getElementById('nameBuilding').value == "") {
+                    alert('Please Input BuildingName');
+                    return false;
+                } else if (document.getElementById('phone').value == "") {
+                    alert('Please Input Phone Number ');
+                    return false;
+                } else if (document.getElementById('email').value == "") {
+                    alert('Please Input Email');
+                    return false;
+                } else if (document.getElementById('unitwater').value =="") {
+                    alert('Please input water meter');
+                    return false;
+                }else if (document.getElementById('unitmeter').value =="") {
+                    alert('Please input Power meter unit');
+                    return false;
+                }
                 var methodwater = $("input[name='water']:checked").val();
                 var plicewater = document.getElementById("unitwater").value;
                 var NameBuild = document.getElementById("nameBuilding").value;
@@ -364,7 +381,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     console.log('res is', xhr.responseText)
                     // if success go login page
-                    alert('success')
+                    alert(xhr.responseText)
                     window.location.reload(true);
 
                 } else {

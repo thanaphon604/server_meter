@@ -106,6 +106,7 @@ app.get('/getuser', (req, res) => {
 })
 
 app.post('/postBuilding', (req, res) => {
+    let BuildingNameInput = req.body.BuildingName
     let newBuilding = new Building({
         floor: req.body.floor,
         adminAllow: req.body.adminAllow,
@@ -113,15 +114,28 @@ app.post('/postBuilding', (req, res) => {
         UnitMeter: req.body.UnitMeter,
         BuildingPhone: req.body.BuildingPhone,
         BuildingEmail: req.body.BuildingEmail,
-        methodwater : req.body.methodwater,
-        plicewater : req.body.plicewater
+        methodwater: req.body.methodwater,
+        plicewater: req.body.plicewater
     })
-    newBuilding.save().then((d) => {
-        res.send(d)
-    }, (e) => {
-        console.log(e)
-        res.status(400).send(e)
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            res.send('BuildingName error')
+        } else if (build.length == 0) {
+            newBuilding.save().then((d) => {
+                res.send('success')
+            }, (e) => {
+                console.log(e)
+                res.status(400).send('success')
+            })
+        }
+    }, (err) => {
+        res.status(400).send(err)
     })
+
+
+
 })
 /*
 app.post('/getHome', (req, res) => {
@@ -207,42 +221,53 @@ app.post('/postcontract', (req, res) => {
 
 //post user 
 app.post('/postUser', (req, res) => {
+    let personIDInput = req.body.personID
     let BuildingNameInput = req.body.BuildingName
     let roomNumberInput = req.body.roomNumber
 
     Building.find({
-        BuildingName: BuildingNameInput,
+        personID: personIDInput,
     }).then((build) => {
         if (build.length == 1) {
-            for (let i = 0; i < build[0].floor.length; i++) {
-                for (let j = 0; j < build[0].floor[i].room.length; j++) {
-                    if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
-
-                        build[0].floor[i].room[j].user.push({
-                            personID: req.body.personID,
-                            firstName: req.body.firstName,
-                            lastName: req.body.lastName,
-                            birthday: req.body.birthday,
-                            address: req.body.address,
-                            phoneNumber: req.body.phoneNumber,
-                            License: req.body.License
-                        })
-                        build[0].floor[i].room[j].roomStatus = 'ไม่ว่าง'
-
-                        build[0].save().then((suc) => {
-                            console.log('res person : ', suc)
-                            res.send(suc)
-                        }, (e) => {
-                            consoel.log('error person :', e)
-                            res.status(400).send(e)
-                        })
-
-                    }
-                }
-            }
             //res.send(admin[0])
         } else if (build.length == 0) {
-            res.status(400).send('sory not found is user')
+            Building.find({
+                BuildingName: BuildingNameInput
+            }).then((build) => {
+                if (build.length == 1) {
+                    for (let i = 0; i < build[0].floor.length; i++) {
+                        for (let j = 0; j < build[0].floor[i].room.length; j++) {
+                            if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
+
+                                build[0].floor[i].room[j].user.push({
+                                    personID: req.body.personID,
+                                    firstName: req.body.firstName,
+                                    lastName: req.body.lastName,
+                                    birthday: req.body.birthday,
+                                    address: req.body.address,
+                                    phoneNumber: req.body.phoneNumber,
+                                    License: req.body.License
+                                })
+                                build[0].floor[i].room[j].roomStatus = 'ไม่ว่าง'
+
+                                build[0].save().then((suc) => {
+                                    console.log('res person : ', suc)
+                                    res.send(suc)
+                                }, (e) => {
+                                    consoel.log('error person :', e)
+                                    res.status(400).send(e)
+                                })
+
+                            }
+                        }
+                    }
+                    //res.send(admin[0])
+                } else if (build.length == 0) {
+
+                }
+            }, (err) => {
+                res.status(400).send(err)
+            })
         }
     }, (err) => {
         res.status(400).send(err)
@@ -473,11 +498,13 @@ app.post('/postMeter', (req, res) => {
     let newmeterbuild = new meterbuild({
         floormeter: req.body.floormeter,
         pricemeter: req.body.pricemeter,
+        pricewater: req.body.pricewater,
         buildingnamemeter: req.body.buildingnamemeter,
         datemeter: req.body.datemeter,
         somepricemeter: req.body.somepricemeter,
         someunitmeter: req.body.someunitmeter,
-
+        someunitwater: req.body.someunitwater,
+        somepricewater: req.body.somepricewater
     })
     let floormeterInput = req.body.floormeter
     let pricemeterInput = req.body.pricemeter
@@ -485,6 +512,8 @@ app.post('/postMeter', (req, res) => {
     let datemeterInput = req.body.datemeter
     let somepricemeterInput = req.body.somepricemeter
     let someunitmeterInput = req.body.someunitmeter
+    let somepricewaterInput = req.body.somepricewater
+    let someunitwaterInput = req.body.someunitwater
     meterbuild.find({
         buildingnamemeter: buildingnamemeterInput,
         datemeter: datemeterInput
@@ -495,6 +524,8 @@ app.post('/postMeter', (req, res) => {
             build[0].pricemeter = pricemeterInput
             build[0].somepricemeter = somepricemeterInput
             build[0].someunitmeter = someunitmeterInput
+            build[0].somepricewater = somepricewaterInput
+            build[0].someunitwater = someunitwaterInput
 
             build[0].save().then((suc) => {
                 res.send(suc)
@@ -539,9 +570,9 @@ app.get('/getmeter/:getdata/', (req, res) => {
         getdata3 = getdata3 + data[i]
         i++;
     }
-  //  console.log('namenow', getdata1)
-  //  console.log('now1', getdata2)
-  //  console.log('now2', getdata3)
+    //  console.log('namenow', getdata1)
+    //  console.log('now1', getdata2)
+    //  console.log('now2', getdata3)
 
     meterbuild.find({
         buildingnamemeter: getdata1,
@@ -587,9 +618,9 @@ app.get('/getmeterbefor/:getdata/', (req, res) => {
         getdata3 = getdata3 + data[i]
         i++;
     }
-   // console.log('namebefor', getdata1)
-   // console.log('befor1', getdata2)
-  //  console.log('befor2', getdata3)
+    // console.log('namebefor', getdata1)
+    // console.log('befor1', getdata2)
+    //  console.log('befor2', getdata3)
 
     meterbuild.find({
         buildingnamemeter: getdata1,
@@ -619,7 +650,7 @@ app.get('/getmeteranalysis/:getdata/', (req, res) => {
     let getdata2 = ''
     let i = 0
     var datameter = []
-    console.log('dataana',data)
+    console.log('dataana', data)
 
     while (data[i] != ',') {
         getdata1 = getdata1 + data[i]
@@ -630,8 +661,8 @@ app.get('/getmeteranalysis/:getdata/', (req, res) => {
         getdata2 = getdata2 + data[i]
         i++;
     }
-  //  console.log('ชื่อหอ', getdata1)
- //   console.log('วันที่', getdata2)
+    //  console.log('ชื่อหอ', getdata1)
+    //   console.log('วันที่', getdata2)
     meterbuild.find({
         buildingnamemeter: getdata1,
         datemeter: getdata2
@@ -649,7 +680,7 @@ app.get('/getmeterbuilds/:BuildingName', (req, res) => {
         buildingnamemeter: req.params.BuildingName
     }).then((doc) => {
         res.send(doc)
-        console.log('gggg',doc)
+
     }, (err) => {
         res.status(404).send(err)
     })
@@ -684,6 +715,33 @@ app.post('/postUnitmeter', (req, res) => {
         res.status(400).send(err)
     })
 })
+//เเก้ไข unit water
+app.post('/postUnitwater', (req, res) => {
+
+    let BuildingNameInput = req.body.BuildingName
+    let plicewaterInput = req.body.plicewater
+    //find หาusername password สำหรับ 
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            build[0].plicewater = plicewaterInput
+
+            build[0].save().then((suc) => {
+                console.log('res contract : ', suc)
+                res.send(suc)
+            }, (e) => {
+                consoel.log('error contract :', e)
+                res.status(400).send(e)
+            })
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
 
 //หน้าเเก้ไขห้องพัก buildingNameIndex: _buildingName
 app.post('/remove-room', (req, res) => {
@@ -697,17 +755,19 @@ app.post('/remove-room', (req, res) => {
             console
             for (let i = 0; i < build[0].floor.length; i++) {
                 for (let j = 0; j < build[0].floor[i].room.length; j++) {
-                    if (RoomInput == build[0].floor[i].room[j].roomNumber) {
-                        build[0].floor[i].room[j] = build[0].floor[i].room[j + 1]
-                        build[0].floor[i].room.pop()
+                    if (build[0].floor[i].room[j].roomStatus == "ว่าง" || build[0].floor[i].room[j].roomStatus == "กำลังปรับปรุง") {
+                        if (RoomInput == build[0].floor[i].room[j].roomNumber) {
+                            build[0].floor[i].room[j] = build[0].floor[i].room[j + 1]
+                            build[0].floor[i].room.pop()
 
-                        build[0].save().then((suc) => {
-                            console.log('res person : ', suc)
-                            res.send(suc)
-                        }, (e) => {
-                            consoel.log('error person :', e)
-                            res.status(400).send(e)
-                        })
+                            build[0].save().then((suc) => {
+                                console.log('res person : ', suc)
+                                res.send(suc)
+                            }, (e) => {
+                                consoel.log('error person :', e)
+                                res.status(400).send(e)
+                            })
+                        }
                     }
                 }
             }
@@ -747,6 +807,30 @@ app.post('/add-floor', (req, res) => {
     }, (err) => {
         res.status(400).send(err)
     })
+    // meterbuild.find({
+    //     BuildingName: BuildingNameInput,
+    // }).then((build) => {
+    //     if (build.length == 1) {
+    //         for (let i = 0; i < build.length; i++) {
+    //             let lastNumber = build[i].floormeter.length
+    //             console.log(lastNumber)
+    //             build[i].floormeter.push({
+    //                 roommeter: []
+    //             })
+    //             build[i].save().then((suc) => {
+    //                 console.log('res person : ', suc)
+    //                 res.send(suc)
+    //             }, (e) => {
+    //                 consoel.log('error person :', e)
+    //                 res.status(400).send(e)
+    //             })
+    //         }
+    //     } else if (build.length == 0) {
+    //         res.status(400).send('sory not found is user')
+    //     }
+    // }, (err) => {
+    //     res.status(400).send(err)
+    // })
 })
 
 app.post('/add-room', (req, res) => {

@@ -248,6 +248,7 @@
                         </div>
                     </div>
                 </div>
+                <!--ผู้เช่าใหม่ -->
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <div class="container-fluid" style="margin-top: 30px">
                         <div class="row justify-content-center">
@@ -382,12 +383,12 @@
                                 <form name="form2" id="form2" action="" onsubmit="" method="">
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">จำนวนการใช้น้ำทั้งหมด (หน่วย)</label>
-                                        <input required name="examplesomemonth" type="number" class="form-control" id="examplesomemonth"
+                                        <input required name="waterunit" type="number" class="form-control" id="waterunit"
                                             placeholder="จำนวนการใช้น้ำทั้งหมด (หน่วย)">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">รายจ่ายให้การน้ำ (บาท)</label>
-                                        <input required name="exampleunit" type="number" class="form-control" id="exampleunit"
+                                        <label for="exampleInputPassword1">รายจ่ายค่าน้ำ (บาท)</label>
+                                        <input required name="watermonth" type="number" class="form-control" id="watermonth"
                                             placeholder="รายจ่ายให้การประปา (บาท)">
                                     </div>
                                 </form>
@@ -407,52 +408,104 @@
         </div>
         <!-- วิเคราะห์การใช้พลังงาน  -->
         <div class="tab-pane fade" id="pills-contact2" role="tabpanel" aria-labelledby="pills-contact-tab2">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#analyzehome" role="tab"
+                        aria-controls="nav-home" aria-selected="true">วิเคราะห์การใช้พลังงานไฟฟ้าของหอพัก</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#analyzewater" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">วิเคราะห์การใช้พลังงานน้ำของหอพัก</a>
 
-            <div class="row justify-content-center">
-                <div class="col-md-11 col-lg-8">
-                    <br> <br>
-                    <h2 style="text-align:center">วิเคราะห์การใช้พลังงานของหอพัก</h3>
-                        <br>
-                        <div class="">
-                            <label for="start">เลือกเดือนที่ต้องการ:</label>
-                            <input type="month" type="" id="analysis" name="analysis" min="2018-03" value="">
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <br><br>
+                <div class="row justify-content-center">
+                    <label for="start">เลือกเดือนที่ต้องการ:</label>
+                    <input type="month" type="" id="analysis" name="analysis" min="2018-03" value="">
 
-                            <div class="row justify-content-center col-lg-3 col-12">
-                                <div class="col">
-                                    <h3 id="ShowMonthAnalysis"></h3>
-                                </div>
-                                <div class="col">
-                                    <h3 id="ShowYearAnalysis"></h3>
-                                </div>
-                            </div>
-                            <div class="row ">
-                                <div class="col-md-12 col-lg-6 divform ">
-                                    <div id="piechart">
-
-                                    </div>
-                                    <div id="setchart">
-
-                                    </div>
-                                </div>
-                                <div class="col-md-11 col-lg-6 divform">
-                                    <div id="container">
-
-                                    </div>
-                                    <br>
-                                    <div id="setchart2" style="text:center">
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-
+                    <div class="row justify-content-center col-lg-3 col-12">
+                        <div class="col">
+                            <h3 id="ShowMonthAnalysis"></h3>
                         </div>
+                        <div class="col">
+                            <h3 id="ShowYearAnalysis"></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show active" id="analyzehome" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-11 col-lg-8">
+                            <br> <br>
+                            <h2 style="text-align:center">วิเคราะห์การใช้พลังงานไฟฟ้าของหอพัก</h3>
+                                <br>
+                                <div class="">
+
+                                    <div class="row ">
+                                        <div class="col-md-12 col-lg-6 divform ">
+                                            <div id="piechart">
+
+                                            </div>
+                                            <div id="setchart">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-11 col-lg-6 divform">
+                                            <div id="container">
+
+                                            </div>
+                                            <br>
+                                            <div id="setchart2" style="text:center">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="analyzewater" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-md-11 col-lg-8">
+                            <br> <br>
+                            <h2 style="text-align:center">วิเคราะห์การใช้พลังงานการใช้น้ำของหอพัก</h3>
+                                <br>
+                                <div class="">
+
+                                    <div class="row ">
+                                        <div class="col-md-12 col-lg-6 divform ">
+                                            <div id="piechartwater">
+
+                                            </div>
+                                            <div id="setchartwater">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-11 col-lg-6 divform">
+                                            <div id="containerwater" style="height:75%">
+
+                                            </div>
+                                            <br>
+                                            <div id="setchartwater2" style="text:center">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
-
         </div>
         <!-- ออกใบเเจ้งหนี้ใบเสร็จ -->
         <div class="tab-pane fade" id="pills-contact3" role="tabpanel" aria-labelledby="pills-contact-tab3">
@@ -460,13 +513,14 @@
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-invoice" role="tab"
                         aria-controls="nav-home" aria-selected="true">ใบเเจ้งหนี้</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-bill" role="tab"
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-bills" role="tab"
                         aria-controls="nav-profile" aria-selected="false">ใบเสร็จ</a>
 
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-invoicec" role="tabpanel" aria-labelledby="nav-home-tab">
+                <!--ใบเเจ้งหนี้ -->
+                <div class="tab-pane fade show active" id="nav-invoice" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row justify-content-center">
                         <div class="col-md-12 col-lg-8">
                             <br>
@@ -482,13 +536,19 @@
                         </div>
 
                     </div>
-
                 </div>
-                <div class="tab-pane fade" id="nav-bill" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <!--ใบเสร็จรับเงิน -->
+                <div class="tab-pane fade" id="nav-bills" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="container-fluid" style="margin-top: 30px">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7 col-sm-12  ">
+                                <br>
+                                <p>d2</p>
+                            </div>
 
-
+                        </div>
+                    </div>
                 </div>
-
 
             </div>
         </div>
@@ -508,45 +568,94 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-unit" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 col-lg-8 ">
-                                <br>
-                                <br>
-                                <br>
-                                <form>
-                                    <div class="row justify-content-center">
-                                        <div class="col-5">
-                                            <p class="h4">ค่าไฟฟ้าปัจจุบันหน่วยละ</p>
-                                        </div>
-                                        <div class="col-1">
-                                            <p id="meter"></p>
-                                        </div>
-                                        <div class="col-3">
-                                            <ul>
-                                                <p class="h4"> บาท</p>
-                                            </ul>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-12 col-lg-8 ">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <form>
+                                            <div class="row justify-content-center">
+                                                <div class="col-5">
+                                                    <p class="h4">ค่าไฟฟ้าปัจจุบันหน่วยละ</p>
+                                                </div>
+                                                <div class="col-1">
+                                                    <p id="meter"></p>
+                                                </div>
+                                                <div class="col-3">
+                                                    <ul>
+                                                        <p class="h4"> บาท</p>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <div class="divform col-md-12 col-lg-12 ">
+                                            <form action="" onsubmit="" method="">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">อัพเดทค่าไฟฟ้าต่อหน่วย</label>
+                                                    <input required name="UnitMeter" type="number" class="form-control"
+                                                        id="UnitMeter" placeholder="" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">บาท/หน่วย</label>
+
+                                                </div>
+                                                <hr>
+                                                <button id="me" type="button" class="btn btn-primary">ยืนยัน</button>
+                                                <!-- <button type="button" onclick="SubMit()" class="btn btn-primary">Submit</button> -->
+                                            </form>
                                         </div>
                                     </div>
-                                </form>
-                                <br>
-                                <br>
-                                <br>
-                                <div class="divform col-md-12 col-lg-12 ">
-                                    <form action="" onsubmit="" method="">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">อัพเดทค่าไฟฟ้าต่อหน่วย</label>
-                                            <input required name="UnitMeter" type="number" class="form-control" id="UnitMeter"
-                                                placeholder="" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">บาท/หน่วย</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-12 col-lg-8 ">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <form>
+                                            <div class="row justify-content-center">
+                                                <div class="col-5">
+                                                    <p class="h4">ค่าน้ำปัจจุบันหน่วยละ</p>
+                                                </div>
+                                                <div class="col-1">
+                                                    <p id="water"></p>
+                                                </div>
+                                                <div class="col-3">
+                                                    <ul>
+                                                        <p class="h4"> บาท</p>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <div class="divform col-md-12 col-lg-12 ">
+                                            <form action="" onsubmit="" method="">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">อัพเดทค่าน้าต่อหน่วย</label>
+                                                    <input required name="plicewater" type="number" class="form-control"
+                                                        id="plicewater" placeholder="" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">บาท/หน่วย</label>
 
+                                                </div>
+                                                <hr>
+                                                <button id="mewater" type="button" class="btn btn-primary">ยืนยัน</button>
+                                                <!-- <button type="button" onclick="SubMit()" class="btn btn-primary">Submit</button> -->
+                                            </form>
                                         </div>
-                                        <hr>
-                                        <button id="me" type="button" class="btn btn-primary">ยืนยัน</button>
-                                        <!-- <button type="button" onclick="SubMit()" class="btn btn-primary">Submit</button> -->
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -566,15 +675,7 @@
                                         </div>
 
                                     </div>
-                                    <form id="myForm" class="container my-3" method="" enctype="" action="">
 
-                                        <a class="bg-success d-block text-center rounded mt-4" id="newNodeButton"
-                                            data-toggle="tooltip" data-placement="top" title="Add new node"><i class="fas fa-plus p-2"
-                                                style="color:white; font-size: 14px;"></i>เพิ่มชั้น</a>
-                                        <hr>
-                                        <a class="bg-success d-block text-center rounded mt-4" data-toggle="tooltip"
-                                            data-placement="top"><i class="fas fa-plus p-2" style="color:white; font-size: 14px;"></i>บันทึกทั้งหมด</a>
-                                    </form>
                                 </div>
                             </div>
 
@@ -711,7 +812,7 @@
             let r = confirm("Do you want to remove the room?");
             if (r == true) {
                 let num = id.substring(10);
-                console.log('now node isห :', num)
+                console.log('now node is :', num)
                 SendPost('http://localhost:3000/remove-room', {
                     numIndex: num,
                     buildingNameIndex: _buildingName
@@ -977,14 +1078,15 @@
                         + '   <table class="table table-bordered" >'
                         + '  <thead>'
                         + '     <tr>'
-                        + '     <th scope="col" style="background-color: grey ; height: 50px;"></th>'
-                        + '       <th scope="col" style="background-color: grey">หมายเลขห้อง</th>'
+                        + '     <th scope="col" style="background-color: grey ; height: 50px;"><input type="checkbox" value="' + + '" class="select_all ' + + '" id="select_all" ></th>'
+                        + '       <th scope="col" style="background-color: grey"></th>'
+                        + ' <th scope="col" style="background-color: grey">หมายเลขห้อง</th>'
                         + '     </tr>'
                         + '  </thead>'
                     for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
 
                         for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
-                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ") {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ") {
                                 htmlStringmeterbuilds += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkbox"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
 
                             }
@@ -1176,6 +1278,40 @@
 
 
             })
+            $('#mewater').click(function () {
+
+                if (document.getElementById('plicewater').value == "") {
+                    alert('Please Input Unitwater');
+                    return false;
+                }
+                var plicewater = document.getElementById("plicewater").value;
+                var dataUnit = {
+                    plicewater, BuildingName,
+                }
+                console.log('dataunitwater', dataUnit)
+                var url = "http://localhost:3000/postUnitwater";
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log('res is', xhr.responseText)
+                        // if success go login page
+                        alert('create user Successful ')
+                        window.location.reload(true);
+                        //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+
+                    } else {
+                        //alert('can not create user! Pls try again.')
+                    }
+                };
+                var data = JSON.stringify({
+                    plicewater: dataUnit.plicewater, BuildingName: dataUnit.BuildingName
+                });
+                xhr.send(data);
+
+
+            })
             //จดมิเตอร์--------------------------------------------------(ourData, Datameter, datemeter)
 
             function renderPostUnitMeter(Datameternow, Datameterbefor, datemeter, befordatemeter) {
@@ -1294,6 +1430,9 @@
                         }
                         htmlStringUnitMeter += '</div>'
                         document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
+                        document.getElementById("examplesomemonth").value = Datameternow[0].someunitmeter
+                        document.getElementById("exampleunit").value = Datameternow[0].somepricewater
+
                         // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
 
                     }
@@ -1350,6 +1489,9 @@
                         }
                         htmlStringUnitMeter += '</div>'
                         document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
+                        document.getElementById("examplesomemonth").value = Datameternow[0].someunitmeter
+                        document.getElementById("exampleunit").value = Datameternow[0].somepricewater
+
                         // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
 
                     }
@@ -1398,7 +1540,7 @@
                                     + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
                                     + ' <td class="getmeterbefor" >' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '</th>'
                                     + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="change ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
-                                    + ' <td  class="setmeterbefor">' + (Datameternow[k].floormeter[i].roommeter[j].usemeter - Datameterbefor[k].floormeter[i].roommeter[j].usemeter) + '</td></th>'
+                                    + ' <td  class="setmeterbefor">' + '' + '</td></th>'
                                     + '</tbody> '
                                     + '</div>'
 
@@ -1407,6 +1549,9 @@
                         }
                         htmlStringUnitMeter += '</div>'
                         document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
+                        document.getElementById("examplesomemonth").value = Datameternow[0].someunitmeter
+                        document.getElementById("exampleunit").value = Datameternow[0].somepricewater
+
                         // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
 
                     }
@@ -1547,8 +1692,8 @@
                                     '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
                                     + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
                                     + ' <td class="getwaterbefor" >0</th>'
-                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupboxwater"><input  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="changewater ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
-                                    + ' <td class="setwaterbefor">' + (Datameternow[k].floormeter[i].roommeter[j].usemeter) + '</th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupboxwater"><input  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usewater + '"  name="UnitMeter" class="changewater ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td class="setwaterbefor">' + (Datameternow[k].floormeter[i].roommeter[j].usewater) + '</th>'
                                     + '</tbody> '
                                     + '</div>'
 
@@ -1557,6 +1702,8 @@
                         }
                         htmlStringwater += '</div>'
                         document.getElementById("divPostwater").innerHTML = htmlStringwater
+                        document.getElementById("waterunit").value = Datameternow[0].someunitwater
+                        document.getElementById("watermonth").value = Datameternow[0].somepricewater
                         // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
 
                     }
@@ -1602,8 +1749,8 @@
 
                                     '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
                                     + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
-                                    + ' <td class="getwaterbefor" >' + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter) + '</th>'
-                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupboxwater"><input  type="number" value="' + y + '"  name="UnitMeter" class="changewater ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td class="getwaterbefor" >' + (Datameterbefor[k].floormeter[i].roommeter[j].usewater) + '</th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupboxwater"><input  type="number" value="' + y + '"  name="UnitMeter" class="changewater ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usewater)) + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
                                     + ' <td class="setwaterbefor"></th>'
                                     + '</tbody> '
                                     + '</div>'
@@ -1613,6 +1760,8 @@
                         }
                         htmlStringwater += '</div>'
                         document.getElementById("divPostwater").innerHTML = htmlStringwater
+                        document.getElementById("waterunit").value = Datameternow[0].someunitwater
+                        document.getElementById("watermonth").value = Datameternow[0].somepricewater
                         // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
 
                     }
@@ -1659,9 +1808,9 @@
 
                                     '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
                                     + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
-                                    + ' <td class="getwaterbefor" >' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '</th>'
-                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupboxwater"><input  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="changewater ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
-                                    + ' <td  class="setwaterbefor">' + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter - Datameternow[k].floormeter[i].roommeter[j].usemeter) + '</td></th>'
+                                    + ' <td class="getwaterbefor" >' + Datameterbefor[k].floormeter[i].roommeter[j].usewater + '</th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupboxwater"><input  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usewater + '"  name="UnitMeter" class="changewater ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td  class="setwaterbefor">' + '' + '</td></th>'
                                     + '</tbody> '
                                     + '</div>'
 
@@ -1670,6 +1819,8 @@
                         }
                         htmlStringwater += '</div>'
                         document.getElementById("divPostwater").innerHTML = htmlStringwater
+                        document.getElementById("waterunit").value = Datameternow[0].someunitwater
+                        document.getElementById("watermonth").value = Datameternow[0].somepricewater
                         // tablePostUnitMeter.insertAdjacentHTML('beforeend', htmlStringUnitMeter);
 
                     }
@@ -1762,14 +1913,14 @@
                     watermonthuse[i] = parseInt(idwa[i].innerHTML)
                 }
                 console.log('หน่วมิเตอร์น้ำที่ใช้ในเดือนนั้น', watermonthuse)
-                //มิเตอรohe์ที่ใช้ก่อนหohk
+                //มิเตอร์น้ำที่ใช้ก่อนหน้า
                 var watermonthusebefor = [];
                 var waterbefor = []
                 var idwater = document.getElementsByClassName("getwaterbefor");
                 for (var i = 0; i < idmeter.length; i++) {
                     watermonthusebefor[i] = parseInt(idwater[i].innerHTML)
                 }
-                console.log('เลขมิเตอร์ก่อนหน้า', watermonthusebefor)
+                console.log('เลขมิเตอร์น้ำก่อนหน้า', watermonthusebefor)
 
                 for (let i = 0; i < watermonthuse.length; i++) {
                     if (isNaN(watermonthuse[i])) watermonthuse[i] = 0;
@@ -1785,6 +1936,16 @@
                     } else {
                         meterst[i] = "ไม่มียอดค้างชำระ"
                         console.log('ไม่ค้างชำระ', metermonthuse[i])
+                    }
+                }
+                for (let i = 0; i < watermonthuse.length; i++) {
+
+                    if (watermonthuse[i] != 0) {
+                        waterst[i] = "ค้างชำระ"
+                        console.log('ค้างชำระ', watermonthuse[i])
+                    } else {
+                        waterst[i] = "ไม่มียอดค้างชำระ"
+                        console.log('ไม่ค้างชำระ', watermonthuse[i])
                     }
                 }
                 /* $('.setmeterbefor').each(function (index, el) {
@@ -1805,9 +1966,15 @@
 
                 var someunitmeter = document.getElementById("examplesomemonth").value
                 var somepricemeter = document.getElementById("exampleunit").value
-                console.log('hh', somepricemeter)
-                console.log('hh', someunitmeter)
+                var someunitwater = document.getElementById("waterunit").value
+                var somepricewater = document.getElementById("watermonth").value
+
+                console.log('จ่ายไฟ', somepricemeter)
+                console.log('จำนวนำไฟ', someunitmeter)
+                console.log('จำนวนน้ำ', someunitwater)
+                console.log('จ่ายค่าน้ำ', somepricewater)
                 let floormeter = []
+
                 for (let i = 0; i < _data.floor.length; i++) {
                     let f = _data.floor[i].room.length
                     floormeter.push(f)
@@ -1815,10 +1982,13 @@
                 let k = 0
                 let myData = {}
                 myData.pricemeter = _data.UnitMeter
+                myData.pricewater = _data.plicewater
                 myData.buildingnamemeter = _data.BuildingName
                 myData.datemeter = datemeter
                 myData.somepricemeter = somepricemeter
                 myData.someunitmeter = someunitmeter
+                myData.someunitwater = someunitwater
+                myData.somepricewater = somepricewater
                 //  myData.allunitmeter = ''
                 //  myData.buymeter = ''
 
@@ -1839,15 +2009,25 @@
                         } else {
                             roomNumbermeter += (j + 1)
                         }
+                        let beforusemeter = parseInt(metermonthusebefor[k])
                         let usemeter = parseInt(eduarray[k])
                         let usemetermonth = parseInt(metermonthuse[k])
                         let meterstatus = "" + meterst[k]
+                        let beforusewater = parseInt(watermonthusebefor[k])
+                        let usewater = parseInt(eduarraywater[k])
+                        let usewatermonth = parseInt(watermonthuse[k])
+                        let waterstatus = "" + waterst[k]
                         k++
                         let roomData = {
+                            beforusemeter,
                             roomNumbermeter,
                             usemeter,
                             usemetermonth,
-                            meterstatus
+                            meterstatus,
+                            beforusewater,
+                            usewater,
+                            usewatermonth,
+                            waterstatus
                         }
 
                         roomArrayPerFloor.push(roomData)
@@ -1881,7 +2061,7 @@
                         //alert('can not create user! Pls try again.')
                     }
                 };
-                var data = JSON.stringify({ floormeter: myData.floormeter, pricemeter: myData.pricemeter, buildingnamemeter: myData.buildingnamemeter, datemeter: myData.datemeter, somepricemeter: myData.somepricemeter, someunitmeter: myData.someunitmeter });
+                var data = JSON.stringify({ floormeter: myData.floormeter, pricemeter: myData.pricemeter, pricewater: myData.pricewater, buildingnamemeter: myData.buildingnamemeter, datemeter: myData.datemeter, somepricemeter: myData.somepricemeter, someunitmeter: myData.someunitmeter, someunitwater: myData.someunitwater, somepricewater: myData.somepricewater });
                 xhr.send(data);
             }
             //บันทึกมิเตอร์รวมของหอพัก
@@ -1955,7 +2135,7 @@
                     console.log('meteranalysis', Dataanalysis)
 
                     renderAnalysis(Dataanalysis)
-
+                    renderAnalysiswater(Dataanalysis)
                 }
                 Request.send();
 
@@ -1971,11 +2151,11 @@
                 // var priceunit ราคาต่ออหน่วยที่เก็บ 
                 //income รายรับจากหอพัก
                 if (Dataanalysis == "") {
-                    alert('กรุณาบันทึกข้อมูลหน่วยมิเตอร์1')
+                    alert('กรุณาบันทึกข้อมูลหน่วยมิเตอร์ของหอพัก')
                     return false;
                 }
                 if (Dataanalysis[0].somepricemeter == "" || Dataanalysis[0].someunitmeter == "") {
-                    alert('กรุณาบันทึกข้อมูลหน่วยมิเตอร์รวมของหอพัก2')
+                    alert('กรุณาบันทึกข้อมูลหน่วยมิเตอร์รวมของหอพัก')
                     return false;
                 }
                 var htmlstringchart = ""
@@ -1987,6 +2167,8 @@
                 var countsomepricemeter = Dataanalysis[0].somepricemeter
                 var countsomeunitmeter = Dataanalysis[0].someunitmeter
                 var priceunit = Dataanalysis[0].pricemeter
+
+
                 for (let i = 0; i < Dataanalysis[0].floormeter.length; i++) {
                     for (let j = 0; j < Dataanalysis[0].floormeter[i].roommeter.length; j++) {
                         if (Dataanalysis[0].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ") {
@@ -1997,16 +2179,22 @@
                 if (countUnitAnalysis <= 0) {
                     return false;
                 }
+                //---------water--------------
+
+
 
                 income = countUnitAnalysis * priceunit
                 unitcentral = countsomeunitmeter - countUnitAnalysis
                 Profit = income - countsomepricemeter
+
                 console.log('การใช้ไฟฟ้าของผู้เช่า (หน่วย) ', countUnitAnalysis)
                 console.log('การใช้ไฟฟ้าของส่วนกลาง(หน่วย) ', unitcentral)
                 console.log('การใช้ไฟฟ้าทั้งหมด(หน่วย) ', countsomeunitmeter)
                 console.log('รายรับค่าไฟฟ้าจากผู้เช่า(บาท) ', income)
                 console.log('รายจ่ายการไฟฟ้า(บาท) ', countsomeunitmeter)
                 console.log('กำไร/ขาดทุน ค่าไฟฟ้า(บาท) ', Profit)
+                console.log('----------------------------------------')
+
 
                 google.charts.load('current', { 'packages': ['corechart'] });
                 google.charts.setOnLoadCallback(drawChart);
@@ -2125,6 +2313,167 @@
 
 
             }
+            function renderAnalysiswater(Dataanalysis) {
+                if (Dataanalysis == "") {
+                    alert('กรุณาบันทึกข้อมูลหน่วยมิเตอร์ของหอพัก')
+                    return false;
+                }
+                if (Dataanalysis[0].somepricewater == "" || Dataanalysis[0].someunitwater == "") {
+                    alert('กรุณาบันทึกข้อมูลหน่วยมิเตอร์รวมของหอพัก')
+                    return false;
+                }
+
+                //-----------------------สร้างตัวเเปลวิเคราะห์การใช้งานพลังงานน้ำ--------------------------
+                var htmlstringchartwater = ""
+                var htmlstringchartwater2 = ""
+                var Profitwater = 0
+                var unitcentralwater = 0
+                var incomewater = 0
+                var countUnitAnalysiswater = 0
+                var countsomepricewater = Dataanalysis[0].somepricewater
+                var countsomeunitwater = Dataanalysis[0].someunitwater
+                var priceunitwater = Dataanalysis[0].pricewater
+
+                for (let i = 0; i < Dataanalysis[0].floormeter.length; i++) {
+                    for (let j = 0; j < Dataanalysis[0].floormeter[i].roommeter.length; j++) {
+                        if (Dataanalysis[0].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ") {
+                            countUnitAnalysiswater = countUnitAnalysiswater + Dataanalysis[0].floormeter[i].roommeter[j].usewatermonth
+                        }
+                    }
+                }
+                if (countUnitAnalysiswater <= 0) {
+                    return false;
+                }
+                incomewater = countUnitAnalysiswater * priceunitwater
+                unitcentralwater = countsomeunitwater - countUnitAnalysiswater
+                Profitwater = incomewater - countsomepricewater
+
+                console.log('ค่าน้ำ', priceunitwater)
+                console.log('ค่าน้ำ', countUnitAnalysiswater)
+                console.log('ค่าน้ำ', incomewater)
+                console.log('การใช้น้ำของผู้เช่า (หน่วย) ', countUnitAnalysiswater)
+                console.log('การใช้น้ำของส่วนกลาง(หน่วย) ', unitcentralwater)
+                console.log('การใช้น้ำทั้งหมด(หน่วย) ', countsomeunitwater)
+                console.log('รายรับค่าน้ำจากผู้เช่า(บาท) ', incomewater)
+                console.log('รายจ่ายการน้ำ(บาท) ', countsomeunitwater)
+                console.log('กำไร/ขาดทุน ค่าน้ำ(บาท) ', Profitwater)
+
+                google.charts.load('current', { 'packages': ['corechart'] });
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Task', ' per Month'],
+                        ['การใช้น้ำของผู้เช่า (หน่วย)', countUnitAnalysiswater],
+                        ['การใช้น้ำของส่วนกลาง(หน่วย)', unitcentralwater],
+
+
+                    ]);
+
+                    // Optional; add a title and set the width and height of the chart
+                    var options = { 'title': 'การใช้พลังงานน้ำของทั้งหอพัก ' + countsomeunitwater + ' หน่วย', 'height': 400, 'width': 390, responsive: true };
+
+                    // Display the chart inside the <div> element with id="piechart"
+                    var chart = new google.visualization.PieChart(document.getElementById('piechartwater'));
+                    chart.draw(data, options);
+                    htmlstringchartwater += ''
+                        + '<div class="row">'
+                        + '       <div class="col-5">'
+                        + '          <p class="h5">การใช้น้ำของทั้งหอพัก</p>'
+                        + '       </div>'
+                        + '     <div class="col-2">'
+                        + '         <p>' + countsomeunitwater + '</p>'
+                        + '      </div>'
+                        + '      <div class="col-1">'
+                        + '         <p>หน่วย</p>'
+                        + '      </div>'
+                        + '    </div>'
+                        + '    <div class="row">'
+                        + '       <div class="col-5">'
+                        + '          <p class="h5">การใช้น้ำของผู้เช่า</p>'
+                        + '       </div>'
+                        + '     <div class="col-2">'
+                        + '         <p>' + countUnitAnalysiswater + '</p>'
+                        + '      </div>'
+                        + '      <div class="col-1">'
+                        + '         <p>หน่วย</p>'
+                        + '      </div>'
+                        + '    </div>'
+                        + '    <div class="row">'
+                        + '        <div class="col-5">'
+                        + '          <p class="h5">การใช้น้ำของส่วนกลาง</p>'
+                        + '        </div>'
+                        + '       <div class="col-2">'
+                        + '           <p>' + unitcentralwater + '</p>'
+                        + '        </div>'
+                        + '         <div class="col-1">'
+                        + '            <p>หน่วย</p>'
+                        + '          </div>'
+                        + '       </div>'
+                    document.getElementById("setchartwater").innerHTML = htmlstringchartwater
+                }
+                anychart.onDocumentReady(function () {
+
+                    // set the data
+                    var data = {
+                        header: ["Name", "Death toll"],
+                        rows: [
+                            ["รายรับค่าน้ำจากผู้เช่า(บาท)", incomewater],
+                            ["รายจ่ายการน้ำ(บาท)", countsomepricewater],
+                            ["กำไร/ขาดทุน ค่าน้ำ(บาท)", Profitwater],
+
+                        ]
+                    };
+
+                    // create the chart
+                    var chart = anychart.column();
+
+                    // add data
+                    chart.data(data);
+
+                    // set the chart title
+                    chart.title("รายรับ-รายจ่ายค่าน้ำของหอพัก");
+
+                    // draw
+                    chart.container("containerwater");
+                    chart.draw();
+                    htmlstringchartwater2 += ''
+                        + '<div class="row">'
+                        + '       <div class="col-5">'
+                        + '          <p class="h5">รายรับค่าน้ำจากผู้เช่า</p>'
+                        + '       </div>'
+                        + '     <div class="col-2">'
+                        + '         <p>' + incomewater + '</p>'
+                        + '      </div>'
+                        + '      <div class="col-1">'
+                        + '         <p>บาท</p>'
+                        + '      </div>'
+                        + '    </div>'
+                        + '    <div class="row">'
+                        + '       <div class="col-5">'
+                        + '          <p class="h5">รายจ่ายการประปา(บาท)</p>'
+                        + '       </div>'
+                        + '     <div class="col-2">'
+                        + '         <p>' + countsomepricewater + '</p>'
+                        + '      </div>'
+                        + '      <div class="col-1">'
+                        + '         <p>บาท</p>'
+                        + '      </div>'
+                        + '    </div>'
+                        + '    <div class="row">'
+                        + '        <div class="col-5">'
+                        + '          <p class="h5">กำไร/ขาดทุน ค่าน้ำ</p>'
+                        + '        </div>'
+                        + '       <div class="col-2">'
+                        + '           <p>' + Profitwater + '</p>'
+                        + '        </div>'
+                        + '         <div class="col-1">'
+                        + '            <p>บาท</p>'
+                        + '          </div>'
+                        + '       </div>'
+                    document.getElementById("setchartwater2").innerHTML = htmlstringchartwater2
+                });
+
+            }
 
             //เเก้ไขห้องพัก----------------------------------------------------
             //อัพเดทห้องพัก
@@ -2189,6 +2538,7 @@
                 }
             })
             function renderHome(ourData) {
+                console.log('ggrender', ourData)
                 var Roomfree = 0
                 var Roombusy = 0
                 var Roomremodel = 0
@@ -2242,6 +2592,7 @@
                 }
                 document.getElementById("divPostHome").innerHTML = htmlString1;
                 document.getElementById("meter").innerHTML = ourData[0].UnitMeter
+                document.getElementById("water").innerHTML = ourData[0].plicewater
                 document.getElementById("BuildingName").innerHTML = ourData[0].BuildingName
                 document.getElementById("BuildingPhone").innerHTML = ourData[0].BuildingPhone
                 document.getElementById("BuildingEmail").innerHTML = ourData[0].BuildingEmail

@@ -24,12 +24,12 @@ var MeterSchema = new Schema({
                      beforusewater: {
                         type: Number
                     },
-                    //หมายเลขมิเตอร์oheเดือนนั้น
+                    //หมายเลขมิเตอร์น้ำเดือนนั้น
                     usewater: {
                         type: Number
                     },
-                    //จำนวนมิเตอร์ี่ไฟใช้ในเดือนนั้น
-                    usemonth: {
+                    //จำนวนมิเตอร์ี่น้ำใช้ในเดือนนั้น
+                    usewatermonth: {
                         type: Number,
 
                     },
@@ -57,6 +57,11 @@ var MeterSchema = new Schema({
         type: Number,
 
     },
+    pricewater: {
+        type: Number,
+
+    },
+
     buildingnamemeter: {
         type: String,
 
@@ -76,7 +81,15 @@ var MeterSchema = new Schema({
     someunitmeter: {
         type: Number,
         //มิเตอร์ทั้งหอพัก
-    }
+    },
+    somepricewater: {
+        type: Number,
+        //จ่ายให้การการปะปา
+    },
+    someunitwater: {
+        type: Number,
+        //มิเตอร์น้ำทั้งหอพัก
+    },
 
 })
 
