@@ -533,6 +533,9 @@
                             <form action="" name="formmeter" id="formmeter" onsubmit="return false">
                                 <button name="formmeter" type="submit" class="btn btn-primary">ยืนยัน</button>
                             </form>
+                            <div id="ggg">
+
+                            </div>
                         </div>
 
                     </div>
@@ -1078,8 +1081,7 @@
                         + '   <table class="table table-bordered" >'
                         + '  <thead>'
                         + '     <tr>'
-                        + '     <th scope="col" style="background-color: grey ; height: 50px;"><input type="checkbox" value="' + + '" class="select_all ' + + '" id="select_all" ></th>'
-                        + '       <th scope="col" style="background-color: grey"></th>'
+                        + '     <th scope="col" style="background-color: grey ; height: 50px;"><input type="checkbox" value="' + (l + 1) + '" class="select_allmeter ' + (Datameterbuilds[l].datemeter) + '" id="select_allmeter" ></th>'
                         + ' <th scope="col" style="background-color: grey">หมายเลขห้อง</th>'
                         + '     </tr>'
                         + '  </thead>'
@@ -1087,7 +1089,7 @@
 
                         for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
                             if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ") {
-                                htmlStringmeterbuilds += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkbox"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
+                                htmlStringmeterbuilds += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkboxmeter"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
 
                             }
                         }
@@ -1096,76 +1098,143 @@
                     htmlStringmeterbuilds += '</table></div></div><br>'
                 }
                 document.getElementById("divPostmeterbuilds").innerHTML = htmlStringmeterbuilds
-                /*
-                            $('.select_allmeter').click(function (e) {
-                                let upfloor = e.target.classList[1]
-            
-                                console.log(upfloor)
-                                if (this.checked) {
-            
-                                    $('.checkbox').each(function () {
-                                        let data = this.value
-                                        let getdata1 = ''
-                                        let getdata2 = ''
-                                        let i = 0
-                                        console.log('dataana', data)
-            
-                                        while (data[i] != ',') {
-                                            getdata1 = getdata1 + data[i]
-                                            i++;
-                                        }
-                                        i++
-                                        while (i < data.length) {
-                                            getdata2 = getdata2 + data[i]
-                                            i++;
-                                        }
-                                        console.log('datemeter', getdata1)
-                                        console.log('room', getdata2)
-                                        for (let l = 0; l < Datameterbuilds.length; l++) {
-                                            for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
-                                                for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
-                                                    if (upfloor == (l + 1)) {
-                                                        if (this.value == Datameterbuilds[l].datemeter) {
-                                                            this.checked = true;
-                                                            console.log("ppppp", this.value)
-                                                        }
-                                                    }
-                                                }
+
+                $('.select_allmeter').click(function (e) {
+                    //  alert('gg')
+                    let setdate = e.target.classList[1]
+
+                    if (this.checked) {
+                        $('.checkboxmeter').each(function () {
+                            console.log('gdp', this.value)
+                            for (let l = 0; l < Datameterbuilds.length; l++) {
+                                for (let i = 0; i < Datameterbuilds[0].floormeter.length; i++) {
+                                    for (let j = 0; j < Datameterbuilds[0].floormeter[i].roommeter.length; j++) {
+                                        if (setdate == (Datameterbuilds[l].datemeter)) {
+                                            if (this.value == (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter)) {
+                                                this.checked = true;
+
                                             }
                                         }
-            
-                                    });
-                                } else {
-                                    $('.checkbox').each(function () {
-                                        this.checked = false;
-                                    });
+                                    }
                                 }
-                            });
-                            */
+                            }
+                        });
+                    } else {
+                        $('.checkbox').each(function () {
+                            this.checked = false;
+                        });
+                    }
+                });
                 $('#formmeter').click(function () {
-
+                    console.log('rommetss', Datameterbuilds)
                     let RoomPrint = []
+                    let htmlStringmeterprint = ""
                     $.each($("input[name='meterRoom']:checked"), function () {
                         RoomPrint.push($(this).val());
                     });
                     console.log('rommeter', RoomPrint)
-                    let dateprint = []
-                    let roomprint = []
-                    let i = 0
                     console.log('rommeterdd', RoomPrint.length)
-                    for (let k = 0; k < RoomPrint.length; k++) {
-                        while (RoomPrint != ',') {
-                            dateprint[k] = dateprint[k] + RoomPrint[k]
-                            i++;
-                        }
-                        i++
-                        while (i < RoomPrint.length) {
-                            roomprin = roomprin + RoomPrint[i]
-                            i++;
+                    for (let l = 0; l < Datameterbuilds.length; l++) {
+                        for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
+                            for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
+                                for (let k = 0; k < RoomPrint.length; k++) {
+                                    if (RoomPrint[k] ==Datameterbuilds[l].floormeter[i].roommeter[j].dateroommeter )
+                                        htmlStringmeterprint +=
+                                            ' <div class="container">'
+                                            + '<div class="col-12" style="margin-left: 3%">'
+                                            + ' <br>'
+                                            + '         <div class="row">'
+                                            + '           <div class="col-3">'
+                                            + '            </div>'
+                                            + '            <div class="col-5">'
+                                            + '                <h3>ใบเเจ้งหนี้ (Invoice)</h3>'
+                                            + '            </div>'
+                                            + '       </div>'
+                                            + '       <div class="row">'
+                                            + '            <div class="col-2">'
+                                            + '                <h3>ชื่อหอพัก</h3>'
+                                            + '            </div>'
+                                            + '             <div class="col-2">'
+                                            + '                <h3>' + Datameterbuilds[l].buildingnamemeter + '</h3>'
+                                            + '            </div>'
+                                            + '         </div>'
+                                            + '          <div class="row">'
+                                            + '             <div class="col-2">'
+                                            + '                 <h3>เลขที่ห้องพัก</h3>'
+                                            + '              </div>'
+                                            + '              <div class="col-2">'
+                                            + '                  <h3>'+Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter+'</h3>'
+                                            + '              </div>'
+                                            + '          </div>'
+                                            + '          <div class="row">'
+                                            + '             <div class="col-2">'
+                                            + '                 <h3>ประจำเดือน</h3>'
+                                            + '              </div>'
+                                            + '             <div class="col-2">'
+                                            + '                 <h3>'+Datameterbuilds[k].datemeter+'</h3>'
+                                            + '              </div>'
+                                            + '          </div>'
+                                            + '           <hr style="border: 1px solid black;">'
+                                            + '              <table class="table table-striped class=" table-primary "">'
+                                            + '                    <thead>'
+                                            + '                    <tr>'
+                                            + '                       <th scope="col"></th>'
+                                            + '                      <th scope="col">เลขมิเตอร์ก่อนหน้า</th>'
+                                            + '                       <th scope="col">เลขมิเตอร์ปัจจุบัน</th>'
+                                            + '                       <th>จำนวนที่ใช้</th>'
+                                            + '                       <th>ราคาต่อหน่วยไฟฟ้า/บาท</th>'
+                                            + '                       <th>จำนวนเงินที่ต้องจ่าย</th>'
+                                            + '                   </tr>'
+                                            + '               </thead>'
+                                            + '                <tbody>'
+                                            + '                   <tr>'
+                                            + '                       <td>ค่าไฟฟ้า</td>'
+                                            + '                       <td></td>'
+                                            + '                        <td></td>'
+                                            + '                        <td></td>'
+                                            + '                        <td></td>'
+                                            + '                        <td></td>'
+                                            + '                     </tr>'
+                                            + '                     <tr>'
+                                            + '                         <td></td>'
+                                            + '                           <td></td>'
+                                            + '                          <td></td>'
+                                            + '                          <td></td>'
+                                            + '                         <td></td>'
+                                            + '                         <td></td>'
+                                            + '                     </tr>'
+                                            + '                     <tr>'
+                                            + '                         <td></td>'
+                                            + '                         <td></td>'
+                                            + '                          <td></td>'
+                                            + '                           <td></td>'
+                                            + '                          <td></td>'
+                                            + '                            <td></td>'
+                                            + '                         </tr>'
+                                            + '                   </tbody>'
+                                            + '                             </table>'
+                                            + '                <hr style="border: 1px solid black;">'
+                                            + '                    <div class="row">'
+                                            + '                        <div class="col-2">'
+                                            + '                           <h4>รวมทั้งสิ้น</h3>'
+                                            + '                        </div>'
+                                            + '                        <div class="col-2">'
+                                            + '                           <h4>252</h3>'
+                                            + '                        </div>'
+                                            + '                         <div class="col-2">'
+                                            + '                            <h4>บาท</h3>'
+                                            + '                         </div>'
+                                            + '                      </div>'
+                                            + '                      </div>'
+                                    htmlStringmeterprint += ' </div>'
+                                    htmlStringmeterprint += ' <br>'
+                                    htmlStringmeterprint += ' <br>'
+                                }
+                            }
                         }
                     }
-                    console.log('fdf', dateprint)
-                    console.log('fdfss', roomprint)
+
+                    document.getElementById("ggg").innerHTML = htmlStringmeterprint
                 });
 
             }
@@ -1372,7 +1441,7 @@
                                 + '</div>'
 
                         }
-                        htmlStringUnitMeter += '</table></div></div></div><br>'
+                        htmlStringUnitMeter += '</table></div></div></div> <br>'
                     }
                     htmlStringUnitMeter += '</div>'
                     document.getElementById("divPostmeter").innerHTML = htmlStringUnitMeter
@@ -1954,7 +2023,7 @@
                     _thiss.find("td").each(function (key, v) {
                         metermonthuse[index].push(v.value);
                     });
-
+ 
                 }); */
                 console.log('eduarray[0] -->' + eduarray[0]);
                 console.log('eduarray[1] -->' + eduarray[1]);
@@ -2017,6 +2086,7 @@
                         let usewater = parseInt(eduarraywater[k])
                         let usewatermonth = parseInt(watermonthuse[k])
                         let waterstatus = "" + waterst[k]
+                        let dateroommeter = datemeter + "," + roomNumbermeter
                         k++
                         let roomData = {
                             beforusemeter,
@@ -2027,7 +2097,8 @@
                             beforusewater,
                             usewater,
                             usewatermonth,
-                            waterstatus
+                            waterstatus,
+                            dateroommeter
                         }
 
                         roomArrayPerFloor.push(roomData)
@@ -2708,12 +2779,13 @@
                     console.log(upfloor)
                     if (this.checked) {
                         $('.checkbox').each(function () {
+                            console.log('gdp', this.value)
                             for (let i = 0; i < ourData[0].floor.length; i++) {
                                 for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
                                     if (upfloor == (i + 1)) {
                                         if (this.value == ourData[0].floor[i].room[j].roomNumber) {
                                             this.checked = true;
-                                            console.log("ppppp")
+                                            console.log("ppppp", this.value)
                                         }
                                     }
                                 }

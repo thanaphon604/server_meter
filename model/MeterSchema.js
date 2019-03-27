@@ -46,6 +46,9 @@ var MeterSchema = new Schema({
                     waterstatus: {
                         type: String,
 
+                    },
+                    dateroommeter:{
+                        type: String,
                     }
 
                 }
