@@ -4,6 +4,9 @@ const bodyParser = require('body-parser')
 const hbs = require('hbs')
 var path = require('path');
 
+
+
+
 const { Admin } = require('./model/AdminSchema')
 const { Building } = require('./model/BuildingSchema')
 const { Userdelete } = require('./model/UserdeleteSchema')
@@ -217,6 +220,36 @@ app.post('/postcontract', (req, res) => {
     }, (err) => {
         res.status(400).send(err)
     })
+
+    //    meterbuild.find({
+    //         BuildingName: BuildingNameInput,
+    //     }).then((buildd) => {
+    //         if (buildd.length == 1) {
+    //             for (let i = 0; i < buildd[0].floormeter.length; i++) {
+    //                 for (let j = 0; j < buildd[0].floormeter[i].roommeter.length; j++) {
+    //                     if (roomNumberInput == buildd[0].floormeter[i].roommeter[j].roomNumbermeter) {
+    //                         buildd[0].floormeter[i].roommeter[j].contractmeter = contractInput
+    //                         buildd[0].floormeter[i].roommeter[j].rentroommeter = rentroomInput
+
+    //                         buildd[0].save().then((suc) => {
+    //                             console.log('res contract : ', suc)
+    //                             res.send(suc)
+    //                         }, (e) => {
+    //                             consoel.log('error contract :', e)
+    //                             res.status(400).send(e)
+    //                         })
+
+    //                     }
+    //                 }
+    //             }
+    //             //res.send(admin[0])
+    //         } else if (build.length == 0) {
+    //             res.status(400).send('sory not found is user')
+    //         }
+    //     }, (err) => {
+    //         res.status(400).send(err)
+    //     })
+
 })
 
 //post user 
@@ -685,6 +718,21 @@ app.get('/getmeterbuilds/:BuildingName', (req, res) => {
         res.status(404).send(err)
     })
 })
+app.post('/postPrint', (req, res) => {
+    let dataprint = req.body.htmlStringmeterprint
+ 
+    var fs = require('fs');
+    var pdf = require('html-pdf');
+    var html = fs.readFileSync(dataprint , 'utf8');
+    var options = { format: 'Letter' };
+    
+    pdf.create(html, options).toFile('./views/gg.pdf', function (err, res) {
+        if (err) return console.log(err);
+        console.log(res); // { filename: '/app/businesscard.pdf' }
+    });
+   
+})
+
 
 
 //-------------------------------------หน้าที่ 6 ---------------------------------------------

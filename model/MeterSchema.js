@@ -49,7 +49,14 @@ var MeterSchema = new Schema({
                     },
                     dateroommeter:{
                         type: String,
-                    }
+                    },
+                    //ค่าเช่า
+                    rentroommeter: {
+                        type: Number
+                    },
+                    contractmeter: {
+                        type: String
+                    },
 
                 }
             ],

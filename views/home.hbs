@@ -1138,103 +1138,131 @@
                         for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
                             for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
                                 for (let k = 0; k < RoomPrint.length; k++) {
-                                    if (RoomPrint[k] ==Datameterbuilds[l].floormeter[i].roommeter[j].dateroommeter )
-                                        htmlStringmeterprint +=
-                                            ' <div class="container">'
-                                            + '<div class="col-12" style="margin-left: 3%">'
-                                            + ' <br>'
-                                            + '         <div class="row">'
-                                            + '           <div class="col-3">'
-                                            + '            </div>'
-                                            + '            <div class="col-5">'
-                                            + '                <h3>ใบเเจ้งหนี้ (Invoice)</h3>'
-                                            + '            </div>'
-                                            + '       </div>'
-                                            + '       <div class="row">'
-                                            + '            <div class="col-2">'
-                                            + '                <h3>ชื่อหอพัก</h3>'
-                                            + '            </div>'
-                                            + '             <div class="col-2">'
-                                            + '                <h3>' + Datameterbuilds[l].buildingnamemeter + '</h3>'
-                                            + '            </div>'
-                                            + '         </div>'
-                                            + '          <div class="row">'
-                                            + '             <div class="col-2">'
-                                            + '                 <h3>เลขที่ห้องพัก</h3>'
-                                            + '              </div>'
-                                            + '              <div class="col-2">'
-                                            + '                  <h3>'+Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter+'</h3>'
-                                            + '              </div>'
-                                            + '          </div>'
-                                            + '          <div class="row">'
-                                            + '             <div class="col-2">'
-                                            + '                 <h3>ประจำเดือน</h3>'
-                                            + '              </div>'
-                                            + '             <div class="col-2">'
-                                            + '                 <h3>'+Datameterbuilds[k].datemeter+'</h3>'
-                                            + '              </div>'
-                                            + '          </div>'
-                                            + '           <hr style="border: 1px solid black;">'
-                                            + '              <table class="table table-striped class=" table-primary "">'
-                                            + '                    <thead>'
-                                            + '                    <tr>'
-                                            + '                       <th scope="col"></th>'
-                                            + '                      <th scope="col">เลขมิเตอร์ก่อนหน้า</th>'
-                                            + '                       <th scope="col">เลขมิเตอร์ปัจจุบัน</th>'
-                                            + '                       <th>จำนวนที่ใช้</th>'
-                                            + '                       <th>ราคาต่อหน่วยไฟฟ้า/บาท</th>'
-                                            + '                       <th>จำนวนเงินที่ต้องจ่าย</th>'
-                                            + '                   </tr>'
-                                            + '               </thead>'
-                                            + '                <tbody>'
-                                            + '                   <tr>'
-                                            + '                       <td>ค่าไฟฟ้า</td>'
-                                            + '                       <td></td>'
-                                            + '                        <td></td>'
-                                            + '                        <td></td>'
-                                            + '                        <td></td>'
-                                            + '                        <td></td>'
-                                            + '                     </tr>'
-                                            + '                     <tr>'
-                                            + '                         <td></td>'
-                                            + '                           <td></td>'
-                                            + '                          <td></td>'
-                                            + '                          <td></td>'
-                                            + '                         <td></td>'
-                                            + '                         <td></td>'
-                                            + '                     </tr>'
-                                            + '                     <tr>'
-                                            + '                         <td></td>'
-                                            + '                         <td></td>'
-                                            + '                          <td></td>'
-                                            + '                           <td></td>'
-                                            + '                          <td></td>'
-                                            + '                            <td></td>'
-                                            + '                         </tr>'
-                                            + '                   </tbody>'
-                                            + '                             </table>'
-                                            + '                <hr style="border: 1px solid black;">'
-                                            + '                    <div class="row">'
-                                            + '                        <div class="col-2">'
-                                            + '                           <h4>รวมทั้งสิ้น</h3>'
-                                            + '                        </div>'
-                                            + '                        <div class="col-2">'
-                                            + '                           <h4>252</h3>'
-                                            + '                        </div>'
-                                            + '                         <div class="col-2">'
-                                            + '                            <h4>บาท</h3>'
-                                            + '                         </div>'
-                                            + '                      </div>'
-                                            + '                      </div>'
-                                    htmlStringmeterprint += ' </div>'
-                                    htmlStringmeterprint += ' <br>'
-                                    htmlStringmeterprint += ' <br>'
+                                    if (RoomPrint[k] == Datameterbuilds[l].floormeter[i].roommeter[j].dateroommeter) {
+                                        for (let a = 0; a < 2; a++) {
+                                            htmlStringmeterprint +=
+                                                ' <div class="container">'
+                                                + '<div class="col-12" style="margin-left: 3%">'
+                                                + ' <br>'
+                                                + '         <div class="row">'
+                                                + '           <div class="col-3">'
+                                                + '            </div>'
+                                                + '            <div class="col-5">'
+                                                + '                <h3>ใบเเจ้งหนี้ (Invoice)</h3>'
+                                                + '            </div>'
+                                                + '       </div>'
+                                                + '       <div class="row">'
+                                                + '            <div class="col-2">'
+                                                + '                <h3>ชื่อหอพัก</h3>'
+                                                + '            </div>'
+                                                + '             <div class="col-2">'
+                                                + '                <h3>' + Datameterbuilds[l].buildingnamemeter + '</h3>'
+                                                + '            </div>'
+                                                + '         </div>'
+                                                + '          <div class="row">'
+                                                + '             <div class="col-2">'
+                                                + '                 <h3>เลขที่ห้องพัก</h3>'
+                                                + '              </div>'
+                                                + '              <div class="col-2">'
+                                                + '                  <h3>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</h3>'
+                                                + '              </div>'
+                                                + '          </div>'
+                                                + '          <div class="row">'
+                                                + '             <div class="col-2">'
+                                                + '                 <h3>ประจำเดือน</h3>'
+                                                + '              </div>'
+                                                + '             <div class="col-2">'
+                                                + '                 <h3>' + Datameterbuilds[l].datemeter + '</h3>'
+                                                + '              </div>'
+                                                + '          </div>'
+                                                + '           <hr style="border: 1px solid black;">'
+                                                + '              <table class="table table-striped class=" table-primary "">'
+                                                + '                    <thead>'
+                                                + '                    <tr>'
+                                                + '                       <th scope="col"></th>'
+                                                + '                      <th scope="col">เลขมิเตอร์ก่อนหน้า</th>'
+                                                + '                       <th scope="col">เลขมิเตอร์ปัจจุบัน</th>'
+                                                + '                       <th>จำนวนที่ใช้</th>'
+                                                + '                       <th>ราคาต่อหน่วยไฟฟ้า/บาท</th>'
+                                                + '                       <th>จำนวนเงินที่ต้องจ่าย</th>'
+                                                + '                   </tr>'
+                                                + '               </thead>'
+                                                + '                <tbody>'
+                                                + '                     <tr>'
+                                                + '                         <td>ค่าเช่า</td>'
+                                                + '                         <td></td>'
+                                                + '                          <td></td>'
+                                                + '                           <td></td>'
+                                                + '                          <td></td>'
+                                                + '                            <td>' + _data.floor[i].room[j].rentroom + '</td>'
+                                                + '                         </tr>'
+                                                + '                   <tr>'
+                                                + '                       <td>ค่าไฟฟ้า</td>'
+                                                + '                       <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].beforusemeter + '</td>'
+                                                + '                        <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].usemeter + '</td>'
+                                                + '                        <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].usemetermonth + '</td>'
+                                                + '                        <td>' + Datameterbuilds[l].pricemeter + '</td>'
+                                                + '                        <td>' + (Datameterbuilds[l].floormeter[i].roommeter[j].usemetermonth * Datameterbuilds[l].pricemeter) + '</td>'
+                                                + '                     </tr>'
+                                                + '                   <tr>'
+                                                + '                       <td>ค่าน้ำ</td>'
+                                                + '                       <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].beforusewater + '</td>'
+                                                + '                        <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].usewater + '</td>'
+                                                + '                        <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].usewatermonth + '</td>'
+                                                + '                        <td>' + Datameterbuilds[l].pricemeter + '</td>'
+                                                + '                        <td>' + (Datameterbuilds[l].floormeter[i].roommeter[j].usewatermonth * Datameterbuilds[l].pricewater) + '</td>'
+                                                + '                     </tr>'
+                                                + '                   </tbody>'
+                                                + '                             </table>'
+                                                + '                <hr style="border: 1px solid black;">'
+                                                + '                    <div class="row">'
+                                                + '                        <div class="col-2">'
+                                                + '                           <h4>รวมทั้งสิ้น</h3>'
+                                                + '                        </div>'
+                                                + '                        <div class="col-2">'
+                                                + '                           <h4>' + (_data.floor[i].room[j].rentroom + (Datameterbuilds[l].floormeter[i].roommeter[j].usemetermonth * Datameterbuilds[l].pricemeter) + (Datameterbuilds[l].floormeter[i].roommeter[j].usewatermonth * Datameterbuilds[l].pricewater)) + '</h3>'
+                                                + '                        </div>'
+                                                + '                         <div class="col-2">'
+                                                + '                            <h4>บาท</h3>'
+                                                + '                         </div>'
+                                                + '                      </div>'
+                                                + '                      </div>'
+                                            htmlStringmeterprint += ' </div>'
+                                            htmlStringmeterprint += ' <br>'
+                                            htmlStringmeterprint += ' <hr style="border: 1px solid black;">'
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
 
                     document.getElementById("ggg").innerHTML = htmlStringmeterprint
+              
+                    var dataprint = {
+                        htmlStringmeterprint
+                    }
+                    console.log('dataunitwater', dataprint)
+                    var url = "http://localhost:3000/postPrint";
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", url, true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            console.log('res is', xhr.responseText)
+                            // if success go login page
+                            alert('create user Successful ')
+                            window.location.reload(true);
+                            //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+
+                        } else {
+                            //alert('can not create user! Pls try again.')
+                        }
+                    };
+                    var data = JSON.stringify({
+                        dataprint: dataprint.dataprint
+                    });
+                    xhr.send(data);
                 });
 
             }
