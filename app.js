@@ -720,17 +720,26 @@ app.get('/getmeterbuilds/:BuildingName', (req, res) => {
 })
 app.post('/postPrint', (req, res) => {
     let dataprint = req.body.htmlStringmeterprint
- 
+
     var fs = require('fs');
     var pdf = require('html-pdf');
-    var html = fs.readFileSync(dataprint , 'utf8');
+    //var html = fs.readFileSync(dataprint , 'utf8');
     var options = { format: 'Letter' };
-    
-    pdf.create(html, options).toFile('./views/gg.pdf', function (err, res) {
-        if (err) return console.log(err);
-        console.log(res); // { filename: '/app/businesscard.pdf' }
+    // console.log('data is :',  req.body)
+    // pdf.create(dataprint, options).toFile('./views/gg.pdf', function (err, res) {
+    //     if (err) return console.log(err);
+    //     //console.log(res); // { filename: '/app/businesscard.pdf' }
+    // });
+    pdf.create(dataprint, { format: 'Letter' }).toStream(function (err, stream) {
+        if (err) {
+            res.json({
+                message: 'Sorry, we were unable to generate pdf',
+            });
+        }
+
+        stream.pipe(res); // your response
     });
-   
+
 })
 
 

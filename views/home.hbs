@@ -1139,10 +1139,24 @@
                             for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
                                 for (let k = 0; k < RoomPrint.length; k++) {
                                     if (RoomPrint[k] == Datameterbuilds[l].floormeter[i].roommeter[j].dateroommeter) {
+                                        htmlStringmeterprint +=
+                                            ' <!DOCTYPE html>'
+                                            + '<html lang="en">'
+                                            + '<head>'
+                                            + ' <meta charset="UTF-8">'
+                                            + '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+                                            + '<meta http-equiv="X-UA-Compatible" content="ie=edge">'
+                                            + '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">'
+                                            + ' <title></title>'
+                                            + '<link rel="stylesheet">'
+                                         
+                                            + ' </head>'
+                                        htmlStringmeterprint += '<body>'
+
                                         for (let a = 0; a < 2; a++) {
                                             htmlStringmeterprint +=
                                                 ' <div class="container">'
-                                                + '<div class="col-12" style="margin-left: 3%">'
+                                                + '<div class="col-10" >'
                                                 + ' <br>'
                                                 + '         <div class="row">'
                                                 + '           <div class="col-3">'
@@ -1152,39 +1166,25 @@
                                                 + '            </div>'
                                                 + '       </div>'
                                                 + '       <div class="row">'
-                                                + '            <div class="col-2">'
-                                                + '                <h3>ชื่อหอพัก</h3>'
-                                                + '            </div>'
-                                                + '             <div class="col-2">'
-                                                + '                <h3>' + Datameterbuilds[l].buildingnamemeter + '</h3>'
+                                                + '            <div class="col-7">'
+                                                + '                <h3>ชื่อหอพัก..........' + Datameterbuilds[l].buildingnamemeter + '   เลขที่ห้องพัก '         + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + ' </h3>'
                                                 + '            </div>'
                                                 + '         </div>'
                                                 + '          <div class="row">'
-                                                + '             <div class="col-2">'
-                                                + '                 <h3>เลขที่ห้องพัก</h3>'
-                                                + '              </div>'
-                                                + '              <div class="col-2">'
-                                                + '                  <h3>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</h3>'
-                                                + '              </div>'
-                                                + '          </div>'
-                                                + '          <div class="row">'
-                                                + '             <div class="col-2">'
-                                                + '                 <h3>ประจำเดือน</h3>'
-                                                + '              </div>'
-                                                + '             <div class="col-2">'
-                                                + '                 <h3>' + Datameterbuilds[l].datemeter + '</h3>'
+                                                + '             <div class="col-8">'
+                                                + '                 <h3>ประจำเดือน......' + Datameterbuilds[l].datemeter + '</h3>'
                                                 + '              </div>'
                                                 + '          </div>'
                                                 + '           <hr style="border: 1px solid black;">'
                                                 + '              <table class="table table-striped class=" table-primary "">'
                                                 + '                    <thead>'
                                                 + '                    <tr>'
-                                                + '                       <th scope="col"></th>'
-                                                + '                      <th scope="col">เลขมิเตอร์ก่อนหน้า</th>'
-                                                + '                       <th scope="col">เลขมิเตอร์ปัจจุบัน</th>'
-                                                + '                       <th>จำนวนที่ใช้</th>'
-                                                + '                       <th>ราคาต่อหน่วยไฟฟ้า/บาท</th>'
-                                                + '                       <th>จำนวนเงินที่ต้องจ่าย</th>'
+                                                + '                       <th scope="col-2"></th>'
+                                                + '                      <th scope="col-2">เลขมิเตอร์ก่อนหน้า</th>'
+                                                + '                       <th scope="col-1">เลขมิเตอร์ปัจจุบัน</th>'
+                                                + '                       <th scope="col-2">จำนวนที่ใช้</th>'
+                                                + '                       <th scope="col-2">ราคาต่อหน่วย/บาท</th>'
+                                                + '                       <th scope="col-2">จำนวนเงินที่ต้องจ่าย</th>'
                                                 + '                   </tr>'
                                                 + '               </thead>'
                                                 + '                <tbody>'
@@ -1216,21 +1216,16 @@
                                                 + '                             </table>'
                                                 + '                <hr style="border: 1px solid black;">'
                                                 + '                    <div class="row">'
-                                                + '                        <div class="col-2">'
-                                                + '                           <h4>รวมทั้งสิ้น</h3>'
+                                                + '                        <div class="col-7">'
+                                                + '                           <h4>รวมทั้งสิ้น ' + (_data.floor[i].room[j].rentroom + (Datameterbuilds[l].floormeter[i].roommeter[j].usemetermonth * Datameterbuilds[l].pricemeter) + (Datameterbuilds[l].floormeter[i].roommeter[j].usewatermonth * Datameterbuilds[l].pricewater)) + ' บาท </h4>'
                                                 + '                        </div>'
-                                                + '                        <div class="col-2">'
-                                                + '                           <h4>' + (_data.floor[i].room[j].rentroom + (Datameterbuilds[l].floormeter[i].roommeter[j].usemetermonth * Datameterbuilds[l].pricemeter) + (Datameterbuilds[l].floormeter[i].roommeter[j].usewatermonth * Datameterbuilds[l].pricewater)) + '</h3>'
-                                                + '                        </div>'
-                                                + '                         <div class="col-2">'
-                                                + '                            <h4>บาท</h3>'
-                                                + '                         </div>'
-                                                + '                      </div>'
                                                 + '                      </div>'
                                             htmlStringmeterprint += ' </div>'
-                                            htmlStringmeterprint += ' <br>'
                                             htmlStringmeterprint += ' <hr style="border: 1px solid black;">'
                                         }
+                                        htmlStringmeterprint +=
+                                            '</body >'
+                                            + '</html >'
                                     }
                                 }
                             }
@@ -1238,11 +1233,8 @@
                     }
 
                     document.getElementById("ggg").innerHTML = htmlStringmeterprint
-              
-                    var dataprint = {
-                        htmlStringmeterprint
-                    }
-                    console.log('dataunitwater', dataprint)
+
+                    console.log('ใบเเจ้งหนี้', htmlStringmeterprint)
                     var url = "http://localhost:3000/postPrint";
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", url, true);
@@ -1251,8 +1243,8 @@
                         if (xhr.readyState === 4 && xhr.status === 200) {
                             console.log('res is', xhr.responseText)
                             // if success go login page
-                            alert('create user Successful ')
-                            window.location.reload(true);
+                         //   alert('create user Successful ')
+                        //    window.location.reload(true);
                             //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
 
                         } else {
@@ -1260,7 +1252,7 @@
                         }
                     };
                     var data = JSON.stringify({
-                        dataprint: dataprint.dataprint
+                        htmlStringmeterprint: htmlStringmeterprint
                     });
                     xhr.send(data);
                 });
