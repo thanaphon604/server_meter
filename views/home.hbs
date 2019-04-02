@@ -542,14 +542,24 @@
                 </div>
                 <!--ใบเสร็จรับเงิน -->
                 <div class="tab-pane fade" id="nav-bills" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <div class="container-fluid" style="margin-top: 30px">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7 col-sm-12  ">
-                                <br>
-                                <p>d2</p>
-                            </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 col-lg-8">
+                            <br>
+                            <h5>*หน้าจอจะเเสดงห้องที่ค้างชำระเท่านั้น</h5>
+                            <h5>*โปรดติกเลือกห้องที่ต้องการชำระเงินเท่านั้น</h5>
+                            <div class="">
+                                <div class="" id="divPostmeterbuildspay" style="margin-top:5%">
+                                </div>
 
+                            </div>
+                            <form action="" name="formmeterpay" id="formmeterpay" onsubmit="return false">
+                                <button name="formmeterpay" type="submit" class="btn btn-primary">ยืนยัน</button>
+                            </form>
+                            <div id="gggpay">
+
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -906,6 +916,7 @@
             var htmlStringNow = ''
             _buildingName = BuildingName
             var htmlStringmeterbuilds = ''
+            var htmlStringmeterbuildspay = ''
             var htmlStringwater = ''
 
             //ดึงข้อมูล user delete
@@ -1059,6 +1070,7 @@
                     var Datameterbuilds = JSON.parse(Request.responseText);
                     //  console.log('datametebuilds', Datameterbuilds)
                     rendermeterbuilds(Datameterbuilds)
+                    rendermeterbuildspay(Datameterbuilds)
                     return false;
                 }
                 Request.send();
@@ -1120,7 +1132,7 @@
                             }
                         });
                     } else {
-                        $('.checkbox').each(function () {
+                        $('.checkboxmeter').each(function () {
                             this.checked = false;
                         });
                     }
@@ -1139,20 +1151,6 @@
                             for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
                                 for (let k = 0; k < RoomPrint.length; k++) {
                                     if (RoomPrint[k] == Datameterbuilds[l].floormeter[i].roommeter[j].dateroommeter) {
-                                        htmlStringmeterprint +=
-                                            ' <!DOCTYPE html>'
-                                            + '<html lang="en">'
-                                            + '<head>'
-                                            + ' <meta charset="UTF-8">'
-                                            + '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
-                                            + '<meta http-equiv="X-UA-Compatible" content="ie=edge">'
-                                            + '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">'
-                                            + ' <title></title>'
-                                            + '<link rel="stylesheet">'
-                                         
-                                            + ' </head>'
-                                        htmlStringmeterprint += '<body>'
-
                                         for (let a = 0; a < 2; a++) {
                                             htmlStringmeterprint +=
                                                 ' <div class="container">'
@@ -1162,12 +1160,18 @@
                                                 + '           <div class="col-3">'
                                                 + '            </div>'
                                                 + '            <div class="col-5">'
-                                                + '                <h3>ใบเเจ้งหนี้ (Invoice)</h3>'
+                                                + '                <h2 style="text-align: center;"> ใบเเจ้งหนี้ (Invoice)</h2>'
                                                 + '            </div>'
+                                                + '<br>'
                                                 + '       </div>'
                                                 + '       <div class="row">'
                                                 + '            <div class="col-7">'
-                                                + '                <h3>ชื่อหอพัก..........' + Datameterbuilds[l].buildingnamemeter + '   เลขที่ห้องพัก '         + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + ' </h3>'
+                                                + '                <h3>ชื่อหอพัก..........' + Datameterbuilds[l].buildingnamemeter + ' </h3>'
+                                                + '            </div>'
+                                                + '         </div>'
+                                                + '       <div class="row">'
+                                                + '            <div class="col-7">'
+                                                + '                <h3>เลขที่ห้องพัก....' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + ' </h3>'
                                                 + '            </div>'
                                                 + '         </div>'
                                                 + '          <div class="row">'
@@ -1217,22 +1221,23 @@
                                                 + '                <hr style="border: 1px solid black;">'
                                                 + '                    <div class="row">'
                                                 + '                        <div class="col-7">'
+                                                + '<br>'
                                                 + '                           <h4>รวมทั้งสิ้น ' + (_data.floor[i].room[j].rentroom + (Datameterbuilds[l].floormeter[i].roommeter[j].usemetermonth * Datameterbuilds[l].pricemeter) + (Datameterbuilds[l].floormeter[i].roommeter[j].usewatermonth * Datameterbuilds[l].pricewater)) + ' บาท </h4>'
                                                 + '                        </div>'
                                                 + '                      </div>'
                                             htmlStringmeterprint += ' </div>'
+                                                + '<br>'
                                             htmlStringmeterprint += ' <hr style="border: 1px solid black;">'
+                                            htmlStringmeterprint += '<br>'
                                         }
-                                        htmlStringmeterprint +=
-                                            '</body >'
-                                            + '</html >'
+
                                     }
                                 }
                             }
                         }
                     }
 
-                    document.getElementById("ggg").innerHTML = htmlStringmeterprint
+                    //  document.getElementById("ggg").innerHTML = htmlStringmeterprint
 
                     console.log('ใบเเจ้งหนี้', htmlStringmeterprint)
                     var url = "http://localhost:3000/postPrint";
@@ -1243,8 +1248,8 @@
                         if (xhr.readyState === 4 && xhr.status === 200) {
                             console.log('res is', xhr.responseText)
                             // if success go login page
-                         //   alert('create user Successful ')
-                        //    window.location.reload(true);
+                            //   alert('create user Successful ')
+                            //    window.location.reload(true);
                             //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
 
                         } else {
@@ -1255,6 +1260,198 @@
                         htmlStringmeterprint: htmlStringmeterprint
                     });
                     xhr.send(data);
+                });
+
+            }
+            //ใบเสร็จรับเงิน
+            function rendermeterbuildspay(Datameterbuilds) {
+                console.log('datametebuilds', Datameterbuilds)
+                for (let l = 0; l < Datameterbuilds.length; l++) {
+                    htmlStringmeterbuildspay +=
+                        ' <div  class="row justify-content-md-center">'
+                        + ' <div class="divform">'
+                        + '  <div class="row justify-content-center">'
+                        + '   <div class="col-2 col-sm-2"><br>'
+                        + '       <p class="h4">ประจำเดือนที่</p>'
+                        + '   </div>'
+                        + '   <div class="col-2 col-sm-2"><br>'
+                        + '      <p id="Updatefloor">' + (Datameterbuilds[l].datemeter) + '</p>'
+                        + '   </div>'
+                        + '  </div>'
+                        + '   <table class="table table-bordered" >'
+                        + '  <thead>'
+                        + '     <tr>'
+                        + '     <th scope="col" style="background-color: grey ; height: 50px;"><input type="checkbox" value="' + (l + 1) + '" class="select_allmeterpay ' + (Datameterbuilds[l].datemeter) + '" id="select_allmeterpay" ></th>'
+                        + ' <th scope="col" style="background-color: grey">หมายเลขห้อง</th>'
+                        + '     </tr>'
+                        + '  </thead>'
+                    for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
+
+                        for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ") {
+                                htmlStringmeterbuildspay += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkboxmeterpay"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
+
+                            }
+                        }
+
+                    }
+                    htmlStringmeterbuildspay += '</table></div></div><br>'
+                }
+                document.getElementById("divPostmeterbuildspay").innerHTML = htmlStringmeterbuildspay
+                $('.select_allmeterpay').click(function (e) {
+                    //  alert('gg')
+                    let setdate = e.target.classList[1]
+
+                    if (this.checked) {
+                        $('.checkboxmeterpay').each(function () {
+                            console.log('gdp', this.value)
+                            for (let l = 0; l < Datameterbuilds.length; l++) {
+                                for (let i = 0; i < Datameterbuilds[0].floormeter.length; i++) {
+                                    for (let j = 0; j < Datameterbuilds[0].floormeter[i].roommeter.length; j++) {
+                                        if (setdate == (Datameterbuilds[l].datemeter)) {
+                                            if (this.value == (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter)) {
+                                                this.checked = true;
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        $('.checkboxmeterpay').each(function () {
+                            this.checked = false;
+                        });
+                    }
+                });
+                $('#formmeterpay').click(function () {
+                    var r = confirm("ยินยันการจ่ายเงิน");
+                    if (r == true) {
+                        console.log('rommetss', Datameterbuilds)
+                        let RoomPrint = []
+                        let htmlStringmeterprint = ""
+                        $.each($("input[name='meterRoom']:checked"), function () {
+                            RoomPrint.push($(this).val());
+                        });
+                        console.log('rommeter', RoomPrint)
+                        console.log('rommeterdd', RoomPrint.length)
+                        for (let l = 0; l < Datameterbuilds.length; l++) {
+                            for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
+                                for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
+                                    for (let k = 0; k < RoomPrint.length; k++) {
+                                        if (RoomPrint[k] == Datameterbuilds[l].floormeter[i].roommeter[j].dateroommeter) {
+                                            for (let a = 0; a < 2; a++) {
+                                                htmlStringmeterprint +=
+                                                    ' <div class="container">'
+                                                    + '<div class="col-10" >'
+                                                    + ' <br>'
+                                                    + '         <div class="row">'
+                                                    + '           <div class="col-3">'
+                                                    + '            </div>'
+                                                    + '            <div class="col-5">'
+                                                    + '                <h2 style="text-align: center;"> ใบเเจ้งหนี้ (Invoice)</h2>'
+                                                    + '            </div>'
+                                                    + '<br>'
+                                                    + '       </div>'
+                                                    + '       <div class="row">'
+                                                    + '            <div class="col-7">'
+                                                    + '                <h3>ชื่อหอพัก..........' + Datameterbuilds[l].buildingnamemeter + ' </h3>'
+                                                    + '            </div>'
+                                                    + '         </div>'
+                                                    + '       <div class="row">'
+                                                    + '            <div class="col-7">'
+                                                    + '                <h3>เลขที่ห้องพัก....' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + ' </h3>'
+                                                    + '            </div>'
+                                                    + '         </div>'
+                                                    + '          <div class="row">'
+                                                    + '             <div class="col-8">'
+                                                    + '                 <h3>ประจำเดือน......' + Datameterbuilds[l].datemeter + '</h3>'
+                                                    + '              </div>'
+                                                    + '          </div>'
+                                                    + '           <hr style="border: 1px solid black;">'
+                                                    + '              <table class="table table-striped class=" table-primary "">'
+                                                    + '                    <thead>'
+                                                    + '                    <tr>'
+                                                    + '                       <th scope="col-2"></th>'
+                                                    + '                      <th scope="col-2">เลขมิเตอร์ก่อนหน้า</th>'
+                                                    + '                       <th scope="col-1">เลขมิเตอร์ปัจจุบัน</th>'
+                                                    + '                       <th scope="col-2">จำนวนที่ใช้</th>'
+                                                    + '                       <th scope="col-2">ราคาต่อหน่วย/บาท</th>'
+                                                    + '                       <th scope="col-2">จำนวนเงินที่ต้องจ่าย</th>'
+                                                    + '                   </tr>'
+                                                    + '               </thead>'
+                                                    + '                <tbody>'
+                                                    + '                     <tr>'
+                                                    + '                         <td>ค่าเช่า</td>'
+                                                    + '                         <td></td>'
+                                                    + '                          <td></td>'
+                                                    + '                           <td></td>'
+                                                    + '                          <td></td>'
+                                                    + '                            <td>' + _data.floor[i].room[j].rentroom + '</td>'
+                                                    + '                         </tr>'
+                                                    + '                   <tr>'
+                                                    + '                       <td>ค่าไฟฟ้า</td>'
+                                                    + '                       <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].beforusemeter + '</td>'
+                                                    + '                        <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].usemeter + '</td>'
+                                                    + '                        <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].usemetermonth + '</td>'
+                                                    + '                        <td>' + Datameterbuilds[l].pricemeter + '</td>'
+                                                    + '                        <td>' + (Datameterbuilds[l].floormeter[i].roommeter[j].usemetermonth * Datameterbuilds[l].pricemeter) + '</td>'
+                                                    + '                     </tr>'
+                                                    + '                   <tr>'
+                                                    + '                       <td>ค่าน้ำ</td>'
+                                                    + '                       <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].beforusewater + '</td>'
+                                                    + '                        <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].usewater + '</td>'
+                                                    + '                        <td>' + Datameterbuilds[l].floormeter[i].roommeter[j].usewatermonth + '</td>'
+                                                    + '                        <td>' + Datameterbuilds[l].pricemeter + '</td>'
+                                                    + '                        <td>' + (Datameterbuilds[l].floormeter[i].roommeter[j].usewatermonth * Datameterbuilds[l].pricewater) + '</td>'
+                                                    + '                     </tr>'
+                                                    + '                   </tbody>'
+                                                    + '                             </table>'
+                                                    + '                <hr style="border: 1px solid black;">'
+                                                    + '                    <div class="row">'
+                                                    + '                        <div class="col-7">'
+                                                    + '<br>'
+                                                    + '                           <h4>รวมทั้งสิ้น ' + (_data.floor[i].room[j].rentroom + (Datameterbuilds[l].floormeter[i].roommeter[j].usemetermonth * Datameterbuilds[l].pricemeter) + (Datameterbuilds[l].floormeter[i].roommeter[j].usewatermonth * Datameterbuilds[l].pricewater)) + ' บาท </h4>'
+                                                    + '                        </div>'
+                                                    + '                      </div>'
+                                                htmlStringmeterprint += ' </div>'
+                                                    + '<br>'
+                                                htmlStringmeterprint += ' <hr style="border: 1px solid black;">'
+                                                htmlStringmeterprint += '<br>'
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        document.getElementById("gggpay").innerHTML = htmlStringmeterprint
+
+                        console.log('ใบเเจ้งหนี้', htmlStringmeterprint)
+                        var url = "http://localhost:3000/postPrint";
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", url, true);
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                console.log('res is', xhr.responseText)
+                                // if success go login page
+                                //   alert('create user Successful ')
+                                //    window.location.reload(true);
+                                //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+
+                            } else {
+                                //alert('can not create user! Pls try again.')
+                            }
+                        };
+                        var data = JSON.stringify({
+                            htmlStringmeterprint: htmlStringmeterprint
+                        });
+                        xhr.send(data);
+                    } else {
+
+                    }
                 });
 
             }

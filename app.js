@@ -726,11 +726,11 @@ app.post('/postPrint', (req, res) => {
     //var html = fs.readFileSync(dataprint , 'utf8');
     var options = { format: 'Letter' };
     // console.log('data is :',  req.body)
-    // pdf.create(dataprint, options).toFile('./views/gg.pdf', function (err, res) {
+    // pdf.create('<html lang="en"><body>'+dataprint+'</body></html>', options).toFile('./views/gg.pdf', function (err, res) {
     //     if (err) return console.log(err);
     //     //console.log(res); // { filename: '/app/businesscard.pdf' }
     // });
-    pdf.create(dataprint, { format: 'Letter' }).toStream(function (err, stream) {
+    pdf.create('<html lang="en"><body>'+dataprint+'</body></html>', { format: 'Letter' }).toStream(function (err, stream) {
         if (err) {
             res.json({
                 message: 'Sorry, we were unable to generate pdf',
