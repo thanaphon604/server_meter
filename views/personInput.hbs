@@ -91,179 +91,262 @@
   Extra Large >= 120px col-xl
 -->
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 col-lg-5">
-                <br>
-                <hr>
-                <div class="divform">
-                    <form name="form" id="form" action="" method="">
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">วันที่ทำสัญญา</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" id="contract" placeholder="ที่อยุ่" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">ค่าเช่าห้อง</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="rentroom" placeholder="ค่าเช่าห้อง" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">บันทึก</button>
-                            </div>
-                        </div>
-                        <p>*กรอกข้อมูลเฉพาะครั้งเเรกเท่านั้น </p>
-                    </form>
-                </div>
-                <div class="divform">
-                    <form name="form1" id="form1" action="" method="">
-                        <p id="plus">เพิ่มข้อมูล</p>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">เลขบัตรประจำตัวประชาชน</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="personID" placeholder="เลขบัตรประจำตัวประชาชน">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">ชื่อ</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="firstName" placeholder="ชื่อ">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">นามสกุล</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="lastName" placeholder="นามสกุล">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">วันเดือนปีเกิด</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" id="birthday" placeholder="วันเดือนปีเกิด">
-                            </div>
-                        </div>
 
-                        {{!-- <fieldset class="form-group">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                aria-controls="nav-home" aria-selected="true">ข้อมูลห้อง</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                aria-controls="nav-profile" aria-selected="false">ย้ายออก</a>
+
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-lg-5">
+                        <br>
+                        <hr>
+                        <div class="divform">
+                            <form name="form" id="form" action="" method="">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">วันที่ทำสัญญา</label>
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control" id="contract" placeholder="ที่อยุ่"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">ค่าเช่าห้อง</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="rentroom" placeholder="ค่าเช่าห้อง"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary">บันทึก</button>
+                                    </div>
+                                </div>
+                                <p>*กรอกข้อมูลเฉพาะครั้งเเรกเท่านั้น </p>
+                            </form>
+                        </div>
+                        <div class="divform">
+                            <form name="form1" id="form1" action="" method="">
+                                <p id="plus">เพิ่มข้อมูล</p>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">เลขบัตรประจำตัวประชาชน</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="personID" placeholder="เลขบัตรประจำตัวประชาชน">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">ชื่อ</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="firstName" placeholder="ชื่อ">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">นามสกุล</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="lastName" placeholder="นามสกุล">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">วันเดือนปีเกิด</label>
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control" id="birthday" placeholder="วันเดือนปีเกิด">
+                                    </div>
+                                </div>
+
+                                {{!-- <fieldset class="form-group">
+                                    <div class="row">
+                                        <legend class="col-form-label col-sm-2 pt-0">เพศ</legend>
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="radio" id="radio1"
+                                                    value="">
+                                                <label class="form-check-label" for="radio">
+                                                    ชาย
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="radio" id="radio2"
+                                                    value="">
+                                                <label class="form-check-label" for="radio">
+                                                    หญิง
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </fieldset> --}}
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">ที่อยู่</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="address" placeholder="ที่อยู่">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">หมายเลขโทรศัพท์</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="phoneNumber" placeholder="หมายเลขโทรศัพท์">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">ป้ายทะเบียนยานพาหนะ</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="License" placeholder="ป้ายทะเบียนยานพาหนะ">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary">บันทึก</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-5" style="margin-left: 3%">
+                        <ul>
+                            <p class="h2">ข้อมูลห้อง</p>
+                        </ul>
+                        <br>
+
+                        <form>
                             <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">เพศ</legend>
-                                <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="radio" id="radio1" value="">
-                                        <label class="form-check-label" for="radio">
-                                            ชาย
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="radio" id="radio2" value="">
-                                        <label class="form-check-label" for="radio">
-                                            หญิง
-                                        </label>
-                                    </div>
+                                <div class="col-3">
+                                    <p class="h4">หมายเลขห้อง</p>
+                                </div>
+                                <div class="col-3">
+                                    <p id="nameR">101</p>
+                                </div>
 
+                                <div class="col-3">
+                                    <p class="h4">อาคาร</p>
+                                </div>
+                                <div class="col-3">
+                                    <p id="nameB">A</p>
                                 </div>
                             </div>
-                        </fieldset> --}}
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">ที่อยู่</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="address" placeholder="ที่อยู่">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">หมายเลขโทรศัพท์</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="phoneNumber" placeholder="หมายเลขโทรศัพท์">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">ป้ายทะเบียนยานพาหนะ</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="License" placeholder="ป้ายทะเบียนยานพาหนะ">
-                            </div>
-                        </div>
+                            <br>
+                            <div class="row">
 
-                        <div class="form-group row">
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">บันทึก</button>
+
+                                <div class="col-3">
+                                    <p class="h4">วันที่ทำสัญญา</p>
+                                </div>
+                                <div class="col-3">
+                                    <p id="showcontract"></p>
+                                </div>
+                                <div class="col-3">
+                                    <p class="h4">ค่าเช่าห้อง</p>
+                                </div>
+                                <div class="col-3">
+                                    <p id="showrentroom"></p>
+                                </div>
                             </div>
+                            <br>
+                            <div class="row">
+
+                            </div>
+                        </form>
+                        <br>
+                        <br>
+                        <div class="">
+                            <table border="2" width="100%" class=" table-responsive no-padding  table table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+
+                                        <th scope="col">ลำดับที่</th>
+                                        <th scope="col">บัตรประชาชน</th>
+                                        <th scope="col">ชื่อ</th>
+                                        <th scope="col">นามสกุล</th>
+                                        <th scope="col">ที่อยู่</th>
+                                        <th scope="col">เบอร์โทรศัพท์</th>
+                                        <th scope="col">ป้ายทะเบียนยานพาหนะ</th>
+                                        <th scope="col">เเก้ไขข้อมูล</th>
+                                        <th scope="col">ลบข้อมูล</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablePos">
+
+                                </tbody>
+                            </table>
                         </div>
-                    </form>
+                    </div>
                 </div>
+
             </div>
-            <div class="col-lg-6 col-sm-5" style="margin-left: 3%">
-                <ul>
-                    <p class="h2">ข้อมูลห้อง</p>
-                </ul>
-                <br>
+        </div>
 
-                <form>
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="h4">หมายเลขห้อง</p>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-8">
+                    <p class="h1" style="text-align: center;">ย้ายออกหอพัก</p>
+                    <div class="row divform">
+                        <div class="col ">
+                            <p class="h5" style="text-align: center;">บิลที่ค้างชำระ</p>
+                            <br>
+                            <label for="exampleInputEmail1" style="color: red">
+                                <h5>*กรุณากลับไปหน้าออกใบเเจ้งหน้้&ใบเสร็จในกรณีมียอดค้างชำระเพื่อชำระเงินให้เรียบร้อยก่อนออกจากหอพัก</h5>
+                            </label>
+                            <div class="" id="bill" style="margin-top:5%">
+                            </div>
                         </div>
-                        <div class="col-3">
-                            <p id="nameR">101</p>
-                        </div>
-
-                        <div class="col-3">
-                            <p class="h4">อาคาร</p>
-                        </div>
-                        <div class="col-3">
-                            <p id="nameB">A</p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-
-
-                        <div class="col-3">
-                            <p class="h4">วันที่ทำสัญญา</p>
-                        </div>
-                        <div class="col-3">
-                            <p id="showcontract"></p>
-                        </div>
-                         <div class="col-3">
-                            <p class="h4">ค่าเช่าห้อง</p>
-                        </div>
-                        <div class="col-3">
-                            <p id="showrentroom"></p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
 
                     </div>
-                </form>
-                <br>
-                <br>
-                <div class="">
-                    <table border="2" width="100%" class=" table-responsive no-padding  table table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-
-                                <th scope="col">ลำดับที่</th>
-                                <th scope="col">บัตรประชาชน</th>
-                                <th scope="col">ชื่อ</th>
-                                <th scope="col">นามสกุล</th>
-                                <th scope="col">ที่อยู่</th>
-                                <th scope="col">เบอร์โทรศัพท์</th>
-                                <th scope="col">ป้ายทะเบียนยานพาหนะ</th>
-                                <th scope="col">เเก้ไขข้อมูล</th>
-                                <th scope="col">ลบข้อมูล</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablePos">
-
-                        </tbody>
-                    </table>
+                    <div class="row divform">
+                        <p class="h5" style="text-align: center;">กรอกเลขมิเตอร์ล่าสุดเพื่อยืนยันการออกจากหอพัก</p>
+                        <p>มิเตอร์ของหอพัก</p>
+                        <div class="divform">
+                            <form name="formmeter" id="formmeter" action="" method="">
+                               
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">เลขมิเตอร์ไฟฟ้าก่อนหน้า </label>
+                                    <div class="col-sm-10">
+                                        <p id="meterbefor"></p>
+                                    </div>
+                                </div>
+                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">เลขมิเตอร์ปัจจุบัน</label>
+                                    <div class="col-sm-10">
+                                        <input required="required" type="number" class="form-control" id="nowmeter" placeholder="เลขมิเตอร์ปัจจุบัน">
+                                    </div>
+                                </div>
+                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">เลขมิเตอร์น้ำก่อนหน้า </label>
+                                    <div class="col-sm-10">
+                                         <p id="waterbefor"></p>
+                                    </div>
+                                </div>
+                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">เลขมิเตอร์น้ำปัจจุบัน</label>
+                                    <div class="col-sm-10">
+                                        <input required="required" type="number" class="form-control" id="nowwater" placeholder="เลขมิเตอร์น้ำปัจจุบัน">
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary">ยืนยันการออกจากหอพัก</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+       
                 </div>
             </div>
         </div>
 
     </div>
+
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script>
@@ -295,7 +378,128 @@
 
             }
             ourRequest.send();
+            getmeterbuilds()
+            function getmeterbuilds() {
 
+                var Request = new XMLHttpRequest();
+                Request.open('GET', 'http://localhost:3000/getmeterbuilds/' + BuildingName)
+                Request.onload = function () {
+                    var Datameterbuilds = JSON.parse(Request.responseText);
+                    //  console.log('datametebuilds', Datameterbuilds)
+                    rendermeter(Datameterbuilds)
+
+                    return false;
+                }
+                Request.send();
+            }
+            getunitmetere()
+            function getunitmetere() {
+                var now = new Date()
+                //  console.log("Current Time is: " + now);
+                var currentYear = now.getFullYear()
+                //   console.log("Current year is: " + currentYear);
+                var month = (now.getMonth() + 1)
+                //   console.log("Current month is: " + month);
+
+                // document.getElementById("start").innerHTML = currentYear
+                if (month == 1) {
+
+                    // document.getElementById("ShowMonth").innerHTML = 'มกราคม'
+                    month = '0' + month
+                } else if (month == 2) {
+                    //  document.getElementById("ShowMonth").innerHTML = 'กุมภาพันธ์'
+                    month = '0' + month
+
+                } else if (month == 3) {
+                    //    document.getElementById("ShowMonth").innerHTML = 'มีนาคม'
+                    month = '0' + month
+                } else if (month == 4) {
+                    //   document.getElementById("ShowMonth").innerHTML = 'เมษายน'
+                    month = '0' + month
+                } else if (month == 5) {
+                    //  document.getElementById("ShowMonth").innerHTML = 'พฤษภาคม'
+                    month = '0' + month
+                } else if (month == 6) {
+                    //    document.getElementById("ShowMonth").innerHTML = 'มิถุนายน'
+                    month = '0' + month
+                } else if (month == 7) {
+                    //    document.getElementById("ShowMonth").innerHTML = 'กรกฎาคม'
+                    month = '0' + month
+                } else if (month == 8) {
+                    //    document.getElementById("ShowMonth").innerHTML = 'สิงหาคม'
+                    month = '0' + month
+                } else if (month == 9) {
+                    //      document.getElementById("ShowMonth").innerHTML = 'กันยายน'
+                    month = '0' + month
+                } else if (month == 10) {
+                    //     document.getElementById("ShowMonth").innerHTML = 'ตุลาคม '
+                } else if (month == 11) {
+                    //      document.getElementById("ShowMonth").innerHTML = 'พฤศจิกายน'
+                } else if (month == 12) {
+                    //      document.getElementById("ShowMonth").innerHTML = 'ธันวาคม'
+                }
+
+                if (month == "01") {
+
+                    var beformont = 12
+                    var beforyear = currentYear - 1
+                    var befordatemeter = beforyear + "-" + beformont
+                    befordatemeter = "" + befordatemeter
+                } else {
+
+                    var beformont = "0" + (parseInt(month) - 1)
+                    var beforyear = currentYear
+                    var befordatemeter = beforyear + "-" + beformont
+                    befordatemeter = "" + befordatemeter
+                }
+
+
+                datemeter = currentYear + "-" + month
+                //    console.log('ddd')
+                //   console.log(datemeter)
+                //    console.log('ddd')
+                //   document.getElementById("ShowYear").innerHTML = currentYear
+                datemeter = "" + datemeter
+                //render จดมิเตอร์
+                //sear data building 
+                //เช็คมิเตอร์ก่อนหน้า
+
+
+                var databefor
+                var getdata = []
+                getdata.push(BuildingName)
+                getdata.push(datemeter)
+                getdata.push(befordatemeter)
+                console.log('data1', getdata)
+
+                var Request1 = new XMLHttpRequest();
+                Request1.open('GET', 'http://localhost:3000/getmeter/' + getdata)
+                Request1.onload = function () {
+                    var Datameterunit = JSON.parse(Request1.responseText);
+                    //   console.log('datanow_', Datameterunit)
+
+                    _dataNow = Datameterunit
+                    console.log('datanowgg_', _dataNow)
+                    var Request = new XMLHttpRequest();
+                    Request.open('GET', 'http://localhost:3000/getmeterbefor/' + getdata)
+                    Request.onload = function () {
+                        var Datameterbefor = JSON.parse(Request.responseText);
+                        console.log('databefor_', Datameterbefor)
+
+                        renderPostUnitMeter(Datameterunit, Datameterbefor)
+
+
+                        return false;
+                    }
+
+
+                    Request.send();
+                    return false;
+                }
+                Request1.send();
+
+
+            }
 
             //เช็คข้อความบัตรประชาชนกับเบอร์โทรศัพท์
             function autoTab2(obj, typeCheck) {
@@ -327,7 +531,7 @@
                 console.log('sss2', contract)
                 console.log(BuildingName)
                 console.log(roomNumber)
-                  console.log(rentroom)
+                console.log(rentroom)
                 var url = "http://localhost:3000/postcontract";
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", url, true);
@@ -344,7 +548,7 @@
                     }
                 };
 
-                var data = JSON.stringify({ contract: '' + contract, BuildingName: BuildingName, roomNumber: roomNumber ,rentroom: rentroom});
+                var data = JSON.stringify({ contract: '' + contract, BuildingName: BuildingName, roomNumber: roomNumber, rentroom: rentroom });
                 xhr.send(data);
                 return false;
 
@@ -382,14 +586,15 @@
                     personID, firstName, lastName, birthday, address, phoneNumber, License, BuildingName, roomNumber
                 }
 
-                console.log(newUser)
+                console.log('ss',newUser)
                 postData(newUser)
 
                 return false;
             })
 
             function postData(newUser) {
-                var Choice = document.getElementById('plus').innerHTML
+
+                  var Choice = document.getElementById('plus').innerHTML
                 if (Choice == 'เพิ่มข้อมูล') {
                     console.log(newUser)
 
@@ -450,7 +655,7 @@
                         if (roomNumber == ourData[0].floor[i].room[j].roomNumber) {
 
                             document.getElementById("showcontract").innerHTML = ourData[0].floor[i].room[j].contract;
-                             document.getElementById("showrentroom").innerHTML = ourData[0].floor[i].room[j].rentroom;
+                            document.getElementById("showrentroom").innerHTML = ourData[0].floor[i].room[j].rentroom;
                             console.log('ytyt', ourData[0].floor[i].room[j].user.length)
                             for (let k = 0; k < ourData[0].floor[i].room[j].user.length; k++) {
                                 htmlString += '<tr><th scope="row">' + (k + 1) + '</th><td>' + ourData[0].floor[i].room[j].user[k].personID + '</td><td>'
@@ -560,6 +765,61 @@
                         //   alert('no')
                     }
                 })
+            }
+            //==============================ย้ายออก===================
+            function rendermeter(Datameterbuilds) {
+                let htmlStringmeterbuilds = ""
+                console.log('datametebuilds', Datameterbuilds)
+                for (let l = 0; l < Datameterbuilds.length; l++) {
+                    for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
+
+                        for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber) {
+                                htmlStringmeterbuilds +=
+                                    ' <div  class="row justify-content-md-center">'
+                                    + ' <div class="divform">'
+                                    + '  <div class="row justify-content-center">'
+                                    + '   <div class="col-5 col-sm-2"><br>'
+                                    + '       <p class="h4">ค้างชำระประจำเดือน</p>'
+                                    + '   </div>'
+                                    + '   <div class="col-2 col-sm-2"><br>'
+                                    + '      <p id="Updatefloor">' + (Datameterbuilds[l].datemeter) + '</p>'
+                                    + '   </div>'
+                                    + '  </div>'
+                                    + '   <table class="table table-bordered" >'
+                                    + '  <thead>'
+                                    + '     <tr>'
+                                    + '     </tr>'
+                                    + '  </thead>'
+                            }
+                        }
+                    }
+                }
+                for (let l = 0; l < Datameterbuilds.length; l++) {
+                    for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
+
+                        for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber) {
+                            }
+                        }
+                        htmlStringmeterbuilds += '</table></div></div>'
+                    }
+
+                }
+
+                document.getElementById("bill").innerHTML = htmlStringmeterbuilds
+            }
+            function renderPostUnitMeter(Datameterunit, Datameterbefor) {
+                console.log('gdpsss', Datameterunit.length)
+                for (let i = 0; i < Datameterunit.length; i++) {
+                    for (let j = 0; j < Datameterunit[0].floormeter[i].roommeter.length; j++) {
+                        if (roomNumber == Datameterunit[0].floormeter[i].roommeter[j].roomNumbermeter) {
+                            document.getElementById("meterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].beforusemeter
+                             document.getElementById("waterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].beforusewater
+                            console.log('ssssgdp', Datameterunit[0].floormeter[i].roommeter[j].beforusemeter)
+                        }
+                    }
+                }
             }
         })
     </script>

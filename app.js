@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const hbs = require('hbs')
 var path = require('path');
-
+fs = require('fs')
 
 
 
@@ -25,6 +25,7 @@ app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 
 app.use(bodyParser.json())
 
@@ -718,27 +719,79 @@ app.get('/getmeterbuilds/:BuildingName', (req, res) => {
         res.status(404).send(err)
     })
 })
+app.get('/print', function (req, res) {
+    var filePath = "./views/gg.pdf";
+ 
+    fs.readFile(__dirname + filePath , function (err,data){
+        res.contentType("application/pdf");
+        res.send(data);
+    });
+});
 app.post('/postPrint', (req, res) => {
     let dataprint = req.body.htmlStringmeterprint
+    var pdf = require('html-pdf');
+    var options = { format: 'Letter' };
+    pdf.create('<html lang="en"><body>' + dataprint + '</body></html>', options).toFile('./views/gg.pdf', function (err, res) {
+        if (err) return console.log(err); 
+    });
+    // pdf.create('<html lang="en"><body>'+dataprint+'</body></html>', { format: 'Letter' }).toStream(function (err, stream) {
+    //     if (err) {
+    //         res.json({
+    //             message: 'Sorry, we were unable to generate pdf',
+    //         });
+    //     }
+
+    //     stream.pipe(res); // your response
+    // });
+
+})
+app.post('/postPrintpay', (req, res) => {
+    let dataprint = req.body.htmlStringmeterprintpay
+    let BuildingNameInput = req.body.BuildingName
+    let RoomPrintInput = req.body.RoomPrint
+
+    meterbuild.find({
+        buildingnamemeter: BuildingNameInput,
+
+    }).then((build) => {
+        if (build.length >= 1) {
+            console.log('ggrecive',build.length)
+            for (let m = 0; m < build.length; m++) {
+                for (let i = 0; i < build[m].floormeter.length; i++) {
+                    for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
+                        if (RoomPrintInput[j] == build[m].floormeter[i].roommeter[j].dateroommeter) {
+                            build[m].floormeter[i].roommeter[j].meterstatus = 'ไม่มียอดค้างชำระ'
+                            build[m].floormeter[i].roommeter[j].waterstatus = 'ไม่มียอดค้างชำระ'
+
+                            build[m].save().then((suc) => {
+                                console.log('res contract : ', suc)
+                                res.send(suc)
+                            }, (e) => {
+                                consoel.log('error contract :', e)
+                                res.status(400).send(e)
+                            })
+                        }
+                    }
+                }
+            }
+            res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
 
     var fs = require('fs');
     var pdf = require('html-pdf');
     //var html = fs.readFileSync(dataprint , 'utf8');
     var options = { format: 'Letter' };
     // console.log('data is :',  req.body)
-    // pdf.create('<html lang="en"><body>'+dataprint+'</body></html>', options).toFile('./views/gg.pdf', function (err, res) {
-    //     if (err) return console.log(err);
-    //     //console.log(res); // { filename: '/app/businesscard.pdf' }
-    // });
-    pdf.create('<html lang="en"><body>'+dataprint+'</body></html>', { format: 'Letter' }).toStream(function (err, stream) {
-        if (err) {
-            res.json({
-                message: 'Sorry, we were unable to generate pdf',
-            });
-        }
-
-        stream.pipe(res); // your response
+    pdf.create('<html lang="en"><body>' + dataprint + '</body></html>', options).toFile('./views/gg.pdf', function (err, res) {
+        if (err) return console.log(err);
+        //console.log(res); // { filename: '/app/businesscard.pdf' }
     });
+
 
 })
 
