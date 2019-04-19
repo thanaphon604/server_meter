@@ -51,6 +51,17 @@ var BuildingSchema = new Schema({
         type: Number,
         required: true
     },
+    //มิเตอร์ก่อนหน้า
+    UnitMeterbefor: {
+        type: Number,
+       
+    },
+    //วันที่เปลี่ยนunitmeter
+    DateUnitMeter: {
+        type: Date,
+        
+    },
+
     BuildingPhone: {
         type: String,
         required: true
@@ -64,6 +75,15 @@ var BuildingSchema = new Schema({
     plicewater: {
         type: Number,
         required: true
+    },
+    plicewaterbefor: {
+        type: Number,
+        
+    },
+      //วันที่เปลี่ยนunitwater
+      DateUnitWater: {
+        type: Date,
+        
     },
     //วิธีคิดค่าน้ำ
     methodwater: {

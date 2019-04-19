@@ -1,0 +1,189 @@
+ $('#formUpdateUnitMeter').submit(function () {
+                //?????????????????
+                var eduarray = [];
+                $('.education-groupbox').each(function (index, el) {
+                    var _this = $(this);
+                    eduarray[index] = [];
+                    _this.find('input').each(function (key, v) {
+                        eduarray[index].push(v.value);
+                    });
+
+                });
+                console.log('?????????????????  -->' + eduarray);
+                //??????????????????????
+                var metermonthuse = [];
+                var meterst = []
+                var id = document.getElementsByClassName("setmeterbefor");
+                for (var i = 0; i < id.length; i++) {
+                    metermonthuse[i] = parseInt(id[i].innerHTML)
+                }
+                console.log('?????????????????????????????', metermonthuse)
+
+                //????????????????????
+                var metermonthusebefor = [];
+                var meterbefor = []
+                var idmeter = document.getElementsByClassName("getmeterbefor");
+                for (var i = 0; i < idmeter.length; i++) {
+                    metermonthusebefor[i] = parseInt(idmeter[i].innerHTML)
+                }
+                console.log('????????????????????????', metermonthusebefor)
+
+                for (let i = 0; i < metermonthuse.length; i++) {
+                    if (isNaN(metermonthuse[i])) metermonthuse[i] = 0;
+                    if (isNaN(metermonthusebefor[i])) metermonthusebefor[i] = 0;
+
+                }
+
+                //??????????????????????????
+                var eduarraywater = [];
+                $('.education-groupboxwater').each(function (index, el) {
+                    var _this = $(this);
+                    eduarraywater[index] = [];
+                    _this.find('input').each(function (key, v) {
+                        eduarraywater[index].push(v.value);
+                    });
+                });
+                console.log('?????????????????   -->' + eduarraywater);
+
+                //?????????????????????????
+                var watermonthuse = [];
+                var waterst = []
+                var idwa = document.getElementsByClassName("setwaterbefor");
+                for (var i = 0; i < idwa.length; i++) {
+                    watermonthuse[i] = parseInt(idwa[i].innerHTML)
+                }
+                console.log('???????????????????????????????', watermonthuse)
+                //????????????????????????
+                var watermonthusebefor = [];
+                var waterbefor = []
+                var idwater = document.getElementsByClassName("getwaterbefor");
+                for (var i = 0; i < idmeter.length; i++) {
+                    watermonthusebefor[i] = parseInt(idwater[i].innerHTML)
+                }
+                console.log('?????????????????????', watermonthusebefor)
+
+                for (let i = 0; i < watermonthuse.length; i++) {
+                    if (isNaN(watermonthuse[i])) watermonthuse[i] = 0;
+                    if (isNaN(watermonthusebefor[i])) watermonthusebefor[i] = 0;
+                }
+
+
+                for (let i = 0; i < metermonthuse.length; i++) {
+
+                    if (metermonthuse[i] != 0) {
+                        meterst[i] = "????????"
+                        console.log('????????', metermonthuse[i])
+                    } else {
+                        meterst[i] = "????????????????"
+                        console.log('???????????', metermonthuse[i])
+                    }
+                }
+                for (let i = 0; i < watermonthuse.length; i++) {
+
+                    if (watermonthuse[i] != 0) {
+                        waterst[i] = "????????"
+                        console.log('????????', watermonthuse[i])
+                    } else {
+                        waterst[i] = "????????????????"
+                        console.log('???????????', watermonthuse[i])
+                    }
+                }
+                /* $('.setmeterbefor').each(function (index, el) {
+                    var _thiss = $(this);
+                    metermonthuse[index] = [];
+                    _thiss.find("td").each(function (key, v) {
+                        metermonthuse[index].push(v.value);
+                    });
+ 
+                }); */
+                console.log('eduarray[0] -->' + eduarray[0]);
+                console.log('eduarray[1] -->' + eduarray[1]);
+                console.log('eduarray    -->' + eduarray);
+                console.log('metermonthuse[0] -->' + metermonthuse[0]);
+                console.log('metermonthuse[1] -->' + metermonthuse[1]);
+                console.log('metermonthuse   -->' + metermonthuse);
+                //???????????? ????????????????????????????????
+
+                var someunitmeter = document.getElementById("examplesomemonth").value
+                var somepricemeter = document.getElementById("exampleunit").value
+                var someunitwater = document.getElementById("waterunit").value
+                var somepricewater = document.getElementById("watermonth").value
+
+                console.log('??????', somepricemeter)
+                console.log('????????', someunitmeter)
+                console.log('????????', someunitwater)
+                console.log('??????????', somepricewater)
+                let floormeter = []
+
+                for (let i = 0; i < _data.floor.length; i++) {
+                    let f = _data.floor[i].room.length
+                    floormeter.push(f)
+                }
+                let k = 0
+                let myData = {}
+                myData.pricemeter = _data.UnitMeter
+                myData.pricewater = _data.plicewater
+                myData.buildingnamemeter = _data.BuildingName
+                myData.datemeter = datemeter
+                myData.somepricemeter = somepricemeter
+                myData.someunitmeter = someunitmeter
+                myData.someunitwater = someunitwater
+                myData.somepricewater = somepricewater
+                //  myData.allunitmeter = ''
+                //  myData.buymeter = ''
+
+                let floorArray = []
+                for (let i = 0; i < _data.floor.length; i++) {
+                    let floorData = {}
+                    let roomArrayPerFloor = []
+
+                    for (let j = 0; j < floormeter[i]; j++) {
+                        let roomNumbermeter = ''
+                        if ((i + 1) <= 9) {
+                            roomNumbermeter = '0' + (i + 1)
+                        } else {
+                            roomNumbermeter = '' + (i + 1)
+                        }
+                        if ((j + 1) <= 9) {
+                            roomNumbermeter += ('0' + (j + 1))
+                        } else {
+                            roomNumbermeter += (j + 1)
+                        }
+                        let beforusemeter = parseInt(metermonthusebefor[k])
+                        let usemeter = parseInt(eduarray[k])
+                        let usemetermonth = parseInt(metermonthuse[k])
+                        let meterstatus = "" + meterst[k]
+                        let beforusewater = parseInt(watermonthusebefor[k])
+                        let usewater = parseInt(eduarraywater[k])
+                        let usewatermonth = parseInt(watermonthuse[k])
+                        let waterstatus = "" + waterst[k]
+                        let dateroommeter = datemeter + "," + roomNumbermeter
+                        k++
+                        let roomData = {
+                            beforusemeter,
+                            roomNumbermeter,
+                            usemeter,
+                            usemetermonth,
+                            meterstatus,
+                            beforusewater,
+                            usewater,
+                            usewatermonth,
+                            waterstatus,
+                            dateroommeter
+                        }
+
+                        roomArrayPerFloor.push(roomData)
+
+                    }
+                    floorData.roommeter = roomArrayPerFloor
+                    floorData.Number = '' + (i + 1)
+                    floorArray.push(floorData)
+
+                }
+                myData.floormeter = floorArray
+
+                console.log('Data is', myData)
+                postData(myData);
+                return false;
+
+            });

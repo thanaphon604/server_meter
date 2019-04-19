@@ -303,42 +303,47 @@
                         <p class="h5" style="text-align: center;">กรอกเลขมิเตอร์ล่าสุดเพื่อยืนยันการออกจากหอพัก</p>
                         <p>มิเตอร์ของหอพัก</p>
                         <div class="divform">
-                            <form name="formmeter" id="formmeter" action="" method="">
-                               
+                            <form name="formmeter" id="formmeter" action="" method="" onsubmit="return false">
+
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">เลขมิเตอร์ไฟฟ้าก่อนหน้า </label>
                                     <div class="col-sm-10">
                                         <p id="meterbefor"></p>
                                     </div>
                                 </div>
-                                 <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">เลขมิเตอร์ปัจจุบัน</label>
                                     <div class="col-sm-10">
-                                        <input required="required" type="number" class="form-control" id="nowmeter" placeholder="เลขมิเตอร์ปัจจุบัน">
+                                        <input required="required" type="number" class="form-control" id="nowmeter"
+                                            placeholder="เลขมิเตอร์ปัจจุบัน">
                                     </div>
                                 </div>
-                                 <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">เลขมิเตอร์น้ำก่อนหน้า </label>
                                     <div class="col-sm-10">
-                                         <p id="waterbefor"></p>
+                                        <p id="waterbefor"></p>
                                     </div>
                                 </div>
-                                 <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">เลขมิเตอร์น้ำปัจจุบัน</label>
                                     <div class="col-sm-10">
-                                        <input required="required" type="number" class="form-control" id="nowwater" placeholder="เลขมิเตอร์น้ำปัจจุบัน">
+                                        <input required="required" type="number" class="form-control" id="nowwater"
+                                            placeholder="เลขมิเตอร์น้ำปัจจุบัน">
                                     </div>
                                 </div>
-                               
+
                                 <div class="form-group row">
                                     <div class="col-sm-10">
                                         <button type="submit" class="btn btn-primary">ยืนยันการออกจากหอพัก</button>
                                     </div>
                                 </div>
                             </form>
+                            <div id="as">
+
+                            </div>
                         </div>
                     </div>
-       
+
                 </div>
             </div>
         </div>
@@ -375,6 +380,7 @@
                 console.log(ourData)
                 renderHTML(ourData);
                 makeClick(ourData);
+                _dataNowmeter = ourData
 
             }
             ourRequest.send();
@@ -385,7 +391,7 @@
                 Request.open('GET', 'http://localhost:3000/getmeterbuilds/' + BuildingName)
                 Request.onload = function () {
                     var Datameterbuilds = JSON.parse(Request.responseText);
-                    //  console.log('datametebuilds', Datameterbuilds)
+                    console.log('datametebuildsggggggg', Datameterbuilds)
                     rendermeter(Datameterbuilds)
 
                     return false;
@@ -586,7 +592,7 @@
                     personID, firstName, lastName, birthday, address, phoneNumber, License, BuildingName, roomNumber
                 }
 
-                console.log('ss',newUser)
+                console.log('ss', newUser)
                 postData(newUser)
 
                 return false;
@@ -594,7 +600,7 @@
 
             function postData(newUser) {
 
-                  var Choice = document.getElementById('plus').innerHTML
+                var Choice = document.getElementById('plus').innerHTML
                 if (Choice == 'เพิ่มข้อมูล') {
                     console.log(newUser)
 
@@ -768,13 +774,16 @@
             }
             //==============================ย้ายออก===================
             function rendermeter(Datameterbuilds) {
+                let countroom = 0
                 let htmlStringmeterbuilds = ""
                 console.log('datametebuilds', Datameterbuilds)
                 for (let l = 0; l < Datameterbuilds.length; l++) {
                     for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
 
                         for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
-                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber) {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
+                                countroom = countroom + 1
+
                                 htmlStringmeterbuilds +=
                                     ' <div  class="row justify-content-md-center">'
                                     + ' <div class="divform">'
@@ -799,7 +808,7 @@
                     for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
 
                         for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
-                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber) {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
                             }
                         }
                         htmlStringmeterbuilds += '</table></div></div>'
@@ -808,19 +817,166 @@
                 }
 
                 document.getElementById("bill").innerHTML = htmlStringmeterbuilds
+                $('#formmeter').submit(function () {
+                    var nowmeter = document.getElementById('nowmeter').value
+                    var nowwater = document.getElementById('nowwater').value
+                    var rentroom = document.getElementById("showrentroom").value
+                    var countprint = 0
+                    //  console.log('rentroom', _dataNowmeter[0].rentroom)
+                    var r = confirm("Do you want to move out of the hostel?");
+                    if (r == true) {
+                        if (countroom == 0) {
+                            console.log('hh', Datameterbuilds)
+                            console.log('hh', roomNumber)
+
+                            let htmlStringmeterprint = ""
+                            for (let l = 0; l < _dataNow.length; l++) {
+                                for (let i = 0; i < _dataNow[l].floormeter.length; i++) {
+                                    for (let j = 0; j < _dataNow[l].floormeter[i].roommeter.length; j++) {
+                                        if (roomNumber == _dataNow[l].floormeter[i].roommeter[j].roomNumbermeter) {
+                                            if (_dataNowmeter[l].floor[i].room[j].rentroom == "" || _dataNowmeter[l].floor[i].room[j].rentroom == undefined) {
+                                                alert('please input rentroom')
+                                                return false
+                                            }
+                                            countprint = countprint + countprint
+                                            for (let a = 0; a < 2; a++) {
+                                                htmlStringmeterprint +=
+                                                    ' <div class="container">'
+                                                    + '<div class="col-10" >'
+                                                    + ' <br>'
+                                                    + '         <div class="row">'
+                                                    + '           <div class="col-3">'
+                                                    + '            </div>'
+                                                    + '            <div class="col-5">'
+                                                    + '                <h2 style="text-align: center;"> ใบเเจ้งหนี้ (Invoice)</h2>'
+                                                    + '            </div>'
+                                                    + '<br>'
+                                                    + '       </div>'
+                                                    + '       <div class="row">'
+                                                    + '            <div class="col-7">'
+                                                    + '                <h3>ชื่อหอพัก..........' + _dataNow[l].buildingnamemeter + ' </h3>'
+                                                    + '            </div>'
+                                                    + '         </div>'
+                                                    + '       <div class="row">'
+                                                    + '            <div class="col-7">'
+                                                    + '                <h3>เลขที่ห้องพัก....' + _dataNow[l].floormeter[i].roommeter[j].roomNumbermeter + ' </h3>'
+                                                    + '            </div>'
+                                                    + '         </div>'
+                                                    + '          <div class="row">'
+                                                    + '             <div class="col-8">'
+                                                    + '                 <h3>ประจำเดือน......' + _dataNow[l].datemeter + '</h3>'
+                                                    + '              </div>'
+                                                    + '          </div>'
+                                                    + '           <hr style="border: 1px solid black;">'
+                                                    + '              <table class="table table-striped class=" table-primary "">'
+                                                    + '                    <thead>'
+                                                    + '                    <tr>'
+                                                    + '                       <th scope="col-2"></th>'
+                                                    + '                      <th scope="col-2">เลขมิเตอร์ก่อนหน้า</th>'
+                                                    + '                       <th scope="col-1">เลขมิเตอร์ปัจจุบัน</th>'
+                                                    + '                       <th scope="col-2">จำนวนที่ใช้</th>'
+                                                    + '                       <th scope="col-2">ราคาต่อหน่วย/บาท</th>'
+                                                    + '                       <th scope="col-2">จำนวนเงินที่ต้องจ่าย</th>'
+                                                    + '                   </tr>'
+                                                    + '               </thead>'
+                                                    + '                <tbody>'
+                                                    + '                     <tr>'
+                                                    + '                         <td>ค่าเช่า</td>'
+                                                    + '                         <td></td>'
+                                                    + '                          <td></td>'
+                                                    + '                           <td></td>'
+                                                    + '                          <td></td>'
+                                                    + '                            <td>' + _dataNowmeter[l].floor[i].room[j].rentroom + '</td>'
+                                                    + '                         </tr>'
+                                                    + '                   <tr>'
+                                                    + '                       <td>ค่าไฟฟ้า</td>'
+                                                    + '                       <td>' + _dataNow[l].floormeter[i].roommeter[j].beforusemeter + '</td>'
+                                                    + '                        <td>' + _dataNow[l].floormeter[i].roommeter[j].usemeter + '</td>'
+                                                    + '                        <td>' + _dataNow[l].floormeter[i].roommeter[j].usemetermonth + '</td>'
+                                                    + '                        <td>' + _dataNow[l].pricemeter + '</td>'
+                                                    + '                        <td>' + (_dataNow[l].floormeter[i].roommeter[j].usemetermonth * _dataNow[l].pricemeter) + '</td>'
+                                                    + '                     </tr>'
+                                                    + '                   <tr>'
+                                                    + '                       <td>ค่าน้ำ</td>'
+                                                    + '                       <td>' + _dataNow[l].floormeter[i].roommeter[j].beforusewater + '</td>'
+                                                    + '                        <td>' + _dataNow[l].floormeter[i].roommeter[j].usewater + '</td>'
+                                                    + '                        <td>' + _dataNow[l].floormeter[i].roommeter[j].usewatermonth + '</td>'
+                                                    + '                        <td>' + _dataNow[l].pricemeter + '</td>'
+                                                    + '                        <td>' + (_dataNow[l].floormeter[i].roommeter[j].usewatermonth * _dataNow[l].pricewater) + '</td>'
+                                                    + '                     </tr>'
+                                                    + '                   </tbody>'
+                                                    + '                             </table>'
+                                                    + '                <hr style="border: 1px solid black;">'
+                                                    + '                    <div class="row">'
+                                                    + '                        <div class="col-7">'
+                                                    + '<br>'
+                                                    + '                           <h4>รวมทั้งสิ้น ' + (_dataNowmeter[l].floor[i].room[j].rentroom + (_dataNow[l].floormeter[i].roommeter[j].usemetermonth * _dataNow[l].pricemeter) + (_dataNow[l].floormeter[i].roommeter[j].usewatermonth * _dataNow[l].pricewater)) + ' บาท </h4>'
+                                                    + '                        </div>'
+                                                    + '                      </div>'
+                                                htmlStringmeterprint += ' </div>'
+                                                    + '<br>'
+                                                htmlStringmeterprint += ' <hr style="border: 1px solid black;">'
+                                                htmlStringmeterprint += '<br>'
+                                            }
+
+                                        }
+
+                                    }
+                                }
+                            }
+
+                            //  document.getElementById("as").innerHTML = htmlStringmeterprint
+                            var url = "http://localhost:3000/outroom";
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", url, true);
+                            xhr.setRequestHeader("Content-Type", "application/json");
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    console.log('res is', xhr.responseText)
+                                    // if success go login page
+                                    //   alert('Delete ser Successful ')
+                                    window.open('http://localhost:3000/printout', '_blank');
+                                    window.location.reload(true);
+                                    //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+
+                                } else {
+                                    //alert('can not create user! Pls try again.')
+                                }
+                            };
+                            var data = JSON.stringify({
+                                roomNumber: roomNumber, BuildingName: BuildingName, nowmeter: nowmeter, nowwater: nowwater, htmlStringmeterprint: htmlStringmeterprint
+                            });
+                            xhr.send(data);
+                            return false
+
+                            //console.log('ใบเเจ้งหนี้', htmlStringmeterprint)
+                        } else {
+                            alert('มีบิลค้างชำระโปรดกลับไปหน้าชำระเงิน')
+
+                        }
+
+                    } else {
+                        alert('Thank!!')
+                    }
+
+                    return false
+
+
+                });
             }
             function renderPostUnitMeter(Datameterunit, Datameterbefor) {
                 console.log('gdpsss', Datameterunit.length)
                 for (let i = 0; i < Datameterunit.length; i++) {
                     for (let j = 0; j < Datameterunit[0].floormeter[i].roommeter.length; j++) {
                         if (roomNumber == Datameterunit[0].floormeter[i].roommeter[j].roomNumbermeter) {
-                            document.getElementById("meterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].beforusemeter
-                             document.getElementById("waterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].beforusewater
+                            document.getElementById("meterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].usemeter
+                            document.getElementById("waterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].usewater
                             console.log('ssssgdp', Datameterunit[0].floormeter[i].roommeter[j].beforusemeter)
                         }
                     }
                 }
             }
+
         })
     </script>
 

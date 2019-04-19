@@ -528,45 +528,204 @@ app.get('/getUserdelete', (req, res) => {
 //         res.status(400).send(e)
 //     })
 // })
+//โพสมิเตอร์
 app.post('/postMeter', (req, res) => {
     let newmeterbuild = new meterbuild({
         floormeter: req.body.floormeter,
         pricemeter: req.body.pricemeter,
         pricewater: req.body.pricewater,
         buildingnamemeter: req.body.buildingnamemeter,
-        datemeter: req.body.datemeter,
-        somepricemeter: req.body.somepricemeter,
-        someunitmeter: req.body.someunitmeter,
-        someunitwater: req.body.someunitwater,
-        somepricewater: req.body.somepricewater
+        datemeter: req.body.datemeter
     })
     let floormeterInput = req.body.floormeter
     let pricemeterInput = req.body.pricemeter
     let buildingnamemeterInput = req.body.buildingnamemeter
     let datemeterInput = req.body.datemeter
-    let somepricemeterInput = req.body.somepricemeter
-    let someunitmeterInput = req.body.someunitmeter
-    let somepricewaterInput = req.body.somepricewater
-    let someunitwaterInput = req.body.someunitwater
+    // console.log('d',floormeterInput.floormeter.roommeter.dateroommeter)
     meterbuild.find({
         buildingnamemeter: buildingnamemeterInput,
         datemeter: datemeterInput
         //    BuildingName: BuildingNameInput,
     }).then((build) => {
         if (build.length == 1) {
-            build[0].floormeter = floormeterInput
-            build[0].pricemeter = pricemeterInput
-            build[0].somepricemeter = somepricemeterInput
-            build[0].someunitmeter = someunitmeterInput
-            build[0].somepricewater = somepricewaterInput
-            build[0].someunitwater = someunitwaterInput
+            for (let m = 0; m < build.length; m++) {
+                for (let i = 0; i < build[m].floormeter.length; i++) {
+                    for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
+                        //   console.log('d',floormeterInput[i].roommeter[j].beforusemeter)
+                        build[m].floormeter[i].roommeter[j].beforusemeter = floormeterInput[i].roommeter[j].beforusemeter
+                        build[m].floormeter[i].roommeter[j].usemeter = floormeterInput[i].roommeter[j].usemeter
+                        build[m].floormeter[i].roommeter[j].usemetermonth = floormeterInput[i].roommeter[j].usemetermonth
+                        build[m].floormeter[i].roommeter[j].meterstatus = floormeterInput[i].roommeter[j].meterstatus
 
-            build[0].save().then((suc) => {
-                res.send(suc)
+                        build[m].save().then((suc) => {
+                            console.log('res contract : ', suc)
+                            res.send(suc)
+                        }, (e) => {
+                            consoel.log('error contract :', e)
+                            res.status(400).send(e)
+                        })
+
+                    }
+                }
+            }
+
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            newmeterbuild.save().then((d) => {
+                res.send(d)
             }, (e) => {
+                console.log(e)
+                res.send(e)
                 res.status(400).send(e)
             })
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+//post มิเตอร์รวมของหอพัก
+app.post('/postsomeMeter', (req, res) => {
 
+    let newmeterbuild = new meterbuild({
+        pricemeter: req.body.pricemeter,
+        pricewater: req.body.pricewater,
+        buildingnamemeter: req.body.buildingnamemeter,
+        datemeter: req.body.datemeter,
+        someunitmeter: req.body.someunitmeter,
+        somepricemeter: req.body.somepricemeter,
+
+    })
+
+    let somepricemeterInput = req.body.somepricemeter
+    let someunitmeterInput = req.body.someunitmeter
+    let buildingnamemeterInput = req.body.buildingnamemeter
+    let datemeterInput = req.body.datemeter
+
+    // console.log('d',floormeterInput.floormeter.roommeter.dateroommeter)
+    meterbuild.find({
+        buildingnamemeter: buildingnamemeterInput,
+        datemeter: datemeterInput
+        //    BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            for (let m = 0; m < build.length; m++) {
+                build[m].someunitmeter = someunitmeterInput
+                build[m].somepricemeter = somepricemeterInput
+
+                build[m].save().then((suc) => {
+                    console.log('res contract : ', suc)
+                    res.send(suc)
+                }, (e) => {
+                    consoel.log('error contract :', e)
+                    res.status(400).send(e)
+                })
+            }
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            newmeterbuild.save().then((d) => {
+                res.send(d)
+            }, (e) => {
+                console.log(e)
+                res.send(e)
+                res.status(400).send(e)
+            })
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+//post water ของหอพัก
+app.post('/postWater', (req, res) => {
+    let newmeterbuild = new meterbuild({
+        floormeter: req.body.floormeter,
+        pricemeter: req.body.pricemeter,
+        pricewater: req.body.pricewater,
+        buildingnamemeter: req.body.buildingnamemeter,
+        datemeter: req.body.datemeter
+    })
+    let floormeterInput = req.body.floormeter
+    let pricemeterInput = req.body.pricemeter
+    let buildingnamemeterInput = req.body.buildingnamemeter
+    let datemeterInput = req.body.datemeter
+    // console.log('d',floormeterInput.floormeter.roommeter.dateroommeter)
+    meterbuild.find({
+        buildingnamemeter: buildingnamemeterInput,
+        datemeter: datemeterInput
+        //    BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            for (let m = 0; m < build.length; m++) {
+                for (let i = 0; i < build[m].floormeter.length; i++) {
+                    for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
+                        //   console.log('d',floormeterInput[i].roommeter[j].beforusemeter)
+                        build[m].floormeter[i].roommeter[j].beforusewater = floormeterInput[i].roommeter[j].beforusewater
+                        build[m].floormeter[i].roommeter[j].usewater = floormeterInput[i].roommeter[j].usewater
+                        build[m].floormeter[i].roommeter[j].usewatermonth = floormeterInput[i].roommeter[j].usewatermonth
+                        build[m].floormeter[i].roommeter[j].waterstatus = floormeterInput[i].roommeter[j].waterstatus
+
+                        build[m].save().then((suc) => {
+                            console.log('res contract : ', suc)
+                            res.send(suc)
+                        }, (e) => {
+                            consoel.log('error contract :', e)
+                            res.status(400).send(e)
+                        })
+
+                    }
+                }
+            }
+
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            newmeterbuild.save().then((d) => {
+                res.send(d)
+            }, (e) => {
+                console.log(e)
+                res.send(e)
+                res.status(400).send(e)
+            })
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+//post >>>>>>>ภาพรวมน้ำ<<<<ของหอพักที่จ่ายให้การไฟฟ้า
+app.post('/postsomeWater', (req, res) => {
+
+    let newmeterbuild = new meterbuild({
+        pricemeter: req.body.pricemeter,
+        pricewater: req.body.pricewater,
+        buildingnamemeter: req.body.buildingnamemeter,
+        datemeter: req.body.datemeter,
+        someunitwater: req.body.someunitwater,
+        somepricewater: req.body.somepricewater,
+
+    })
+
+    let somepricewaterInput = req.body.somepricewater
+    let someunitwaterInput = req.body.someunitwater
+    let buildingnamemeterInput = req.body.buildingnamemeter
+    let datemeterInput = req.body.datemeter
+
+    // console.log('d',floormeterInput.floormeter.roommeter.dateroommeter)
+    meterbuild.find({
+        buildingnamemeter: buildingnamemeterInput,
+        datemeter: datemeterInput
+        //    BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            for (let m = 0; m < build.length; m++) {
+                build[m].someunitwater = someunitwaterInput
+                build[m].somepricewater = somepricewaterInput
+
+                build[m].save().then((suc) => {
+                    console.log('res contract : ', suc)
+                    res.send(suc)
+                }, (e) => {
+                    consoel.log('error contract :', e)
+                    res.status(400).send(e)
+                })
+            }
             //res.send(admin[0])
         } else if (build.length == 0) {
             newmeterbuild.save().then((d) => {
@@ -709,20 +868,51 @@ app.get('/getmeteranalysis/:getdata/', (req, res) => {
     })
 })
 //-------------------------------------หน้า5 ใบเเจ้งหนี้เเละใบเสร็จ-------------------------------
+// app.get('/getmeterbuilds/:BuildingName', (req, res) => {
+//     // && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง'
+//     let doc = []
+//     meterbuild.find({
+//         buildingnamemeter: req.params.BuildingName
+//     }).then((build) => {
+//         if (build.length >= 1) {
+//             for (let m = 0; m < build.length; m++) {
+//                 for (let i = 0; i < build[m].floormeter.length; i++) {
+//                     for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
+//                         if (build[m].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && build[m].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && build[m].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
+                           
+//                             doc.push(build[m])
+//                             Array.from(new Set(doc))
+//                             //console.log('log',build[m])
+//                         }
+//                     }
+//                 }
+//             }
+//           //  Array.from(new Set(doc))
+//             res.send(doc)
+//         } else if (build.length == 0) {
+//             res.status(400).send('sory not found is user')
+//         }
+//     }, (err) => {
+//         res.status(404).send(err)
+//     })
+// })
+//=====================ข้างบนยังเเก้ไม่เสร็จ
 app.get('/getmeterbuilds/:BuildingName', (req, res) => {
     meterbuild.find({
         buildingnamemeter: req.params.BuildingName
     }).then((doc) => {
+        
         res.send(doc)
 
     }, (err) => {
         res.status(404).send(err)
     })
+
 })
 app.get('/print', function (req, res) {
-    var filePath = "./views/gg.pdf";
- 
-    fs.readFile(__dirname + filePath , function (err,data){
+    var filePath = "/files/invoice.pdf";
+
+    fs.readFile(__dirname + filePath, function (err, data) {
         res.contentType("application/pdf");
         res.send(data);
     });
@@ -731,9 +921,37 @@ app.post('/postPrint', (req, res) => {
     let dataprint = req.body.htmlStringmeterprint
     var pdf = require('html-pdf');
     var options = { format: 'Letter' };
-    pdf.create('<html lang="en"><body>' + dataprint + '</body></html>', options).toFile('./views/gg.pdf', function (err, res) {
-        if (err) return console.log(err); 
+    let BuildingNameInput = req.body.BuildingName
+
+    pdf.create('<html lang="en"><body>' + dataprint + '</body></html>', options).toFile('./files/invoice.pdf', function (err, res) {
+
+        if (err) return console.log(err);
+
     });
+    meterbuild.find({
+        buildingnamemeter: BuildingNameInput,
+
+    }).then((build) => {
+        if (build.length >= 1) {
+            console.log('ggrecive', build.length)
+            for (let m = 0; m < build.length; m++) {
+
+                build[m].save().then((suc) => {
+                    console.log('res contract : ', suc)
+                    res.send(suc)
+                }, (e) => {
+                    consoel.log('error contract :', e)
+                    res.status(400).send(e)
+                })
+
+            }
+            res.send(build[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
     // pdf.create('<html lang="en"><body>'+dataprint+'</body></html>', { format: 'Letter' }).toStream(function (err, stream) {
     //     if (err) {
     //         res.json({
@@ -749,32 +967,36 @@ app.post('/postPrintpay', (req, res) => {
     let dataprint = req.body.htmlStringmeterprintpay
     let BuildingNameInput = req.body.BuildingName
     let RoomPrintInput = req.body.RoomPrint
+    console.log('name', BuildingNameInput)
+    console.log('room', RoomPrintInput)
 
     meterbuild.find({
         buildingnamemeter: BuildingNameInput,
 
     }).then((build) => {
         if (build.length >= 1) {
-            console.log('ggrecive',build.length)
-            for (let m = 0; m < build.length; m++) {
-                for (let i = 0; i < build[m].floormeter.length; i++) {
-                    for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
-                        if (RoomPrintInput[j] == build[m].floormeter[i].roommeter[j].dateroommeter) {
-                            build[m].floormeter[i].roommeter[j].meterstatus = 'ไม่มียอดค้างชำระ'
-                            build[m].floormeter[i].roommeter[j].waterstatus = 'ไม่มียอดค้างชำระ'
-
-                            build[m].save().then((suc) => {
-                                console.log('res contract : ', suc)
-                                res.send(suc)
-                            }, (e) => {
-                                consoel.log('error contract :', e)
-                                res.status(400).send(e)
-                            })
+            console.log('ggrecive', build.length)
+            for (let l = 0; l < RoomPrintInput.length; l++) {
+                for (let m = 0; m < build.length; m++) {
+                    for (let i = 0; i < build[m].floormeter.length; i++) {
+                        for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
+                            if (RoomPrintInput[l] == build[m].floormeter[i].roommeter[j].dateroommeter) {
+                                build[m].floormeter[i].roommeter[j].meterstatus = 'ไม่มียอดค้างชำระ'
+                                build[m].floormeter[i].roommeter[j].waterstatus = 'ไม่มียอดค้างชำระ'
+                                build[m].floormeter[i].roommeter[j].statusprint  = 'เคยพริ้น'
+                                build[m].save().then((suc) => {
+                                    console.log('res contract : ', suc)
+                                    res.send(suc)
+                                }, (e) => {
+                                    consoel.log('error contract :', e)
+                                    res.status(400).send(e)
+                                })
+                            }
                         }
                     }
                 }
             }
-            res.send(admin[0])
+            res.send(build[0])
         } else if (build.length == 0) {
             res.status(400).send('sory not found is user')
         }
@@ -787,14 +1009,98 @@ app.post('/postPrintpay', (req, res) => {
     //var html = fs.readFileSync(dataprint , 'utf8');
     var options = { format: 'Letter' };
     // console.log('data is :',  req.body)
-    pdf.create('<html lang="en"><body>' + dataprint + '</body></html>', options).toFile('./views/gg.pdf', function (err, res) {
+    pdf.create('<html lang="en"><body>' + dataprint + '</body></html>', options).toFile('./files/Receipt.pdf', function (err, res) {
         if (err) return console.log(err);
         //console.log(res); // { filename: '/app/businesscard.pdf' }
     });
-
-
 })
+//render เเทบใบเสร็จรับเงินหน้าใหม่
+app.get('/printt', function (req, res) {
+    let filePath = "/files/Receipt.pdf";
 
+    fs.readFile(__dirname + filePath, function (err, data) {
+        res.contentType("application/pdf");
+        res.send(data);
+    });
+});
+//ออกจากหอพัก
+app.post('/outroom', (req, res) => {
+
+    let BuildingNameInput = req.body.BuildingName
+    let roomNumberInput = req.body.roomNumber
+    let nowmeterInput = req.body.nowmeter
+    let nowwaterInput = req.body.nowwater
+    let dataprint = req.body.htmlStringmeterprint
+
+    var pdf = require('html-pdf');
+    var options = { format: 'Letter' };
+    pdf.create('<html lang="en"><body>' + dataprint + '</body></html>', options).toFile('./files/lastinvoice.pdf', function (err, res) {
+        if (err) return console.log(err);
+    });
+
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((build) => {
+        if (build.length == 1) {
+            for (let i = 0; i < build[0].floor.length; i++) {
+                for (let j = 0; j < build[0].floor[i].room.length; j++) {
+                    if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
+                        if (build[0].floor[i].room[j].user.length >= 1) {
+                            for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
+                                let newUserdelete = new Userdelete({
+                                    BuildingNameAllow: BuildingNameInput,
+                                    roomNumberAllow: roomNumberInput,
+                                    personIDAllow: build[0].floor[i].room[j].user[k].personID,
+                                    firstNameAllow: build[0].floor[i].room[j].user[k].firstName,
+                                    lastNameAllow: build[0].floor[i].room[j].user[k].lastName,
+                                    birthdayAllow: build[0].floor[i].room[j].user[k].birthday,
+                                    phoneNumberAllow: build[0].floor[i].room[j].user[k].phoneNumber,
+                                    Li: build[0].floor[i].room[j].user[k].License,
+                                    ad: build[0].floor[i].room[j].user[k].address
+                                })
+                                console.log(newUserdelete)
+                                newUserdelete.save().then((d) => {
+                                    res.send(d)
+                                }, (e) => {
+                                    console.log(e)
+                                    res.status(400).send(e)
+                                })
+
+                                build[0].floor[i].room[j].contract = ""
+                                build[0].floor[i].room[j].rentroom = 0
+                                build[0].floor[i].room[j].roomStatus = "ว่าง"
+                                build[0].floor[i].room[j].user[k] = build[0].floor[i].room[j].user[k + 1]
+                                build[0].floor[i].room[j].user.pop()
+
+                                build[0].save().then((suc) => {
+                                    console.log('res person : ', suc)
+                                    res.send(suc)
+                                }, (e) => {
+                                    consoel.log('error person :', e)
+                                    res.status(400).send(e)
+                                })
+
+                            }
+                        }
+                    }
+                }
+            }
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+app.get('/printout', function (req, res) {
+    let filePath = "/files/lastinvoice.pdf";
+
+    fs.readFile(__dirname + filePath, function (err, data) {
+        res.contentType("application/pdf");
+        res.send(data);
+    });
+});
 
 
 //-------------------------------------หน้าที่ 6 ---------------------------------------------
@@ -803,12 +1109,15 @@ app.post('/postUnitmeter', (req, res) => {
 
     let BuildingNameInput = req.body.BuildingName
     let UnitMeterInput = req.body.UnitMeter
+    let dateInput = req.body.nowdate
     //find หาusername password สำหรับ 
     Building.find({
         BuildingName: BuildingNameInput,
     }).then((build) => {
         if (build.length == 1) {
+            build[0].UnitMeterbefor = build[0].UnitMeter
             build[0].UnitMeter = UnitMeterInput
+            build[0].DateUnitMeter = dateInput
 
             build[0].save().then((suc) => {
                 console.log('res contract : ', suc)
@@ -830,12 +1139,15 @@ app.post('/postUnitwater', (req, res) => {
 
     let BuildingNameInput = req.body.BuildingName
     let plicewaterInput = req.body.plicewater
+    let dateInput = req.body.nowdate
     //find หาusername password สำหรับ 
     Building.find({
         BuildingName: BuildingNameInput,
     }).then((build) => {
         if (build.length == 1) {
+            build[0].plicewaterbefor = build[0].plicewater
             build[0].plicewater = plicewaterInput
+            build[0].DateUnitWater = dateInput
 
             build[0].save().then((suc) => {
                 console.log('res contract : ', suc)
@@ -1000,26 +1312,32 @@ app.post('/postRoomUpdate', (req, res) => {
     let RoomUpdateInput = req.body.RoomUpdate
     let BuildingNameInput = req.body.BuildingName
 
+    console.log('roomnumber', RoomUpdateInput)
     //find หาusername password สำหรับ 
     Building.find({
         BuildingName: BuildingNameInput,
     }).then((build) => {
         if (build.length == 1) {
-            for (let i = 0; i < build[0].floor.length; i++) {
-                for (let j = 0; j < build[0].floor[i].room.length; j++) {
-                    if (RoomUpdateInput[j] == build[0].floor[i].room[j].roomNumber) {
-                        build[0].floor[i].room[j].roomStatus = 'กำลังปรับปรุง'
+            for (let l = 0; l < RoomUpdateInput.length; l++) {
+                for (let i = 0; i < build[0].floor.length; i++) {
+                    for (let j = 0; j < build[0].floor[i].room.length; j++) {
+                        console.log('room', j)
 
-                        build[0].save().then((suc) => {
-                            console.log('res contract : ', suc)
-                            res.send(suc)
-                        }, (e) => {
-                            consoel.log('error contract :', e)
-                            res.status(400).send(e)
-                        })
+                        if (RoomUpdateInput[l] == build[0].floor[i].room[j].roomNumber) {
+                            build[0].floor[i].room[j].roomStatus = 'กำลังปรับปรุง'
+                            console.log('roomlll', RoomUpdateInput[l])
+                            build[0].save().then((suc) => {
+                                console.log('res contract : ', suc)
+                                res.send(suc)
+                            }, (e) => {
+                                console.log('error contract :', e)
+                                res.status(400).send(e)
+                            })
 
+                        }
                     }
                 }
+
             }
             //res.send(admin[0])
         } else if (build.length == 0) {

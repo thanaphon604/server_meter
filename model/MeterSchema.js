@@ -57,6 +57,9 @@ var MeterSchema = new Schema({
                     contractmeter: {
                         type: String
                     },
+                    statusprint:{
+                        type: String
+                    }
 
                 }
             ],
