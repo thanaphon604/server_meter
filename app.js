@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const hbs = require('hbs')
 var path = require('path');
 fs = require('fs')
+var uab = require('unique-array-objects')
 
 
 
@@ -255,16 +256,18 @@ app.post('/postcontract', (req, res) => {
 
 //post user 
 app.post('/postUser', (req, res) => {
-    let personIDInput = req.body.personID
+    let personIDInput = ""+req.body.personID
     let BuildingNameInput = req.body.BuildingName
     let roomNumberInput = req.body.roomNumber
 
     Building.find({
         personID: personIDInput,
     }).then((build) => {
-        if (build.length == 1) {
+        if (build.length >= 1) {
+            console.log('find user11111111111111')
             //res.send(admin[0])
         } else if (build.length == 0) {
+            console.log('find user222222222',build.length)
             Building.find({
                 BuildingName: BuildingNameInput
             }).then((build) => {
@@ -868,47 +871,56 @@ app.get('/getmeteranalysis/:getdata/', (req, res) => {
     })
 })
 //-------------------------------------หน้า5 ใบเเจ้งหนี้เเละใบเสร็จ-------------------------------
-// app.get('/getmeterbuilds/:BuildingName', (req, res) => {
-//     // && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง'
-//     let doc = []
-//     meterbuild.find({
-//         buildingnamemeter: req.params.BuildingName
-//     }).then((build) => {
-//         if (build.length >= 1) {
-//             for (let m = 0; m < build.length; m++) {
-//                 for (let i = 0; i < build[m].floormeter.length; i++) {
-//                     for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
-//                         if (build[m].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && build[m].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && build[m].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
-                           
-//                             doc.push(build[m])
-//                             Array.from(new Set(doc))
-//                             //console.log('log',build[m])
-//                         }
-//                     }
-//                 }
-//             }
-//           //  Array.from(new Set(doc))
-//             res.send(doc)
-//         } else if (build.length == 0) {
-//             res.status(400).send('sory not found is user')
-//         }
-//     }, (err) => {
-//         res.status(404).send(err)
-//     })
-// })
-//=====================ข้างบนยังเเก้ไม่เสร็จ
 app.get('/getmeterbuilds/:BuildingName', (req, res) => {
+    // && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง'
+    let doc = []
     meterbuild.find({
         buildingnamemeter: req.params.BuildingName
-    }).then((doc) => {
-        
-        res.send(doc)
+    }).then((build) => {
+        if (build.length >= 1) {
+            for (let m = 0; m < build.length; m++) {
+                for (let i = 0; i < build[m].floormeter.length; i++) {
+                    for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
+                        if (build[m].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && build[m].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && build[m].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
+                            if (doc.length >= 1) {
+                                for (let n = 0; n < doc.length; n++) {
+                                    if (doc[n] != build[m]) {
+                                        doc.push(build[m])
 
+                                    }
+                                }
+                            } else {
+                                doc.push(build[m])
+
+                            }
+                            // doc.push(build[m])
+                            // Array.from(new Set(doc))
+                            //console.log('log',build[m])
+                        }
+                    }
+                }
+            }
+            let a = uab(doc)
+            res.send(a)
+        } else if (build.length == 0) {
+            res.status(400).send('sory ')
+        }
     }, (err) => {
         res.status(404).send(err)
     })
-
 })
+// app.get('/getmeterbuilds/:BuildingName', (req, res) => {
+//     meterbuild.find({
+//         buildingnamemeter: req.params.BuildingName
+//     }).then((doc) => {
+
+//         res.send(doc)
+
+//     }, (err) => {
+//         res.status(404).send(err)
+//     })
+
+// })
 app.get('/print', function (req, res) {
     var filePath = "/files/invoice.pdf";
 
@@ -983,7 +995,7 @@ app.post('/postPrintpay', (req, res) => {
                             if (RoomPrintInput[l] == build[m].floormeter[i].roommeter[j].dateroommeter) {
                                 build[m].floormeter[i].roommeter[j].meterstatus = 'ไม่มียอดค้างชำระ'
                                 build[m].floormeter[i].roommeter[j].waterstatus = 'ไม่มียอดค้างชำระ'
-                                build[m].floormeter[i].roommeter[j].statusprint  = 'เคยพริ้น'
+                                build[m].floormeter[i].roommeter[j].statusprint = 'เคยพริ้น'
                                 build[m].save().then((suc) => {
                                     console.log('res contract : ', suc)
                                     res.send(suc)
