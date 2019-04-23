@@ -196,7 +196,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">หมายเลขโทรศัพท์</label>
                                     <div class="col-sm-10">
-                                        <input type="text" maxlength="10" class="form-control" onkeyup="autoTab2(this,2)"
+                                        <input type="text" maxlength="10" class="form-control" 
                                             id="phoneNumber" placeholder="หมายเลขโทรศัพท์">
                                     </div>
                                 </div>
@@ -636,12 +636,15 @@
                         if (xhr.readyState === 4 && xhr.status === 200) {
                             console.log('res is', xhr.responseText)
                             // if success go login page
-                            alert('create user Successful ')
+                            alert('create user Successful ',xhr.responseText)
+                              console.log(' success',xhr.responseText)
                             window.location.reload(true);
                             //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
 
-                        } else {
+                        } else if(xhr.status === 400) {
                             //alert('can not create user! Pls try again.')
+                             alert('not success ',xhr.responseText)
+                             console.log('not success',xhr.responseText)
                         }
                     };
                     var data = JSON.stringify({

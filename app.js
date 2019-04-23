@@ -5,6 +5,7 @@ const hbs = require('hbs')
 var path = require('path');
 fs = require('fs')
 var uab = require('unique-array-objects')
+var check = require('check-types');
 
 
 
@@ -12,6 +13,7 @@ const { Admin } = require('./model/AdminSchema')
 const { Building } = require('./model/BuildingSchema')
 const { Userdelete } = require('./model/UserdeleteSchema')
 const { meterbuild } = require('./model/MeterSchema')
+const { Userroom } = require('./model/UserSchema')
 
 mongoose.Promise = global.Promise;
 
@@ -256,10 +258,12 @@ app.post('/postcontract', (req, res) => {
 
 //post user 
 app.post('/postUser', (req, res) => {
-    let personIDInput = ""+req.body.personID
+    let personIDInput = "" + req.body.personID
     let BuildingNameInput = req.body.BuildingName
     let roomNumberInput = req.body.roomNumber
-
+    let d = 0
+    let e = 0
+    let count = 0
     Building.find({
         personID: personIDInput,
     }).then((build) => {
@@ -267,37 +271,78 @@ app.post('/postUser', (req, res) => {
             console.log('find user11111111111111')
             //res.send(admin[0])
         } else if (build.length == 0) {
-            console.log('find user222222222',build.length)
+            console.log('find user222222222', build.length)
+            console.log('find user222222222', personIDInput)
+            console.log(check.string(personIDInput))
             Building.find({
                 BuildingName: BuildingNameInput
             }).then((build) => {
                 if (build.length == 1) {
                     for (let i = 0; i < build[0].floor.length; i++) {
                         for (let j = 0; j < build[0].floor[i].room.length; j++) {
-                            if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
+                            for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
+                                console.log(build[0].floor[i].room[j].user.length)
+                                if (build[0].floor[i].room[j].user[k].personID == personIDInput) {
+                                    // console.log(' find ssddsdsdwe')
 
-                                build[0].floor[i].room[j].user.push({
-                                    personID: req.body.personID,
-                                    firstName: req.body.firstName,
-                                    lastName: req.body.lastName,
-                                    birthday: req.body.birthday,
-                                    address: req.body.address,
-                                    phoneNumber: req.body.phoneNumber,
-                                    License: req.body.License
-                                })
-                                build[0].floor[i].room[j].roomStatus = 'ไม่ว่าง'
-
-                                build[0].save().then((suc) => {
-                                    console.log('res person : ', suc)
-                                    res.send(suc)
-                                }, (e) => {
-                                    consoel.log('error person :', e)
-                                    res.status(400).send(e)
-                                })
-
+                                    d++
+                                } else if (build[0].floor[i].room[j].user[k].personID != personIDInput) {
+                                    e++
+                                    // console.log('not find ssddsdsdwe')
+                                }
                             }
                         }
                     }
+                    if (d == 0) {
+                        for (let i = 0; i < build[0].floor.length; i++) {
+                            for (let j = 0; j < build[0].floor[i].room.length; j++) {
+                                if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
+                                    count = 1
+                                    build[0].floor[i].room[j].user.push({
+                                        personID: req.body.personID,
+                                        firstName: req.body.firstName,
+                                        lastName: req.body.lastName,
+                                        birthday: req.body.birthday,
+                                        address: req.body.address,
+                                        phoneNumber: req.body.phoneNumber,
+                                        License: req.body.License
+                                    })
+                                    build[0].floor[i].room[j].roomStatus = 'ไม่ว่าง'
+
+                                    build[0].save().then((suc) => {
+                                        console.log('res person : ', suc)
+                                        res.send(suc)
+                                    }, (e) => {
+                                        consoel.log('error person :', e)
+                                        res.status(400).send(e)
+                                    })
+
+
+
+                                }
+                            }
+                        }
+
+                    } else {
+                        res.send('not mat')
+                    }
+                    if (count == 1) {
+                        console.log('saveuser room')
+                        let newUserroom = new Userroom({
+                            usernameuser: req.body.BuildingName,
+                            passworduser: req.body.personID,
+                            fnameuser: req.body.firstName,
+                            lnameuser: req.body.lastName,
+                            phoneuser: req.body.phoneNumber,
+                        })
+                        newUserroom.save().then((d) => {
+                            res.send(d)
+                        }, (e) => {
+                            console.log(e)
+                            res.status(400).send(e)
+                        })
+                    }
+
                     //res.send(admin[0])
                 } else if (build.length == 0) {
 
@@ -1393,7 +1438,34 @@ app.post('/postDatabuild', (req, res) => {
         res.status(400).send(err)
     })
 })
-
+//====================ฝั่ง user ของหอพัก=================
+app.post('/signinuser', (req, res) => {
+    let usernameInput = req.body.usernameuser
+    let passwordInput = req.body.passworduser
+    //find หาusername password สำหรับ 
+    Userroom.find({
+        usernameuser: usernameInput,
+        passworduser: passwordInput
+    }).then((user) => {
+        if (user.length == 1) {
+            Building.find({
+                BuildingName: req.body.usernameuser
+            }).then((doc) => {
+                res.render('homeuser.hbs', {
+                    personID: passwordInput,
+                    BuildingName:usernameInput,
+                    doc: encodeURI(JSON.stringify(doc))
+                })
+            })
+            //res.send(admin[0])
+        } else if (user.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+//====================ฝั่ง user ของหอพัก=================
 
 
 

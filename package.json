@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "check-types": "^8.0.2",
     "dynamic-html-pdf": "^1.0.0",
     "express": "^4.16.3",
     "hbs": "^4.0.1",
