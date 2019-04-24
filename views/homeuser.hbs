@@ -28,6 +28,17 @@
     height: 150px;
     margin-left: 5%
   }
+  .divform{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color:whitesmoke;
+
+  }
   div.room{
     border: 2px solid black;
     width: 100px;
@@ -158,7 +169,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
     </div>
     <form class="form-inline my-2 my-lg-0 fixed-right">
-      <button style="margin-right:5%;" class="btn btn-outline-success my-2 my-sm-0" value="log out" type="submit">Log out</button>
+      <button style="margin-right:5%;" class="btn btn-outline-success my-2 my-sm-0" value="log out" type="submit">Log
+        out</button>
     </form>
   </nav>
   <nav>
@@ -173,13 +185,134 @@ body {font-family: Arial, Helvetica, sans-serif;}
   <div class="tab-content" id="nav-tabContent">
 
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div class="container-fluid" style="margin-top: 30px">
+        <div class="row justify-content-center">
+          <div class="col-lg-7 col-sm-12  ">
+            <br>
+            <div class="divform" style="margin-left: 3%">
+              <ul>
+                <p class="h2">ข้อมูลห้อง</p>
+              </ul>
+              <br>
+              <div class="row">
+                <div class="col-md-12 col-lg-6">
+
+                  <label for="exampleInputEmail1">หมายเลขห้อง</label><br>
+                  <h4 id="roomNumber" style="margin-left:10%;">dfdfd</h5><br>
+                    <label for="exampleInputEmail1">วันที่ทำสัญญา</label>
+                    <h4 id="Contract" style="margin-left:10%;">dfdfd</h5><br>
+
+                </div>
+                <br>
+
+                <div class="col-md-12 col-lg-6">
+
+                  <label for="exampleInputEmail1">ชื่อหอพัก</label><br>
+                  <h4 id="BuildingName" style="margin-left:10%;">dfdfd</h5><br>
+                    <label for="exampleInputEmail1">ค่าเช่าห้อง</label>
+                    <h4 id="rentroom" style="margin-left:10%;">dfdfd</h5><br>
+
+                </div>
+                <br>
+              </div>
+
+
+              <p class="h2">รายชื่อสมาชิกในห้อง</p>
+              <div class="">
+                <table border="2" class="col-lg-12 col-sm-8 table-responsive padding  table table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">ลำดับที่</th>
+                      <th scope="col">ชื่อ</th>
+                      <th scope="col">นามสกุล</th>
+                      <th scope="col">เบอร์โทรศัพท์</th>
+                      <th scope="col">ป้ายทะเบียนยานพาหนะ</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tablePos">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container-fluid" style="margin-top: 30px">
+        <div class="row justify-content-center">
+          <div class="col-lg-7 col-sm-12  ">
+            <br>
+            <div class="divform" style="margin-left: 3%">
+              <ul>
+                <p class="h2">ข้อมูลติดต่อหอพัก</p>
+                <div class="row">
+                  <div class="col-md-12 col-lg-6">
+
+                    <label for="exampleInputEmail1">ชื่อหอพัก</label><br>
+                    <h4 id="BuildingNameAdmin" style="margin-left:10%;">dfdfd</h5><br>
+                      <label for="exampleInputEmail1">เบอร์โทรติดต่อหอพัก</label>
+                      <h4 id="BuildingPhone" style="margin-left:10%;">dfdfd</h5><br>
+
+                  </div>
+                  <br>
+
+                  <div class="col-md-12 col-lg-6">
+
+                    <label for="exampleInputEmail1">ชื่อผู้ดูเเลหอพัก</label><br>
+                    <h4 id="nameadmin" style="margin-left:10%;">dfdfd</h5><br>
+                      <label for="exampleInputEmail1">emailติดต่อหอพัก</label>
+                      <h4 id="emailadmin" style="margin-left:10%;">dfdfd</h5><br>
+
+                  </div>
+                  <br>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
     </div>
-
+    {{!-- การใช้น้ำเเละไฟฟ้า --}}
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div class="row justify-content-center">
+        <div class="col-md-11 col-lg-8">
+          <br> <br>
+          <h2 style="text-align:center">ตารางเเสดงการใช้ไฟฟ้าเเละการใช้น้ำ</h3>
+            <br>
+            <div class="">
 
+              <div class="row ">
+                <div class="col-md-12 col-lg-6 divform ">
+                  <h4>การใช้พลังงานไฟฟ้าของห้องพัก</h4>
+                  <div id="usemeter">
+
+                  </div>
+                  <div id="stringovermeter">
+
+                  </div>
+                </div>
+                <div class="col-md-12 col-lg-6 divform">
+                  <h4>การใช้พลังงานน้ำของห้องพัก</h4>
+                  <div id="usewater">
+
+                  </div>
+                  <br>
+                  <div id="stringoverwater" style="text:center">
+                  </div>
+                </div>
+
+              </div>
+
+
+
+            </div>
+        </div>
+
+      </div>
     </div>
 
   </div>
@@ -216,15 +349,150 @@ body {font-family: Arial, Helvetica, sans-serif;}
       console.log('###################')
       console.log(data)
 
-      
+      var ourRequest = new XMLHttpRequest();
+      ourRequest.open('GET', 'http://localhost:3000/getbuilduser/' + BuildingName)
+      ourRequest.onload = function () {
+        var ourData = JSON.parse(ourRequest.responseText);
+        console.log('datatest', ourData)
+        renderusemeter(ourData, personID)
+        renderusewater(ourData, personID)
+        return false;
+      }
+      ourRequest.send();
+
+      renderhomeuser(data, personID)
+
+
+      function renderhomeuser(data, personID) {
+        console.log('testdata', data)
+        var count = 0
+        var countuser = 0
+        var htmlstringhomeuser = ''
+        for (let i = 0; i < data[0].floor.length; i++) {
+          for (let j = 0; j < data[0].floor[i].room.length; j++) {
+            for (let k = 0; k < data[0].floor[i].room[j].user.length; k++) {
+              if (data[0].floor[i].room[j].user[k].personID == personID) {
+                _countuser = data[0].floor[i].room[j].roomNumber
+                _methodwater = data[0].methodwater
+
+                console.log('จำนวนห้อง', data[0].floor[i].room[j].user.length)
+                document.getElementById('roomNumber').innerHTML = data[0].floor[i].room[j].roomNumber
+                document.getElementById('Contract').innerHTML = data[0].floor[i].room[j].contract
+                document.getElementById('BuildingName').innerHTML = data[0].BuildingName
+                document.getElementById('rentroom').innerHTML = data[0].floor[i].room[j].rentroom
+                document.getElementById('BuildingNameAdmin').innerHTML = data[0].BuildingName
+                document.getElementById('BuildingPhone').innerHTML = data[0].BuildingPhone
+                document.getElementById('nameadmin').innerHTML = data[0].adminAllow
+                document.getElementById('emailadmin').innerHTML = data[0].BuildingEmail
+                for (let k = 0; k < data[0].floor[i].room[j].user.length; k++) {
+
+                  htmlstringhomeuser += ''
+                    + '   <tr>'
+                    + '     <th scope="row">' + (k + 1) + '</th>'
+                    + '     <td>' + data[0].floor[i].room[j].user[k].firstName + '</td>'
+                    + '      <td>' + data[0].floor[i].room[j].user[k].lastName + '</td>'
+                    + '     <td>' + data[0].floor[i].room[j].user[k].phoneNumber + '</td>'
+                    + '     <td>' + data[0].floor[i].room[j].user[k].License + '</td>'
+                    + '   </tr >'
+                }
+
+              }
 
 
 
+
+
+
+            }
+          }
+        }
+        document.getElementById('tablePos').innerHTML = htmlstringhomeuser
+
+      }
+
+      //funtion หน้า 2 การใช้ไฟฟ้าในห้อง
+      function renderusemeter(Dataanalysis, personID) {
+        console.log(_countuser)
+        var htmlstringuse = ''
+        htmlstringuse += ''
+          + ' <table class="table table-striped class=" table - primary >'
+          + '   <thead>'
+          + '    <tr>'
+          + '      <th scope="col">เดือนที่</th>'
+          + '      <th scope="col">จำนวนไฟฟ้าที่ใช้</th>'
+          + '       <th scope="col">ราคาบาท/หน่วยไฟฟ้า</th>'
+          + '       <th>จำนวนเงิน</th>'
+          + '       </tr>'
+          + '     </thead>'
+          + '     <tbody>'
+        for (let h = 0; h < Dataanalysis.length; h++) {
+          for (let i = 0; i < Dataanalysis[h].floormeter.length; i++) {
+            for (let j = 0; j < Dataanalysis[h].floormeter[i].roommeter.length; j++) {
+              if (Dataanalysis[h].floormeter[i].roommeter[j].roomNumbermeter == _countuser) {
+                htmlstringuse += ''
+                  + ' <tr>'
+                  + '    <td scope="row"> ' + Dataanalysis[h].datemeter + '</td>'
+                  + '     <td scope="row"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usemetermonth + '</td>'
+                  + '     <td scope="row"> ' + Dataanalysis[h].pricemeter + '</td>'
+                  + '     <td scope="row"> ' + (Dataanalysis[h].pricemeter * Dataanalysis[h].floormeter[i].roommeter[j].usemetermonth) + '</td>'
+                  + '</tr>'
+              }
+            }
+          }
+        }
+        htmlstringuse += ''
+          + '</tbody >'
+          + '</table >'
+        document.getElementById('usemeter').innerHTML = htmlstringuse
+      }
+      function renderusewater(Dataanalysis, personID) {
+        console.log(_countuser)
+         console.log(_methodwater)
+
+        var htmlstringuse = ''
+        htmlstringuse += ''
+          + ' <table class="table table-striped class=" table - primary >'
+          + '   <thead>'
+          + '    <tr>'
+          + '      <th scope="col">เดือนที่</th>'
+          + '      <th scope="col">จำนวนน้ำที่ใช้</th>'
+          + '       <th scope="col">ราคาบาท/หน่วยมิเตอร์น้ำ</th>'
+          + '       <th>จำนวนเงิน</th>'
+          + '       </tr>'
+          + '     </thead>'
+          + '     <tbody>'
+        for (let h = 0; h < Dataanalysis.length; h++) {
+          for (let i = 0; i < Dataanalysis[h].floormeter.length; i++) {
+            for (let j = 0; j < Dataanalysis[h].floormeter[i].roommeter.length; j++) {
+              if (Dataanalysis[h].floormeter[i].roommeter[j].roomNumbermeter == _countuser) {
+                if (_methodwater == 'rentunit') {
+                  htmlstringuse += ''
+                    + ' <tr>'
+                    + '    <td scope="row"> ' + Dataanalysis[h].datemeter + '</td>'
+                    + '     <td scope="row"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
+                    + '     <td scope="row"> ' + Dataanalysis[h].pricewater + '</td>'
+                    + '     <td scope="row"> ' + (Dataanalysis[h].pricewater * Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth) + '</td>'
+                    + '</tr>'
+                } else  {
+                  htmlstringuse += ''
+                    + ' <tr>'
+                    + '    <td scope="row"> ' + Dataanalysis[h].datemeter + '</td>'
+                    + '     <td scope="row"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
+                    + '     <td scope="row"> ' + Dataanalysis[h].pricewater + '</td>'
+                    + '     <td scope="row"> ' + (Dataanalysis[h].pricewater ) + '</td>'
+                    + '</tr>'
+                }
+              }
+            }
+          }
+        }
+        htmlstringuse += ''
+          + '</tbody >'
+          + '</table >'
+        document.getElementById('usewater').innerHTML = htmlstringuse
+      }
 
     });
-
-
-
   </script>
 
 </body>

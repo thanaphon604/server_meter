@@ -509,6 +509,15 @@ app.post('/deleteUser', (req, res) => {
                     }
                 }
             }
+            Userroom.remove({ 'passworduser': personIDInput }, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.log('remove successfully.');
+            })
+
+            //res.send(admin[0])
+
             //res.send(admin[0])
         } else if (build.length == 0) {
             res.status(400).send('sory not found is user')
@@ -1104,6 +1113,8 @@ app.post('/outroom', (req, res) => {
                     if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
                         if (build[0].floor[i].room[j].user.length >= 1) {
                             for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
+                                console.log('check user.length',build[0].floor[i].room[j].user.length)
+                                console.log('check user.length',k)
                                 let newUserdelete = new Userdelete({
                                     BuildingNameAllow: BuildingNameInput,
                                     roomNumberAllow: roomNumberInput,
@@ -1115,12 +1126,20 @@ app.post('/outroom', (req, res) => {
                                     Li: build[0].floor[i].room[j].user[k].License,
                                     ad: build[0].floor[i].room[j].user[k].address
                                 })
-                                console.log(newUserdelete)
+                               // console.log(newUserdelete)
+
                                 newUserdelete.save().then((d) => {
                                     res.send(d)
                                 }, (e) => {
                                     console.log(e)
-                                    res.status(400).send(e)
+                                //    res.status(400).send(e)
+                                })
+                                console.log('personid user ',build[0].floor[i].room[j].user[k].personID)
+                                Userroom.remove({ 'passworduser': build[0].floor[i].room[j].user[k].personID }, (err) => {
+                                    if (err) {
+                                        console.log(err);
+                                    }
+                                    console.log('remove successfully.');
                                 })
 
                                 build[0].floor[i].room[j].contract = ""
@@ -1131,17 +1150,18 @@ app.post('/outroom', (req, res) => {
 
                                 build[0].save().then((suc) => {
                                     console.log('res person : ', suc)
-                                    res.send(suc)
+                                 //   res.send(suc)
                                 }, (e) => {
                                     consoel.log('error person :', e)
-                                    res.status(400).send(e)
+                                //    res.status(400).send(e)
                                 })
-
+                                console.log('check user.length2',k)
                             }
                         }
                     }
                 }
             }
+
             //res.send(admin[0])
         } else if (build.length == 0) {
             res.status(400).send('sory not found is user')
@@ -1453,7 +1473,7 @@ app.post('/signinuser', (req, res) => {
             }).then((doc) => {
                 res.render('homeuser.hbs', {
                     personID: passwordInput,
-                    BuildingName:usernameInput,
+                    BuildingName: usernameInput,
                     doc: encodeURI(JSON.stringify(doc))
                 })
             })
@@ -1463,6 +1483,17 @@ app.post('/signinuser', (req, res) => {
         }
     }, (err) => {
         res.status(400).send(err)
+    })
+})
+app.get('/getbuilduser/:BuildingName', (req, res) => {
+    // console.log( req.params.BuildingName)
+    meterbuild.find({
+        buildingnamemeter: req.params.BuildingName
+    }).then((doc) => {
+        res.send(doc)
+        //console.log(doc)
+    }, (err) => {
+        res.status(404).send(err)
     })
 })
 //====================ฝั่ง user ของหอพัก=================

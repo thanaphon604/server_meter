@@ -11,7 +11,7 @@
     <style>
         #Head {
     font-size: 20px;
-    background-color: yellowgreen;
+    background-color:#FFA500;
     color: black;
     border: 2px
   }
@@ -576,7 +576,7 @@
 
                 if (document.getElementById('personID').value == "" || obj.length != 13) {
                     document.getElementById("validationText").style.color = "red";
-                    document.getElementById("validationText").innerHTML = 'กรุณากรอกข้อมูลให้ครบทั้ง 13 ตัว ';
+                    document.getElementById("validationText").innerHTML = 'กรุณากรอกข้อมูลให้ครบทั้ง 13 ตัว กรอกเฉพาะตัวเลข ';
                 } else {
                     document.getElementById("validationText").innerHTML = "";
                 }
@@ -732,6 +732,10 @@
                         for (let i = 0; i < ourData[0].floor.length; i++) {
                             for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
                                 if (roomNumber == ourData[0].floor[i].room[j].roomNumber) {
+                                    if(ourData[0].floor[i].room[j].user.length<=1){
+                                        alert('Can not delete user')
+                                        return false
+                                    }
 
 
                                     var personID = ourData[0].floor[i].room[j].user[count].personID;
