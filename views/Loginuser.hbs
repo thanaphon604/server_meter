@@ -141,7 +141,7 @@
       // alert('test:'+localStorage.getItem('username'))
     }
     console.log('testttt')
-    $.getJSON("http://localhost:3000/getAdmin", function (data) {
+    $.getJSON("https://electricitymeter.herokuapp.com/getAdmin", function (data) {
       //data contains full parsed JavaScript object of json 
       console.log('data = ', data)
       console.log('test' + data.username)
