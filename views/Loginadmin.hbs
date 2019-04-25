@@ -362,7 +362,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
       });
     })
     function postData(newAdmin) {
-      var url = "http://localhost:3000/postAdmin";
+      var url = "https://electricitymeter.herokuapp.com/postAdmin";
       console.log('===============')
       console.log(newAdmin.username)
       console.log(newAdmin.password)
@@ -384,7 +384,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
           console.log('res is', xhr.responseText)
           // if success go login page
           alert('create user Successful ')
-          window.location.href = 'http://127.0.0.1:5500/somelogin.html';
+          window.location.href = 'https://electricitymeter.herokuapp.com/Loginadmin';
 
         } else {
           //alert('can not create user! Pls try again.')
