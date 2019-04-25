@@ -360,42 +360,44 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
       });
+      function postData(newAdmin) {
+        var url = "https://electricitymeter.herokuapp.com/postAdmin";
+        console.log('===============')
+        console.log(newAdmin.username)
+        console.log(newAdmin.password)
+        console.log(newAdmin.fname)
+        console.log(newAdmin.lname)
+        console.log(newAdmin.phone)
+        console.log('===============')
+        // let res = $.post(url, { username: newAdmin.username, password: newAdmin.password }) 
+        // let res = $.post(url, { username: newAdmin.username, password: newAdmin.password },  function(data, status){
+        //     console.log('data:'+ data)
+        //     console.log('status'+ status)
+        // })
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('res is', xhr.responseText)
+            // if success go login page
+            alert('create user Successful ')
+            window.location.href = 'https://electricitymeter.herokuapp.com/Loginadmin';
+
+          } else {
+            //alert('can not create user! Pls try again.')
+          }
+        };
+        var data = JSON.stringify({
+          username: newAdmin.username, password: newAdmin.password, fname: newAdmin.fname,
+          lname: newAdmin.lname, phone: newAdmin.phone
+        });
+        xhr.send(data);
+      }
+
     })
-    function postData(newAdmin) {
-      var url = "https://electricitymeter.herokuapp.com/postAdmin";
-      console.log('===============')
-      console.log(newAdmin.username)
-      console.log(newAdmin.password)
-      console.log(newAdmin.fname)
-      console.log(newAdmin.lname)
-      console.log(newAdmin.phone)
-      console.log('===============')
-      // let res = $.post(url, { username: newAdmin.username, password: newAdmin.password }) 
-      // let res = $.post(url, { username: newAdmin.username, password: newAdmin.password },  function(data, status){
-      //     console.log('data:'+ data)
-      //     console.log('status'+ status)
-      // })
 
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          console.log('res is', xhr.responseText)
-          // if success go login page
-          alert('create user Successful ')
-          window.location.href = 'https://electricitymeter.herokuapp.com/Loginadmin';
-
-        } else {
-          //alert('can not create user! Pls try again.')
-        }
-      };
-      var data = JSON.stringify({
-        username: newAdmin.username, password: newAdmin.password, fname: newAdmin.fname,
-        lname: newAdmin.lname, phone: newAdmin.phone
-      });
-      xhr.send(data);
-    }
   </script>
 
 </body>
