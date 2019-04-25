@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <style>
+    .subject {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 50px;
+      color: rgb(78, 4, 4);
+    }#Head {
+    font-size: 20px;
+    background-color: #FFA500;
+    color: black;
+    border: 2px
+  }
+  div.bigroom{
+    width: 100px;
+    height: 150px;
+    margin-left: 5%
+  }
+  div.room{
+    border: 2px solid black;
+    width: 100px;
+    height: 90px;
+  }
+  .TextHead{
+    font-size: 50px
+    
+  }.divform{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color:whitesmoke;
+
+  }body{
+    background-color:rgb(236, 236, 236)
+  }
+ 
+ 
+  </style>
+</head>
+<!--
+  Extra small <576px   col
+  small > 576      px  col-sm
+  mediu, >= 768        col-md
+  Large >=992 px       com-lg
+  Extra Large >= 120px col-xl
+-->
+
+<body>
+  <div class="container-fluid" id="Head">
+    <div class="class col-sm-12 ">
+      <div class="row justify-content-center">
+        <ul>
+          <img src="https://www.bpicc.com/images/2018/10/09/Logo_Intregrate.png" width="90px" height="90px" alt="">
+        </ul>
+        <ul>
+          <img src="https://www.bpicc.com/images/2018/10/09/lg_wu.png" width="80px" height="90px" alt="">
+        </ul>
+        <div>
+          <ul>
+            <h1>ระบบบันทึกหน่วยไฟฟ้าอัจฉริยะ </h1>
+          </ul>
+          <ul>
+            <h5>(Smart energy monitoring system)</h2>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link " href="somelogin.html">เข้าสู่ระบบ
+            <span class="sr-only"></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="someregister.html">สมัครสมาชิก</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 30px">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8  ">
+        <div align="center">
+          <img src="images/Logo_Intregrate.png" width="40%" height="40%" alt="">
+        </div>
+        <p class="subject">ระบบบันทึกหน่วยไฟฟ้าอัจฉริยะ</p>
+       
+        <h3>สำหรับผู้ดูเเลหอพัก</h3>
+
+        <div class="divform">
+          <form action="http://localhost:3000/signin" onsubmit="SubMit()" method="POST">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Username</label>
+              <input required name="username" type="text" class="form-control" id="exampleInputUsername" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input required name="password" type="password" class="form-control" id="exampleInputPassword1"
+                placeholder="Password">
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <!-- <button type="button" onclick="SubMit()" class="btn btn-primary">Submit</button> -->
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <script>
+    function SubMit() {
+      localStorage.setItem("username", "test");
+      localStorage.username = "Smith";
+      document.cookie = "username=John Doe";
+      console.log('cookie', document.cookie)
+      //$.cookie('name','123456');
+      // alert('test:'+localStorage.getItem('username'))
+    }
+    console.log('testttt')
+    $.getJSON("http://localhost:3000/getAdmin", function (data) {
+      //data contains full parsed JavaScript object of json 
+      console.log('data = ', data)
+      console.log('test' + data.username)
+    });
+
+    $(document).ready(function () {
+      // เมื่อเกิดเหตุการ submit form
+      $('#form1').submit(function () {
+
+        if (document.getElementById('username').value == "") {
+          alert('Please Input Username');
+          return false;
+        } else if (document.getElementById('password').value == "") {
+          alert('Please Input Password ');
+          return false;
+        }
+        var username = document.getElementById('username').value
+        var password = document.getElementById('password').value
+
+
+
+      });
+    })
+
+  </script>
+
+
+
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
