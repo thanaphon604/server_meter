@@ -44,9 +44,13 @@ app.get('/p', (req, res) => {
     // res.send('hello')
     res.render('testhome.hbs')
 })
-app.get('/Register', (req, res) => {
+app.get('/Loginadmin', (req, res) => {
     // res.send('hello')
-    res.render('Register.hbs')
+    res.render('Loginadmin.hbs')
+})
+app.get('/Loginuser', (req, res) => {
+    // res.send('hello')
+    res.render('Loginuser.hbs')
 })
 
 app.post('/createbuilding', (req, res) => {
