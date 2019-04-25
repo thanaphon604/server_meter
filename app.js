@@ -18,7 +18,7 @@ const { Userroom } = require('./model/UserSchema')
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.MONGODB_URI || keys.mongoURI)
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/serDB')
     .then(() => console.log('@@@ Connection db is succes @@@'))
     .catch((err) => console.error('!!! Fail to connect db !!!'));
 
@@ -1830,6 +1830,6 @@ app.get('/getbuilduser/:BuildingName', (req, res) => {
 
 
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('listen on port 3000')
 })
