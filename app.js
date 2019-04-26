@@ -987,7 +987,7 @@ app.get('/getmeterbuilds/:BuildingName', (req, res) => {
 app.get('/print', function (req, res) {
     var filePath = "/files/invoice.pdf";
 
-    fs.readFile(__dirname + filePath, function (err, data) {
+    fs.readFile(__dirname + filePath+utf8, function (err, data) {
         res.contentType("application/pdf");
         res.send(data);
     });
@@ -1093,7 +1093,7 @@ app.post('/postPrintpay', (req, res) => {
 app.get('/printt', function (req, res) {
     let filePath = "/files/Receipt.pdf";
 
-    fs.readFile(__dirname + filePath+utf8, function (err, data) {
+    fs.readFile(__dirname + filePath, function (err, data) {
         res.contentType("application/pdf");
         res.send(data);
     });
