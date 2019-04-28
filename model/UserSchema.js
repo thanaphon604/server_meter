@@ -5,6 +5,7 @@ var Schema = mongoose.Schema
 var UserSchema = new Schema({
     usernameuser: {
         type: String, 
+        unique: true
        
     },
     passworduser: {
@@ -22,6 +23,10 @@ var UserSchema = new Schema({
     phoneuser: {
         type: String,
      
+    },
+    BuildingNameuser:{
+        type: String,
+        required: true
     }
 })
 

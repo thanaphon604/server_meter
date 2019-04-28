@@ -337,10 +337,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
     $(document).ready(function () {
       //    { { !--console.log($.cookie('name')) --} }
-      var personID = "{{personID}}"
+      var phoneNumber = "{{phoneNumber}}"
       var BuildingName = "{{BuildingName}}"
       console.log('ddd', BuildingName)
-      console.log('ddd', personID)
+      console.log('ddd', phoneNumber)
 
 
       var doc = "{{doc}}"
@@ -350,20 +350,20 @@ body {font-family: Arial, Helvetica, sans-serif;}
       console.log(data)
 
       var ourRequest = new XMLHttpRequest();
-      ourRequest.open('GET', 'https://electricitymeter.herokuapp.com/getbuilduser/' + BuildingName)
+      ourRequest.open('GET', 'http://localhost:3000/getbuilduser/' + BuildingName)
       ourRequest.onload = function () {
         var ourData = JSON.parse(ourRequest.responseText);
         console.log('datatest', ourData)
-        renderusemeter(ourData, personID)
-        renderusewater(ourData, personID)
+        renderusemeter(ourData, phoneNumber)
+        renderusewater(ourData, phoneNumber)
         return false;
       }
       ourRequest.send();
 
-      renderhomeuser(data, personID)
+      renderhomeuser(data, phoneNumber)
 
 
-      function renderhomeuser(data, personID) {
+      function renderhomeuser(data, phoneNumber) {
         console.log('testdata', data)
         var count = 0
         var countuser = 0
@@ -371,7 +371,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
         for (let i = 0; i < data[0].floor.length; i++) {
           for (let j = 0; j < data[0].floor[i].room.length; j++) {
             for (let k = 0; k < data[0].floor[i].room[j].user.length; k++) {
-              if (data[0].floor[i].room[j].user[k].personID == personID) {
+              if (data[0].floor[i].room[j].user[k].phoneNumber == phoneNumber) {
                 _countuser = data[0].floor[i].room[j].roomNumber
                 _methodwater = data[0].methodwater
 
@@ -411,7 +411,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
       }
 
       //funtion หน้า 2 การใช้ไฟฟ้าในห้อง
-      function renderusemeter(Dataanalysis, personID) {
+      function renderusemeter(Dataanalysis, phoneNumber) {
         console.log(_countuser)
         var htmlstringuse = ''
         htmlstringuse += ''
@@ -445,7 +445,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
           + '</table >'
         document.getElementById('usemeter').innerHTML = htmlstringuse
       }
-      function renderusewater(Dataanalysis, personID) {
+      function renderusewater(Dataanalysis, phoneNumber) {
         console.log(_countuser)
          console.log(_methodwater)
 

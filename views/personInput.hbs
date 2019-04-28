@@ -20,6 +20,12 @@
     height: 150px;
     margin-left: 5%
   }
+  .ui-datepicker{
+    width:150px;
+    font-family:tahoma;
+    font-size:11px;
+    text-align:center;
+}
   div.room{
     border: 2px solid black;
     width: 100px;
@@ -111,9 +117,12 @@
                         <hr>
                         <div class="divform">
                             <form name="form" id="form" action="" method="">
+                                <p style="color:red">*กรุณากรอกข้อมูลให้ครบทั้ง2ช่อง</p>
+                                <p style="color:red">*กรอกข้อมูลเฉพาะครั้งเเรกเท่านั้น </p>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">วันที่ทำสัญญา</label>
                                     <div class="col-sm-10">
+
                                         <input type="date" class="form-control" id="contract" placeholder="ที่อยุ่"
                                             required>
                                     </div>
@@ -121,7 +130,8 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ค่าเช่าห้อง</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" id="rentroom" placeholder="ค่าเช่าห้อง"
+                                        <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                            maxlength="6" class="form-control" id="rentroom" placeholder="ค่าเช่าห้อง"
                                             required>
                                     </div>
                                 </div>
@@ -130,17 +140,18 @@
                                         <button type="submit" class="btn btn-primary">บันทึก</button>
                                     </div>
                                 </div>
-                                <p>*กรอกข้อมูลเฉพาะครั้งเเรกเท่านั้น </p>
+
                             </form>
                         </div>
                         <div class="divform">
                             <form name="form1" id="form1" action="" method="">
+                                <p style="color:red">*กรุณากรอกข้อมูลให้ครบทุกช่อง</p>
                                 <p id="plus">เพิ่มข้อมูล</p>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">เลขบัตรประจำตัวประชาชน</label>
                                     <div class="col-sm-10">
-                                        <input type="number" maxlength="13" class="form-control" id="personID"
-                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number"  placeholder="เลขบัตรประจำตัวประชาชน">
+                                        <input type="number" maxlength="13" class="form-control" id="personID" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                            type="number" placeholder="เลขบัตรประจำตัวประชาชน">
                                         <div id="validationText"></div>
                                     </div>
                                 </div>
@@ -196,9 +207,11 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">หมายเลขโทรศัพท์</label>
                                     <div class="col-sm-10">
-                                        <input type="text" maxlength="10" class="form-control" 
-                                            id="phoneNumber" placeholder="หมายเลขโทรศัพท์">
+                                        <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                            type="number" maxlength="10" class="form-control" id="phoneNumber"
+                                            placeholder="หมายเลขโทรศัพท์">
                                     </div>
+                                    <div id="validationTextphone"></div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ป้ายทะเบียนยานพาหนะ</label>
@@ -385,7 +398,7 @@
 
             // get ข้อมูลทั้งตึกมา
             var ourRequest = new XMLHttpRequest();
-            ourRequest.open('GET', 'https://electricitymeter.herokuapp.com/getUser/' + BuildingName)
+            ourRequest.open('GET', 'http://localhost:3000/getUser/' + BuildingName)
             ourRequest.onload = function () {
                 var ourData = JSON.parse(ourRequest.responseText);
                 console.log(ourData)
@@ -399,7 +412,7 @@
             function getmeterbuilds() {
 
                 var Request = new XMLHttpRequest();
-                Request.open('GET', 'https://electricitymeter.herokuapp.com/getmeterbuilds/' + BuildingName)
+                Request.open('GET', 'http://localhost:3000/getmeterbuilds/' + BuildingName)
                 Request.onload = function () {
                     var Datameterbuilds = JSON.parse(Request.responseText);
                     console.log('datametebuildsggggggg', Datameterbuilds)
@@ -490,7 +503,7 @@
                 console.log('data1', getdata)
 
                 var Request1 = new XMLHttpRequest();
-                Request1.open('GET', 'https://electricitymeter.herokuapp.com/getmeter/' + getdata)
+                Request1.open('GET', 'http://localhost:3000/getmeter/' + getdata)
                 Request1.onload = function () {
                     var Datameterunit = JSON.parse(Request1.responseText);
                     //   console.log('datanow_', Datameterunit)
@@ -498,7 +511,7 @@
                     _dataNow = Datameterunit
                     console.log('datanowgg_', _dataNow)
                     var Request = new XMLHttpRequest();
-                    Request.open('GET', 'https://electricitymeter.herokuapp.com/getmeterbefor/' + getdata)
+                    Request.open('GET', 'http://localhost:3000/getmeterbefor/' + getdata)
                     Request.onload = function () {
                         var Datameterbefor = JSON.parse(Request.responseText);
                         console.log('databefor_', Datameterbefor)
@@ -517,7 +530,7 @@
 
 
             }
-
+            
             //เช็คข้อความบัตรประชาชนกับเบอร์โทรศัพท์
             function autoTab2(obj, typeCheck) {
                 if (typeCheck == 1) {
@@ -542,6 +555,17 @@
             }
 
             // เมื่อเกิดเหตุการ submit form
+
+            // แทรกโค้ต jquery
+
+            // แทรกโค้ต jquery
+
+
+
+            // รูปแบบวันที่ที่ได้จะเป็น 2009-08-16
+
+
+
             $('#form').submit(function () {
                 var contract = document.getElementById('contract').value
                 var rentroom = document.getElementById('rentroom').value
@@ -549,7 +573,7 @@
                 console.log(BuildingName)
                 console.log(roomNumber)
                 console.log(rentroom)
-                var url = "https://electricitymeter.herokuapp.com/postcontract";
+                var url = "http://localhost:3000/postcontract";
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", url, true);
                 xhr.setRequestHeader("Content-Type", "application/json");
@@ -581,9 +605,20 @@
                     document.getElementById("validationText").innerHTML = "";
                 }
             })
+            $('#phoneNumber').on('input', function (e) {
+                var objp = document.getElementById('phoneNumber').value
+                console.log(objp)
+
+                if (document.getElementById('phoneNumber').value == "" || objp.length != 10) {
+                    document.getElementById("validationTextphone").style.color = "red";
+                    document.getElementById("validationTextphone").innerHTML = 'กรุณากรอกข้อมูลให้ครบทั้ง 10 ตัว กรอกเฉพาะตัวเลข ';
+                } else {
+                    document.getElementById("validationTextphone").innerHTML = "";
+                }
+            })
             $('#form1').submit(function () {
 
-                if (document.getElementById('personID').value == "" ||document.getElementById('personID').value.length != 13) {
+                if (document.getElementById('personID').value == "" || document.getElementById('personID').value.length != 13) {
                     alert('PLEASE INPUT Person ID');
 
                     return false;
@@ -628,27 +663,32 @@
                     console.log(newUser)
 
                     console.log('pppp')
-                    var url = "https://electricitymeter.herokuapp.com/postUser";
+                    var url = "http://localhost:3000/postUser";
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", url, true);
                     xhr.setRequestHeader("Content-Type", "application/json");
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState === 4 && xhr.status === 200) {
-                            console.log('res is', xhr.responseText)
-                            // if success go login page
-                            alert('create user Successful ',xhr.responseText)
-                              console.log(' success',xhr.responseText)
-                            window.location.reload(true);
+                            if (xhr.responseText == "not mat") {
+                                alert('เลขบัตรประชานชนหรือเบอร์โทรศัพท์ซ้ำ')
+                                return false;
+                            } else if (xhr.responseText == "บันทึกสำเร็จ") {
+                                console.log('res is', xhr.responseText)
+                                // if success go login page
+                                alert('create user Successful ', xhr.responseText)
+                                console.log(' success', xhr.responseText)
+                                window.location.reload(true);
+                            }
                             //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
 
-                        } else if(xhr.status === 400) {
+                        } else if (xhr.status === 400 && xhr.responseText != "บันทึกสำเร็จ") {
                             //alert('can not create user! Pls try again.')
-                             alert('not success ',xhr.responseText)
-                             console.log('not success',xhr.responseText)
+                            alert('not success ', xhr.responseText)
+                            console.log('not success', xhr.responseText)
                         }
                     };
                     var data = JSON.stringify({
-                        personID:""+newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
+                        personID: "" + newUser.personID, firstName: newUser.firstName, lastName: newUser.lastName, birthday: newUser.birthday, address: newUser.address, phoneNumber: newUser.phoneNumber, License: newUser.License, BuildingName: newUser.BuildingName, roomNumber: newUser.roomNumber
 
                     });
                     xhr.send(data);
@@ -656,7 +696,7 @@
                     console.log(newUser)
                     console.log(Choice)
                     console.log('ttt')
-                    var url = "https://electricitymeter.herokuapp.com/updateUser";
+                    var url = "http://localhost:3000/updateUser";
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", url, true);
                     xhr.setRequestHeader("Content-Type", "application/json");
@@ -732,7 +772,7 @@
                         for (let i = 0; i < ourData[0].floor.length; i++) {
                             for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
                                 if (roomNumber == ourData[0].floor[i].room[j].roomNumber) {
-                                    if(ourData[0].floor[i].room[j].user.length<=1){
+                                    if (ourData[0].floor[i].room[j].user.length <= 1) {
                                         alert('Can not delete user')
                                         return false
                                     }
@@ -751,7 +791,7 @@
                         var newUser = {
                             personID, firstName, lastName, birthday, address, phoneNumber, License, BuildingName, roomNumber
                         }
-                        var url = "https://electricitymeter.herokuapp.com/deleteUser";
+                        var url = "http://localhost:3000/deleteUser";
                         var xhr = new XMLHttpRequest();
                         xhr.open("POST", url, true);
                         xhr.setRequestHeader("Content-Type", "application/json");
@@ -919,23 +959,23 @@
                                                         + '                          <td></td>'
                                                         + '                           <td></td>'
                                                         + '                          <td></td>'
-                                                        + '                            <td>' + _dataNowmeter[l].floor[i].room[j].rentroom + '</td>'
+                                                        + '                            <td style="text-align: right;" >' + _dataNowmeter[l].floor[i].room[j].rentroom + '</td>'
                                                         + '                         </tr>'
                                                         + '                   <tr>'
                                                         + '                       <td>ค่าไฟฟ้า</td>'
-                                                        + '                       <td>' + _dataNow[l].floormeter[i].roommeter[j].usemeter + '</td>'
-                                                        + '                        <td>' + nowmeter + '</td>'
-                                                        + '                        <td>' + (nowmeter - _dataNow[l].floormeter[i].roommeter[j].usemeter) + '</td>'
-                                                        + '                        <td>' + _dataNowmeter[l].UnitMeter + '</td>'
-                                                        + '                        <td>' + ((nowmeter - _dataNow[l].floormeter[i].roommeter[j].usemeter) * _dataNowmeter[l].UnitMeter) + '</td>'
+                                                        + '                       <td style="text-align: right;">' + _dataNow[l].floormeter[i].roommeter[j].usemeter + '</td>'
+                                                        + '                        <td style="text-align: right;">' + nowmeter + '</td>'
+                                                        + '                        <td style="text-align: right;">' + (nowmeter - _dataNow[l].floormeter[i].roommeter[j].usemeter) + '</td>'
+                                                        + '                        <td style="text-align: right;">' + _dataNowmeter[l].UnitMeter + '</td>'
+                                                        + '                        <td style="text-align: right;">' + ((nowmeter - _dataNow[l].floormeter[i].roommeter[j].usemeter) * _dataNowmeter[l].UnitMeter) + '</td>'
                                                         + '                     </tr>'
                                                         + '                   <tr>'
                                                         + '                       <td>ค่าน้ำ</td>'
-                                                        + '                       <td>' + _dataNow[l].floormeter[i].roommeter[j].usewater + '</td>'
-                                                        + '                        <td>' + nowwater + '</td>'
-                                                        + '                        <td>' + (nowwater - _dataNow[l].floormeter[i].roommeter[j].usewater) + '</td>'
-                                                        + '                        <td>' + _dataNowmeter[l].plicewater + '</td>'
-                                                        + '                        <td>' + ((nowwater - _dataNow[l].floormeter[i].roommeter[j].usewater) * _dataNowmeter[l].plicewater) + '</td>'
+                                                        + '                       <td style="text-align:right;">' + _dataNow[l].floormeter[i].roommeter[j].usewater + '</td>'
+                                                        + '                        <td style="text-align:right;">' + nowwater + '</td>'
+                                                        + '                        <td style="text-align: right;">' + (nowwater - _dataNow[l].floormeter[i].roommeter[j].usewater) + '</td>'
+                                                        + '                        <td style="text-align: right;">' + _dataNowmeter[l].plicewater + '</td>'
+                                                        + '                        <td style="text-align: right;">' + ((nowwater - _dataNow[l].floormeter[i].roommeter[j].usewater) * _dataNowmeter[l].plicewater) + '</td>'
                                                         + '                     </tr>'
                                                         + '                   </tbody>'
                                                         + '                             </table>'
@@ -1016,15 +1056,15 @@
                                                         + '                          <td></td>'
                                                         + '                           <td></td>'
                                                         + '                          <td></td>'
-                                                        + '                            <td>' + _dataNowmeter[l].floor[i].room[j].rentroom + '</td>'
+                                                        + '                            <td style="text-align: right;">' + _dataNowmeter[l].floor[i].room[j].rentroom + '</td>'
                                                         + '                         </tr>'
                                                         + '                   <tr>'
                                                         + '                       <td>ค่าไฟฟ้า</td>'
-                                                        + '                       <td>' + _dataNow[l].floormeter[i].roommeter[j].usemeter + '</td>'
-                                                        + '                        <td>' + nowmeter + '</td>'
-                                                        + '                        <td>' + (nowmeter - _dataNow[l].floormeter[i].roommeter[j].usemeter) + '</td>'
-                                                        + '                        <td>' + _dataNowmeter[l].UnitMeter + '</td>'
-                                                        + '                        <td>' + ((nowmeter - _dataNow[l].floormeter[i].roommeter[j].usemeter) * _dataNowmeter[l].UnitMeter) + '</td>'
+                                                        + '                       <td style="text-align:right;">' + _dataNow[l].floormeter[i].roommeter[j].usemeter + '</td>'
+                                                        + '                        <td style="text-align: right;">' + nowmeter + '</td>'
+                                                        + '                        <td style="text-align: right;">' + (nowmeter - _dataNow[l].floormeter[i].roommeter[j].usemeter) + '</td>'
+                                                        + '                        <td style="text-align:right;">' + _dataNowmeter[l].UnitMeter + '</td>'
+                                                        + '                        <td style="text-align:right;">' + ((nowmeter - _dataNow[l].floormeter[i].roommeter[j].usemeter) * _dataNowmeter[l].UnitMeter) + '</td>'
                                                         + '                     </tr>'
                                                         + '                   <tr>'
                                                         + '                       <td>ค่าน้ำ</td>'
@@ -1032,7 +1072,7 @@
                                                         + '                        <td></td>'
                                                         + '                        <td></td>'
                                                         + '                        <td></td>'
-                                                        + '                        <td>' + (_dataNowmeter[l].plicewater) + '</td>'
+                                                        + '                        <td style="text-align: right;">' + (_dataNowmeter[l].plicewater) + '</td>'
                                                         + '                     </tr>'
                                                         + '                   </tbody>'
                                                         + '                             </table>'
@@ -1056,7 +1096,7 @@
                                 }
                             }
                             //  document.getElementById("as").innerHTML = htmlStringmeterprint
-                            var url = "https://electricitymeter.herokuapp.com/outroom";
+                            var url = "http://localhost:3000/outroom";
                             var xhr = new XMLHttpRequest();
                             xhr.open("POST", url, true);
                             xhr.setRequestHeader("Content-Type", "application/json");
@@ -1065,7 +1105,7 @@
                                     console.log('res is', xhr.responseText)
                                     // if success go login page
                                     //   alert('Delete ser Successful ')
-                                    window.open('https://electricitymeter.herokuapp.com/printout', '_blank');
+                                    window.open('http://localhost:3000/printout', '_blank');
                                     window.location.reload(true);
                                     //  window.location.href = 'http://127.0.0.1:5500/somelogin.html';
 

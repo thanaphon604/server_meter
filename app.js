@@ -270,6 +270,7 @@ app.post('/postUser', (req, res) => {
     let personIDInput = "" + req.body.personID
     let BuildingNameInput = req.body.BuildingName
     let roomNumberInput = req.body.roomNumber
+    let phoneNumberInput = req.body.phoneNumber
     let d = 0
     let e = 0
     let count = 0
@@ -291,7 +292,7 @@ app.post('/postUser', (req, res) => {
                         for (let j = 0; j < build[0].floor[i].room.length; j++) {
                             for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
                                 console.log(build[0].floor[i].room[j].user.length)
-                                if (build[0].floor[i].room[j].user[k].personID == personIDInput) {
+                                if (build[0].floor[i].room[j].user[k].personID == personIDInput || build[0].floor[i].room[j].user[k].phoneNumber == phoneNumberInput) {
                                     // console.log(' find ssddsdsdwe')
 
                                     d++
@@ -302,6 +303,7 @@ app.post('/postUser', (req, res) => {
                             }
                         }
                     }
+
                     if (d == 0) {
                         for (let i = 0; i < build[0].floor.length; i++) {
                             for (let j = 0; j < build[0].floor[i].room.length; j++) {
@@ -315,12 +317,13 @@ app.post('/postUser', (req, res) => {
                                         address: req.body.address,
                                         phoneNumber: req.body.phoneNumber,
                                         License: req.body.License
+
                                     })
                                     build[0].floor[i].room[j].roomStatus = 'ไม่ว่าง'
 
                                     build[0].save().then((suc) => {
                                         console.log('res person : ', suc)
-                                        res.send(suc)
+                                        res.send("บันทึกสำเร็จ")
                                     }, (e) => {
                                         consoel.log('error person :', e)
                                         res.status(400).send(e)
@@ -338,14 +341,17 @@ app.post('/postUser', (req, res) => {
                     if (count == 1) {
                         console.log('saveuser room')
                         let newUserroom = new Userroom({
-                            usernameuser: req.body.BuildingName,
+                            usernameuser: req.body.phoneNumber,
                             passworduser: req.body.personID,
                             fnameuser: req.body.firstName,
                             lnameuser: req.body.lastName,
                             phoneuser: req.body.phoneNumber,
+                            BuildingNameuser: req.body.BuildingName,
+
+
                         })
                         newUserroom.save().then((d) => {
-                            res.send(d)
+                            res.send("บันทึกสำเร็จ")
                         }, (e) => {
                             console.log(e)
                             res.status(400).send(e)
@@ -387,6 +393,36 @@ app.post('/updateUser', (req, res) => {
     // console.log(phoneNumberInput)
     // console.log(LicenseInput)
     // console.log('test###############')
+    // Userroom.find({
+    //     usernameuser: phoneNumberInput,
+    // }).then((user) => {
+    //     if (user.length == 1) {
+    //         for (let d = 0; d < user.length; d++) {
+    //             user[0].usernameuser = phoneNumberInput
+    //             user[0].passworduser = personIDInput
+    //             user[0].fnameuser = firstNameInput
+    //             user[0].lnameuser = lastNameInput
+    //             user[0].phoneuser = phoneNumberInput
+    //             user[0].BuildingNameuser = BuildingNameInput
+
+    //             user[0].save().then((suc) => {
+    //                 console.log('res person : ', suc)
+    //                 res.send(suc)
+    //             }, (e) => {
+    //                 consoel.log('error person :', e)
+    //                 res.status(400).send(e)
+    //             })
+
+    //         }
+
+    //         //res.send(admin[0])
+    //     } else if (user.length == 0) {
+    //         res.status(400).send('sory not found is user')
+    //     }
+    // }, (err) => {
+    //     res.status(400).send(err)
+    // })
+
     Building.find({
         BuildingName: BuildingNameInput,
     }).then((build) => {
@@ -421,11 +457,16 @@ app.post('/updateUser', (req, res) => {
                                     consoel.log('error person :', e)
                                     res.status(400).send(e)
                                 })
+
+
                             }
                         }
                     }
                 }
             }
+
+
+
             //res.send(admin[0])
         } else if (build.length == 0) {
             res.status(400).send('sory not found is user')
@@ -1807,11 +1848,12 @@ app.post('/signinuser', (req, res) => {
     }).then((user) => {
         if (user.length == 1) {
             Building.find({
-                BuildingName: req.body.usernameuser
+                BuildingName: user[0].BuildingNameuser
             }).then((doc) => {
+                console.log('data', user[0].BuildingNameuser)
                 res.render('homeuser.hbs', {
-                    personID: passwordInput,
-                    BuildingName: usernameInput,
+                    phoneNumber: usernameInput,
+                    BuildingName: user[0].BuildingNameuser,
                     doc: encodeURI(JSON.stringify(doc))
                 })
             })

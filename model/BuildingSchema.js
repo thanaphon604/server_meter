@@ -11,14 +11,17 @@ var BuildingSchema = new Schema({
                         {
                             personID: {
                                 type: String,
-
+                                unique: true
                             },
                             firstName: String,
                             lastName: String,
                             birthday: String,
                             //sex: Boolean,
                             address: String,
-                            phoneNumber: String,
+                            phoneNumber: {
+                                type: String,
+                                unique: true
+                            },
                             License: String,
 
 
@@ -54,12 +57,12 @@ var BuildingSchema = new Schema({
     //มิเตอร์ก่อนหน้า
     UnitMeterbefor: {
         type: Number,
-       
+
     },
     //วันที่เปลี่ยนunitmeter
     DateUnitMeter: {
         type: Date,
-        
+
     },
 
     BuildingPhone: {
@@ -78,12 +81,12 @@ var BuildingSchema = new Schema({
     },
     plicewaterbefor: {
         type: Number,
-        
+
     },
-      //วันที่เปลี่ยนunitwater
-      DateUnitWater: {
+    //วันที่เปลี่ยนunitwater
+    DateUnitWater: {
         type: Date,
-        
+
     },
     //วิธีคิดค่าน้ำ
     methodwater: {

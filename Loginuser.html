@@ -15,7 +15,7 @@
       color: rgb(78, 4, 4);
     }#Head {
     font-size: 20px;
-    background-color: #FFA500;
+    background-color: yellowgreen;
     color: black;
     border: 2px
   }
@@ -87,13 +87,9 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link " href="somelogin.html">เข้าสู่ระบบ
-            <span class="sr-only"></span>
-          </a>
+
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="someregister.html">สมัครสมาชิก</a>
-        </li>
+
       </ul>
 
     </div>
@@ -103,21 +99,22 @@
     <div class="row justify-content-center">
       <div class="col-12 col-md-8  ">
         <div align="center">
-          <img src="images/Logo_Intregrate.png" width="40%" height="40%" alt="">
+          <img src="https://www.bpicc.com/images/2018/10/09/Logo_Intregrate.png" width="40%" height="40%" alt="">
         </div>
         <p class="subject">ระบบบันทึกหน่วยไฟฟ้าอัจฉริยะ</p>
-       
-        <h3>สำหรับผู้ดูเเลหอพัก</h3>
+
+        <h3>สำหรับผู้เข้าพักของหอพัก</h3>
 
         <div class="divform">
-          <form action="http://localhost:3000/signin" onsubmit="SubMit()" method="POST">
+          <form action="http://localhost:3000/signinuser" onsubmit="SubMit()" method="POST">
             <div class="form-group">
               <label for="exampleInputEmail1">Username</label>
-              <input required name="username" type="text" class="form-control" id="exampleInputUsername" placeholder="Enter Username">
+
+              <input required name="usernameuser" type="text" class="form-control" id="" placeholder="Enter Username">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input required name="password" type="password" class="form-control" id="exampleInputPassword1"
+              <input required name="passworduser" type="password" class="form-control" id="exampleInputPassword1"
                 placeholder="Password">
             </div>
             <hr>
