@@ -1045,9 +1045,9 @@ app.get('/getmeterbuilds/:BuildingName', (req, res) => {
 
 // })
 app.get('/print', function (req, res) {
-    var filePath = ('/files/invoice.pdf','utf8');
+    var filePath = "/files/invoice.pdf";
 
-    fs.readFileSync(__dirname + filePath, function (err, data) {
+    fs.readFile(__dirname + filePath, function (err, data) {
         res.contentType("application/pdf");
         res.send(data);
     });
