@@ -1119,6 +1119,7 @@
 
 
             function validDate() {
+                var now = new Date()
                 var month = (now.getMonth() + 1).toISOString()
                 var monthlast = (now.getMonth() + 2).toISOString()
                 var today = new Date().toISOString().split('T')[0];
