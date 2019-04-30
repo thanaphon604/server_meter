@@ -1113,10 +1113,11 @@
             Request.send();
             validDate()
             // set date ไม่ให้กรอกวันข้างหน้า
+            
             function validDate() {
-                var today = new Date().toISOString().split('T')[0];
-                var everyday = new Date().toISOString()
-                var nextWeekDate = new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+                var today = (now.getMonth() + 1).toISOString().split('T')[0];
+                var everyday = (now.getMonth() + 1).toISOString()
+                var nextWeekDate = (now.getMonth() + 1)((now.getMonth() + 1).getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
                 document.getElementsByName("start")[0].setAttribute('min', everyday);
                 document.getElementsByName("start")[0].setAttribute('max', today)
             }
