@@ -1063,7 +1063,7 @@ app.post('/postPrint', (req, res) => {
     var options = { format: 'Letter' };
     let BuildingNameInput = req.body.BuildingName
 
-    pdf.create('<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"></head><body>' + dataprint + '</body></html>', options).toFile('./files/invoice.pdf', function (err, res) {
+    pdf.create('<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"></head><body>' + dataprint + '</body></html>','utf8', options).toFile('./files/invoice.pdf', function (err, res) {
 
         if (err) return console.log(err);
 
