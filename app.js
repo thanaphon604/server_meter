@@ -381,7 +381,8 @@ app.post('/updateUser', (req, res) => {
     let addressInput = req.body.address
     let phoneNumberInput = req.body.phoneNumber
     let LicenseInput = req.body.License
-
+    let phoneruserInput = req.body.phoneuser
+    let personiduserInput = req.body.personiduser
     // console.log('test')
     // console.log(BuildingNameInput )
     // console.log(roomNumberInput)
@@ -393,35 +394,6 @@ app.post('/updateUser', (req, res) => {
     // console.log(phoneNumberInput)
     // console.log(LicenseInput)
     // console.log('test###############')
-    // Userroom.find({
-    //     usernameuser: phoneNumberInput,
-    // }).then((user) => {
-    //     if (user.length == 1) {
-    //         for (let d = 0; d < user.length; d++) {
-    //             user[0].usernameuser = phoneNumberInput
-    //             user[0].passworduser = personIDInput
-    //             user[0].fnameuser = firstNameInput
-    //             user[0].lnameuser = lastNameInput
-    //             user[0].phoneuser = phoneNumberInput
-    //             user[0].BuildingNameuser = BuildingNameInput
-
-    //             user[0].save().then((suc) => {
-    //                 console.log('res person : ', suc)
-    //                 res.send(suc)
-    //             }, (e) => {
-    //                 consoel.log('error person :', e)
-    //                 res.status(400).send(e)
-    //             })
-
-    //         }
-
-    //         //res.send(admin[0])
-    //     } else if (user.length == 0) {
-    //         res.status(400).send('sory not found is user')
-    //     }
-    // }, (err) => {
-    //     res.status(400).send(err)
-    // })
 
     Building.find({
         BuildingName: BuildingNameInput,
@@ -431,7 +403,11 @@ app.post('/updateUser', (req, res) => {
                 for (let j = 0; j < build[0].floor[i].room.length; j++) {
                     if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
                         for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
-                            if (personIDInput == build[0].floor[i].room[j].user[k].personID) {
+                            if (personiduserInput == build[0].floor[i].room[j].user[k].personID) {
+                                // console.log('===========')
+                                // console.log(build[0].floor[i].room[j].user[k].personID)
+                                // console.log(personIDInput)
+                                // console.log('===========')
 
                                 build[0].floor[i].room[j].user[k].personID = personIDInput
                                 build[0].floor[i].room[j].user[k].firstName = firstNameInput
@@ -469,6 +445,49 @@ app.post('/updateUser', (req, res) => {
 
             //res.send(admin[0])
         } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+})
+//=======
+app.post('/updateUserroom', (req, res) => {
+    let BuildingNameInput = req.body.BuildingName
+    let roomNumberInput = req.body.roomNumber
+    let personIDInput = req.body.personID
+    let firstNameInput = req.body.firstName
+    let lastNameInput = req.body.lastName
+    let birthdayInput = req.body.birthday
+    let addressInput = req.body.address
+    let phoneNumberInput = req.body.phoneNumber
+    let LicenseInput = req.body.License
+    let phoneruserInput = req.body.phoneuser
+
+    Userroom.find({
+        usernameuser: phoneruserInput,
+    }).then((user) => {
+        if (user.length == 1) {
+            for (let d = 0; d < user.length; d++) {
+                user[0].usernameuser = phoneNumberInput
+                user[0].passworduser = personIDInput
+                user[0].fnameuser = firstNameInput
+                user[0].lnameuser = lastNameInput
+                user[0].phoneuser = phoneNumberInput
+                user[0].BuildingNameuser = BuildingNameInput
+
+                user[0].save().then((suc) => {
+                    console.log('res person : ', suc)
+                    res.send(suc)
+                }, (e) => {
+                    consoel.log('error person :', e)
+                    res.status(400).send(e)
+                })
+
+            }
+
+            //res.send(admin[0])
+        } else if (user.length == 0) {
             res.status(400).send('sory not found is user')
         }
     }, (err) => {
@@ -1033,13 +1052,17 @@ app.get('/print', function (req, res) {
         res.send(data);
     });
 });
+
+
+
+
 app.post('/postPrint', (req, res) => {
     let dataprint = req.body.htmlStringmeterprint
     var pdf = require('html-pdf');
     var options = { format: 'Letter' };
     let BuildingNameInput = req.body.BuildingName
 
-    pdf.create('<html lang="en"><body>' + dataprint + '</body></html>', options).toFile('./files/invoice.pdf', function (err, res) {
+    pdf.create('<html lang="en"><head><meta charset="UTF-8"></head><body>' + dataprint + '</body></html>', options).toFile('./files/invoice.pdf', function (err, res) {
 
         if (err) return console.log(err);
 
@@ -1079,6 +1102,8 @@ app.post('/postPrint', (req, res) => {
     // });
 
 })
+//=============
+
 app.post('/postPrintpay', (req, res) => {
     let dataprint = req.body.htmlStringmeterprintpay
     let BuildingNameInput = req.body.BuildingName
@@ -1125,7 +1150,7 @@ app.post('/postPrintpay', (req, res) => {
     //var html = fs.readFileSync(dataprint , 'utf8');
     var options = { format: 'Letter' };
     // console.log('data is :',  req.body)
-    pdf.create('<html lang="en"><body>' + dataprint + '</body></html>', options).toFile('./files/Receipt.pdf', function (err, res) {
+    pdf.create('<html lang="en"><head><meta charset="UTF-8"></head><body>' + dataprint + '</body></html>', options).toFile('./files/Receipt.pdf', function (err, res) {
         if (err) return console.log(err);
         //console.log(res); // { filename: '/app/businesscard.pdf' }
     });
@@ -1150,7 +1175,7 @@ app.post('/outroom', (req, res) => {
 
     var pdf = require('html-pdf');
     var options = { format: 'Letter' };
-    pdf.create('<html lang="en"><body>' + dataprint + '</body></html>', options).toFile('./files/lastinvoice.pdf', function (err, res) {
+    pdf.create('<html lang="en"><head><meta charset="UTF-8"></head><body>' + dataprint + '</body></html>', options).toFile('./files/lastinvoice.pdf', function (err, res) {
         if (err) return console.log(err);
     });
 

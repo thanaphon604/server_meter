@@ -350,7 +350,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
       console.log(data)
 
       var ourRequest = new XMLHttpRequest();
-      ourRequest.open('GET', 'http://localhost:3000/getbuilduser/' + BuildingName)
+      ourRequest.open('GET', 'https://electricitymeter.herokuapp.com/getbuilduser/' + BuildingName)
       ourRequest.onload = function () {
         var ourData = JSON.parse(ourRequest.responseText);
         console.log('datatest', ourData)

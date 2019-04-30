@@ -470,7 +470,7 @@
 
             //sear data building 
             var ourRequest = new XMLHttpRequest();
-            ourRequest.open('GET', 'http://localhost:3000/getbuild/' + BuildingName)
+            ourRequest.open('GET', 'https://electricitymeter.herokuapp.com/getbuild/' + BuildingName)
             ourRequest.onload = function () {
                 var ourData = JSON.parse(ourRequest.responseText);
                 console.log(ourData)
@@ -502,7 +502,7 @@
                 var dataUnit = {
                     UnitMeter, BuildingName,
                 }
-                var url = "http://localhost:3000/postUUnitmeter";
+                var url = "https://electricitymeter.herokuapp.com/postUUnitmeter";
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", url, true);
                 xhr.setRequestHeader("Content-Type", "application/json");
@@ -546,7 +546,7 @@
                     console.log('gg')
                     console.log(dataName)
 
-                    var url = "http://localhost:3000/postDatabuild";
+                    var url = "https://electricitymeter.herokuapp.com/postDatabuild";
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", url, true);
                     xhr.setRequestHeader("Content-Type", "application/json");
@@ -580,7 +580,7 @@
                     for (let j = 0; j < ourData[0].floor[i].room.length; j++) {
                         let p = 3
 
-                        htmlString1 += '<div class="bigroom"><div> <a href="http://localhost:3000/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> </div><div id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div></div> '
+                        htmlString1 += '<div class="bigroom"><div> <a href="https://electricitymeter.herokuapp.com/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> </div><div id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div></div> '
                         console.log('t', ourData[0].floor[i].room[j])
                         console.log('#')
 
@@ -647,7 +647,7 @@
             function Userdelete() {
 
                 var ourRequest = new XMLHttpRequest();
-                ourRequest.open('GET', 'http://localhost:3000/getUserdelete')
+                ourRequest.open('GET', 'https://electricitymeter.herokuapp.com/getUserdelete')
                 ourRequest.onload = function () {
                     var ourData = JSON.parse(ourRequest.responseText);
                     console.log(ourData)
