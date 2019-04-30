@@ -777,7 +777,8 @@
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">เบอร์โทรติดต่อหอพัก</label>
-                                            <input name="phone" maxlength="10" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" id="phone" placeholder="เบอร์โทรติดต่อหอพัก">
+                                            <input name="phone" maxlength="10" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                class="form-control" id="phone" placeholder="เบอร์โทรติดต่อหอพัก">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">emailติดต่อหอพัก</label>
@@ -1115,16 +1116,16 @@
             // set date ไม่ให้กรอกวันข้างหน้า
 
             //  console.log("Current Time is: " + now);
-            
 
-           /* function validDate() {
-            var today = new Date().toISOString().split('T')[0];
-                var everyday = new Date().toISOString()
-                var nextWeekDate = new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-                document.getElementsByName("start")[0].setAttribute('min', everyday);
-                document.getElementsByName("start")[0].setAttribute('max', today)
-            }
-            */
+
+            /* function validDate() {
+             var today = new Date().toISOString().split('T')[0];
+                 var everyday = new Date().toISOString()
+                 var nextWeekDate = new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+                 document.getElementsByName("start")[0].setAttribute('min', everyday);
+                 document.getElementsByName("start")[0].setAttribute('max', today)
+             }
+             */
             //ดึงข้อมูลของ ห้องพักทุกห้องที่ค้างค่าไฟ้า
 
 
@@ -2029,6 +2030,9 @@
                 if (document.getElementById('UnitMeter').value == "") {
                     alert('Please Input Unitmeter');
                     return false;
+                } else if (document.getElementById('UnitMeter').value <= 0) {
+                    alert('Please Input Unitmeter');
+                    return false;
                 }
                 var nowdate = new Date()
                 var UnitMeter = document.getElementById("UnitMeter").value;
@@ -2063,6 +2067,9 @@
             $('#mewater').click(function () {
 
                 if (document.getElementById('plicewater').value == "") {
+                    alert('Please Input Unitwater');
+                    return false;
+                } else if (document.getElementById('plicewater').value <= 0) {
                     alert('Please Input Unitwater');
                     return false;
                 }
