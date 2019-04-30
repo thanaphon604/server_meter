@@ -1113,8 +1113,14 @@
             Request.send();
             validDate()
             // set date ไม่ให้กรอกวันข้างหน้า
-            
+
+            //  console.log("Current Time is: " + now);
+            var currentYear = now.getFullYear()
+            //   console.log("Current year is: " + currentYear);
+            var month = (now.getMonth() + 1)
+
             function validDate() {
+                var now = new Date()
                 var today = (now.getMonth() + 1).toISOString().split('T')[0];
                 var everyday = (now.getMonth() + 1).toISOString()
                 var nextWeekDate = (now.getMonth() + 1)((now.getMonth() + 1).getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
@@ -2200,7 +2206,7 @@
                                 '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
                                 + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
                                 + ' <td class="getmeterbefor" >' + y + '</th>'
-                                + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" value="' + y + '"  name="UnitMeter" class="change ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input min="1"   type="number" value="' + y + '"  name="UnitMeter" class="change ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
                                 + ' <td class="setmeterbefor"></th>'
                                 + '</tbody> '
                                 + '</div>'
