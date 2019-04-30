@@ -1112,20 +1112,23 @@
                 return false;
             }
             Request.send();
-            // validDate()
+            validDate()
             // set date ไม่ให้กรอกวันข้างหน้า
 
             //  console.log("Current Time is: " + now);
 
 
-            /* function validDate() {
-             var today = new Date().toISOString().split('T')[0];
-                 var everyday = new Date().toISOString()
-                 var nextWeekDate = new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-                 document.getElementsByName("start")[0].setAttribute('min', everyday);
-                 document.getElementsByName("start")[0].setAttribute('max', today)
-             }
-             */
+            function validDate() {
+                var month = (now.getMonth() + 1).toISOString()
+                var monthlast = (now.getMonth() + 2).toISOString()
+                var today = new Date().toISOString().split('T')[0];
+                var everyday = new Date().toISOString()
+
+                var nextWeekDate = new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+                document.getElementsByName("start")[0].setAttribute('min', month);
+                document.getElementsByName("start")[0].setAttribute('max', monthlast)
+            }
+
             //ดึงข้อมูลของ ห้องพักทุกห้องที่ค้างค่าไฟ้า
 
 
