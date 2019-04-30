@@ -304,7 +304,7 @@
                         <br> <br>
                         <div class="">
                             <label for="start">จดมิเตอร์ประจำเดือน:</label>
-                            <input type="month" type="" id="start" name="start" min="2018-03" value="">
+                            <input type="month" type="" name="start" id="start" name="start" min="2018-03" value="">
 
                             <div class="row justify-content-center col-lg-3 col-12">
                                 <div class="col">
@@ -1111,7 +1111,15 @@
                 return false;
             }
             Request.send();
-
+            validDate()
+            // set date ไม่ให้กรอกวันข้างหน้า
+            function validDate() {
+                var today = new Date().toISOString().split('T')[0];
+                var everyday = new Date().toISOString()
+                var nextWeekDate = new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+                document.getElementsByName("start")[0].setAttribute('min', everyday);
+                document.getElementsByName("start")[0].setAttribute('max', today)
+            }
             //ดึงข้อมูลของ ห้องพักทุกห้องที่ค้างค่าไฟ้า
 
 
@@ -2152,7 +2160,7 @@
                     + '    </div>'
                 document.getElementById("setmetermonth").innerHTML = htmlStringmetermonth
                 if (Datameternow == "" && Datameterbefor == "") {
-                   // alert('ไม่มีข้อมูล')
+                    // alert('ไม่มีข้อมูล')
                     htmlStringUnitMeter +=
                         '<div class="setmeter">'
                         + '<div id="clear" >'
@@ -2262,7 +2270,7 @@
 
                     }
                 } else if (Datameternow == "" && Datameterbefor != "") {
-                  //  alert('มีข้อมูลอดีต')
+                    //  alert('มีข้อมูลอดีต')
                     // console.log(Datameterunit[0].datameter)
                     for (let k = 0; k < Datameterbefor.length; k++) {
 
