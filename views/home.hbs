@@ -1117,13 +1117,14 @@
             //  console.log("Current Time is: " + now);
             
 
-            function validDate() {
+           /* function validDate() {
             var today = new Date().toISOString().split('T')[0];
                 var everyday = new Date().toISOString()
                 var nextWeekDate = new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
                 document.getElementsByName("start")[0].setAttribute('min', everyday);
                 document.getElementsByName("start")[0].setAttribute('max', today)
             }
+            */
             //ดึงข้อมูลของ ห้องพักทุกห้องที่ค้างค่าไฟ้า
 
 
@@ -2203,7 +2204,7 @@
                                 '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
                                 + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
                                 + ' <td class="getmeterbefor" >' + y + '</th>'
-                                + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input min="1"   type="number" value="' + y + '"  name="UnitMeter" class="change ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input min="0"   type="number" value="' + y + '"  name="UnitMeter" class="change ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
                                 + ' <td class="setmeterbefor"></th>'
                                 + '</tbody> '
                                 + '</div>'
@@ -2257,7 +2258,7 @@
                                     '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
                                     + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
                                     + ' <td class="getmeterbefor" >0</th>'
-                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input min="1"  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="change ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input min="0"  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="change ' + ((z++) + "-") + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
                                     + ' <td class="setmeterbefor">' + (Datameternow[k].floormeter[i].roommeter[j].usemeter) + '</th>'
                                     + '</tbody> '
                                     + '</div>'
@@ -2316,7 +2317,7 @@
                                     '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
                                     + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
                                     + ' <td class="getmeterbefor" >' + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter) + '</th>'
-                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" min="1" value="' + y + '"  name="UnitMeter" class="change ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input  type="number" min="0" value="' + y + '"  name="UnitMeter" class="change ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
                                     + ' <td class="setmeterbefor"></th>'
                                     + '</tbody> '
                                     + '</div>'
@@ -2375,7 +2376,7 @@
                                     '<tbody > <tr><td scope="row">' + _data.floor[i].room[j].roomNumber + '</td>'
                                     + ' <td id="getnum">' + _data.floor[i].room[j].roomStatus + '</th>'
                                     + ' <td class="getmeterbefor" >' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '</th>'
-                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input min="1"  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="change ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
+                                    + ' <td> <div id="education-groupboxwrapper"><div class="education-groupbox"><input min="0"  type="number" value="' + Datameternow[k].floormeter[i].roommeter[j].usemeter + '"  name="UnitMeter" class="change ' + ((z++) + "-" + (Datameterbefor[k].floormeter[i].roommeter[j].usemeter)) + '" class="changemeter' + Datameterbefor[k].floormeter[i].roommeter[j].usemeter + '" style="width:85%; padding: 1px;text-align:center; margin-left: 5px;"> </div></div></th>'
                                     + ' <td  class="setmeterbefor">' + '' + '</td></th>'
                                     + '</tbody> '
                                     + '</div>'
