@@ -1057,7 +1057,7 @@ app.get('/print', function (req, res) {
 
 
 
-app.post('/postPrint', async(req, res) => {
+app.post('/postPrint', (req, res) => {
     //let dataprint = req.body.htmlStringmeterprint
     
     var fonts = {
@@ -1089,7 +1089,7 @@ app.post('/postPrint', async(req, res) => {
       pdfDoc.pipe(fs.createWriteStream('document.pdf'));
       pdfDoc.end(); 
       
-
+      res.send('donesss')
     // var pdf = require('html-pdf');
     // var fs = require('fs')
     // console.log('here')
