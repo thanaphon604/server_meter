@@ -1058,50 +1058,57 @@ app.get('/print', function (req, res) {
 
 
 app.post('/postPrint', (req, res) => {
-    let dataprint = req.body.htmlStringmeterprint
-    var pdf = require('html-pdf');
-    var options = { format: 'Letter' };
-    let BuildingNameInput = req.body.BuildingName
+    //let dataprint = req.body.htmlStringmeterprint
+    //var pdf = require('html-pdf');
+    //var options = { format: 'Letter' };
+    //let BuildingNameInput = req.body.BuildingName
 
-    console.log('### dataprint : ', dataprint)
-
-    pdf.create(`
-        <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            </head>
-            <body>ทดสอบ</body>
-        </html>`, options)
-        .toFile('./files/invoice.pdf', function (err, res) {
-            if (err) return console.log(err);
-        }
-    );
-    meterbuild.find({
-        buildingnamemeter: BuildingNameInput,
-
-    }).then((build) => {
-        if (build.length >= 1) {
-            console.log('ggrecive', build.length)
-            for (let m = 0; m < build.length; m++) {
-
-                build[m].save().then((suc) => {
-                    console.log('res contract : ', suc)
-                    res.send(suc)
-                }, (e) => {
-                    consoel.log('error contract :', e)
-                    res.status(400).send(e)
-                })
-
-            }
-            res.send(build[0])
-        } else if (build.length == 0) {
-            res.status(400).send('sory not found is user')
-        }
-    }, (err) => {
-        res.status(400).send(err)
+    console.log('### dataprint ###')
+    var fs = require('fs')
+    var conversion = require('phantom-html-to-pdf')()
+    conversion({html: '<h1>ทดสอบ</h1>'}, (err, pdf) => {
+        var output = fs.createWriteStream('./files/invoice.pdf')
+        console.log('pdf pdf pdf ~')
+        pdf.stream.pipe(output)
     })
+
+    // pdf.create(`
+    //     <html lang="en">
+    //         <head>
+    //             <meta charset="UTF-8">
+    //             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    //             <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    //         </head>
+    //         <body>ทดสอบ</body>
+    //     </html>`, options)
+    //     .toFile('./files/invoice.pdf', function (err, res) {
+    //         if (err) return console.log(err);
+    //     }
+    // // );
+    // meterbuild.find({
+    //     buildingnamemeter: BuildingNameInput,
+
+    // }).then((build) => {
+    //     if (build.length >= 1) {
+    //         console.log('ggrecive', build.length)
+    //         for (let m = 0; m < build.length; m++) {
+
+    //             build[m].save().then((suc) => {
+    //                 console.log('res contract : ', suc)
+    //                 res.send(suc)
+    //             }, (e) => {
+    //                 consoel.log('error contract :', e)
+    //                 res.status(400).send(e)
+    //             })
+
+    //         }
+    //         res.send(build[0])
+    //     } else if (build.length == 0) {
+    //         res.status(400).send('sory not found is user')
+    //     }
+    // }, (err) => {
+    //     res.status(400).send(err)
+    // })
     // pdf.create('<html lang="en"><body>'+dataprint+'</body></html>', { format: 'Letter' }).toStream(function (err, stream) {
     //     if (err) {
     //         res.json({

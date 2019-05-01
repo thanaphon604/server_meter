@@ -4,11 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start" : "node app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "enignes" : {
-    "node" : "8.11.3"
+  "enignes": {
+    "node": "8.11.3"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "express": "^4.16.3",
     "hbs": "^4.0.1",
     "mongoose": "^5.2.15",
+    "phantom-html-to-pdf": "^0.5.6",
     "pug": "^2.0.3",
     "unique-array-objects": "^1.0.0"
   }
