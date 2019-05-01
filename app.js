@@ -1047,7 +1047,7 @@ app.get('/getmeterbuilds/:BuildingName', (req, res) => {
 app.get('/print', function (req, res) {
     var filePath = "/sss.pdf";
 
-    fs.readFile(__dirname + filePath, 'utf8', function (err, data) {
+    fs.readFile(__dirname + filePath, {encoding: 'utf-8'}, function (err, data) {
         res.contentType("application/pdf");
         res.send(data);
     });
