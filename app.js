@@ -1062,7 +1062,31 @@ app.post('/postPrint', async(req, res) => {
     var pdf = require('html-pdf');
     var fs = require('fs')
     console.log('here')
-    await pdf.create('<h1>ทดสอบบsssdsadasd</h1>', {format: 'A4'}).toFile('./sss.pdf', function(err, res) {
+    await pdf.create(`
+        <html>
+            <head>
+            <style type="text/css">
+            @font-face {
+                font-family: 'ThaiSansLite';
+                src: url('font/ThaiSansLite.eot?#iefix') format('embedded-opentype'),
+                    url('font/ThaiSansLite.woff') format('woff'),
+                    url('font/ThaiSansLite.ttf') format('truetype');
+                    url('font/ThaiSansLite.svg#ThaiSansLite') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            * {
+                font-family: ThaiSansLite;
+            }
+            
+            </style>
+            </head>
+            <body>
+                ทดสอบ 1234 Hello
+            </body>
+        </html>
+    `, {format: 'A4'}).toFile('./sss.pdf', function(err, res) {
         if(err) return console.log(err)
         console.log('donee')
     })
