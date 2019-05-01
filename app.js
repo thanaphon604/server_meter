@@ -1067,7 +1067,16 @@ app.post('/postPrint', (req, res) => {
         'Content-disposition': `attachment; filename=test.pdf`,
     });
 
-    pdf.create('<h1>HELLO ทดสอบ</h1>', {format: 'Letter'}).toStream((err, stream) => {
+    pdf.create(`
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        </head>
+        <body>
+            <h1>HELLO ทดสอบ</h1>
+        </body>
+    </html>
+    `, {format: 'Letter'}).toStream((err, stream) => {
         stream.pipe(res)
     })
 
