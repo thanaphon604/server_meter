@@ -1070,7 +1070,7 @@ app.post('/postPrint', (req, res) => {
     pdf.create(`
     <html>
         <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <meta http-equiv="Content-Type" content="text/html; charset=TIS-620">
         </head>
         <body>
             <h1>HELLO ทดสอบ</h1>
