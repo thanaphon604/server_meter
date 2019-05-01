@@ -1060,12 +1060,7 @@ app.get('/print', function (req, res) {
 app.post('/postPrint', async(req, res) => {
     //let dataprint = req.body.htmlStringmeterprint
     
-
-    var pdfMake = require('pdfmake/build/pdfmake')
-    var pdfFonts = require('pdfmake/build/vfs_fonts')
-    pdfMake.vfs = pdfFonts.pdfMake.vfs
-    
-    pdfMake.fonts = {
+    var fonts = {
         ThaiSansLite: {
           normal: 'ThaiSansLite.ttf',
         },
@@ -1077,15 +1072,22 @@ app.post('/postPrint', async(req, res) => {
         }
       }
 
-      var d = {
-          content: [
-              {text: 'สวัสดี', fontSize: 15},
-          ],
-          defaultStyle: {
-              font: 'ThaiSansLite'
-          }
-      }
-      pdfMake.createPdf(d).write('./sss.pdf')
+      var PdfPrinter = require('pdfmake');
+      var printer = new PdfPrinter(fonts);
+      var fs = require('fs');
+       
+      var docDefinition = {
+        content: [
+            {text: 'asdasdสวสวสวสว', fontSize: 15}
+        ],
+        defaultStyle: {
+            font: 'ThaiSansLite'
+        }
+      };
+       
+      var pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream('document.pdf'));
+      pdfDoc.end(); 
       
 
     // var pdf = require('html-pdf');
