@@ -1062,20 +1062,27 @@ app.post('/postPrint', async(req, res) => {
     var pdf = require('html-pdf');
     var fs = require('fs')
     console.log('here')
-    await pdf.create(`
+    
+    
+    pdf.create(`
         <html>
             <head>
             <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+            <style>
+                h1 { font-family: Kanit; }
+                h2 { font-family: 'Kanit'; }
+            </style>
             </head>
             <body style="font-family: 'Kanit', sans-serif;">
                 ทดสอบ 1234 Hello
+
+                <h1>สวัสดี</h1>
+                <h2>สวัสดี</h2>
             </body>
         </html>
-    `, {format: 'A4'}).toFile('./sss.pdf', function(err, res) {
-        if(err) return console.log(err)
-        console.log('donee')
+    `, {format: 'A4'}).toStream((err, stream) => {
+        stream.pipe(res)
     })
-    res.send('done')
 })
 
 
