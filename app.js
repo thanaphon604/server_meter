@@ -1059,30 +1059,59 @@ app.get('/print', function (req, res) {
 
 app.post('/postPrint', async(req, res) => {
     //let dataprint = req.body.htmlStringmeterprint
-    var pdf = require('html-pdf');
-    var fs = require('fs')
-    console.log('here')
     
-    
-    pdf.create(`
-        <html>
-            <head>
-            <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
-            <style>
-                h1 { font-family: Kanit; }
-                h2 { font-family: 'Kanit'; }
-            </style>
-            </head>
-            <body style="font-family: 'Kanit', sans-serif;">
-                ทดสอบ 1234 Hello
 
-                <h1>สวัสดี</h1>
-                <h2>สวัสดี</h2>
-            </body>
-        </html>
-    `, {format: 'A4'}).toStream((err, stream) => {
-        stream.pipe(res)
-    })
+    var pdfMake = require('pdfmake/build/pdfmake')
+    var pdfFonts = require('pdfmake/build/vfs_fonts')
+    pdfMake.vfs = pdfFonts.pdfMake.vfs
+    
+    pdfMake.fonts = {
+        ThaiSansLite: {
+          normal: 'ThaiSansLite.ttf',
+        },
+        Roboto: {
+          normal: 'Roboto-Regular.ttf',
+          bold: 'Roboto-Medium.ttf',
+          italics: 'Roboto-Italic.ttf',
+          bolditalics: 'Roboto-MediumItalic.ttf'
+        }
+      }
+
+      var d = {
+          content: [
+              {text: 'สวัสดี', fontSize: 15},
+          ],
+          defaultStyle: {
+              font: 'ThaiSansLite'
+          }
+      }
+      pdfMake.createPdf(d).write('./sss.pdf')
+      
+
+    // var pdf = require('html-pdf');
+    // var fs = require('fs')
+    // console.log('here')
+    
+    
+    // pdf.create(`
+    //     <html>
+    //         <head>
+    //         <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+    //         <style>
+    //             h1 { font-family: Kanit; }
+    //             h2 { font-family: 'Kanit'; }
+    //         </style>
+    //         </head>
+    //         <body style="font-family: 'Kanit', sans-serif;">
+    //             ทดสอบ 1234 Hello
+
+    //             <h1>สวัสดี</h1>
+    //             <h2>สวัสดี</h2>
+    //         </body>
+    //     </html>
+    // `, {format: 'A4'}).toStream((err, stream) => {
+    //     stream.pipe(res)
+    // })
 })
 
 
