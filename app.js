@@ -1059,18 +1059,28 @@ app.get('/print', function (req, res) {
 
 app.post('/postPrint', (req, res) => {
     //let dataprint = req.body.htmlStringmeterprint
-    //var pdf = require('html-pdf');
+    var pdf = require('html-pdf');
     //var options = { format: 'Letter' };
     //let BuildingNameInput = req.body.BuildingName
+    res.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-disposition': `attachment; filename=test.pdf`,
+    });
 
-    console.log('### dataprint ###')
-    var fs = require('fs')
-    var conversion = require('phantom-html-to-pdf')()
-    conversion({html: '<h1>ทดสอบ</h1>'}, (err, pdf) => {
-        var output = fs.createWriteStream('./files/invoice.pdf', {encoding: 'utf8'})
-        console.log('pdf pdf pdf ~')
-        pdf.stream.pipe(output)
+    pdf.create('<h1>HELLO ทดสอบ</h1>', {format: 'Letter'}).toStream((err, stream) => {
+        stream.pipe(res)
     })
+
+    // console.log('### dataprint ###')
+    // var fs = require('fs')
+    // var conversion = require('phantom-html-to-pdf')()
+    // conversion({html: '<h1>ทดสอบ</h1>'}, (err, pdf) => {
+    //     var output = fs.createWriteStream('./files/invoice.pdf', {encoding: 'utf8'})
+    //     console.log('pdf pdf pdf ~')
+    //     pdf.stream.pipe(output)
+    // })
+
+    // res.send('done')
 
     // pdf.create(`
     //     <html lang="en">
