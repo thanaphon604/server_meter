@@ -1045,7 +1045,7 @@ app.get('/getmeterbuilds/:BuildingName', (req, res) => {
 
 // })
 app.get('/print', function (req, res) {
-    var filePath = "/files/invoice.pdf";
+    var filePath = "/sss.pdf";
 
     fs.readFile(__dirname + filePath, function (err, data) {
         res.contentType("application/pdf");
@@ -1057,28 +1057,38 @@ app.get('/print', function (req, res) {
 
 
 
-app.post('/postPrint', (req, res) => {
+app.post('/postPrint', async(req, res) => {
     //let dataprint = req.body.htmlStringmeterprint
     var pdf = require('html-pdf');
+    var fs = require('fs')
+    console.log('here')
+    await pdf.create('<h1>ทดสอบบsssdsadasd</h1>', {format: 'A4'}).toFile('./sss.pdf', function(err, res) {
+        if(err) return console.log(err)
+        console.log('donee')
+    })
+    res.send('done')
+})
+
+
     //var options = { format: 'Letter' };
     //let BuildingNameInput = req.body.BuildingName
-    res.writeHead(200, {
-        'Content-Type': 'application/pdf',
-        'Content-disposition': `attachment; filename=test.pdf`,
-    });
+    // res.writeHead(200, {
+    //     'Content-Type': 'application/pdf',
+    //     'Content-disposition': `attachment; filename=test.pdf`,
+    // });
 
-    pdf.create(`
-    <html>
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=TIS-620">
-        </head>
-        <body>
-            <h1>HELLO ทดสอบ</h1>
-        </body>
-    </html>
-    `, {format: 'Letter'}).toStream((err, stream) => {
-        stream.pipe(res)
-    })
+    // pdf.create(`
+    // <html>
+    //     <head>
+    //         <meta http-equiv="Content-Type" content="text/html; charset=TIS-620">
+    //     </head>
+    //     <body>
+    //         <h1>HELLO ทดสอบ</h1>
+    //     </body>
+    // </html>
+    // `, {format: 'Letter'}).toStream((err, stream) => {
+    //     stream.pipe(res)
+    // })
 
     // console.log('### dataprint ###')
     // var fs = require('fs')
@@ -1138,7 +1148,7 @@ app.post('/postPrint', (req, res) => {
     //     stream.pipe(res); // your response
     // });
 
-})
+//})
 //=============
 
 app.post('/postPrintpay', (req, res) => {
