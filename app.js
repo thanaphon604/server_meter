@@ -1061,9 +1061,6 @@ app.post('/postPrint', (req, res) => {
     //let dataprint = req.body.htmlStringmeterprint
     
     var fonts = {
-        ThaiSansLite: {
-          normal: 'ThaiSansLite.ttf',
-        },
         Roboto: {
           normal: 'Roboto-Regular.ttf',
           bold: 'Roboto-Medium.ttf',
@@ -1080,9 +1077,6 @@ app.post('/postPrint', (req, res) => {
         content: [
             {text: 'asdasdสวสวสวสว', fontSize: 15}
         ],
-        defaultStyle: {
-            font: 'ThaiSansLite'
-        }
       };
        
       var pdfDoc = printer.createPdfKitDocument(docDefinition);
