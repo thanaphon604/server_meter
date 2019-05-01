@@ -1067,7 +1067,7 @@ app.post('/postPrint', (req, res) => {
     var fs = require('fs')
     var conversion = require('phantom-html-to-pdf')()
     conversion({html: '<h1>ทดสอบ</h1>'}, (err, pdf) => {
-        var output = fs.createWriteStream('./files/invoice.pdf')
+        var output = fs.createWriteStream('./files/invoice.pdf', {encoding: 'utf8'})
         console.log('pdf pdf pdf ~')
         pdf.stream.pipe(output)
     })
