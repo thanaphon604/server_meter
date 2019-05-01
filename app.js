@@ -1047,7 +1047,7 @@ app.get('/getmeterbuilds/:BuildingName', (req, res) => {
 app.get('/print', function (req, res) {
     var filePath = "/sss.pdf";
 
-    fs.readFile(__dirname + filePath, 'utf8', function (err, data) {
+    fs.readFile(__dirname + filePath, function (err, data) {
         res.contentType("application/pdf");
         res.send(data);
     });
@@ -1065,24 +1065,9 @@ app.post('/postPrint', async(req, res) => {
     await pdf.create(`
         <html>
             <head>
-            <style type="text/css">
-            @font-face {
-                font-family: 'ThaiSansLite';
-                src: url('font/ThaiSansLite.eot?#iefix') format('embedded-opentype'),
-                    url('font/ThaiSansLite.woff') format('woff'),
-                    url('font/ThaiSansLite.ttf') format('truetype');
-                    url('font/ThaiSansLite.svg#ThaiSansLite') format('svg');
-                font-weight: normal;
-                font-style: normal;
-            }
-
-            * {
-                font-family: ThaiSansLite;
-            }
-
-            </style>
+            <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
             </head>
-            <body>
+            <body style="font-family: 'Kanit', sans-serif;">
                 ทดสอบ 1234 Hello
             </body>
         </html>
