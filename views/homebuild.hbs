@@ -425,30 +425,44 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 if (ourData[0].methodwater == 'rentmonth') {
                     // window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
                     //============
-                    var ourRequest = new XMLHttpRequest();
-                    ourRequest.open('GET', 'https://electricitymeter.herokuapp.com/HOME/' + BuildingName)
-                    ourRequest.onload = function () {
-                        var ourData = JSON.parse(ourRequest.responseText);
+                    var url = "https://electricitymeter.herokuapp.com/HOME";
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", url, true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            console.log('res is', xhr.responseText)
+                            // if success go login page
+                            alert(xhr.responseText)
+                            window.location.reload(true);
 
-                        console.log('data : ', ourData)
-                        gethomewater(ourData, BuildingName)
-                        return false;
-                    }
-                    ourRequest.send();
+                        } else {
+                            //alert('can not create user! Pls try again.')
+                        }
+                    };
+                    var data = JSON.stringify({ BuildingName:BuildingName});
+                    xhr.send(data);
 
                     ///==============
                 } else if (ourData[0].methodwater == 'rentunit') {
                     //   window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
-                    var ourRequest = new XMLHttpRequest();
-                    ourRequest.open('GET', 'https://electricitymeter.herokuapp.com/HOME/' + BuildingName)
-                    ourRequest.onload = function () {
-                        var ourData = JSON.parse(ourRequest.responseText);
+                  var url = "https://electricitymeter.herokuapp.com/HOME";
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", url, true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            console.log('res is', xhr.responseText)
+                            // if success go login page
+                            alert(xhr.responseText)
+                            window.location.reload(true);
 
-                        console.log('data : ', ourData)
-                        gethomewater(ourData, BuildingName)
-                        return false;
-                    }
-                    ourRequest.send();
+                        } else {
+                            //alert('can not create user! Pls try again.')
+                        }
+                    };
+                    var data = JSON.stringify({ BuildingName:BuildingName});
+                    xhr.send(data);
                 }
             }
 

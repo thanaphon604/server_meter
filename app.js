@@ -175,10 +175,10 @@ app.get('/Person', (req, res) => {
     res.render('personInput.hbs')
 })
 //run Home.hbs
-app.get('/HOME/:BuildingName', (req, res) => {
+app.post('/HOME', (req, res) => {
+    let BuildingNameInput = req.body.BuildingName
     res.render('home.hbs', {
-        BuildingName: req.params.BuildingName,
-
+        BuildingName: BuildingNameInput,
     })
 })
 app.get('/getwater/:BuildingName', (req, res) => {
