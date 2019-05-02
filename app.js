@@ -177,8 +177,13 @@ app.get('/Person', (req, res) => {
 //run Home.hbs
 app.post('/HOME', (req, res) => {
     let BuildingNameInput = req.body.BuildingName
-    res.render('home.hbs', {
+    Building.find({
         BuildingName: BuildingNameInput,
+    }).then((doc) => {
+        res.render('home.hbs', {
+            BuildingName: BuildingNameInput,
+            doc: encodeURI(JSON.stringify(doc))
+        })
     })
 })
 app.get('/getwater/:BuildingName', (req, res) => {
