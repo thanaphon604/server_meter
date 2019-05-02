@@ -1962,6 +1962,8 @@ app.post('/postDatabuild', (req, res) => {
 app.post('/signinuser', (req, res) => {
     let usernameInput = req.body.usernameuser
     let passwordInput = req.body.passworduser
+    let ggwpinput = req.body.ggwp
+    console.log('test',ggwpinput)
     //find หาusername password สำหรับ 
     Userroom.find({
         usernameuser: usernameInput,
