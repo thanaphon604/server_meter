@@ -189,14 +189,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
             <div class="form-popup" id="myForm">
                 <form action="" class="form-container" method="" name="myForm" id="myForm">
                     <h1>สร้างหอพัก</h1>
-                     <label for="exampleInputEmail1" style="color: red"><h5>*กรุณากรอกข้อมูลให้ครบทุกช่องไม่อย่างนั้นระบบจะไม่สามารถบันทึกได้</h5></label>
+                    <label for="exampleInputEmail1" style="color: red">
+                        <h5>*กรุณากรอกข้อมูลให้ครบทุกช่องไม่อย่างนั้นระบบจะไม่สามารถบันทึกได้</h5>
+                    </label>
                     <div class="form-group">
                         <label for="exampleInputEmail1">ชื่อหอพัก</label>
                         <input name="nameBuilding" type="text" class="form-control" id="nameBuilding" placeholder="ชื่อหอพัก">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">เบอร์โทรติดต่อหอพัก</label>
-                        <input name="phone" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" class="form-control" id="phone" placeholder="เบอร์โทรติดต่อหอพัก">
+                        <input name="phone" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type="number" maxlength="10" class="form-control" id="phone" placeholder="เบอร์โทรติดต่อหอพัก">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">emailติดต่อหอพัก</label>
@@ -206,11 +209,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         <label for="exampleInputEmail1">วิธีคิดค่าน้ำ</label><br>
                         <input type="radio" name="water" value="rentmonth" required="required">คิดเเบบเหมาจ่ายต่อเดือน<br>
                         <input type="radio" name="water" value="rentunit" required="required">คิดตาม Unit ที่ใช้<br>
-                        <input name="unitwater" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" type="number" class="form-control" id="unitwater" placeholder="ราคาค่าต่อเดือน หรือ ราคากี่บาทต่อ 1 uint">
+                        <input name="unitwater" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            maxlength="4" type="number" class="form-control" id="unitwater" placeholder="ราคาค่าต่อเดือน หรือ ราคากี่บาทต่อ 1 uint">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">ค่าไฟฟ้าต่อหน่วย/บาท</label>
-                        <input name="unitmeter" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" type="number" class="form-control" id="unitmeter" placeholder="ค่าไฟฟ้าต่อหน่วย">
+                        <input name="unitmeter" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            maxlength="3" type="number" class="form-control" id="unitmeter" placeholder="ค่าไฟฟ้าต่อหน่วย">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">จำนวนชั้น</label>
@@ -288,7 +293,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
             $('#add').click(function () {
                 console.log('######')
-                 if (document.getElementById('nameBuilding').value == "") {
+                if (document.getElementById('nameBuilding').value == "") {
                     alert('Please Input BuildingName');
                     return false;
                 } else if (document.getElementById('phone').value == "") {
@@ -297,10 +302,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 } else if (document.getElementById('email').value == "") {
                     alert('Please Input Email');
                     return false;
-                } else if (document.getElementById('unitwater').value =="") {
+                } else if (document.getElementById('unitwater').value == "") {
                     alert('Please input water meter');
                     return false;
-                }else if (document.getElementById('unitmeter').value =="") {
+                } else if (document.getElementById('unitmeter').value == "") {
                     alert('Please input Power meter unit');
                     return false;
                 }
@@ -418,9 +423,32 @@ body {font-family: Arial, Helvetica, sans-serif;}
             function gethomewater(ourData, BuildingName) {
                 //console.log(ourData[0].methodwater)
                 if (ourData[0].methodwater == 'rentmonth') {
-                    window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
+                    // window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
+                    //============
+                    var ourRequest = new XMLHttpRequest();
+                    ourRequest.open('GET', 'https://electricitymeter.herokuapp.com/HOME/' + BuildingName)
+                    ourRequest.onload = function () {
+                        var ourData = JSON.parse(ourRequest.responseText);
+
+                        console.log('data : ', ourData)
+                        gethomewater(ourData, BuildingName)
+                        return false;
+                    }
+                    ourRequest.send();
+
+                    ///==============
                 } else if (ourData[0].methodwater == 'rentunit') {
-                    window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
+                    //   window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
+                    var ourRequest = new XMLHttpRequest();
+                    ourRequest.open('GET', 'https://electricitymeter.herokuapp.com/HOME/' + BuildingName)
+                    ourRequest.onload = function () {
+                        var ourData = JSON.parse(ourRequest.responseText);
+
+                        console.log('data : ', ourData)
+                        gethomewater(ourData, BuildingName)
+                        return false;
+                    }
+                    ourRequest.send();
                 }
             }
 

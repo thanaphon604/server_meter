@@ -175,8 +175,11 @@ app.get('/Person', (req, res) => {
     res.render('personInput.hbs')
 })
 //run Home.hbs
-app.get('/HOME', (req, res) => {
-    res.render('home.hbs')
+app.get('/HOME/:BuildingName', (req, res) => {
+    res.render('home.hbs', {
+        BuildingName: req.params.BuildingName,
+
+    })
 })
 app.get('/getwater/:BuildingName', (req, res) => {
     Building.find({
@@ -1059,36 +1062,36 @@ app.get('/print', function (req, res) {
 
 app.post('/postPrint', (req, res) => {
     //let dataprint = req.body.htmlStringmeterprint
-    
+
     var fonts = {
         Roboto: {
-          normal: 'Roboto-Regular.ttf',
-          bold: 'Roboto-Medium.ttf',
-          italics: 'Roboto-Italic.ttf',
-          bolditalics: 'Roboto-MediumItalic.ttf'
+            normal: 'Roboto-Regular.ttf',
+            bold: 'Roboto-Medium.ttf',
+            italics: 'Roboto-Italic.ttf',
+            bolditalics: 'Roboto-MediumItalic.ttf'
         }
-      }
+    }
 
-      var PdfPrinter = require('pdfmake');
-      var printer = new PdfPrinter(fonts);
-      var fs = require('fs');
-       
-      var docDefinition = {
+    var PdfPrinter = require('pdfmake');
+    var printer = new PdfPrinter(fonts);
+    var fs = require('fs');
+
+    var docDefinition = {
         content: [
-            {text: 'asdasdสวสวสวสว', fontSize: 15}
+            { text: 'asdasdสวสวสวสว', fontSize: 15 }
         ],
-      };
-       
-      var pdfDoc = printer.createPdfKitDocument(docDefinition);
-      pdfDoc.pipe(fs.createWriteStream('document.pdf'));
-      pdfDoc.end(); 
-      
-      res.send('donesss')
+    };
+
+    var pdfDoc = printer.createPdfKitDocument(docDefinition);
+    pdfDoc.pipe(fs.createWriteStream('document.pdf'));
+    pdfDoc.end();
+
+    res.send('donesss')
     // var pdf = require('html-pdf');
     // var fs = require('fs')
     // console.log('here')
-    
-    
+
+
     // pdf.create(`
     //     <html>
     //         <head>
@@ -1111,83 +1114,83 @@ app.post('/postPrint', (req, res) => {
 })
 
 
-    //var options = { format: 'Letter' };
-    //let BuildingNameInput = req.body.BuildingName
-    // res.writeHead(200, {
-    //     'Content-Type': 'application/pdf',
-    //     'Content-disposition': `attachment; filename=test.pdf`,
-    // });
+//var options = { format: 'Letter' };
+//let BuildingNameInput = req.body.BuildingName
+// res.writeHead(200, {
+//     'Content-Type': 'application/pdf',
+//     'Content-disposition': `attachment; filename=test.pdf`,
+// });
 
-    // pdf.create(`
-    // <html>
-    //     <head>
-    //         <meta http-equiv="Content-Type" content="text/html; charset=TIS-620">
-    //     </head>
-    //     <body>
-    //         <h1>HELLO ทดสอบ</h1>
-    //     </body>
-    // </html>
-    // `, {format: 'Letter'}).toStream((err, stream) => {
-    //     stream.pipe(res)
-    // })
+// pdf.create(`
+// <html>
+//     <head>
+//         <meta http-equiv="Content-Type" content="text/html; charset=TIS-620">
+//     </head>
+//     <body>
+//         <h1>HELLO ทดสอบ</h1>
+//     </body>
+// </html>
+// `, {format: 'Letter'}).toStream((err, stream) => {
+//     stream.pipe(res)
+// })
 
-    // console.log('### dataprint ###')
-    // var fs = require('fs')
-    // var conversion = require('phantom-html-to-pdf')()
-    // conversion({html: '<h1>ทดสอบ</h1>'}, (err, pdf) => {
-    //     var output = fs.createWriteStream('./files/invoice.pdf', {encoding: 'utf8'})
-    //     console.log('pdf pdf pdf ~')
-    //     pdf.stream.pipe(output)
-    // })
+// console.log('### dataprint ###')
+// var fs = require('fs')
+// var conversion = require('phantom-html-to-pdf')()
+// conversion({html: '<h1>ทดสอบ</h1>'}, (err, pdf) => {
+//     var output = fs.createWriteStream('./files/invoice.pdf', {encoding: 'utf8'})
+//     console.log('pdf pdf pdf ~')
+//     pdf.stream.pipe(output)
+// })
 
-    // res.send('done')
+// res.send('done')
 
-    // pdf.create(`
-    //     <html lang="en">
-    //         <head>
-    //             <meta charset="UTF-8">
-    //             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    //             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    //         </head>
-    //         <body>ทดสอบ</body>
-    //     </html>`, options)
-    //     .toFile('./files/invoice.pdf', function (err, res) {
-    //         if (err) return console.log(err);
-    //     }
-    // // );
-    // meterbuild.find({
-    //     buildingnamemeter: BuildingNameInput,
+// pdf.create(`
+//     <html lang="en">
+//         <head>
+//             <meta charset="UTF-8">
+//             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//             <meta http-equiv="X-UA-Compatible" content="ie=edge">
+//         </head>
+//         <body>ทดสอบ</body>
+//     </html>`, options)
+//     .toFile('./files/invoice.pdf', function (err, res) {
+//         if (err) return console.log(err);
+//     }
+// // );
+// meterbuild.find({
+//     buildingnamemeter: BuildingNameInput,
 
-    // }).then((build) => {
-    //     if (build.length >= 1) {
-    //         console.log('ggrecive', build.length)
-    //         for (let m = 0; m < build.length; m++) {
+// }).then((build) => {
+//     if (build.length >= 1) {
+//         console.log('ggrecive', build.length)
+//         for (let m = 0; m < build.length; m++) {
 
-    //             build[m].save().then((suc) => {
-    //                 console.log('res contract : ', suc)
-    //                 res.send(suc)
-    //             }, (e) => {
-    //                 consoel.log('error contract :', e)
-    //                 res.status(400).send(e)
-    //             })
+//             build[m].save().then((suc) => {
+//                 console.log('res contract : ', suc)
+//                 res.send(suc)
+//             }, (e) => {
+//                 consoel.log('error contract :', e)
+//                 res.status(400).send(e)
+//             })
 
-    //         }
-    //         res.send(build[0])
-    //     } else if (build.length == 0) {
-    //         res.status(400).send('sory not found is user')
-    //     }
-    // }, (err) => {
-    //     res.status(400).send(err)
-    // })
-    // pdf.create('<html lang="en"><body>'+dataprint+'</body></html>', { format: 'Letter' }).toStream(function (err, stream) {
-    //     if (err) {
-    //         res.json({
-    //             message: 'Sorry, we were unable to generate pdf',
-    //         });
-    //     }
+//         }
+//         res.send(build[0])
+//     } else if (build.length == 0) {
+//         res.status(400).send('sory not found is user')
+//     }
+// }, (err) => {
+//     res.status(400).send(err)
+// })
+// pdf.create('<html lang="en"><body>'+dataprint+'</body></html>', { format: 'Letter' }).toStream(function (err, stream) {
+//     if (err) {
+//         res.json({
+//             message: 'Sorry, we were unable to generate pdf',
+//         });
+//     }
 
-    //     stream.pipe(res); // your response
-    // });
+//     stream.pipe(res); // your response
+// });
 
 //})
 //=============
