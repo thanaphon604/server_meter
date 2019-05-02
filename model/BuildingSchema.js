@@ -20,7 +20,7 @@ var BuildingSchema = new Schema({
                             address: String,
                             phoneNumber: {
                                 type: String,
-                                unique: true
+                               
                             },
                             License: String,
 
