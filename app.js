@@ -105,7 +105,7 @@ app.post('/signin', (req, res) => {
             })
             //res.send(admin[0])
         } else if (admin.length == 0) {
-            res.status(400).send('sory not found is user')
+            res.status(400).send('sory not found is user',usernameInput)
         }
     }, (err) => {
         res.status(400).send(err)
