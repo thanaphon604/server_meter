@@ -263,7 +263,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                   <div class="row mt-4">
                                          <div class="col">
                                            <h3 text-center id="NameB[' + i + ']">ชื่อหอพัก`  + data_admin[i].BuildingName + `</h3>
-                                           <form action="http://localhost:3000/HOME" onsubmit="SubMit()" method="POST">
+                                           <form action="https://electricitymeter.herokuapp.com/HOME" onsubmit="SubMit()" method="POST">
                                               <div class="form-group">
                                                  <input style="display:none" value="`+ data_admin[i].BuildingName + `" required name="BuildingName" type="text" class="form-control" id="BuildingName"
                                                      placeholder="Enter Username">
