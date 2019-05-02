@@ -1982,7 +1982,8 @@ app.post('/signinuser', (req, res) => {
             })
             //res.send(admin[0])
         } else if (user.length == 0) {
-            res.status(400).send('sory not found is user')
+            res.status(400).send('sory not found is user',ggwpinput)
+            res.status(400).send('sory not found is user',usernameInput)
         }
     }, (err) => {
         res.status(400).send(err)
