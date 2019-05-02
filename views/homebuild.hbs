@@ -391,8 +391,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
         });
         function postData(myData) {
-              var url = "http://localhost:3000/postBuilding";
-           // var url = "https://electricitymeter.herokuapp.com/postBuilding";
+            //  var url = "http://localhost:3000/postBuilding";
+            var url = "https://electricitymeter.herokuapp.com/postBuilding";
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/json");
@@ -410,6 +410,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
             var data = JSON.stringify({ adminAllow: myData.adminAllow, BuildingName: myData.BuildingName, UnitMeter: myData.UnitMeter, BuildingPhone: myData.BuildingPhone, BuildingEmail: myData.BuildingEmail, floor: myData.floor, methodwater: myData.methodwater, plicewater: myData.plicewater });
             xhr.send(data);
         }
+
         function openForm() {
             document.getElementById("myForm").style.display = "block";
         }
