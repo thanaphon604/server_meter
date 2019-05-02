@@ -259,7 +259,19 @@ body {font-family: Arial, Helvetica, sans-serif;}
             for (let i = 0; i < long_nameBuild; i++) {
                 data_admin[i] = Admin[i]
                 console.log(data_admin[i])
-                htmlStringg += '<div id="box" class="col-sm-5 col-12 "style="margin-bottom:5%"><div class="row mt-4"><div class="col"><h3 text-center id="NameB[' + i + ']">ชื่อหอพัก ' + data_admin[i].BuildingName + '</h3></div></div><button onclick="FunctionBuild(this.id)" type="button" class="btn btn-primary mt-4" style="width:50%"id="' + data_admin[i].BuildingName + ' "">จัดการหอพัก</button></div>'
+                htmlStringg += `<div id="box" class="col-sm-5 col-12 "style="margin-bottom:5%">
+                    <div class="row mt-4">
+                        <div class="col">
+                            <h3 text-center id="NameB[' + i + ']">ชื่อหอพัก`  + data_admin[i].BuildingName + `</h3>
+                             <form action="https://electricitymeter.herokuapp.com/HOME" onsubmit="SubMit()" method="POST">
+                             <div class="form-group">
+                              <input style="display:none" value="`+ data_admin[i].BuildingName + `" required name="BuildingName" type="text" class="form-control" id="BuildingName"
+                           placeholder="Enter Username">
+                         <button type="submit" class="btn btn-primary">Submit</button>
+                                 <!-- <button type="button" onclick="SubMit()" class="btn btn-primary">จัดการหอพัก</button> -->
+                                </form>
+                            </div></div>
+                            </div>`
             }
             document.getElementById(" divPostNameBuild").innerHTML = htmlStringg;
             console.log('nameAdmin', Admin)
@@ -440,13 +452,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
                             //alert('can not create user! Pls try again.')
                         }
                     };
-                    var data = JSON.stringify({ BuildingName:BuildingName});
+                    var data = JSON.stringify({ BuildingName: BuildingName });
                     xhr.send(data);
 
                     ///==============
                 } else if (ourData[0].methodwater == 'rentunit') {
                     //   window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
-                  var url = "https://electricitymeter.herokuapp.com/HOME";
+                    var url = "https://electricitymeter.herokuapp.com/HOME";
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", url, true);
                     xhr.setRequestHeader("Content-Type", "application/json");
@@ -461,7 +473,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                             //alert('can not create user! Pls try again.')
                         }
                     };
-                    var data = JSON.stringify({ BuildingName:BuildingName});
+                    var data = JSON.stringify({ BuildingName: BuildingName });
                     xhr.send(data);
                 }
             }
