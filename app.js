@@ -1105,7 +1105,7 @@ app.post('/postPrint', (req, res) => {
             buildingName,
             datemeter,
         }
-        
+
         floormeter.forEach((f, i) => {
             let { roommeter } = f
             roommeter.forEach((r, i) => {
@@ -1132,7 +1132,6 @@ app.post('/postPrint', (req, res) => {
                 } 
             }) // end per room
             stringData.push(objData)
-            objData = {}
         })
     }) // end all date
     console.log('stringData is : ', stringData)
