@@ -1082,6 +1082,7 @@ app.get('/print', function (req, res) {
 });
 
 app.post('/postPrint', (req, res) => {
+    let buildingName = req.body.BuildingName
     let rooms = req.body.RoomPrint
     let roomNumber = []
     rooms.forEach((e, i) => {
@@ -1091,8 +1092,11 @@ app.post('/postPrint', (req, res) => {
     let dates = req.body.Datameterbuilds
     let stringData = []
     console.log('#######')
-    console.log('all room is : ', roomNumber)
     dates.forEach((e, i) => {
+        let objData = {
+            buildingName,
+            datemeter,
+        }
         let {
             pricemeter,
             pricewater,
@@ -1113,13 +1117,18 @@ app.post('/postPrint', (req, res) => {
                         usewater,
                         usewatermonth, 
                     } = r
+                    objData.roomNumber = roomNumbermeter
+                    objData.rent = 9999,
+                    objData.meter = {
+                        beforusemeter, usemeter, usemetermonth
+                    }
+                    objData.water = {
+                        beforusewater, usewater, usewatermonth
+                    }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
                 } 
             })
         })
-        console.log('----')
-        console.log('pricemeter : ', pricemeter)
-        console.log('----')
     })
     
 
