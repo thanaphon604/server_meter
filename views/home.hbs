@@ -3679,11 +3679,11 @@
                         let p = 3
                         if (ourData[0].floor[i].room[j].roomStatus == "ว่าง") {
                             Roomfree = Roomfree + 1
-                            htmlString1 += '<div class="bigroom"><div> <a href="https://electricitymeter.herokuapp.com/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> '
+                            htmlString1 += '<div class="bigroom"><div style="text-align:center"> <a>' + ourData[0].floor[i].room[j].roomNumber + '</a> '
                                 + ' </div >'
                                 //  if()
                                 + '     <div style="background-color: green" id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div>'
-                                + '    <form action = "http://localhost:3000/Person" onsubmit = "SubMit()" method = "POST" >'
+                                + '    <form action = "https://electricitymeter.herokuapp.com/Person" onsubmit = "SubMit()" method = "POST" >'
                                 + '                <button type="submit" class="btn btn-primary">จัดการห้อง</button>'
                                 + '       <div class="form-group">'
                                 + '           <input style="display:none" value="' + BuildingName + '"  name="BuildingName" type="text" class="form-control" id="exampleInputUsername">'
@@ -3694,11 +3694,11 @@
                                 + '     </div> '
                         } else if (ourData[0].floor[i].room[j].roomStatus == "ไม่ว่าง") {
                             Roombusy = Roombusy + 1
-                            htmlString1 += '<div class="bigroom"><div> <a href="https://electricitymeter.herokuapp.com/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> '
+                            htmlString1 += '<div class="bigroom"><div style="text-align:center"> <a>' + ourData[0].floor[i].room[j].roomNumber + '</a> '
                                 + ' </div >'
                                 //  if()
                                 + '     <div style="background-color: orange" id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div>'
-                                 + '    <form action = "http://localhost:3000/Person" onsubmit = "SubMit()" method = "POST" >'
+                                 + '    <form action = "https://electricitymeter.herokuapp.com/Person" onsubmit = "SubMit()" method = "POST" >'
                                 + '                <button type="submit" class="btn btn-primary">จัดการห้อง</button>'
                                 + '       <div class="form-group">'
                                 + '           <input style="display:none" value="' + BuildingName + '"  name="BuildingName" type="text" class="form-control" id="exampleInputUsername">'
@@ -3710,11 +3710,11 @@
 
                         } else if (ourData[0].floor[i].room[j].roomStatus == "กำลังปรับปรุง") {
                             Roomremodel = Roomremodel + 1
-                            htmlString1 += '<div class="bigroom"><div> <a href="https://electricitymeter.herokuapp.com/Person?BuildingName=' + BuildingName + '&room=' + ourData[0].floor[i].room[j].contract + '&roomNumber=' + ourData[0].floor[i].room[j].roomNumber + '" >' + ourData[0].floor[i].room[j].roomNumber + '</a> '
+                            htmlString1 += '<div class="bigroom"><div style="text-align:center"> <a>' + ourData[0].floor[i].room[j].roomNumber + '</a> '
                                 + ' </div >'
                                 //  if()
                                 + '     <div style="background-color: gray"  id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div>'
-                                  + '    <form action = "http://localhost:3000/Person" onsubmit = "SubMit()" method = "POST" >'
+                                  + '    <form action = "https://electricitymeter.herokuapp.com/Person" onsubmit = "SubMit()" method = "POST" >'
                                 + '                <button type="submit" class="btn btn-primary">จัดการห้อง</button>'
                                 + '       <div class="form-group">'
                                 + '           <input style="display:none" value="' + BuildingName + '"  name="BuildingName" type="text" class="form-control" id="exampleInputUsername">'
