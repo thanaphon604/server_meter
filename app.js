@@ -1081,25 +1081,22 @@ app.get('/print', function (req, res) {
     });
 });
 
-
-
-
-
 app.post('/postPrint', (req, res) => {
-    const PDFDocument = require('pdfkit')
-    const fs = require('fs')
+    console.log('data is : ', req.body)
+    // const PDFDocument = require('pdfkit')
+    // const fs = require('fs')
 
-    const doc = new PDFDocument()
+    // const doc = new PDFDocument()
 
-    doc.pipe(fs.createWriteStream('sss.pdf'))
+    // doc.pipe(fs.createWriteStream('sss.pdf'))
 
-    doc.font('fonts/ThaiSansLite.ttf')
-        .fontSize(25)
-        .text('Hello สวัสดี 1234', 100, 100)
+    // doc.font('fonts/ThaiSansLite.ttf')
+    //     .fontSize(25)
+    //     .text('Hello สวัสดี 1234', 100, 100)
 
-    doc.end()
+    // doc.end()
 
-    res.send('done')
+    // res.send('done')
 })
 
 
