@@ -19,6 +19,7 @@
     "express": "^4.16.3",
     "hbs": "^4.0.1",
     "mongoose": "^5.2.15",
+    "pdfkit": "^0.9.1",
     "pdfmake": "^0.1.55",
     "phantom-html-to-pdf": "^0.5.6",
     "pug": "^2.0.3",
