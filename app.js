@@ -1151,12 +1151,11 @@ app.post('/postPrint', (req, res) => {
     doc.pipe(fs.createWriteStream('sss.pdf'))
 
     stringData.forEach((page, i) => {
-        doc.font('fonts/ThaiSansLite.ttf')
-            .fontSize(25)
-            .text(`หน้า ${i+1}`, 100, 300)
-            .underline(100, 100, 50, 27, {color: "#000000"})
-            .moveDown()
-            .text(JSON.stringify(page), 100, 300)
+        doc.font('fonts/ThaiSansLite.ttf').fontSize(25)
+            
+        doc
+            .text(`หน้า ${i+1}`, 100, 80)
+            //.text(JSON.stringify(page), 100, 100)
 
         doc.addPage()
     })
