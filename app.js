@@ -1153,10 +1153,10 @@ app.post('/postPrint', (req, res) => {
     stringData.forEach((page, i) => {
         doc.font('fonts/ThaiSansLite.ttf')
             .fontSize(25)
-            .text('หน้า '+i, 100, 100)
+            .text(`หน้า ${i+1}`, 100, 100)
+            .text(JSON.stringify(page), 100, 100)
 
         doc.addPage()
-            .text(JSON.stringify(page), 100, 100)
     })
     doc.end()
 
