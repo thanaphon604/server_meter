@@ -1082,6 +1082,44 @@ app.get('/print', function (req, res) {
 });
 
 app.post('/postPrint', (req, res) => {
+    let rooms = req.body.RoomPrint
+    let roomNumber = []
+    rooms.forEach((e, i) => {
+        roomNumber.push(e.split(','))
+    })
+
+    let dates = req.body.Datameterbuilds
+    let stringData = []
+    dates.forEach((e, i) => {
+        let {
+            pricemeter,
+            pricewater,
+            datemeter,
+            floormeter,
+        } = e
+        floormeter.forEach((f, i) => {
+            let { roommeter } = f
+            roommeter.forEach((r, i) => {
+                if (roomNumber.indexOf(r.roomNumbermeter) !== -1) { // ห้องที่ checked
+                    let {
+                        roomNumbermeter, 
+                        beforusemeter,
+                        usemeter,
+                        usemetermonth,
+                        beforusewater,
+                        usewater,
+                        usewatermonth, 
+                    } = r
+                    console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
+                } 
+            })
+        })
+        console.log('----')
+        console.log('pricemeter : ', pricemeter)
+        console.log('----')
+    })
+    
+
     console.log('data is : ', JSON.stringify(req.body))
     // const PDFDocument = require('pdfkit')
     // const fs = require('fs')
