@@ -392,7 +392,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
         });
         function postData(myData) {
             //    var url = "http://localhost:3000/postBuilding";
-            var url = "https://electricitymeter.herokuapp.com/postBuilding";
+            var url = "https://electricitymeter.herokuapp.com/postBuildinghome";
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/json");
@@ -431,18 +431,18 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 var ourData = JSON.parse(ourRequest.responseText);
 
                 console.log('data : ', ourData)
-                gethomewater(ourData, BuildingName)
+             //   gethomewater(ourData, BuildingName)
                 return false;
             }
             ourRequest.send();
-            function gethomewater(ourData, BuildingName) {
+          /*     function gethomewater(ourData, BuildingName) {
                 //console.log(ourData[0].methodwater)
                 if (ourData[0].methodwater == 'rentmonth') {
                     window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
                 } else if (ourData[0].methodwater == 'rentunit') {
                     window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
                 }
-            }
+            } */
 
             /*  var url = "http://localhost:3000/getHome";
               var xhr = new XMLHttpRequest();
