@@ -1155,6 +1155,7 @@ app.post('/postPrint', (req, res) => {
             
         doc
             .text(`หน้า ${i+1}`, 100, 80)
+            .text('some text สวัสดี')
             //.text(JSON.stringify(page), 100, 100)
 
         doc.addPage()
