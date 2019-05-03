@@ -331,7 +331,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 var Unitmeter = document.getElementById("unitmeter").value;
                 var Inputfloor = document.getElementById("inputfloor").value;
                 let floor = []
-                let user = []
+               
 
                 for (let i = 0; i < Inputfloor; i++) {
                     let f = $('#floor' + (i + 1)).val()
@@ -374,7 +374,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                             payStatus: false,
                             roomNumber,
                             contract: '',
-                            user
+                            
 
                         }
                         roomArrayPerFloor.push(roomData)
@@ -394,7 +394,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
         });
         function postData(myData) {
             //    var url = "http://localhost:3000/postBuilding";
-            var url = "https://electricitymeter.herokuapp.com/postBuildinghome";
+            var url = "https://electricitymeter.herokuapp.com/postBuilding";
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/json");

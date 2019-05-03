@@ -150,35 +150,7 @@ app.post('/postBuilding', (req, res) => {
         res.status(400).send(err)
     })
 })
-app.post('/postBuildinghome', (req, res) => {
-    let BuildingNameInput = req.body.BuildingName
-    let newBuilding = new Building({
-        floor: req.body.floor,
-        adminAllow: req.body.adminAllow,
-        BuildingName: req.body.BuildingName,
-        UnitMeter: req.body.UnitMeter,
-        BuildingPhone: req.body.BuildingPhone,
-        BuildingEmail: req.body.BuildingEmail,
-        methodwater: req.body.methodwater,
-        plicewater: req.body.plicewater
-    })
-    Building.find({
-        BuildingName: BuildingNameInput,
-    }).then((build) => {
-        if (build.length == 1) {
-            res.send('BuildingName error')
-        } else if (build.length == 0) {
-            newBuilding.save().then((d) => {
-                res.send('success')
-            }, (e) => {
-                console.log(e)
-                res.status(400).send('success')
-            })
-        }
-    }, (err) => {
-        res.status(400).send(err)
-    })
-})
+
 /*
 app.post('/getHome', (req, res) => {
     let nameBuildInput = req.body.BuildingName
