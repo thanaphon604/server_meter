@@ -1082,7 +1082,7 @@ app.get('/print', function (req, res) {
 });
 
 app.post('/postPrint', (req, res) => {
-    console.log('data is : ', req.body)
+    console.log('data is : ', JSON.stringify(req.body))
     // const PDFDocument = require('pdfkit')
     // const fs = require('fs')
 
