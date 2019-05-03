@@ -1082,6 +1082,7 @@ app.get('/print', function (req, res) {
 });
 
 app.post('/postPrint', (req, res) => {
+    let methodwater = req.body.methodwater
     let buildingName = req.body.BuildingName
     let rooms = req.body.RoomPrint
     let roomNumber = []
@@ -1127,10 +1128,15 @@ app.post('/postPrint', (req, res) => {
                     }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
                 } 
-            })
+            }) // end per room
+            stringData.push(objData)
+            objData = {}
         })
-    })
-    
+    }) // end all date
+    console.log('stringData is : ', stringData)
+    console.log('+++++')
+    console.log(JSON.stringify(stringData))
+    console.log('+++++')
 
     //console.log('data is : ', JSON.stringify(req.body))
     // const PDFDocument = require('pdfkit')
