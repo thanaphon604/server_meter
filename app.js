@@ -1094,16 +1094,18 @@ app.post('/postPrint', (req, res) => {
     let stringData = []
     console.log('#######')
     dates.forEach((e, i) => {
-        let objData = {
-            buildingName,
-            datemeter,
-        }
         let {
             pricemeter,
             pricewater,
             datemeter,
             floormeter,
         } = e
+
+        let objData = {
+            buildingName,
+            datemeter,
+        }
+        
         floormeter.forEach((f, i) => {
             let { roommeter } = f
             roommeter.forEach((r, i) => {
