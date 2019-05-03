@@ -1085,7 +1085,7 @@ app.post('/postPrint', (req, res) => {
     let rooms = req.body.RoomPrint
     let roomNumber = []
     rooms.forEach((e, i) => {
-        roomNumber.push(e.split(','))
+        roomNumber.push(e.split(',')[1])
     })
 
     let dates = req.body.Datameterbuilds
