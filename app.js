@@ -1128,6 +1128,12 @@ app.post('/postPrint', (req, res) => {
                     objData.water = {
                         beforusewater, usewater, usewatermonth
                     }
+                    objData.meterTotal = usemeter * pricemeter
+                    if (methodwater === 'rentunit') {
+                        objData.waterTotal = usewater * pricewater
+                    } else {
+                        objData.waterTotal = pricewater
+                    } 
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
                 } 
             }) // end per room
@@ -1135,25 +1141,26 @@ app.post('/postPrint', (req, res) => {
         })
     }) // end all date
     console.log('stringData is : ', stringData)
-    console.log('+++++')
-    console.log(JSON.stringify(stringData))
-    console.log('+++++')
-
+    
     //console.log('data is : ', JSON.stringify(req.body))
-    // const PDFDocument = require('pdfkit')
-    // const fs = require('fs')
+    const PDFDocument = require('pdfkit')
+    const fs = require('fs')
 
-    // const doc = new PDFDocument()
+    const doc = new PDFDocument()
 
-    // doc.pipe(fs.createWriteStream('sss.pdf'))
+    doc.pipe(fs.createWriteStream('sss.pdf'))
 
-    // doc.font('fonts/ThaiSansLite.ttf')
-    //     .fontSize(25)
-    //     .text('Hello สวัสดี 1234', 100, 100)
+    stringData.forEach((page, i) => {
+        doc.font('fonts/ThaiSansLite.ttf')
+            .fontSize(25)
+            .text('หน้า '+i, 100, 100)
 
-    // doc.end()
+        doc.addPage()
+            .text(JSON.stringify(page), 100, 100)
+    })
+    doc.end()
 
-    // res.send('done')
+    res.send('done')
 })
 
 
