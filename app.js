@@ -1090,6 +1090,8 @@ app.post('/postPrint', (req, res) => {
 
     let dates = req.body.Datameterbuilds
     let stringData = []
+    console.log('#######')
+    console.log('all room is : ', roomNumber)
     dates.forEach((e, i) => {
         let {
             pricemeter,
@@ -1100,6 +1102,7 @@ app.post('/postPrint', (req, res) => {
         floormeter.forEach((f, i) => {
             let { roommeter } = f
             roommeter.forEach((r, i) => {
+                console.log('curroom is : ',r.roomNumbermeter)
                 if (roomNumber.indexOf(r.roomNumbermeter) !== -1) { // ห้องที่ checked
                     let {
                         roomNumbermeter, 
@@ -1120,7 +1123,7 @@ app.post('/postPrint', (req, res) => {
     })
     
 
-    console.log('data is : ', JSON.stringify(req.body))
+    //console.log('data is : ', JSON.stringify(req.body))
     // const PDFDocument = require('pdfkit')
     // const fs = require('fs')
 
