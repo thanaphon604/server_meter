@@ -3683,6 +3683,14 @@
                                 + ' </div >'
                                 //  if()
                                 + '     <div style="background-color: green" id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div>'
+                                + '    <form action = "http://localhost:3000/Person" onsubmit = "SubMit()" method = "POST" >'
+                                + '                <button type="submit" class="btn btn-primary">จัดการห้อง</button>'
+                                + '       <div class="form-group">'
+                                + '           <input style="display:none" value="' + BuildingName + '"  name="BuildingName" type="text" class="form-control" id="exampleInputUsername">'
+                                + '           <input style="display:none" value="' + ourData[0].floor[i].room[j].contract + '"  name="room" type="text" class="form-control" id="room">'
+                                + '           <input style="display:none" value="' + ourData[0].floor[i].room[j].roomNumber + '"  name="roomNumber" type="number" class="form-control" id="roomNumber">'
+                                + '     </div> '
+                                + ' </form>'
                                 + '     </div> '
                         } else if (ourData[0].floor[i].room[j].roomStatus == "ไม่ว่าง") {
                             Roombusy = Roombusy + 1
@@ -3690,6 +3698,14 @@
                                 + ' </div >'
                                 //  if()
                                 + '     <div style="background-color: orange" id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div>'
+                                 + '    <form action = "http://localhost:3000/Person" onsubmit = "SubMit()" method = "POST" >'
+                                + '                <button type="submit" class="btn btn-primary">จัดการห้อง</button>'
+                                + '       <div class="form-group">'
+                                + '           <input style="display:none" value="' + BuildingName + '"  name="BuildingName" type="text" class="form-control" id="exampleInputUsername">'
+                                + '           <input style="display:none" value="' + ourData[0].floor[i].room[j].contract + '"  name="room" type="text" class="form-control" id="room">'
+                                + '           <input style="display:none" value="' + ourData[0].floor[i].room[j].roomNumber + '"  name="roomNumber" type="number" class="form-control" id="roomNumber">'
+                                + '     </div> '
+                                + ' </form>'
                                 + '     </div> '
 
                         } else if (ourData[0].floor[i].room[j].roomStatus == "กำลังปรับปรุง") {
@@ -3698,6 +3714,14 @@
                                 + ' </div >'
                                 //  if()
                                 + '     <div style="background-color: gray"  id="changcss" class="room">  <br>  <p>15230.5kw/h</p></div>'
+                                  + '    <form action = "http://localhost:3000/Person" onsubmit = "SubMit()" method = "POST" >'
+                                + '                <button type="submit" class="btn btn-primary">จัดการห้อง</button>'
+                                + '       <div class="form-group">'
+                                + '           <input style="display:none" value="' + BuildingName + '"  name="BuildingName" type="text" class="form-control" id="exampleInputUsername">'
+                                + '           <input style="display:none" value="' + ourData[0].floor[i].room[j].contract + '"  name="room" type="text" class="form-control" id="room">'
+                                + '           <input style="display:none" value="' + ourData[0].floor[i].room[j].roomNumber + '"  name="roomNumber" type="number" class="form-control" id="roomNumber">'
+                                + '     </div> '
+                                + ' </form>'
                                 + '     </div> '
                         }
                     }

@@ -383,9 +383,9 @@
         $(document).ready(function () {
             var url_string = window.location.href
             var url = new URL(url_string);
-            let roomNumber = url.searchParams.get("roomNumber");
-            let BuildingName = url.searchParams.get("BuildingName");
-            let contract = url.searchParams.get("contract");
+           let roomNumber = "{{roomNumber}}"
+            let BuildingName = "{{BuildingName}}"
+            let contract = "{{room}}"
             document.getElementById("nameR").innerHTML = roomNumber;
             document.getElementById("nameB").innerHTML = BuildingName;
             var ourRequest = new XMLHttpRequest();

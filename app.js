@@ -169,8 +169,30 @@ app.post('/getHome', (req, res) => {
 })
 */
 // run Person/.hbs
-app.get('/Person', (req, res) => {
-    res.render('personInput.hbs')
+// app.get('/Person', (req, res) => {
+//     res.render('personInput.hbs')
+// })
+app.post('/Person', (req, res) => {
+    let BuildingNameInput = req.body.BuildingName
+    let roomInput = req.body.room
+    let roomNumberInput = req.body.roomNumber
+    console.log('#########')
+    console.log(BuildingNameInput)
+    console.log(roomInput)
+    console.log(roomNumberInput)
+    console.log('#########')
+
+
+    Building.find({
+        BuildingName: BuildingNameInput,
+    }).then((doc) => {
+        res.render('personInput.hbs', {
+            BuildingName: BuildingNameInput,
+            room : roomInput,
+            roomNumber :roomNumberInput,
+            doc: encodeURI(JSON.stringify(doc))
+        })
+    })
 })
 //run Home.hbs
 app.post('/HOME', (req, res) => {
@@ -1980,9 +2002,8 @@ app.post('/signinuser', (req, res) => {
             })
             //res.send(admin[0])
         } else if (user.length == 0) {
-            res.status(400).send('sory not found is user',ggwpinput)
-            res.status(400).send('sory not found is user',usernameInput)
-            res.status(400).send('sory not found is user',usernameInput)
+            res.status(400).send('sory not found is user')
+            
         }
     }, (err) => {
         res.status(400).send(err)
