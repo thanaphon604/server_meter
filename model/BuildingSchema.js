@@ -10,8 +10,7 @@ var BuildingSchema = new Schema({
                     user: [
                         {
                             personID: {
-                                type: String,
-                                
+                                type: String,  
                             },
                             firstName: String,
                             lastName: String,
@@ -19,12 +18,9 @@ var BuildingSchema = new Schema({
                             //sex: Boolean,
                             address: String,
                             phoneNumber: {
-                                type: String,
-                               
+                                type: String,        
                             },
                             License: String,
-
-
                         }
                     ],
                     roomStatus: String,
