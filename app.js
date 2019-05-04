@@ -1143,7 +1143,7 @@ app.post('/postPrint', (req, res) => {
     })
 
     let dates = req.body.Datameterbuilds
-    let stringData = []
+    let stringData = [] // ข้อมูลทุกห้อง-
     console.log('#######')
     dates.forEach((e, i) => {
         let {
@@ -1153,7 +1153,7 @@ app.post('/postPrint', (req, res) => {
             floormeter,
         } = e
 
-        let objData = {
+        let objData = { //ข้อมูลแต่ละห้อง
             buildingName,
             datemeter,
         }
@@ -1170,10 +1170,11 @@ app.post('/postPrint', (req, res) => {
                         usemetermonth,
                         beforusewater,
                         usewater,
-                        usewatermonth, 
+                        usewatermonth,
+                        rentroommeter,
                     } = r
                     objData.roomNumber = roomNumbermeter
-                    objData.rent = 9999,
+                    objData.rent = rentroommeter,
                     objData.meter = {
                         beforusemeter, usemeter, usemetermonth
                     }
