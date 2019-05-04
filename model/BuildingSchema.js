@@ -11,7 +11,7 @@ var BuildingSchema = new Schema({
                         {
                             personID: {
                                 type: String,
-                                required: true
+                             
                             },
                             firstName: String,
                             lastName: String,
