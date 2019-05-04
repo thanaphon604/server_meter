@@ -1141,6 +1141,7 @@ app.post('/postPrint', (req, res) => {
     rooms.forEach((e, i) => {
         roomNumber.push(e.split(',')[1])
     })
+    console.log('room is : ', rooms)
 
     let dates = req.body.Datameterbuilds
     let stringData = [] // ข้อมูลทุกห้อง-
