@@ -603,7 +603,7 @@
             });
              function postdata(BuildingName, roomNumber, rentroom) {
                 alert(rentroom)
-                var url = "http://localhost:3000/postrentroom";
+                var url = "https://electricitymeter.herokuapp.com/postrentroom";
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", url, true);
                 xhr.setRequestHeader("Content-Type", "application/json");
