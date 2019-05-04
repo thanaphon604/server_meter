@@ -575,6 +575,7 @@
             $('#form').submit(function () {
                 var contract = document.getElementById('contract').value
                 var rentroom = document.getElementById('rentroom').value
+                postdata(BuildingName, roomNumber, rentroom)
                 console.log('sss2', contract)
                 console.log(BuildingName)
                 console.log(roomNumber)
@@ -600,6 +601,28 @@
                 return false;
 
             });
+             function postdata(BuildingName, roomNumber, rentroom) {
+                alert(rentroom)
+                var url = "http://localhost:3000/postrentroom";
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log('res is', xhr.responseText)
+                        // if success go login page
+                        alert('success')
+                        window.location.reload(false);
+
+                    } else {
+                        //alert('can not create user! Pls try again.')
+                    }
+                };
+
+                var data = JSON.stringify({ BuildingName: BuildingName, roomNumber: roomNumber, rentroom: rentroom });
+                xhr.send(data);
+                return false;
+            }
             $('#personID').on('input', function (e) {
                 var obj = document.getElementById('personID').value
 

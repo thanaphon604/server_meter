@@ -59,6 +59,9 @@ var MeterSchema = new Schema({
                     },
                     statusprint:{
                         type: String
+                    },
+                    rentroommeter:{
+                        type:Number
                     }
 
                 }

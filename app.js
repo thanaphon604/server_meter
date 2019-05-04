@@ -85,6 +85,13 @@ app.get('/getAdmin', (req, res) => {
         res.status(404).send(err)
     })
 })
+app.get('/getmeterbuild', (req, res) => {
+    meterbuild.find().then((doc) => {
+        res.send(doc)
+    }, (err) => {
+        res.status(404).send(err)
+    })
+})
 
 app.post('/signin', (req, res) => {
     let usernameInput = req.body.username
@@ -290,6 +297,51 @@ app.post('/postcontract', (req, res) => {
     //     }, (err) => {
     //         res.status(400).send(err)
     //     })
+
+})
+//api post renroom meterbuild
+app.post('/postrentroom', (req, res) => {
+    let BuildingNameInput = req.body.BuildingName
+    let roomNumberInput = req.body.roomNumber
+    let rentroomInput = req.body.rentroom
+    //find หาusername password สำหรับ 
+    console.log('###########')
+    console.log(BuildingNameInput)
+    console.log(roomNumberInput)
+    console.log(rentroomInput)
+    console.log('#######')
+    meterbuild.find({
+        buildingnamemeter: BuildingNameInput,
+    }).then((build) => {
+        if (build.length >= 1) {
+            console.log('find')
+            for (let l = 0; l < build.length; l++) {
+                for (let i = 0; i < build[l].floormeter.length; i++) {
+                    for (let j = 0; j < build[l].floormeter[i].roommeter.length; j++) {
+                        if (roomNumberInput == build[0].floormeter[i].roommeter[j].roomNumbermeter) {
+                            console.log('ggwp############')
+                            build[l].floormeter[i].roommeter[j].rentroommeter = rentroomInput
+
+                            build[l].save().then((suc) => {
+                                console.log('res contract : ', suc)
+                                res.send(suc)
+                            }, (e) => {
+                                consoel.log('error contract :', e)
+                                res.status(400).send(e)
+                            })
+                        }
+                    }
+                }
+            }
+            
+            //res.send(admin[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory ')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+
 
 })
 
@@ -1155,7 +1207,7 @@ app.post('/postPrint', (req, res) => {
             
         doc
             .text(`หน้า ${i+1}`, 100, 80)
-            .text('some text สวัสดี')
+            .text('some text สวัส')
             //.text(JSON.stringify(page), 100, 100)
 
         doc.addPage()
