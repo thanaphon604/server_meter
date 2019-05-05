@@ -1208,12 +1208,18 @@ app.post('/postPrint', (req, res) => {
         doc.font('fonts/ThaiSansLite.ttf').fontSize(25)
 
         doc
-            .text(`หน้า ${i + 1}`, 100, 80)
-            .text('some text สวัส')
+            // .text(`หน้า ${i + 1}`, 100, 80)
+            .moveDown(1)
+            .text('ใบเเจ้งหนี้(Invoice)', {
+                align: 'center',
+                fontSize: '30'
+            })
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(1)
             .text(`ชื่อหอพัก ${stringData[i].buildingName}`, 100, 80)
+            .moveDown(1)
             .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`, 100, 80)
+            .moveDown(1)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`, 100, 80)
 
         doc.addPage()
