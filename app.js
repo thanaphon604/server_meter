@@ -1216,11 +1216,12 @@ app.post('/postPrint', (req, res) => {
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(0.25)
             .text(`ชื่อหอพัก ${stringData[i].buildingName}`)
-            .moveDown(0.25)
+            .moveDown(0.1)
             .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
-            .moveDown(0.25)
+            .moveDown(0.1)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-            doc.underline(100, 100, 160, 27, {color: "black"})
+            .moveDown(0.1)
+            doc.underline( {color: "black"})
 
         doc.addPage()
 
