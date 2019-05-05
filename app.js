@@ -195,8 +195,8 @@ app.post('/Person', (req, res) => {
     }).then((doc) => {
         res.render('personInput.hbs', {
             BuildingName: BuildingNameInput,
-            room : roomInput,
-            roomNumber :roomNumberInput,
+            room: roomInput,
+            roomNumber: roomNumberInput,
             doc: encodeURI(JSON.stringify(doc))
         })
     })
@@ -333,7 +333,7 @@ app.post('/postrentroom', (req, res) => {
                     }
                 }
             }
-            
+
             //res.send(admin[0])
         } else if (build.length == 0) {
             res.status(400).send('sory ')
@@ -1162,10 +1162,10 @@ app.post('/postPrint', (req, res) => {
         floormeter.forEach((f, i) => {
             let { roommeter } = f
             roommeter.forEach((r, i) => {
-                console.log('curroom is : ',r.roomNumbermeter)
+                console.log('curroom is : ', r.roomNumbermeter)
                 if (roomNumber.indexOf(r.roomNumbermeter) !== -1) { // ห้องที่ checked
                     let {
-                        roomNumbermeter, 
+                        roomNumbermeter,
                         beforusemeter,
                         usemeter,
                         usemetermonth,
@@ -1176,9 +1176,9 @@ app.post('/postPrint', (req, res) => {
                     } = r
                     objData.roomNumber = roomNumbermeter
                     objData.rent = rentroommeter,
-                    objData.meter = {
-                        beforusemeter, usemeter, usemetermonth
-                    }
+                        objData.meter = {
+                            beforusemeter, usemeter, usemetermonth
+                        }
                     objData.water = {
                         beforusewater, usewater, usewatermonth
                     }
@@ -1187,15 +1187,15 @@ app.post('/postPrint', (req, res) => {
                         objData.waterTotal = usewater * pricewater
                     } else {
                         objData.waterTotal = pricewater
-                    } 
+                    }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
-                } 
+                }
             }) // end per room
             stringData.push(objData)
         })
     }) // end all date
     console.log('stringData is : ', stringData)
-    
+
     //console.log('data is : ', JSON.stringify(req.body))
     const PDFDocument = require('pdfkit')
     const fs = require('fs')
@@ -1206,13 +1206,16 @@ app.post('/postPrint', (req, res) => {
 
     stringData.forEach((page, i) => {
         doc.font('fonts/ThaiSansLite.ttf').fontSize(25)
-            
+
         doc
-            .text(`หน้า ${i+1}`, 100, 80)
-            .text('some text สวัส')
-            //.text(JSON.stringify(page), 100, 100)
+            .text(`หน้า ${i + 1}`, 100, 80)
+            .text('ใบเเจ้งหนี้(Invoice)', {
+                valign: 'center'
+            })
+        //.text(JSON.stringify(page), 100, 100)
 
         doc.addPage()
+      
     })
     doc.end()
 
@@ -1983,7 +1986,7 @@ app.post('/signinuser', (req, res) => {
     let usernameInput = req.body.usernameuser
     let passwordInput = req.body.passworduser
     let ggwpinput = req.body.ggwp
-    console.log('test',ggwpinput)
+    console.log('test', ggwpinput)
     //find หาusername password สำหรับ 
     Userroom.find({
         usernameuser: usernameInput,
@@ -2003,7 +2006,7 @@ app.post('/signinuser', (req, res) => {
             //res.send(admin[0])
         } else if (user.length == 0) {
             res.status(400).send('sory not found is user')
-            
+
         }
     }, (err) => {
         res.status(400).send(err)
