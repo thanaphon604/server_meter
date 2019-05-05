@@ -1211,11 +1211,11 @@ app.post('/postPrint', (req, res) => {
             .text(`หน้า ${i + 1}`, 100, 80)
             .text('ใบเเจ้งหนี้(Invoice)', {
                 align: 'center',
-                fontSize: '20'
+                fontSize: '30'
             })
-            .text(`ชื่อหอพัก ${buildingName}` )
+            .text(`ชื่อหอพัก ${stringData.buildingName}` )
             .text(`เลขที่ห้องพัก ${roomNumbermeter}` )
-            .text(`ประจำเดือนที่ ${datemeter}` )
+            .text(`ประจำเดือนที่ ${stringData.datemeter}` )
         //.text(JSON.stringify(page), 100, 100)
 
         doc.addPage()
