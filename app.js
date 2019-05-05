@@ -1209,18 +1209,18 @@ app.post('/postPrint', (req, res) => {
 
         doc
             // .text(`หน้า ${i + 1}`, 100, 80)
-            .moveDown(1)
             .text('ใบเเจ้งหนี้(Invoice)', {
                 align: 'center',
                 fontSize: '30'
             })
             //.text(JSON.stringify(page), 100, 100)
-            .moveDown(1)
+            .moveDown(0.5)
             .text(`ชื่อหอพัก ${stringData[i].buildingName}`)
-            .moveDown(1)
+            .moveDown(0.5)
             .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
-            .moveDown(1)
+            .moveDown(0.5)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
+            .underline(100, 100, 160, 27, {color: "black"})
 
         doc.addPage()
 
