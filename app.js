@@ -1213,6 +1213,9 @@ app.post('/postPrint', (req, res) => {
                 align: 'center',
                 fontSize: '20'
             })
+            .text(`ชื่อหอพัก ${buildingName}` )
+            .text(`เลขที่ห้องพัก ${roomNumbermeter}` )
+            .text(`ประจำเดือนที่ ${datemeter}` )
         //.text(JSON.stringify(page), 100, 100)
 
         doc.addPage()
