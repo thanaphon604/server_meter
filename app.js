@@ -1214,13 +1214,13 @@ app.post('/postPrint', (req, res) => {
                 fontSize: '30'
             })
             //.text(JSON.stringify(page), 100, 100)
-            .moveDown(0.5)
+            .moveDown(0.25)
             .text(`ชื่อหอพัก ${stringData[i].buildingName}`)
-            .moveDown(0.5)
+            .moveDown(0.25)
             .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
-            .moveDown(0.5)
+            .moveDown(0.25)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-            .underline(100, 100, 160, 27, {color: "black"})
+            doc.underline(100, 100, 160, 27, {color: "black"})
 
         doc.addPage()
 
