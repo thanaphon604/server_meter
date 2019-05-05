@@ -1210,7 +1210,8 @@ app.post('/postPrint', (req, res) => {
         doc
             .text(`หน้า ${i + 1}`, 100, 80)
             .text('ใบเเจ้งหนี้(Invoice)', {
-                valign: 'center'
+                align: 'center',
+                fontSize: '20'
             })
         //.text(JSON.stringify(page), 100, 100)
 
