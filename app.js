@@ -1221,7 +1221,7 @@ app.post('/postPrint', (req, res) => {
             .moveDown(0.1)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
             .moveDown(0.1)
-            doc.underline( {color: "black"})
+            doc.underline(100, 100, width, 27, {color: "black"})
 
         doc.addPage()
 
