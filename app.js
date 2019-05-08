@@ -1220,7 +1220,7 @@ app.post('/postPrint', (req, res) => {
             .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
             .moveDown(0.1)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-            doc.underline(0, 300, 560, 27, {color: "black"})
+            doc.underline(0, 300, 590, 27, {color: "black"})
 
         doc.addPage()
 
