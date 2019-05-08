@@ -1197,7 +1197,7 @@ app.post('/postPrint', (req, res) => {
     console.log('stringData is : ', stringData)
 
     //console.log('data is : ', JSON.stringify(req.body))
-    const PDFDocument = require('pdfkit')
+    const PDFDocument = require('pdfkit-tables')
     const fs = require('fs')
 
     const doc = new PDFDocument()
