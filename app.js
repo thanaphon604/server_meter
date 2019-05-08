@@ -1221,6 +1221,18 @@ app.post('/postPrint', (req, res) => {
             .moveDown(0.1)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
             doc.underline(0, 200, 620, 27, {color: "black"})
+            .text('ใบเเจ้งหนี้(Invoice)', {
+                align: 'center',
+                fontSize: '30'
+            })
+            //.text(JSON.stringify(page), 100, 100)
+            .moveDown(0.25)
+            .text(`ชื่อหอพัก ${stringData[i].buildingName}`)
+            .moveDown(0.1)
+            .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
+            .moveDown(0.1)
+            .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
+           // doc.underline(0, 200, 620, 27, {color: "black"})
 
         doc.addPage()
 
