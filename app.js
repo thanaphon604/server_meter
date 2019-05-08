@@ -1221,8 +1221,6 @@ app.post('/postPrint', (req, res) => {
             .moveDown(0.1)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
             doc.underline(0, 200, 620, 27, {color: "black"})
-
-            
             const table1 = {
                 headers: ['Country', 'Conversion rate', 'Trend'],
                 rows: [
@@ -1232,7 +1230,7 @@ app.post('/postPrint', (req, res) => {
                 ]
             }
             
-            doc.moveDown().table(table1, 100, 350, { width: 300 })
+            .moveDown().table(table1, 100, 350, { width: 300 })
             
             .text('ใบเเจ้งหนี้(Invoice)', {
                 align: 'center',
