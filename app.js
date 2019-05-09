@@ -1164,7 +1164,7 @@ app.post('/postPrint', (req, res) => {
             let { roommeter } = f
             roommeter.forEach((r, i) => {
                 console.log('curroom is : ', r.dateroommeter)
-                if (rooms[i] == dateroommeter) { // ห้องที่ checked
+                if (rooms.indexOf(r.dateroommeter) !== -1) { // ห้องที่ checked
                     let {
                         roomNumbermeter,
                         beforusemeter,
@@ -1225,7 +1225,7 @@ app.post('/postPrint', (req, res) => {
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
 
 
-
+           
 
 
         doc.underline(0, 200, 620, 27, { color: "black" })
