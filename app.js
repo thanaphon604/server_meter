@@ -1239,7 +1239,7 @@ app.post('/postPrint', (req, res) => {
         doc.fontSize(15).text(`ค่าน้ำ                   ${stringData[i].water.beforusewater}              ${stringData[i].water.usewater}          ${stringData[i].water.usewatermonth}                ${stringData[i].pricewater}                 ${stringData[i].waterTotal}`)
         doc.underline(50, 300, 500, 27, { color: "black" })
         //.text(JSON.stringify(page), 100, 100)
-        .moveDown(3)
+        .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent +stringData[i].meterTotal+stringData[i].waterTotal }   บาท`)
         .moveDown(10)
         doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
