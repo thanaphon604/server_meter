@@ -2751,6 +2751,14 @@
                 })
             }
             $('#formUpdateUnitMeter').submit(function () {
+                let Rentroommeter = []
+                for (let l = 0; l < _data.length; l++) {
+                    for (let i = 0; i < _data[l].floor.length; i++) {
+                        for (let j = 0; j < _data[l].floor[i].roomm.length; j++) {
+                            Rentroommeter.push(_data[l].floor[i].roomm[j].rentroommeter)
+                        }
+                    }
+                }
                 //เลขมิเตอร์ที่กรอก
                 var eduarray = [];
                 $('.education-groupbox').each(function (index, el) {
@@ -2840,6 +2848,7 @@
                         }
                         let beforusemeter = parseInt(metermonthusebefor[k])
                         let usemeter = parseInt(eduarray[k])
+                        let rentroommeter = parseInt(Rentroommeter[k])
                         let usemetermonth = parseInt(metermonthuse[k])
                         let meterstatus = "" + meterst[k]
                         let dateroommeter = datemeter + "," + roomNumbermeter
@@ -2850,7 +2859,8 @@
                             usemeter,
                             usemetermonth,
                             meterstatus,
-                            dateroommeter
+                            dateroommeter,
+                            rentroommeter
                         }
 
                         roomArrayPerFloor.push(roomData)
