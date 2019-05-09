@@ -2756,12 +2756,15 @@
                     for (let i = 0; i < _data[l].floor.length; i++) {
                         for (let j = 0; j < _data[l].floor[i].roomm.length; j++) {
                             Rentroommeter.push(_data[l].floor[i].roomm[j].rentroom)
+                            console.log('=================')
+                            console.log(_data[l].floor[i].roomm[j].rentroom)
                         }
                     }
                 }
                 //เลขมิเตอร์ที่กรอก
                 console.log('=================')
                 console.log(Rentroommeter)
+                console.log(_data)
                 console.log('=================')
                 var eduarray = [];
                 $('.education-groupbox').each(function (index, el) {
