@@ -2752,20 +2752,20 @@
             }
             $('#formUpdateUnitMeter').submit(function () {
                 let Rentroommeter = []
-
                 for (let i = 0; i < _data.floor.length; i++) {
                     for (let j = 0; j < _data.floor[i].room.length; j++) {
                         Rentroommeter.push(_data.floor[i].room[j].rentroom)
-                        console.log('=================')
-                        console.log(_data.floor[i].room[j].rentroom)
+                        //    console.log('=================')
+                        //    console.log(_data.floor[i].room[j].rentroom)
                     }
                 }
 
                 //เลขมิเตอร์ที่กรอก
-                console.log('=================')
+                /*console.log('=================')
                 console.log(Rentroommeter)
                 console.log(_data)
                 console.log('=================')
+                */
                 var eduarray = [];
                 $('.education-groupbox').each(function (index, el) {
                     var _this = $(this);
@@ -2948,7 +2948,14 @@
 
             });
             $('#formUpdateUnitWaters').submit(function () {
-
+                let Rentroommeter = []
+                for (let i = 0; i < _data.floor.length; i++) {
+                    for (let j = 0; j < _data.floor[i].room.length; j++) {
+                        Rentroommeter.push(_data.floor[i].room[j].rentroom)
+                        //    console.log('=================')
+                        //    console.log(_data.floor[i].room[j].rentroom)
+                    }
+                }
                 //มิเตอร์น้ำเดือนนั้นที่กรอก
                 var eduarraywater = [];
                 $('.education-groupboxwater').each(function (index, el) {
@@ -3021,7 +3028,7 @@
                         } else {
                             roomNumbermeter += (j + 1)
                         }
-
+                        let rentroommeter = parseInt(Rentroommeter[k])
                         let beforusewater = parseInt(watermonthusebefor[k])
                         let usewater = parseInt(eduarraywater[k])
                         let usewatermonth = parseInt(watermonthuse[k])
@@ -3035,7 +3042,8 @@
                             usewater,
                             usewatermonth,
                             waterstatus,
-                            dateroommeter
+                            dateroommeter,
+                            rentroommeter
                         }
                         roomArrayPerFloor.push(roomData)
                     }
