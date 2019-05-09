@@ -1256,7 +1256,7 @@ app.post('/postPrint', (req, res) => {
         doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-        doc.underline(50, 500, 500, 27, { color: "black" })
+        doc.underline(50, 550, 500, 27, { color: "black" })
 
             .moveDown(0.25)
         doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
@@ -1266,7 +1266,7 @@ app.post('/postPrint', (req, res) => {
         doc.fontSize(15).text(`ค่าไฟฟ้า                ${stringData[i].meter.beforusemeter}              ${stringData[i].meter.usemeter}          ${stringData[i].meter.usemetermonth}                ${stringData[i].pricemeter}                  ${stringData[i].meterTotal}`)
         .moveDown(0.1)
         doc.fontSize(15).text(`ค่าน้ำ                   ${stringData[i].water.beforusewater}              ${stringData[i].water.usewater}          ${stringData[i].water.usewatermonth}                ${stringData[i].pricewater}                 ${stringData[i].waterTotal}`)
-        doc.underline(50, 600, 500, 27, { color: "black" })
+        doc.underline(50, 650, 500, 27, { color: "black" })
         //.text(JSON.stringify(page), 100, 100)
         .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent +stringData[i].meterTotal+stringData[i].waterTotal }   บาท`)
