@@ -1233,7 +1233,7 @@ app.post('/postPrint', (req, res) => {
         .moveDown(0.1)
         doc.fontSize(15).text(`ค่าเช่า                                                                                      ${stringData[i].rent}`)
         .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าไฟฟ้า                   ${stringData[i].meter.beforusemeter}              ${stringData[i].meter.usemeter}           ${stringData[i].meter.usemetermonth}               ${stringData[i].pricemeter}                 ${stringData[i].meterTotal}`)
+        doc.fontSize(15).text(`ค่าไฟฟ้า                 ${stringData[i].meter.beforusemeter}             ${stringData[i].meter.usemeter}          ${stringData[i].meter.usemetermonth}               ${stringData[i].pricemeter}                 ${stringData[i].meterTotal}`)
         .moveDown(0.1)
         doc.fontSize(15).text(`ค่าน้ำ`)
 
