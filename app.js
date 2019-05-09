@@ -1143,7 +1143,7 @@ app.post('/postPrint', (req, res) => {
         // roomNumber.push(e.split(',')[1])
     })
     // console.log('room is : ', rooms)
-     console.log('room is number: ', roomNumber)
+    console.log('room is number: ', roomNumber)
 
     let dates = req.body.Datameterbuilds
     let stringData = [] // ข้อมูลทุกห้อง-
@@ -1194,7 +1194,7 @@ app.post('/postPrint', (req, res) => {
                     stringData.push(objData)
                 }
             }) // end per room
-         
+
         })
     }) // end all date
     console.log('stringData is : ', stringData)
@@ -1231,9 +1231,8 @@ app.post('/postPrint', (req, res) => {
                 fontSize: '30'
             })
             .moveDown(0.1)
-            .text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`,{
-                fontSize: '10'
-            })
+            .text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`,5,80) 
+             
             .text(`           `)
 
             //.text(JSON.stringify(page), 100, 100)
