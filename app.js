@@ -1224,16 +1224,16 @@ app.post('/postPrint', (req, res) => {
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
 
 
-        doc.table([
-            ["cell11"], ["cell21"], ["cell31"],
-            ["cell12"], ["cell22"], ["cell32"],
-            ["cell13"], ["cell23"], ["cell33"]
-        ], {
-                width: 20,
-                height: 40,
-                x: 30,
-                y: 40
-            });
+            .table([
+                ["cell11"], ["cell21"], ["cell31"],
+                ["cell12"], ["cell22"], ["cell32"],
+                ["cell13"], ["cell23"], ["cell33"]
+            ], {
+                    width: 20,
+                    height: 40,
+                    x: 30,
+                    y: 40
+                });
 
 
         doc.underline(0, 200, 620, 27, { color: "black" })
