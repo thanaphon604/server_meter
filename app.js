@@ -1184,6 +1184,7 @@ app.post('/postPrint', (req, res) => {
                     objData.water = {
                         beforusewater, usewater, usewatermonth
                     }
+                    objData.pricemeter = pricemeter
                     objData.meterTotal = usemeter * pricemeter
                     if (methodwater === 'rentunit') {
                         objData.waterTotal = usewater * pricewater
@@ -1230,9 +1231,9 @@ app.post('/postPrint', (req, res) => {
             .moveDown(0.25)
         doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
         .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าเช่า                                                                                ${stringData[i].rent}`)
+        doc.fontSize(15).text(`ค่าเช่า                                                                                      ${stringData[i].rent}`)
         .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าไฟฟ้า                   ${stringData[i].meter.beforusemeter}`)
+        doc.fontSize(15).text(`ค่าไฟฟ้า                   ${stringData[i].meter.beforusemeter}              ${stringData[i].meter.usemeter}           ${stringData[i].meter.usemetermonth}                   ${stringData[i].pricemeter}                    ${stringData[i].meterTotal}`)
         .moveDown(0.1)
         doc.fontSize(15).text(`ค่าน้ำ`)
 
