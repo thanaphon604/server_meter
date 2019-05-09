@@ -1138,11 +1138,11 @@ app.post('/postPrint', (req, res) => {
     let buildingName = req.body.BuildingName
     let rooms = req.body.RoomPrint
     let roomNumber = []
-    rooms.forEach((e, i) => {
-        roomNumber.push(e.split(',')[1])
-    })
-    console.log('room is : ', rooms)
-    console.log('room is number: ', roomNumber)
+    // rooms.forEach((e, i) => {
+    //     roomNumber.push(e.split(',')[1])
+    // })
+    // console.log('room is : ', rooms)
+    // console.log('room is number: ', roomNumber)
 
     let dates = req.body.Datameterbuilds
     let stringData = [] // ข้อมูลทุกห้อง-
@@ -1163,8 +1163,8 @@ app.post('/postPrint', (req, res) => {
         floormeter.forEach((f, i) => {
             let { roommeter } = f
             roommeter.forEach((r, i) => {
-                console.log('curroom is : ', r.roomNumbermeter)
-                if (roomNumber.indexOf(r.roomNumbermeter) !== -1) { // ห้องที่ checked
+                console.log('curroom is : ', r.dateroommeter)
+                if (rooms.indexOf(r.dateroommeter) !== -1) { // ห้องที่ checked
                     let {
                         roomNumbermeter,
                         beforusemeter,
