@@ -1137,7 +1137,7 @@ app.post('/postPrint', (req, res) => {
     let methodwater = req.body.methodwater
     let buildingName = req.body.BuildingName
     let rooms = req.body.RoomPrint
-    let datarenroom = req.body.datarenroom
+    
     let roomNumber = []
     rooms.forEach((e, i) => {
         roomNumber.push(e)
@@ -1225,7 +1225,7 @@ app.post('/postPrint', (req, res) => {
             .moveDown(0.25)
         doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
             .moveDown(0.1)
-        doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
+        doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
         doc.underline(50, 200, 500, 27, { color: "black" })
@@ -1254,7 +1254,7 @@ app.post('/postPrint', (req, res) => {
         .moveDown(0.25)
         doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
             .moveDown(0.1)
-        doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
+        doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
         doc.underline(50, 535, 500, 27, { color: "black" })
@@ -1262,7 +1262,7 @@ app.post('/postPrint', (req, res) => {
             .moveDown(0.25)
         doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
         .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าเช่า                                                                                   ${stringData[i].rent}`)
+        doc.fontSize(15).text(`ค่าเช่า                                                                                ${stringData[i].rent}`)
         .moveDown(0.1)
         doc.fontSize(15).text(`ค่าไฟฟ้า               ${stringData[i].meter.beforusemeter}            ${stringData[i].meter.usemeter}            ${stringData[i].meter.usemetermonth}               ${stringData[i].pricemeter}                 ${stringData[i].meterTotal}`)
         .moveDown(0.1)
