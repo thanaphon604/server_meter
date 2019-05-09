@@ -1236,7 +1236,7 @@ app.post('/postPrint', (req, res) => {
         .moveDown(0.1)
         doc.fontSize(15).text(`ค่าไฟฟ้า                 ${stringData[i].meter.beforusemeter}              ${stringData[i].meter.usemeter}          ${stringData[i].meter.usemetermonth}                ${stringData[i].pricemeter}                   ${stringData[i].meterTotal}`)
         .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าน้ำ                   ${stringData[i].meter.beforusewater}              ${stringData[i].meter.usewater}          ${stringData[i].meter.usewatermonth}                ${stringData[i].pricewater}                   ${stringData[i].meterTotal}`)
+        doc.fontSize(15).text(`ค่าน้ำ                   ${stringData[i].water.beforusewater}              ${stringData[i].water.usewater}          ${stringData[i].water.usewatermonth}                ${stringData[i].pricewater}                   ${stringData[i].waterTotal}`)
 
         //.text(JSON.stringify(page), 100, 100)
         doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
