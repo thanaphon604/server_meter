@@ -1143,7 +1143,7 @@ app.post('/postPrint', (req, res) => {
         // roomNumber.push(e.split(',')[1])
     })
     // console.log('room is : ', rooms)
-    // console.log('room is number: ', roomNumber)
+     console.log('room is number: ', roomNumber)
 
     let dates = req.body.Datameterbuilds
     let stringData = [] // ข้อมูลทุกห้อง-
@@ -1164,8 +1164,8 @@ app.post('/postPrint', (req, res) => {
         floormeter.forEach((f, i) => {
             let { roommeter } = f
             roommeter.forEach((r, i) => {
-                console.log('curroom is : ', r.roomNumbermeter)
-                if (roomNumber.indexOf(r.roomNumbermeter) !== -1) { // ห้องที่ checked
+                console.log('curroom is : ', r.dateroommeter)
+                if (roomNumber.indexOf(r.dateroommeter) !== -1) { // ห้องที่ checked
                     let {
                         roomNumbermeter,
                         beforusemeter,
@@ -1230,7 +1230,10 @@ app.post('/postPrint', (req, res) => {
                 fontSize: '30'
             })
             .moveDown(0.1)
-            .text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
+            .text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`,{
+                fontSize: '10'
+            })
+            .text(`           `)
 
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(5)
