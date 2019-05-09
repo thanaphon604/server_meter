@@ -1138,9 +1138,10 @@ app.post('/postPrint', (req, res) => {
     let buildingName = req.body.BuildingName
     let rooms = req.body.RoomPrint
     let roomNumber = []
-    // rooms.forEach((e, i) => {
-    //     roomNumber.push(e.split(',')[1])
-    // })
+    rooms.forEach((e, i) => {
+        roomNumber.push(e)
+        // roomNumber.push(e.split(',')[1])
+    })
     // console.log('room is : ', rooms)
     // console.log('room is number: ', roomNumber)
 
@@ -1163,8 +1164,8 @@ app.post('/postPrint', (req, res) => {
         floormeter.forEach((f, i) => {
             let { roommeter } = f
             roommeter.forEach((r, i) => {
-                console.log('curroom is : ', r.dateroommeter)
-                if (rooms.indexOf(r.dateroommeter) !== -1) { // ห้องที่ checked
+                console.log('curroom is : ', r.roomNumbermeter)
+                if (roomNumber.indexOf(r.roomNumbermeter) !== -1) { // ห้องที่ checked
                     let {
                         roomNumbermeter,
                         beforusemeter,
@@ -1223,19 +1224,16 @@ app.post('/postPrint', (req, res) => {
             .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
             .moveDown(0.1)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-
-
-           
-
-
         doc.underline(0, 200, 620, 27, { color: "black" })
             .text('ใบเเจ้งหนี้(Invoice)', {
                 align: 'center',
                 fontSize: '30'
             })
+            .moveDown(0.1)
+            .text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
 
             //.text(JSON.stringify(page), 100, 100)
-            .moveDown(0.25)
+            .moveDown(5)
             .text(`ชื่อหอพัก ${stringData[i].buildingName}`)
             .moveDown(0.1)
             .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
