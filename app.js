@@ -1232,7 +1232,7 @@ app.post('/postPrint', (req, res) => {
         .moveDown(0.1)
         doc.fontSize(15).text(`ค่าเช่า                                                                                ${stringData[i].rent}`)
         .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าไฟฟ้า                   ${stringData[i].meter[i].beforusemeter}`)
+        doc.fontSize(15).text(`ค่าไฟฟ้า                   ${stringData[i].meter.beforusemeter}`)
         .moveDown(0.1)
         doc.fontSize(15).text(`ค่าน้ำ`)
 
