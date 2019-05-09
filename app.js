@@ -1265,14 +1265,14 @@ app.post('/postPrint', (req, res) => {
             .moveDown(0.1)
         doc.fontSize(15).text(`ค่าเช่า                                                                             ${stringData[i].rent}`)
             .moveDown(0.1)
-        doc.fontSize(15).columns(6).text(`ค่าไฟฟ้า              ${stringData[i].meter.beforusemeter}            ${stringData[i].meter.usemeter}            ${stringData[i].meter.usemetermonth}               ${stringData[i].pricemeter}                 ${stringData[i].meterTotal}`)
+        doc.fontSize(15).text(`ค่าไฟฟ้า              ${stringData[i].meter.beforusemeter}            ${stringData[i].meter.usemeter}            ${stringData[i].meter.usemetermonth}               ${stringData[i].pricemeter}                 ${stringData[i].meterTotal}`)
             .moveDown(0.1)
         doc.fontSize(15).text(`ค่าน้ำ                 ${stringData[i].water.beforusewater}            ${stringData[i].water.usewater}            ${stringData[i].water.usewatermonth}               ${stringData[i].pricewater}                ${stringData[i].waterTotal}`)
         doc.underline(50, 645, 500, 27, { color: "black" })
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
-       
+       doc.text('sdsd',280,200,50)
         doc.addPage()
 
 
