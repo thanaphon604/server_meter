@@ -1197,10 +1197,13 @@ app.post('/postPrint', (req, res) => {
     console.log('stringData is : ', stringData)
 
     //console.log('data is : ', JSON.stringify(req.body))
-    const PDFDocument = require('pdfkit-tables')
+    const PDFDocument = require('pdfkit')
     const fs = require('fs')
 
     const doc = new PDFDocument()
+
+    var PdfTable = require('voilab-pdf-table'),
+        PdfDocument = require('pdfkit');
 
     doc.pipe(fs.createWriteStream('sss.pdf'))
 
@@ -1220,22 +1223,16 @@ app.post('/postPrint', (req, res) => {
             .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
             .moveDown(0.1)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-            doc.underline(0, 200, 620, 27, {color: "black"})
-            const table1 = {
-                headers: ['Country', 'Conversion rate', 'Trend'],
-                rows: [
-                    ['Switzerland', '12%', '+1.12%'],
-                    ['France', '67%', '-0.98%'],
-                    ['England', '33%', '+4.44%']
-                ]
-            }
-            
-            .moveDown().table(table1, 100, 350, { width: 300 })
-            
+
+
+
+
+        doc.underline(0, 200, 620, 27, { color: "black" })
             .text('ใบเเจ้งหนี้(Invoice)', {
                 align: 'center',
                 fontSize: '30'
             })
+
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(0.25)
             .text(`ชื่อหอพัก ${stringData[i].buildingName}`)
@@ -1243,9 +1240,76 @@ app.post('/postPrint', (req, res) => {
             .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
             .moveDown(0.1)
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-           // doc.underline(0, 200, 620, 27, {color: "black"})
+        // doc.underline(0, 200, 620, 27, {color: "black"})
 
         doc.addPage()
+        var PdfTable = require('voilab-pdf-table'),
+            PdfDocument = require('pdfkit');
+
+        module.exports = {
+            create: function () {
+                // create a PDF from PDFKit, and a table from PDFTable
+                var pdf = new PdfDocument({
+                    autoFirstPage: false
+                }),
+                    table = new PdfTable(pdf, {
+                        bottomMargin: 30
+                    });
+
+                table
+                    // add some plugins (here, a 'fit-to-width' for a column)
+                    .addPlugin(new (require('voilab-pdf-table/plugins/fitcolumn'))({
+                        column: 'description'
+                    }))
+                    // set defaults to your columns
+                    .setColumnsDefaults({
+                        headerBorder: 'B',
+                        align: 'right'
+                    })
+                    // add table columns
+                    .addColumns([
+                        {
+                            id: 'description',
+                            header: 'Product',
+                            align: 'left'
+                        },
+                        {
+                            id: 'quantity',
+                            header: 'Quantity',
+                            width: 50
+                        },
+                        {
+                            id: 'price',
+                            header: 'Price',
+                            width: 40
+                        },
+                        {
+                            id: 'total',
+                            header: 'Total',
+                            width: 70,
+                            renderer: function (tb, data) {
+                                return 'CHF ' + data.total;
+                            }
+                        }
+                    ])
+                    // add events (here, we draw headers on each new page)
+                    .onPageAdded(function (tb) {
+                        tb.addHeader();
+                    });
+
+                // if no page already exists in your PDF, do not forget to add one
+                pdf.addPage();
+
+                // draw content, by passing data to the addBody method
+                table.addBody([
+                    { description: 'Product 1', quantity: 1, price: 20.10, total: 20.10 },
+                    { description: 'Product 2', quantity: 4, price: 4.00, total: 16.00 },
+                    { description: 'Product 3', quantity: 2, price: 17.85, total: 35.70 }
+                ]);
+
+                return pdf;
+            }
+        };
 
     })
     doc.end()

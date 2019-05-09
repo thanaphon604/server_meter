@@ -23,6 +23,7 @@
     "pdfmake": "^0.1.55",
     "phantom-html-to-pdf": "^0.5.6",
     "pug": "^2.0.3",
-    "unique-array-objects": "^1.0.0"
+    "unique-array-objects": "^1.0.0",
+    "voilab-pdf-table": "^0.4.1"
   }
 }
