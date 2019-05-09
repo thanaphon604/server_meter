@@ -1142,6 +1142,7 @@ app.post('/postPrint', (req, res) => {
         roomNumber.push(e.split(',')[1])
     })
     console.log('room is : ', rooms)
+    console.log('room is number: ', roomNumber)
 
     let dates = req.body.Datameterbuilds
     let stringData = [] // ข้อมูลทุกห้อง-
@@ -1224,16 +1225,7 @@ app.post('/postPrint', (req, res) => {
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
 
 
-            .table([
-                ["cell11", "cell21", "cell31"],
-                ["cell12", "cell22", "cell32"],
-                ["cell13", "cell23", "cell33"]
-            ], {
-                    width: 20,
-                    height: 40,
-                    x: 30,
-                    y: 40
-                });
+           
 
 
         doc.underline(0, 200, 620, 27, { color: "black" })
