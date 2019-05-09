@@ -1232,7 +1232,7 @@ app.post('/postPrint', (req, res) => {
 
             .moveDown(0.25)
         doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
-        doc.fontSize(15).text('sdsd', 280, 200, 50)
+        //doc.fontSize(15).text('sdsd', 280, 200, 50)
             .moveDown(0.1)
         doc.fontSize(15).text(`ค่าเช่า                                                                             ${stringData[i].rent}`)
             .moveDown(0.1)
