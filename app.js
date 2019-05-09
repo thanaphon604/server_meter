@@ -1271,7 +1271,8 @@ app.post('/postPrint', (req, res) => {
         //.text(JSON.stringify(page), 100, 100)
         .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent +stringData[i].meterTotal+stringData[i].waterTotal }   บาท`)
-       
+       doc.moveTo(100,150)
+       doc.text(`ggwp`)
         doc.addPage()
 
 
