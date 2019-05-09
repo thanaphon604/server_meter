@@ -1228,16 +1228,19 @@ app.post('/postPrint', (req, res) => {
         doc.underline(0, 200, 620, 27, { color: "black" })
 
             .moveDown(0.25)
-        doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`, {
-            fontSize: '1'
-        })
-            .text(`           `)
+        doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
+        .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าเช่า                                                                  ${stringData[i].rent}`)
+        .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าไฟฟ้า`)
+        .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าน้ำ`)
 
-            //.text(JSON.stringify(page), 100, 100)
-            doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
-                align: 'center',
-                fontSize: '30'
-            })
+        //.text(JSON.stringify(page), 100, 100)
+        doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
+            align: 'center',
+            fontSize: '30'
+        })
             .moveDown(5)
             .text(`ชื่อหอพัก ${stringData[i].buildingName}`)
             .moveDown(0.1)
