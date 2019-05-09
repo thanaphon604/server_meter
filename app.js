@@ -1227,7 +1227,7 @@ app.post('/postPrint', (req, res) => {
         doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-        doc.underline(0, 200, 620, 27, { color: "black" })
+        doc.underline(50, 200, 500, 27, { color: "black" })
 
             .moveDown(0.25)
         doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
