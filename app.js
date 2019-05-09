@@ -1191,9 +1191,10 @@ app.post('/postPrint', (req, res) => {
                         objData.waterTotal = pricewater
                     }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
+                    stringData.push(objData)
                 }
             }) // end per room
-            stringData.push(objData)
+         
         })
     }) // end all date
     console.log('stringData is : ', stringData)
