@@ -1137,7 +1137,7 @@ app.post('/postPrint', (req, res) => {
     let methodwater = req.body.methodwater
     let buildingName = req.body.BuildingName
     let rooms = req.body.RoomPrint
-    
+
     let roomNumber = []
     rooms.forEach((e, i) => {
         roomNumber.push(e)
@@ -1232,26 +1232,28 @@ app.post('/postPrint', (req, res) => {
 
             .moveDown(0.25)
         doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
-        .moveDown(0.1)
+            .moveDown(0.1)
         doc.fontSize(15).text(`ค่าเช่า                                                                             ${stringData[i].rent}`)
-        .moveDown(0.1)
+            .moveDown(0.1)
         doc.fontSize(15).text(`ค่าไฟฟ้า              ${stringData[i].meter.beforusemeter}            ${stringData[i].meter.usemeter}            ${stringData[i].meter.usemetermonth}               ${stringData[i].pricemeter}                 ${stringData[i].meterTotal}`)
-        .moveDown(0.1)
+            .moveDown(0.1)
         doc.fontSize(15).text(`ค่าน้ำ                 ${stringData[i].water.beforusewater}            ${stringData[i].water.usewater}            ${stringData[i].water.usewatermonth}               ${stringData[i].pricewater}                ${stringData[i].waterTotal}`)
         doc.underline(50, 300, 500, 27, { color: "black" })
-        //.text(JSON.stringify(page), 100, 100)
-        .moveDown(1)
-        doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent +stringData[i].meterTotal+stringData[i].waterTotal }   บาท`)
+            //.text(JSON.stringify(page), 100, 100)
+            .moveDown(1)
+        doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
+        doc.moveTo(100, 150).text(`ggwp`)
+        doc.text(`ggwp`)
         doc.underline(0, 350, 620, 45, { color: "black" })
         doc.underline(0, 350, 620, 45, { color: "black" })
         doc.underline(0, 350, 620, 45, { color: "black" })
-        .moveDown(1)
+            .moveDown(1)
         //=============บน
         doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
             align: 'center',
             fontSize: '30'
         })
-        .moveDown(0.25)
+            .moveDown(0.25)
         doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
@@ -1261,18 +1263,18 @@ app.post('/postPrint', (req, res) => {
 
             .moveDown(0.25)
         doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
-        .moveDown(0.1)
+            .moveDown(0.1)
         doc.fontSize(15).text(`ค่าเช่า                                                                             ${stringData[i].rent}`)
-        .moveDown(0.1)
+            .moveDown(0.1)
         doc.fontSize(15).text(`ค่าไฟฟ้า              ${stringData[i].meter.beforusemeter}            ${stringData[i].meter.usemeter}            ${stringData[i].meter.usemetermonth}               ${stringData[i].pricemeter}                 ${stringData[i].meterTotal}`)
-        .moveDown(0.1)
+            .moveDown(0.1)
         doc.fontSize(15).text(`ค่าน้ำ                 ${stringData[i].water.beforusewater}            ${stringData[i].water.usewater}            ${stringData[i].water.usewatermonth}               ${stringData[i].pricewater}                ${stringData[i].waterTotal}`)
         doc.underline(50, 645, 500, 27, { color: "black" })
-        //.text(JSON.stringify(page), 100, 100)
-        .moveDown(1)
-        doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent +stringData[i].meterTotal+stringData[i].waterTotal }   บาท`)
-       doc.moveTo(100,150)
-       doc.text(`ggwp`)
+            //.text(JSON.stringify(page), 100, 100)
+            .moveDown(1)
+        doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
+        doc.moveTo(100, 150)
+        doc.text(`ggwp`)
         doc.addPage()
 
 
