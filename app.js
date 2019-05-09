@@ -1237,13 +1237,14 @@ app.post('/postPrint', (req, res) => {
         doc.fontSize(15).text(`ค่าไฟฟ้า                ${stringData[i].meter.beforusemeter}              ${stringData[i].meter.usemeter}          ${stringData[i].meter.usemetermonth}                ${stringData[i].pricemeter}                  ${stringData[i].meterTotal}`)
         .moveDown(0.1)
         doc.fontSize(15).text(`ค่าน้ำ                   ${stringData[i].water.beforusewater}              ${stringData[i].water.usewater}          ${stringData[i].water.usewatermonth}                ${stringData[i].pricewater}                 ${stringData[i].waterTotal}`)
-        doc.underline(0, 350, 620, 27, { color: "black" })
+        doc.underline(0, 300, 500, 27, { color: "black" })
         //.text(JSON.stringify(page), 100, 100)
+        .moveDown(10)
         doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
             align: 'center',
             fontSize: '30'
         })
-            .moveDown(5)
+            .moveDown(1)
             .text(`ชื่อหอพัก ${stringData[i].buildingName}`)
             .moveDown(0.1)
             .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
