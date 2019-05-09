@@ -1224,6 +1224,16 @@ app.post('/postPrint', (req, res) => {
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
 
 
+        doc.table([
+            ["cell11"], ["cell21"], ["cell31"],
+            ["cell12"], ["cell22"], ["cell32"],
+            ["cell13"], ["cell23"], ["cell33"]
+        ], {
+                width: 20,
+                height: 40,
+                x: 30,
+                y: 40
+            });
 
 
         doc.underline(0, 200, 620, 27, { color: "black" })
@@ -1241,63 +1251,12 @@ app.post('/postPrint', (req, res) => {
             .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
         // doc.underline(0, 200, 620, 27, {color: "black"})
 
-        doc.lineCap('butt')
-            .moveTo(270, 90)
-            .lineTo(270, 230)
-            .stroke()
 
-        row(doc, 90);
-        row(doc, 110);
-        row(doc, 130);
-        row(doc, 150);
-        row(doc, 170);
-        row(doc, 190);
-        row(doc, 210);
-
-        textInRowFirst(doc, 'Nombre o razón social', 100);
-        textInRowFirst(doc, 'RUT', 120);
-        textInRowFirst(doc, 'Dirección', 140);
-        textInRowFirst(doc, 'Comuna', 160);
-        textInRowFirst(doc, 'Ciudad', 180);
-        textInRowFirst(doc, 'Telefono', 200);
-        textInRowFirst(doc, 'e-mail', 220);
-        doc.end();
-
-        writeStream.on('finish', function () {
-            // do stuff with the PDF file
-            return res.status(200).json({
-                ok: "ok"
-            });
-
-        });
-
-
-        function textInRowFirst(doc, text, heigth) {
-            doc.y = heigth;
-            doc.x = 30;
-            doc.fillColor('black')
-            doc.text(text, {
-                paragraphGap: 5,
-                indent: 5,
-                align: 'justify',
-                columns: 1,
-            });
-            return doc
-        }
-
-
-        function row(doc, heigth) {
-            doc.lineJoin('miter')
-                .rect(30, heigth, 500, 20)
-                .stroke()
-            return doc
-        }
 
         doc.addPage()
 
+
     })
-
-
     doc.end()
 
     res.send('done')
