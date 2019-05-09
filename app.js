@@ -1220,18 +1220,20 @@ app.post('/postPrint', (req, res) => {
             })
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(0.25)
-            .text(`ชื่อหอพัก ${stringData[i].buildingName}`)
+            doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
             .moveDown(0.1)
-            .text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
+            doc.fontSize(28).text(`เลขที่ห้องพัก ${stringData[i].roomNumbermeter}`)
             .moveDown(0.1)
-            .text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
+            doc.fontSize(20).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
         doc.underline(0, 200, 620, 27, { color: "black" })
             .text('ใบเเจ้งหนี้(Invoice)', {
                 align: 'center',
                 fontSize: '30'
             })
             .moveDown(0.1)
-            doc.fontSize(14).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
+            doc.fontSize(18).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`, {
+                fontSize: '1'
+            })
             .text(`           `)
 
             //.text(JSON.stringify(page), 100, 100)
