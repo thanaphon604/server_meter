@@ -1242,7 +1242,7 @@ app.post('/postPrint', (req, res) => {
         .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent +stringData[i].meterTotal+stringData[i].waterTotal }   บาท`)
         doc.underline(0, 350, 620, 45, { color: "black" })
-        .moveDown(10)
+        .moveDown(2)
         doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
             align: 'center',
             fontSize: '30'
