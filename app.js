@@ -1265,7 +1265,7 @@ app.post('/postPrint', (req, res) => {
             .moveDown(0.25)
         doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
             .moveDown(0.1)
-            doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
+        doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
             .moveDown(0.1)
         doc.fontSize(15).text(`ค่าไฟฟ้า`)
             .moveDown(0.1)
@@ -1274,7 +1274,7 @@ app.post('/postPrint', (req, res) => {
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
-        
+
         doc.fontSize(15).text(`${stringData[i].meter.beforusemeter}`, 180, 275)
         doc.fontSize(15).text(`${stringData[i].meter.usemeter}`, 260, 275)
         doc.fontSize(15).text(`${stringData[i].meter.usemetermonth}`, 320, 275)
@@ -1308,23 +1308,23 @@ app.post('/postPrint', (req, res) => {
 
 
 app.post('/postPrintpay', (req, res) => {
-    let dataprint = req.body.htmlStringmeterprintpay
-    let BuildingNameInput = req.body.BuildingName
-    let RoomPrintInput = req.body.RoomPrint
-    console.log('name', BuildingNameInput)
-    console.log('room', RoomPrintInput)
+    let buildingName = req.body.BuildingName
+    let rooms = req.body.RoomPrint
+    let methodwater = req.body.methodwater
+    let dates = req.body.Datameterbuilds
+
 
     meterbuild.find({
-        buildingnamemeter: BuildingNameInput,
+        buildingnamemeter: buildingName,
 
     }).then((build) => {
         if (build.length >= 1) {
             console.log('ggrecive', build.length)
-            for (let l = 0; l < RoomPrintInput.length; l++) {
+            for (let l = 0; l < rooms.length; l++) {
                 for (let m = 0; m < build.length; m++) {
                     for (let i = 0; i < build[m].floormeter.length; i++) {
                         for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
-                            if (RoomPrintInput[l] == build[m].floormeter[i].roommeter[j].dateroommeter) {
+                            if (rooms[l] == build[m].floormeter[i].roommeter[j].dateroommeter) {
                                 build[m].floormeter[i].roommeter[j].meterstatus = 'ไม่มียอดค้างชำระ'
                                 build[m].floormeter[i].roommeter[j].waterstatus = 'ไม่มียอดค้างชำระ'
                                 build[m].floormeter[i].roommeter[j].statusprint = 'เคยพริ้น'
@@ -1348,15 +1348,173 @@ app.post('/postPrintpay', (req, res) => {
         res.status(400).send(err)
     })
 
-    var fs = require('fs');
-    var pdf = require('html-pdf');
-    //var html = fs.readFileSync(dataprint , 'utf8');
-    var options = { format: 'Letter' };
-    // console.log('data is :',  req.body)
-    pdf.create('<html lang="en"><head><meta charset="UTF-8"></head><body>' + dataprint + '</body></html>', options).toFile('./files/Receipt.pdf', function (err, res) {
-        if (err) return console.log(err);
-        //console.log(res); // { filename: '/app/businesscard.pdf' }
-    });
+
+    let roomNumber = []
+    rooms.forEach((e, i) => {
+        roomNumber.push(e)
+        // roomNumber.push(e.split(',')[1])
+    })
+    // console.log('room is : ', rooms)
+    console.log('room is number: ', roomNumber)
+    let stringData = [] // ข้อมูลทุกห้อง-
+    console.log('#######')
+    dates.forEach((e, i) => {
+        let {
+            pricemeter,
+            pricewater,
+            datemeter,
+            floormeter,
+        } = e
+
+        let objData = { //ข้อมูลแต่ละห้อง
+            buildingName,
+            datemeter,
+        }
+
+        floormeter.forEach((f, i) => {
+            let { roommeter } = f
+            roommeter.forEach((r, i) => {
+                console.log('curroom is : ', r.dateroommeter)
+                if (roomNumber.indexOf(r.dateroommeter) !== -1) { // ห้องที่ checked
+                    let {
+                        roomNumbermeter,
+                        beforusemeter,
+                        usemeter,
+                        usemetermonth,
+                        beforusewater,
+                        usewater,
+                        usewatermonth,
+                        rentroommeter,
+                    } = r
+                    objData.roomNumber = roomNumbermeter
+                    objData.rent = rentroommeter,
+                        objData.meter = {
+                            beforusemeter, usemeter, usemetermonth
+                        }
+                    objData.water = {
+                        beforusewater, usewater, usewatermonth
+                    }
+                    objData.pricemeter = pricemeter
+                    objData.pricewater = pricewater
+                    objData.meterTotal = usemeter * pricemeter
+                    if (methodwater === 'rentunit') {
+                        objData.waterTotal = usewater * pricewater
+                    } else {
+                        objData.waterTotal = pricewater
+                    }
+                    console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
+                    stringData.push(objData)
+                }
+            }) // end per room
+
+        })
+    }) // end all date
+    console.log('stringData is : ', stringData)
+
+    //console.log('data is : ', JSON.stringify(req.body))
+    const PDFDocument = require('pdfkit')
+    const fs = require('fs')
+
+    const doc = new PDFDocument()
+
+
+
+    doc.pipe(fs.createWriteStream('sss.pdf'))
+
+    stringData.forEach((page, i) => {
+        doc.font('fonts/ThaiSansLite.ttf').fontSize(25)
+
+        doc
+        // .text(`หน้า ${i + 1}`, 100, 80)
+        doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
+            align: 'center',
+            fontSize: '30'
+        })
+            //.text(JSON.stringify(page), 100, 100)
+            .moveDown(0.25)
+        doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
+            .moveDown(0.1)
+        doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
+            .moveDown(0.1)
+        doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
+        doc.underline(50, 200, 500, 27, { color: "black" })
+
+            .moveDown(0.25)
+        doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
+            //doc.fontSize(15).text('sdsd', 280, 200, 50)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าไฟฟ้า`)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าน้ำ`)
+        doc.underline(50, 300, 500, 27, { color: "black" })
+            //.text(JSON.stringify(page), 100, 100)
+            .moveDown(1)
+        doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
+
+        doc.underline(0, 350, 620, 45, { color: "black" })
+        doc.underline(0, 350, 620, 45, { color: "black" })
+        doc.underline(0, 350, 620, 45, { color: "black" })
+            .moveDown(1)
+
+        // =============บน
+        doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
+            align: 'center',
+            fontSize: '30'
+        })
+            .moveDown(0.25)
+        doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
+            .moveDown(0.1)
+        doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
+            .moveDown(0.1)
+        doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
+        doc.underline(50, 535, 500, 27, { color: "black" })
+
+            .moveDown(0.25)
+        doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าไฟฟ้า`)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าน้ำ`)
+        doc.underline(50, 645, 500, 27, { color: "black" })
+            //.text(JSON.stringify(page), 100, 100)
+            .moveDown(1)
+        doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
+
+        doc.fontSize(15).text(`${stringData[i].meter.beforusemeter}`, 180, 275)
+        doc.fontSize(15).text(`${stringData[i].meter.usemeter}`, 260, 275)
+        doc.fontSize(15).text(`${stringData[i].meter.usemetermonth}`, 320, 275)
+        doc.fontSize(15).text(`${stringData[i].pricemeter}`, 410, 275)
+        doc.fontSize(15).text(`${stringData[i].meterTotal}`, 510, 275)
+        doc.fontSize(15).text(`${stringData[i].water.beforusewater}`, 180, 298)
+        doc.fontSize(15).text(`${stringData[i].water.usewater}`, 260, 298)
+        doc.fontSize(15).text(`${stringData[i].water.usewatermonth}`, 320, 298)
+        doc.fontSize(15).text(`${stringData[i].pricewater}`, 410, 298)
+        doc.fontSize(15).text(`${stringData[i].waterTotal}`, 510, 298)
+        //===============2  ส่วน บนเเละล่าง
+        doc.fontSize(15).text(`${stringData[i].meter.beforusemeter}`, 180, 603)
+        doc.fontSize(15).text(`${stringData[i].meter.usemeter}`, 260, 603)
+        doc.fontSize(15).text(`${stringData[i].meter.usemetermonth}`, 320, 603)
+        doc.fontSize(15).text(`${stringData[i].pricemeter}`, 410, 603)
+        doc.fontSize(15).text(`${stringData[i].meterTotal}`, 510, 603)
+        doc.fontSize(15).text(`${stringData[i].water.beforusewater}`, 180, 626)
+        doc.fontSize(15).text(`${stringData[i].water.usewater}`, 260, 626)
+        doc.fontSize(15).text(`${stringData[i].water.usewatermonth}`, 320, 626)
+        doc.fontSize(15).text(`${stringData[i].pricewater}`, 410, 626)
+        doc.fontSize(15).text(`${stringData[i].waterTotal}`, 510, 626)
+
+        doc.addPage()
+
+
+    })
+    doc.end()
+
+    res.send('done')
+
+
 })
 //render เเทบใบเสร็จรับเงินหน้าใหม่
 app.get('/printt', function (req, res) {
