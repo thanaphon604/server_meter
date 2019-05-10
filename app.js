@@ -1389,7 +1389,7 @@ app.post('/postPrintpay', (req, res) => {
 
         doc
         // .text(`หน้า ${i + 1}`, 100, 80)
-        doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
+        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)', {
             align: 'center',
             fontSize: '30'
         })
@@ -1403,19 +1403,26 @@ app.post('/postPrintpay', (req, res) => {
         doc.underline(50, 200, 500, 27, { color: "black" })
 
             .moveDown(0.25)
-        doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
+        doc.fontSize(15).text(`           จำนวนเงินที่ต้องจ่าย`)
             //doc.fontSize(15).text('sdsd', 280, 200, 50)
             .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
+        doc.fontSize(15).text(`ค่าเช่า      ${stringData[i].rent}`)
             .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าไฟฟ้า`)
+        doc.fontSize(15).text(`ค่าไฟฟ้า    ${stringData[i].meterTotal}`)
             .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าน้ำ`)
+        doc.fontSize(15).text(`ค่าน้ำ      ${stringData[i].waterTotal}`)
         doc.underline(50, 300, 500, 27, { color: "black" })
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
-
+        .moveDown(0.1)
+        doc.fontSize(15).text('ลงชื่อ......................ผู้รับเงิน', {
+            align: 'center',
+        })
+        .moveDown(0.1)
+        doc.fontSize(15).text('(.............................)', {
+            align: 'center',
+        })
         doc.underline(0, 350, 620, 45, { color: "black" })
         doc.underline(0, 350, 620, 45, { color: "black" })
         doc.underline(0, 350, 620, 45, { color: "black" })
@@ -1447,27 +1454,7 @@ app.post('/postPrintpay', (req, res) => {
             .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
 
-        doc.fontSize(15).text(`${stringData[i].meter.beforusemeter}`, 180, 275)
-        doc.fontSize(15).text(`${stringData[i].meter.usemeter}`, 260, 275)
-        doc.fontSize(15).text(`${stringData[i].meter.usemetermonth}`, 320, 275)
-        doc.fontSize(15).text(`${stringData[i].pricemeter}`, 410, 275)
-        doc.fontSize(15).text(`${stringData[i].meterTotal}`, 510, 275)
-        doc.fontSize(15).text(`${stringData[i].water.beforusewater}`, 180, 298)
-        doc.fontSize(15).text(`${stringData[i].water.usewater}`, 260, 298)
-        doc.fontSize(15).text(`${stringData[i].water.usewatermonth}`, 320, 298)
-        doc.fontSize(15).text(`${stringData[i].pricewater}`, 410, 298)
-        doc.fontSize(15).text(`${stringData[i].waterTotal}`, 510, 298)
-        //===============2  ส่วน บนเเละล่าง
-        doc.fontSize(15).text(`${stringData[i].meter.beforusemeter}`, 180, 603)
-        doc.fontSize(15).text(`${stringData[i].meter.usemeter}`, 260, 603)
-        doc.fontSize(15).text(`${stringData[i].meter.usemetermonth}`, 320, 603)
-        doc.fontSize(15).text(`${stringData[i].pricemeter}`, 410, 603)
-        doc.fontSize(15).text(`${stringData[i].meterTotal}`, 510, 603)
-        doc.fontSize(15).text(`${stringData[i].water.beforusewater}`, 180, 626)
-        doc.fontSize(15).text(`${stringData[i].water.usewater}`, 260, 626)
-        doc.fontSize(15).text(`${stringData[i].water.usewatermonth}`, 320, 626)
-        doc.fontSize(15).text(`${stringData[i].pricewater}`, 410, 626)
-        doc.fontSize(15).text(`${stringData[i].waterTotal}`, 510, 626)
+       
 
         doc.addPage()
 
