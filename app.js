@@ -1166,7 +1166,7 @@ app.post('/postPrint', (req, res) => {
             let { roommeter } = f
             roommeter.forEach((r, i) => {
                 console.log('curroom is : ', r.dateroommeter)
-                if (roomNumber[i].indexOf(r.dateroommeter) !== -1) { // ห้องที่ checked
+                if (roomNumber.indexOf(r.dateroommeter) !== -1) { // ห้องที่ checked
                     let {
                         roomNumbermeter,
                         beforusemeter,
@@ -1194,8 +1194,9 @@ app.post('/postPrint', (req, res) => {
                         objData.waterTotal = pricewater
                     }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
-                    stringData.push(objData)
+
                 }
+                stringData.push(objData)
             }) // end per room
 
         })
@@ -1456,7 +1457,7 @@ app.post('/postPrintpay', (req, res) => {
         doc.fontSize(15).text('(................................................................)', {
             align: 'center',
         })
-       
+
         doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)', 80, 25, {
             align: 'center',
             fontSize: '30'
