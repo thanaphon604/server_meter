@@ -1277,11 +1277,11 @@ app.post('/postPrint', (req, res) => {
         
         doc.fontSize(15).text('sdsd1', 180, 275)
         doc.fontSize(15).text('sdsd2', 260, 275)
-        doc.fontSize(15).text('sdsd3', 300, 275)
-        doc.fontSize(15).text('sdsd4', 390, 275)
-        doc.fontSize(15).text('sdsd5', 510, 275)
+        doc.fontSize(15).text('sdsd3', 330, 275)
+        doc.fontSize(15).text('sdsd4', 410, 275)
+        doc.fontSize(15).text('sdsd5', 520, 275)
         doc.fontSize(15).text('sdsd6', 180, 298)
-        doc.fontSize(15).text('sdsd7', 260, 299)
+        doc.fontSize(15).text('sdsd7', 260, 298)
         doc.addPage()
 
 
