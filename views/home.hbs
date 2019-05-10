@@ -1938,16 +1938,16 @@
 
                         // document.getElementById("gggpay").innerHTML = htmlStringmeterprintpay
 
-                        console.log('ใบเสร็จรับเงิน', htmlStringmeterprintpay)
-                        console.log('rommeterใบเสร้จ', RoomPrint)
-                        console.log('ชื่อหอใบเสร้จ', Datameterbuilds[0].buildingnamemeter)
-                        console.log('#############')
-                        console.log(RoomPrint)
-                        console.log(BuildingName)
-                        console.log(Datameterbuilds)
-                        console.log(_data.methodwater)
-                        console.log('#############')
-                        {{!-- var url = "https://electricitymeter.herokuapp.com/postPrintpay";
+                        //  console.log('ใบเสร็จรับเงิน', htmlStringmeterprintpay)
+                        //   console.log('rommeterใบเสร้จ', RoomPrint)
+                        //  console.log('ชื่อหอใบเสร้จ', Datameterbuilds[0].buildingnamemeter)
+                        //   console.log('#############')
+                        //    console.log(RoomPrint)
+                        //    console.log(BuildingName)
+                        //    console.log(Datameterbuilds)
+                        //    console.log(_data.methodwater)
+                        //    console.log('#############')
+                        var url = "https://electricitymeter.herokuapp.com/postPrintpay";
                         var xhr = new XMLHttpRequest();
                         xhr.open("POST", url, true);
                         xhr.setRequestHeader("Content-Type", "application/json");
@@ -1968,10 +1968,10 @@
                             }
                         };
                         var data = JSON.stringify({
-                           RoomPrint, BuildingName, Datameterbuilds, methodwater: _data.methodwater
+                            RoomPrint, BuildingName, Datameterbuilds, methodwater: _data.methodwater
                         });
-                        xhr.send(data); --}}
-                    }else{
+                        xhr.send(data);
+                    } else {
 
                     }
                 });
