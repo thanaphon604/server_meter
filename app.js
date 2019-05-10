@@ -1457,7 +1457,7 @@ app.post('/postPrintpay', (req, res) => {
             align: 'center',
         })
        
-        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)', 150, 30, {
+        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)', 100, 25, {
             align: 'center',
             fontSize: '30'
         })
