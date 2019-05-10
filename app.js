@@ -1265,7 +1265,7 @@ app.post('/postPrint', (req, res) => {
             .moveDown(0.25)
         doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
             .moveDown(0.1)
-            doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
+        doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
             .moveDown(0.1)
         doc.fontSize(15).text(`ค่าไฟฟ้า`)
             .moveDown(0.1)
@@ -1274,7 +1274,8 @@ app.post('/postPrint', (req, res) => {
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
-        
+        doc.image('https://www.bpicc.com/images/2018/10/09/Logo_Intregrate.png', 320, 280, { scale: 0.25 })
+            .text('Scale', 320, 265);
         doc.fontSize(15).text(`${stringData[i].meter.beforusemeter}`, 180, 275)
         doc.fontSize(15).text(`${stringData[i].meter.usemeter}`, 260, 275)
         doc.fontSize(15).text(`${stringData[i].meter.usemetermonth}`, 320, 275)
