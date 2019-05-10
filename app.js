@@ -1382,7 +1382,7 @@ app.post('/postPrintpay', (req, res) => {
 
 
 
-    doc.pipe(fs.createWriteStream('sss.pdf'))
+    doc.pipe(fs.createWriteStream('ss.pdf'))
 
     stringData.forEach((page, i) => {
         doc.font('fonts/ThaiSansLite.ttf').fontSize(25)
@@ -1518,7 +1518,7 @@ app.post('/postPrintpay', (req, res) => {
 })
 //render เเทบใบเสร็จรับเงินหน้าใหม่
 app.get('/printt', function (req, res) {
-    let filePath = "/files/Receipt.pdf";
+    var filePath = "/ss.pdf";
 
     fs.readFile(__dirname + filePath, function (err, data) {
         res.contentType("application/pdf");
