@@ -1153,7 +1153,7 @@ app.post('/postPrint', (req, res) => {
     doc.pipe(fs.createWriteStream('sss.pdf'))
     
     let dates = req.body.Datameterbuilds
-    let stringData = {} // ข้อมูลทุกห้อง-
+    let stringData = [] // ข้อมูลทุกห้อง-
     console.log('#######')
     dates.forEach((e, i) => {
         let {
