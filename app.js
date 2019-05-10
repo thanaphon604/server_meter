@@ -1151,9 +1151,9 @@ app.post('/postPrint', (req, res) => {
 
     const doc = new PDFDocument()
     doc.pipe(fs.createWriteStream('sss.pdf'))
-
+    
     let dates = req.body.Datameterbuilds
-    let stringData = [] // ข้อมูลทุกห้อง-
+    let stringData = {} // ข้อมูลทุกห้อง-
     console.log('#######')
     dates.forEach((e, i) => {
         let {
@@ -1203,110 +1203,109 @@ app.post('/postPrint', (req, res) => {
                     console.log('stringData is befor: ', stringData)
                     stringData.push(objData)
                     console.log('stringData is after: ', stringData)
-                    doc.font('fonts/ThaiSansLite.ttf').fontSize(25)
-
-                    doc
-                    // .text(`หน้า ${i + 1}`, 100, 80)
-                    doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
-                        align: 'center',
-                        fontSize: '30'
-                    })
-                        //.text(JSON.stringify(page), 100, 100)
-                        .moveDown(0.25)
-                    doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
-                        .moveDown(0.1)
-                    doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
-                        .moveDown(0.1)
-                    doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-                    doc.underline(50, 200, 500, 27, { color: "black" })
-
-                        .moveDown(0.25)
-                    doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
-                        //doc.fontSize(15).text('sdsd', 280, 200, 50)
-                        .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
-                        .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าไฟฟ้า`)
-                        .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าน้ำ`)
-                    doc.underline(50, 300, 500, 27, { color: "black" })
-                        //.text(JSON.stringify(page), 100, 100)
-                        .moveDown(1)
-                    doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
-
-                    doc.underline(0, 350, 620, 45, { color: "black" })
-                    doc.underline(0, 350, 620, 45, { color: "black" })
-                    doc.underline(0, 350, 620, 45, { color: "black" })
-                        .moveDown(1)
-
-                    // =============บน
-                    doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
-                        align: 'center',
-                        fontSize: '30'
-                    })
-                        .moveDown(0.25)
-                    doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
-                        .moveDown(0.1)
-                    doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
-                        .moveDown(0.1)
-                    doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-                    doc.underline(50, 535, 500, 27, { color: "black" })
-
-                        .moveDown(0.25)
-                    doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
-                        .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
-                        .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าไฟฟ้า`)
-                        .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าน้ำ`)
-                    doc.underline(50, 645, 500, 27, { color: "black" })
-                        //.text(JSON.stringify(page), 100, 100)
-                        .moveDown(1)
-                    doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
-
-                    doc.fontSize(15).text(`${stringData[i].meter.beforusemeter}`, 180, 275)
-                    doc.fontSize(15).text(`${stringData[i].meter.usemeter}`, 260, 275)
-                    doc.fontSize(15).text(`${stringData[i].meter.usemetermonth}`, 320, 275)
-                    doc.fontSize(15).text(`${stringData[i].pricemeter}`, 410, 275)
-                    doc.fontSize(15).text(`${stringData[i].meterTotal}`, 510, 275)
-                    doc.fontSize(15).text(`${stringData[i].water.beforusewater}`, 180, 298)
-                    doc.fontSize(15).text(`${stringData[i].water.usewater}`, 260, 298)
-                    doc.fontSize(15).text(`${stringData[i].water.usewatermonth}`, 320, 298)
-                    doc.fontSize(15).text(`${stringData[i].pricewater}`, 410, 298)
-                    doc.fontSize(15).text(`${stringData[i].waterTotal}`, 510, 298)
-                    //===============2  ส่วน บนเเละล่าง
-                    doc.fontSize(15).text(`${stringData[i].meter.beforusemeter}`, 180, 603)
-                    doc.fontSize(15).text(`${stringData[i].meter.usemeter}`, 260, 603)
-                    doc.fontSize(15).text(`${stringData[i].meter.usemetermonth}`, 320, 603)
-                    doc.fontSize(15).text(`${stringData[i].pricemeter}`, 410, 603)
-                    doc.fontSize(15).text(`${stringData[i].meterTotal}`, 510, 603)
-                    doc.fontSize(15).text(`${stringData[i].water.beforusewater}`, 180, 626)
-                    doc.fontSize(15).text(`${stringData[i].water.usewater}`, 260, 626)
-                    doc.fontSize(15).text(`${stringData[i].water.usewatermonth}`, 320, 626)
-                    doc.fontSize(15).text(`${stringData[i].pricewater}`, 410, 626)
-                    doc.fontSize(15).text(`${stringData[i].waterTotal}`, 510, 626)
-
-                    doc.addPage()
-
-
                 }
 
             }) // end per room
-            doc.end()
 
-            res.send('done')
         })
     }) // end all date
     console.log('stringData is : ', stringData)
 
     //console.log('data is : ', JSON.stringify(req.body))
-
+   
 
     stringData.forEach((page, i) => {
+        doc.font('fonts/ThaiSansLite.ttf').fontSize(25)
+
+        doc
+        // .text(`หน้า ${i + 1}`, 100, 80)
+        doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
+            align: 'center',
+            fontSize: '30'
+        })
+            //.text(JSON.stringify(page), 100, 100)
+            .moveDown(0.25)
+        doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
+            .moveDown(0.1)
+        doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
+            .moveDown(0.1)
+        doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
+        doc.underline(50, 200, 500, 27, { color: "black" })
+
+            .moveDown(0.25)
+        doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
+            //doc.fontSize(15).text('sdsd', 280, 200, 50)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าไฟฟ้า`)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าน้ำ`)
+        doc.underline(50, 300, 500, 27, { color: "black" })
+            //.text(JSON.stringify(page), 100, 100)
+            .moveDown(1)
+        doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
+
+        doc.underline(0, 350, 620, 45, { color: "black" })
+        doc.underline(0, 350, 620, 45, { color: "black" })
+        doc.underline(0, 350, 620, 45, { color: "black" })
+            .moveDown(1)
+
+        // =============บน
+        doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
+            align: 'center',
+            fontSize: '30'
+        })
+            .moveDown(0.25)
+        doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
+            .moveDown(0.1)
+        doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
+            .moveDown(0.1)
+        doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
+        doc.underline(50, 535, 500, 27, { color: "black" })
+
+            .moveDown(0.25)
+        doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าไฟฟ้า`)
+            .moveDown(0.1)
+        doc.fontSize(15).text(`ค่าน้ำ`)
+        doc.underline(50, 645, 500, 27, { color: "black" })
+            //.text(JSON.stringify(page), 100, 100)
+            .moveDown(1)
+        doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
+
+        doc.fontSize(15).text(`${stringData[i].meter.beforusemeter}`, 180, 275)
+        doc.fontSize(15).text(`${stringData[i].meter.usemeter}`, 260, 275)
+        doc.fontSize(15).text(`${stringData[i].meter.usemetermonth}`, 320, 275)
+        doc.fontSize(15).text(`${stringData[i].pricemeter}`, 410, 275)
+        doc.fontSize(15).text(`${stringData[i].meterTotal}`, 510, 275)
+        doc.fontSize(15).text(`${stringData[i].water.beforusewater}`, 180, 298)
+        doc.fontSize(15).text(`${stringData[i].water.usewater}`, 260, 298)
+        doc.fontSize(15).text(`${stringData[i].water.usewatermonth}`, 320, 298)
+        doc.fontSize(15).text(`${stringData[i].pricewater}`, 410, 298)
+        doc.fontSize(15).text(`${stringData[i].waterTotal}`, 510, 298)
+        //===============2  ส่วน บนเเละล่าง
+        doc.fontSize(15).text(`${stringData[i].meter.beforusemeter}`, 180, 603)
+        doc.fontSize(15).text(`${stringData[i].meter.usemeter}`, 260, 603)
+        doc.fontSize(15).text(`${stringData[i].meter.usemetermonth}`, 320, 603)
+        doc.fontSize(15).text(`${stringData[i].pricemeter}`, 410, 603)
+        doc.fontSize(15).text(`${stringData[i].meterTotal}`, 510, 603)
+        doc.fontSize(15).text(`${stringData[i].water.beforusewater}`, 180, 626)
+        doc.fontSize(15).text(`${stringData[i].water.usewater}`, 260, 626)
+        doc.fontSize(15).text(`${stringData[i].water.usewatermonth}`, 320, 626)
+        doc.fontSize(15).text(`${stringData[i].pricewater}`, 410, 626)
+        doc.fontSize(15).text(`${stringData[i].waterTotal}`, 510, 626)
+
+        doc.addPage()
+
 
     })
+    doc.end()
 
+    res.send('done')
 })
 
 
