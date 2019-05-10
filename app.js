@@ -1395,7 +1395,7 @@ app.post('/postPrintpay', (req, res) => {
         doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-        doc.underline(50, 150, 500, 27, { color: "black" })
+        doc.underline(50, 149, 500, 27, { color: "black" })
 
             .moveDown(0.1)
         doc.fontSize(15).text(`              จำนวนเงินที่ต้องจ่าย`)
@@ -1434,7 +1434,7 @@ app.post('/postPrintpay', (req, res) => {
         doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-        doc.underline(50, 520, 500, 27, { color: "black" })
+        doc.underline(50, 515, 500, 27, { color: "black" })
 
             .moveDown(0.25)
         doc.fontSize(15).text(`              จำนวนเงินที่ต้องจ่าย`)
@@ -1457,7 +1457,7 @@ app.post('/postPrintpay', (req, res) => {
             align: 'center',
         })
        
-        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)', 200, 50, {
+        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)', 150, 30, {
             align: 'center',
             fontSize: '30'
         })
