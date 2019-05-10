@@ -1389,10 +1389,6 @@ app.post('/postPrintpay', (req, res) => {
 
         doc
         // .text(`หน้า ${i + 1}`, 100, 80)
-        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)', {
-            align: 'center',
-            fontSize: '30'
-        })
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(0.25)
         doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
@@ -1453,7 +1449,11 @@ app.post('/postPrintpay', (req, res) => {
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
-
+        
+        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)',510,500, {
+            align: 'center',
+            fontSize: '30'
+        })
        
 
         doc.addPage()
