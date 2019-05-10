@@ -1433,11 +1433,11 @@ app.post('/postPrintpay', (req, res) => {
             align: 'center',
             fontSize: '30'
         })
-            .moveDown(0.25)
+            .moveDown(0.1)
         doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
-            .moveDown(0.1)
+            .moveDown(0.05)
         doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
-            .moveDown(0.1)
+            .moveDown(0.05)
         doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
         doc.underline(50, 535, 500, 27, { color: "black" })
 
