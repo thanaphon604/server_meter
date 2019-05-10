@@ -1402,7 +1402,7 @@ app.post('/postPrintpay', (req, res) => {
         doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
         doc.underline(50, 200, 500, 27, { color: "black" })
 
-            .moveDown(0.25)
+            .moveDown(0.1)
         doc.fontSize(15).text(`              จำนวนเงินที่ต้องจ่าย`)
             //doc.fontSize(15).text('sdsd', 280, 200, 50)
             .moveDown(0.1)
