@@ -1389,7 +1389,7 @@ app.post('/postPrintpay', (req, res) => {
 
         doc
         // .text(`หน้า ${i + 1}`, 100, 80)
-            //.text(JSON.stringify(page), 100, 100)
+        //.text(JSON.stringify(page), 100, 100)
         doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
@@ -1410,11 +1410,11 @@ app.post('/postPrintpay', (req, res) => {
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
-        .moveDown(0.1)
+            .moveDown(0.1)
         doc.fontSize(15).text('ลงชื่อ.......................................................ผู้รับเงิน', {
             align: 'center',
         })
-        .moveDown(0.1)
+            .moveDown(0.1)
         doc.fontSize(15).text('(..............................................................)', {
             align: 'center',
         })
@@ -1437,23 +1437,31 @@ app.post('/postPrintpay', (req, res) => {
         doc.underline(50, 535, 500, 27, { color: "black" })
 
             .moveDown(0.25)
-        doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
+        doc.fontSize(15).text(`              จำนวนเงินที่ต้องจ่าย`)
             .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าเช่า                                                                                     ${stringData[i].rent}`)
+        doc.fontSize(15).text(`ค่าเช่า         ${stringData[i].rent}`)
             .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าไฟฟ้า`)
+        doc.fontSize(15).text(`ค่าไฟฟ้า       ${stringData[i].meterTotal}`)
             .moveDown(0.1)
-        doc.fontSize(15).text(`ค่าน้ำ`)
+        doc.fontSize(15).text(`ค่าน้ำ          ${stringData[i].waterTotal}`)
         doc.underline(50, 645, 500, 27, { color: "black" })
             //.text(JSON.stringify(page), 100, 100)
-            .moveDown(1)
+            .moveDown(0.1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
-        
-        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)',510,500, {
+            .moveDown(0.1)
+        doc.fontSize(15).text('ลงชื่อ.......................................................ผู้รับเงิน', {
+            align: 'center',
+        })
+            .moveDown(0.1)
+        doc.fontSize(15).text('(..............................................................)', {
+            align: 'center',
+        })
+       
+        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)', 510, 500, {
             align: 'center',
             fontSize: '30'
         })
-       
+
 
         doc.addPage()
     })
