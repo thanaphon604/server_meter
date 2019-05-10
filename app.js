@@ -1312,43 +1312,6 @@ app.post('/postPrintpay', (req, res) => {
     let rooms = req.body.RoomPrint
     let methodwater = req.body.methodwater
     let dates = req.body.Datameterbuilds
-
-
-    meterbuild.find({
-        buildingnamemeter: buildingName,
-
-    }).then((build) => {
-        if (build.length >= 1) {
-            console.log('ggrecive', build.length)
-            for (let l = 0; l < rooms.length; l++) {
-                for (let m = 0; m < build.length; m++) {
-                    for (let i = 0; i < build[m].floormeter.length; i++) {
-                        for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
-                            if (rooms[l] == build[m].floormeter[i].roommeter[j].dateroommeter) {
-                                build[m].floormeter[i].roommeter[j].meterstatus = 'ไม่มียอดค้างชำระ'
-                                build[m].floormeter[i].roommeter[j].waterstatus = 'ไม่มียอดค้างชำระ'
-                                build[m].floormeter[i].roommeter[j].statusprint = 'เคยพริ้น'
-                                build[m].save().then((suc) => {
-                                    console.log('res contract : ', suc)
-                                    res.send(suc)
-                                }, (e) => {
-                                    consoel.log('error contract :', e)
-                                    res.status(400).send(e)
-                                })
-                            }
-                        }
-                    }
-                }
-            }
-            res.send(build[0])
-        } else if (build.length == 0) {
-            res.status(400).send('sory not found is user')
-        }
-    }, (err) => {
-        res.status(400).send(err)
-    })
-
-
     let roomNumber = []
     rooms.forEach((e, i) => {
         roomNumber.push(e)
@@ -1513,6 +1476,43 @@ app.post('/postPrintpay', (req, res) => {
     doc.end()
 
     res.send('done')
+
+
+    meterbuild.find({
+        buildingnamemeter: buildingName,
+
+    }).then((build) => {
+        if (build.length >= 1) {
+            console.log('ggrecive', build.length)
+            for (let l = 0; l < rooms.length; l++) {
+                for (let m = 0; m < build.length; m++) {
+                    for (let i = 0; i < build[m].floormeter.length; i++) {
+                        for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
+                            if (rooms[l] == build[m].floormeter[i].roommeter[j].dateroommeter) {
+                                build[m].floormeter[i].roommeter[j].meterstatus = 'ไม่มียอดค้างชำระ'
+                                build[m].floormeter[i].roommeter[j].waterstatus = 'ไม่มียอดค้างชำระ'
+                                build[m].floormeter[i].roommeter[j].statusprint = 'เคยพริ้น'
+                                build[m].save().then((suc) => {
+                                    console.log('res contract : ', suc)
+                                    res.send(suc)
+                                }, (e) => {
+                                    consoel.log('error contract :', e)
+                                    res.status(400).send(e)
+                                })
+                            }
+                        }
+                    }
+                }
+            }
+            res.send(build[0])
+        } else if (build.length == 0) {
+            res.status(400).send('sory not found is user')
+        }
+    }, (err) => {
+        res.status(400).send(err)
+    })
+
+
 
 
 })
