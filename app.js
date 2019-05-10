@@ -1274,14 +1274,14 @@ app.post('/postPrint', (req, res) => {
         //     //.text(JSON.stringify(page), 100, 100)
         //     .moveDown(1)
         // doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
-        doc.text('sdsd', 280, 200, 50)
+        
         doc.fontSize(15).text('sdsd1', 180, 275)
         doc.fontSize(15).text('sdsd2', 260, 275)
-        doc.fontSize(15).text('sdsd3', 340, 275)
-        doc.fontSize(15).text('sdsd4', 430, 275)
-        doc.fontSize(15).text('sdsd5', 480, 275)
-        doc.fontSize(15).text('sdsd6', 180, 300)
-        doc.fontSize(15).text('sdsd7', 260, 300)
+        doc.fontSize(15).text('sdsd3', 300, 275)
+        doc.fontSize(15).text('sdsd4', 390, 275)
+        doc.fontSize(15).text('sdsd5', 510, 275)
+        doc.fontSize(15).text('sdsd6', 180, 298)
+        doc.fontSize(15).text('sdsd7', 260, 299)
         doc.addPage()
 
 
