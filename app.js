@@ -1390,7 +1390,6 @@ app.post('/postPrintpay', (req, res) => {
         doc
         // .text(`หน้า ${i + 1}`, 100, 80)
             //.text(JSON.stringify(page), 100, 100)
-            .moveDown(0.25)
         doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
@@ -1416,7 +1415,7 @@ app.post('/postPrintpay', (req, res) => {
             align: 'center',
         })
         .moveDown(0.1)
-        doc.fontSize(15).text('(...........................................................)', {
+        doc.fontSize(15).text('(..............................................................)', {
             align: 'center',
         })
         doc.underline(0, 350, 620, 45, { color: "black" })
