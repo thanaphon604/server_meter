@@ -1200,16 +1200,16 @@ app.post('/postPrint', (req, res) => {
                         objData.waterTotal = pricewater
                     }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
-                    console.log('stringData is befor: ', stringData)
+                    console.log('###stringData is befor: ', stringData)
                     stringData.push(objData)
-                    console.log('stringData is after: ', stringData)
+                    console.log('###stringData is after: ', stringData)
                 }
-
+                console.log('##stringData after if else: ', stringData)
             }) // end per room
-
+            console.log('####stringData after loop: ', stringData)
         })
     }) // end all date
-    console.log('stringData is : ', stringData)
+    console.log('####stringData is : ', stringData)
 
     //console.log('data is : ', JSON.stringify(req.body))
    
