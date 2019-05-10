@@ -1395,7 +1395,7 @@ app.post('/postPrintpay', (req, res) => {
         doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-        doc.underline(50, 200, 500, 27, { color: "black" })
+        doc.underline(50, 100, 500, 27, { color: "black" })
 
             .moveDown(0.1)
         doc.fontSize(15).text(`              จำนวนเงินที่ต้องจ่าย`)
@@ -1406,7 +1406,7 @@ app.post('/postPrintpay', (req, res) => {
         doc.fontSize(15).text(`ค่าไฟฟ้า       ${stringData[i].meterTotal}`)
             .moveDown(0.1)
         doc.fontSize(15).text(`ค่าน้ำ          ${stringData[i].waterTotal}`)
-        doc.underline(50, 300, 500, 27, { color: "black" })
+        doc.underline(50, 200, 500, 27, { color: "black" })
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
@@ -1415,12 +1415,12 @@ app.post('/postPrintpay', (req, res) => {
             align: 'center',
         })
             .moveDown(0.1)
-        doc.fontSize(15).text('(..............................................................)', {
+        doc.fontSize(15).text('(................................................................)', {
             align: 'center',
         })
-        doc.underline(0, 350, 620, 45, { color: "black" })
-        doc.underline(0, 350, 620, 45, { color: "black" })
-        doc.underline(0, 350, 620, 45, { color: "black" })
+        doc.underline(0, 300, 620, 45, { color: "black" })
+        doc.underline(0, 310, 620, 45, { color: "black" })
+        doc.underline(0, 320, 620, 45, { color: "black" })
             .moveDown(1)
 
         // =============บน
@@ -1434,7 +1434,7 @@ app.post('/postPrintpay', (req, res) => {
         doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
             .moveDown(0.1)
         doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
-        doc.underline(50, 535, 500, 27, { color: "black" })
+        doc.underline(50, 500, 500, 27, { color: "black" })
 
             .moveDown(0.25)
         doc.fontSize(15).text(`              จำนวนเงินที่ต้องจ่าย`)
@@ -1444,7 +1444,7 @@ app.post('/postPrintpay', (req, res) => {
         doc.fontSize(15).text(`ค่าไฟฟ้า       ${stringData[i].meterTotal}`)
             .moveDown(0.1)
         doc.fontSize(15).text(`ค่าน้ำ          ${stringData[i].waterTotal}`)
-        doc.underline(50, 645, 500, 27, { color: "black" })
+        doc.underline(50, 600, 500, 27, { color: "black" })
             //.text(JSON.stringify(page), 100, 100)
             .moveDown(0.1)
         doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
@@ -1453,11 +1453,11 @@ app.post('/postPrintpay', (req, res) => {
             align: 'center',
         })
             .moveDown(0.1)
-        doc.fontSize(15).text('(..............................................................)', {
+        doc.fontSize(15).text('(................................................................)', {
             align: 'center',
         })
        
-        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)', 510, 500, {
+        doc.fontSize(28).text('ใบเสร็จรับเงิน (Receipt)', 250, 250, {
             align: 'center',
             fontSize: '30'
         })
