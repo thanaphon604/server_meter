@@ -1194,6 +1194,7 @@ app.post('/postPrint', (req, res) => {
                         objData.waterTotal = pricewater
                     }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
+                    console.log('stringData is befor: ', stringData)
                     stringData.push(objData)
                 }
 
