@@ -1196,9 +1196,9 @@ app.post('/postPrint', (req, res) => {
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
 
                 }
-                stringData.push(objData)
-            }) // end per room
 
+            }) // end per room
+            stringData.push(objData)
         })
     }) // end all date
     console.log('stringData is : ', stringData)
