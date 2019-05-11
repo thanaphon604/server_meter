@@ -1173,6 +1173,9 @@ app.post('/postPrint', (req, res) => {
             roommeter.forEach((r, i) => {
                 console.log('curroom is : ', r.dateroommeter)
                 if (roomNumber.indexOf(r.dateroommeter) !== -1) { // ห้องที่ checked
+                console.log('check========',i)
+                console.log('check========',roomNumber)
+
                     let {
                         roomNumbermeter,
                         beforusemeter,
