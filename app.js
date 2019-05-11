@@ -1139,6 +1139,7 @@ app.post('/postPrint', (req, res) => {
     let rooms = req.body.RoomPrint
 
     let roomNumber = []
+    let data = []
     rooms.forEach((e, i) => {
         roomNumber.push(e)
         // roomNumber.push(e.split(',')[1])
@@ -1186,31 +1187,32 @@ app.post('/postPrint', (req, res) => {
                         usewatermonth,
                         rentroommeter,
                     } = r
-                    objData.roomNumber = roomNumbermeter
-                    objData.rent = rentroommeter,
-                        objData.meter = {
+                    data[i].objData.roomNumber = roomNumbermeter
+                    data[i].objData.rent = rentroommeter,
+                    data[i].objData.meter = {
                             beforusemeter, usemeter, usemetermonth
                         }
-                    objData.water = {
+                        data[i].objData.water = {
                         beforusewater, usewater, usewatermonth
                     }
-                    objData.pricemeter = pricemeter
-                    objData.pricewater = pricewater
-                    objData.meterTotal = usemeter * pricemeter
+                    data[i].objData.pricemeter = pricemeter
+                    data[i].objData.pricewater = pricewater
+                    data[i].objData.meterTotal = usemeter * pricemeter
                     if (methodwater === 'rentunit') {
-                        objData.waterTotal = usewater * pricewater
+                        data[i].objData.waterTotal = usewater * pricewater
                     } else {
-                        objData.waterTotal = pricewater
+                        data[i].objData.waterTotal = pricewater
                     }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
                     console.log('###stringData is befor: ', stringData)
-                    stringData.push(objData)
-                    console.log('###stringData is after: ', stringData)
+                    console.log('###stringData is data ========: ',data[i])
+                   // stringData.push(objData)
+                    //console.log('###stringData is after: ', stringData)
                 }
 
-                console.log('##stringData after if else after push: ', stringData)
+                console.log('##stringData after if else after push: ', data)
             }) // end per room
-            console.log('####stringData after loop: ', stringData)
+            console.log('####stringData after loop: ', data)
         })
     }) // end all date
     console.log('####stringData is : ', stringData)
