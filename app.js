@@ -1210,12 +1210,12 @@ app.post('/postPrint', (req, res) => {
                     //console.log('###stringData is after: ', stringData)
                 }
 
-                console.log('##stringData after if else after push: ', data)
+                //console.log('##stringData after if else after push: ', data)
             }) // end per room
-            console.log('####stringData after loop: ', data)
+           // console.log('####stringData after loop: ', data)
         })
     }) // end all date
-    console.log('####stringData is : ', stringData)
+    //console.log('####stringData is : ', stringData)
 
     //console.log('data is : ', JSON.stringify(req.body))
 
