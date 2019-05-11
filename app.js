@@ -1206,6 +1206,7 @@ app.post('/postPrint', (req, res) => {
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
                     console.log('###stringData is befor: ', stringData)
                     stringData.push(objData)
+                    stringData1.push(objData)
                     console.log('###stringData is after: ', stringData)
                     console.log('###stringData is after1: ', stringData1)
                 }
