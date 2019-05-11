@@ -1139,7 +1139,6 @@ app.post('/postPrint', (req, res) => {
     let rooms = req.body.RoomPrint
 
     let roomNumber = []
-    
     rooms.forEach((e, i) => {
         roomNumber.push(e)
         // roomNumber.push(e.split(',')[1])
@@ -1155,7 +1154,7 @@ app.post('/postPrint', (req, res) => {
 
     let dates = req.body.Datameterbuilds
     let stringData = [] // ข้อมูลทุกห้อง-
-    let stringData1 = []
+    let stringData1 = [] // ข้อมูลทุกห้อง-
     console.log('#######')
     dates.forEach((e, i) => {
         let {
@@ -1208,14 +1207,16 @@ app.post('/postPrint', (req, res) => {
                     console.log('###stringData is befor: ', stringData)
                     stringData.push(objData)
                     console.log('###stringData is after: ', stringData)
+                    console.log('###stringData is after1: ', stringData1)
                 }
-
+                
                 console.log('##stringData after if else after push: ', stringData)
             }) // end per room
             console.log('####stringData after loop: ', stringData)
         })
     }) // end all date
     console.log('####stringData is : ', stringData)
+    console.log('####stringData is111 : ', stringData1)
 
     //console.log('data is : ', JSON.stringify(req.body))
 
@@ -1375,14 +1376,12 @@ app.post('/postPrintpay', (req, res) => {
                     }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
                     stringData.push(objData)
-                    tringData1.push(objData)
                 }
             }) // end per room
 
         })
     }) // end all date
     console.log('stringData is : ', stringData)
-    console.log('stringData is : ', stringData1)
 
     //console.log('data is : ', JSON.stringify(req.body))
     const PDFDocument = require('pdfkit')
