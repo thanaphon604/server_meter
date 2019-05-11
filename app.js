@@ -1154,7 +1154,8 @@ app.post('/postPrint', (req, res) => {
     doc.pipe(fs.createWriteStream('sss.pdf'))
 
     let dates = req.body.Datameterbuilds
-    let stringData = {} // ข้อมูลทุกห้อง-
+    let stringData = [] // ข้อมูลทุกห้อง-
+    let stringData1 = []
     console.log('#######')
     dates.forEach((e, i) => {
         let {
@@ -1374,12 +1375,14 @@ app.post('/postPrintpay', (req, res) => {
                     }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
                     stringData.push(objData)
+                    tringData1.push(objData)
                 }
             }) // end per room
 
         })
     }) // end all date
     console.log('stringData is : ', stringData)
+    console.log('stringData is : ', stringData1)
 
     //console.log('data is : ', JSON.stringify(req.body))
     const PDFDocument = require('pdfkit')
