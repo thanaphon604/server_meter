@@ -1151,7 +1151,7 @@ app.post('/postPrint', (req, res) => {
 
     const doc = new PDFDocument()
     doc.pipe(fs.createWriteStream('sss.pdf'))
-    
+
     let dates = req.body.Datameterbuilds
     let stringData = [] // ข้อมูลทุกห้อง-
     console.log('#######')
@@ -1173,8 +1173,8 @@ app.post('/postPrint', (req, res) => {
             roommeter.forEach((r, i) => {
                 console.log('curroom is : ', r.dateroommeter)
                 if (roomNumber.indexOf(r.dateroommeter) !== -1) { // ห้องที่ checked
-                console.log('check========',i)
-                console.log('check========',roomNumber)
+                    console.log('check========', i)
+                    console.log('check========', roomNumber)
 
                     let {
                         roomNumbermeter,
@@ -1204,9 +1204,10 @@ app.post('/postPrint', (req, res) => {
                     }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
                     console.log('###stringData is befor: ', stringData)
-                    stringData.push(objData)
+
                     console.log('###stringData is after: ', stringData)
                 }
+                stringData.push(objData)
                 console.log('##stringData after if else: ', stringData)
             }) // end per room
             console.log('####stringData after loop: ', stringData)
@@ -1215,7 +1216,7 @@ app.post('/postPrint', (req, res) => {
     console.log('####stringData is : ', stringData)
 
     //console.log('data is : ', JSON.stringify(req.body))
-   
+
 
     stringData.forEach((page, i) => {
         doc.font('fonts/ThaiSansLite.ttf').fontSize(25)
