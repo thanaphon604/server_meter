@@ -1204,10 +1204,10 @@ app.post('/postPrint', (req, res) => {
                     }
                     console.log('room', roomNumbermeter, ' , usemeter :', usemeter)
                     console.log('###stringData is befor: ', stringData)
-
+                    stringData.push(objData)
                     console.log('###stringData is after: ', stringData)
                 }
-                stringData.push(objData)
+
                 console.log('##stringData after if else after push: ', stringData)
             }) // end per room
             console.log('####stringData after loop: ', stringData)
