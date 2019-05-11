@@ -1208,7 +1208,7 @@ app.post('/postPrint', (req, res) => {
                     console.log('###stringData is after: ', stringData)
                 }
                 stringData.push(objData)
-                console.log('##stringData after if else: ', stringData)
+                console.log('##stringData after if else after push: ', stringData)
             }) // end per room
             console.log('####stringData after loop: ', stringData)
         })
