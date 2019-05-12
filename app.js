@@ -1209,7 +1209,7 @@ app.post('/postPrint', (req, res) => {
                     stringData.push(objData)
                     stringData1.push(objData)
                     console.log('###stringData is after: ', stringData)
-                  
+
 
                     doc.font('fonts/ThaiSansLite.ttf').fontSize(25)
 
@@ -1294,7 +1294,7 @@ app.post('/postPrint', (req, res) => {
                     doc.fontSize(15).text(`${stringData[j].water.usewatermonth}`, 320, 626)
                     doc.fontSize(15).text(`${stringData[j].pricewater}`, 410, 626)
                     doc.fontSize(15).text(`${stringData[j].waterTotal}`, 510, 626)
-
+                    j++
                     doc.addPage()
 
                 }
