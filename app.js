@@ -1703,7 +1703,7 @@ app.post('/outroom', (req, res) => {
                     doc.fontSize(15).text(`${objData.water.usewatermonth}`, 320, 626)
                     doc.fontSize(15).text(`${objData.pricewater}`, 410, 626)
                     doc.fontSize(15).text(`${objData.waterTotal}`, 510, 626)
-                    j++
+                   
                     doc.addPage()
 
                 }
