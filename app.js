@@ -2175,7 +2175,7 @@ app.post('/outroom', (req, res) => {
     // })
 })
 app.get('/printout', function (req, res) {
-    var filePath = "/s.pdf";
+    var filePath = "/st.pdf";
 
     fs.readFile(__dirname + filePath, function (err, data) {
         res.contentType("application/pdf");
