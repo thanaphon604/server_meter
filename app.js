@@ -1601,9 +1601,9 @@ app.post('/outroom', (req, res) => {
                     }
                     objData.pricemeter = pricemeter
                     objData.pricewater = pricewater
-                    objData.meterTotal = usemeter * pricemeter
+                    objData.meterTotal = ((nowmeterInput-usemeter) * pricemeter)
                     if (methodwater === 'rentunit') {
-                        objData.waterTotal = usewater * pricewater
+                        objData.waterTotal = ((nowwaterInput-usewater) * pricewater)
                     } else {
                         objData.waterTotal = pricewater
                     }
@@ -1682,25 +1682,25 @@ app.post('/outroom', (req, res) => {
                         .moveDown(1)
                     doc.fontSize(24).text(`รวมทั้งสิ้น  ${objData.rent + objData.meterTotal + objData.waterTotal}   บาท`)
 
-                    doc.fontSize(15).text(`${objData.meter.beforusemeter}`, 180, 275)
-                    doc.fontSize(15).text(`${objData.meter.usemeter}`, 260, 275)
-                    doc.fontSize(15).text(`${objData.meter.usemetermonth}`, 320, 275)
+                    doc.fontSize(15).text(`${objData.meter.usemeter}`, 180, 275)
+                    doc.fontSize(15).text(`${nowmeterInput}`, 260, 275)
+                    doc.fontSize(15).text(`${nowmeterInput-objData.meter.usemeter}`, 320, 275)
                     doc.fontSize(15).text(`${objData.pricemeter}`, 410, 275)
                     doc.fontSize(15).text(`${objData.meterTotal}`, 510, 275)
-                    doc.fontSize(15).text(`${objData.water.beforusewater}`, 180, 298)
-                    doc.fontSize(15).text(`${objData.water.usewater}`, 260, 298)
-                    doc.fontSize(15).text(`${objData.water.usewatermonth}`, 320, 298)
+                    doc.fontSize(15).text(`${objData.water.usewater}`, 180, 298)
+                    doc.fontSize(15).text(`${nowwaterInput}`, 260, 298)
+                    doc.fontSize(15).text(`${nowwaterInput-objData.water.usewater}`, 320, 298)
                     doc.fontSize(15).text(`${objData.pricewater}`, 410, 298)
                     doc.fontSize(15).text(`${objData.waterTotal}`, 510, 298)
                     //===============2  ส่วน บนเเละล่าง
-                    doc.fontSize(15).text(`${objData.meter.beforusemeter}`, 180, 603)
-                    doc.fontSize(15).text(`${objData.meter.usemeter}`, 260, 603)
-                    doc.fontSize(15).text(`${objData.meter.usemetermonth}`, 320, 603)
+                    doc.fontSize(15).text(`${objData.meter.usemeter}`, 180, 603)
+                    doc.fontSize(15).text(`${nowmeterInput}`, 260, 603)
+                    doc.fontSize(15).text(`${nowmeterInput-objData.meter.usemeter}`, 320, 603)
                     doc.fontSize(15).text(`${objData.pricemeter}`, 410, 603)
                     doc.fontSize(15).text(`${objData.meterTotal}`, 510, 603)
-                    doc.fontSize(15).text(`${objData.water.beforusewater}`, 180, 626)
-                    doc.fontSize(15).text(`${objData.water.usewater}`, 260, 626)
-                    doc.fontSize(15).text(`${objData.water.usewatermonth}`, 320, 626)
+                    doc.fontSize(15).text(`${objData.water.usewater}`, 180, 626)
+                    doc.fontSize(15).text(`${nowwaterInput}`, 260, 626)
+                    doc.fontSize(15).text(`${nowwaterInput-objData.water.usewater}`, 320, 626)
                     doc.fontSize(15).text(`${objData.pricewater}`, 410, 626)
                     doc.fontSize(15).text(`${objData.waterTotal}`, 510, 626)
                    
