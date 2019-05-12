@@ -405,6 +405,7 @@
                 renderHTML(ourData);
                 makeClick(ourData);
                 _dataNowmeter = ourData
+                console.log('sss',_dataNowmeter.methodwater)
 
             }
             ourRequest.send();
@@ -1174,7 +1175,9 @@
                                 }
                             } */
                             //  document.getElementById("as").innerHTML = htmlStringmeterprint
-                            var url = "https://electricitymeter.herokuapp.com/outroom";
+                            console.log('sss',_dataNowmeter.methodwater)
+                            console.log('sss',_dataNowmeter)
+                            {{!-- var url = "https://electricitymeter.herokuapp.com/outroom";
                             var xhr = new XMLHttpRequest();
                             xhr.open("POST", url, true);
                             xhr.setRequestHeader("Content-Type", "application/json");
@@ -1195,7 +1198,7 @@
                                 roomNumber: roomNumber, BuildingName: BuildingName, nowmeter: nowmeter, nowwater: nowwater, htmlStringmeterprint: htmlStringmeterprint
                             });
                             xhr.send(data);
-                            return false
+                            return false --}}
 
                             //console.log('ใบเเจ้งหนี้', htmlStringmeterprint)
                         } else {
