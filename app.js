@@ -1211,6 +1211,8 @@ app.post('/postPrint', (req, res) => {
                     console.log('#############################################')
                     console.log(i)
                     console.log(objData)
+                    console.log(objData.rent)
+                    console.log(objData.meter.beforusemeter)
                     console.log('#############################################')
                     stringData.push(objData)
                     stringData1.push(objData)
