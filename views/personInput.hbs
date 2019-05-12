@@ -962,22 +962,10 @@
                     let htmlStringmeterprint = ""
                     var r = confirm("Do you want to move out of the hostel?");
                     if (r == true) {
-                        for (let l = 0; l < _dataNow.length; l++) {
-                            for (let i = 0; i < _dataNow[l].floormeter.length; i++) {
-                                for (let j = 0; j < _dataNow[l].floormeter[i].roommeter.length; j++) {
-                                    if (roomNumber == _dataNow[l].floormeter[i].roommeter[j].roomNumbermeter) {
-                                        if (_dataNowmeter[l].floor[i].room[j].rentroom == "" || _dataNowmeter[l].floor[i].room[j].rentroom == undefined) {
-                                            alert('please input rentroom')
-                                            return false
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        /*  if (countroom == 0) {
+                        if (countroom == 0) {
                             console.log('hh', Datameterbuilds)
                             console.log('hh', roomNumber)
-                            {{!-- if (_dataNowmeter[0] == "rentunit") {
+                            if (_dataNowmeter[0] == "rentunit") {
 
                                 for (let l = 0; l < _dataNow.length; l++) {
                                     for (let i = 0; i < _dataNow[l].floormeter.length; i++) {
@@ -1171,7 +1159,7 @@
                                         }
                                     }
                                 }
-                            } */
+                            }
                             //  document.getElementById("as").innerHTML = htmlStringmeterprint
                             var url = "https://electricitymeter.herokuapp.com/outroom";
                             var xhr = new XMLHttpRequest();
