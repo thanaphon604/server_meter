@@ -1577,7 +1577,7 @@ app.post('/outroom', (req, res) => {
             let { roommeter } = f
             roommeter.forEach((r, i) => {
                 console.log('curroom is : ', r.dateroommeter)
-                if (roomNumberInput.indexOf(r.dateroommeter) !== -1) { // ห้องที่ checked
+                if (roomNumberInput.indexOf(r.roomNumbermeter) !== -1) { // ห้องที่ checked
                     console.log('check========', i)
                     console.log('check========', roomNumberInput)
 
@@ -1717,14 +1717,6 @@ app.post('/outroom', (req, res) => {
     console.log('####stringData is111 : ', stringData1)
 
     //console.log('data is : ', JSON.stringify(req.body))
-
-
-
-
-
-    stringData.forEach((page, i) => {
-
-    })
     doc.end()
 
     res.send('done')
@@ -2175,7 +2167,7 @@ app.post('/outroom', (req, res) => {
     // })
 })
 app.get('/printout', function (req, res) {
-    var filePath = "/st.pdf";
+    var filePath = "/s.pdf";
 
     fs.readFile(__dirname + filePath, function (err, data) {
         res.contentType("application/pdf");
