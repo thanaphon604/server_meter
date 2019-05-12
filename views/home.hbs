@@ -1612,6 +1612,20 @@
 
                         console.log('rommeter', RoomPrint)
                         console.log('rommeterdd', RoomPrint.length)
+                        for (let l = 0; l < Datameterbuilds.length; l++) {
+                            for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
+                                for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
+                                    for (let k = 0; k < RoomPrint.length; k++) {
+                                        if (RoomPrint[k] == Datameterbuilds[l].floormeter[i].roommeter[j].dateroommeter) {
+                                            if (_data.floor[i].room[j].rentroom == undefined || _data.floor[i].room[j].rentroom == "") {
+                                                alert('Please return to fill in the room price.')
+                                                return false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         /*for (let l = 0; l < Datameterbuilds.length; l++) {
                             for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
                                 for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
