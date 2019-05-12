@@ -1208,12 +1208,15 @@ app.post('/postPrint', (req, res) => {
                     console.log('###stringData is befor: ', stringData)
                     console.log('###stringData is befor๒๒๒๒๒๒๒๒๒๒       : ', stringData)
 
-
+                    console.log('#############################################')
+                    console.log(i)
+                    console.log(objData)
+                    console.log('#############################################')
                     stringData.push(objData)
                     stringData1.push(objData)
                     console.log('###stringData is after: ', stringData)
 
-                   
+
                 }
 
                 console.log('##stringData after if else after push: ', stringData)
