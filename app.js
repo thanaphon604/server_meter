@@ -1400,26 +1400,26 @@ app.post('/postPrintpay', (req, res) => {
                     doc
                     // .text(`หน้า ${i + 1}`, 100, 80)
                     //.text(JSON.stringify(page), 100, 100)
-                    doc.fontSize(24).text(`ชื่อหอพัก ${stringData[j].buildingName}`)
+                    doc.fontSize(24).text(`ชื่อหอพัก ${objData.buildingName}`)
                         .moveDown(0.1)
-                    doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[j].roomNumber}`)
+                    doc.fontSize(24).text(`เลขที่ห้องพัก ${objData.roomNumber}`)
                         .moveDown(0.1)
-                    doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[j].datemeter}`)
+                    doc.fontSize(24).text(`ประจำเดือนที่ ${objData.datemeter}`)
                     doc.underline(50, 149, 500, 27, { color: "black" })
 
                         .moveDown(0.1)
                     doc.fontSize(15).text(`              จำนวนเงินที่ต้องจ่าย`)
                         //doc.fontSize(15).text('sdsd', 280, 200, 50)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าเช่า         ${stringData[j].rent}`)
+                    doc.fontSize(15).text(`ค่าเช่า         ${objData.rent}`)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าไฟฟ้า       ${stringData[j].meterTotal}`)
+                    doc.fontSize(15).text(`ค่าไฟฟ้า       ${objData.meterTotal}`)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าน้ำ          ${stringData[j].waterTotal}`)
+                    doc.fontSize(15).text(`ค่าน้ำ          ${objData.waterTotal}`)
                     doc.underline(50, 250, 500, 27, { color: "black" })
                         //.text(JSON.stringify(page), 100, 100)
                         .moveDown(1)
-                    doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[j].rent + stringData[j].meterTotal + stringData[j].waterTotal}   บาท`)
+                    doc.fontSize(24).text(`รวมทั้งสิ้น  ${objData.rent + objData.meterTotal + objData.waterTotal}   บาท`)
                         .moveDown(0.1)
                     doc.fontSize(15).text('ลงชื่อ.......................................................ผู้รับเงิน', {
                         align: 'center',
@@ -1439,25 +1439,25 @@ app.post('/postPrintpay', (req, res) => {
                         fontSize: '30'
                     })
                         .moveDown(0.25)
-                    doc.fontSize(24).text(`ชื่อหอพัก ${stringData[j].buildingName}`)
+                    doc.fontSize(24).text(`ชื่อหอพัก ${objData.buildingName}`)
                         .moveDown(0.1)
-                    doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[j].roomNumber}`)
+                    doc.fontSize(24).text(`เลขที่ห้องพัก ${objData.roomNumber}`)
                         .moveDown(0.1)
-                    doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[j].datemeter}`)
+                    doc.fontSize(24).text(`ประจำเดือนที่ ${objData.datemeter}`)
                     doc.underline(50, 515, 500, 27, { color: "black" })
 
                         .moveDown(0.25)
                     doc.fontSize(15).text(`              จำนวนเงินที่ต้องจ่าย`)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าเช่า         ${stringData[j].rent}`)
+                    doc.fontSize(15).text(`ค่าเช่า         ${objData.rent}`)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าไฟฟ้า       ${stringData[j].meterTotal}`)
+                    doc.fontSize(15).text(`ค่าไฟฟ้า       ${objData.meterTotal}`)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าน้ำ          ${stringData[j].waterTotal}`)
+                    doc.fontSize(15).text(`ค่าน้ำ          ${objData.waterTotal}`)
                     doc.underline(50, 603, 500, 27, { color: "black" })
                         //.text(JSON.stringify(page), 100, 100)
                         .moveDown(0.1)
-                    doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[j].rent + stringData[j].meterTotal + stringData[j].waterTotal}   บาท`)
+                    doc.fontSize(24).text(`รวมทั้งสิ้น  ${objData.rent + objData.meterTotal + objData.waterTotal}   บาท`)
                         .moveDown(0.1)
                     doc.fontSize(15).text('ลงชื่อ.......................................................ผู้รับเงิน', {
                         align: 'center',
@@ -1492,39 +1492,39 @@ app.post('/postPrintpay', (req, res) => {
     res.send('done')
 
 
-    meterbuild.find({
-        buildingnamemeter: buildingName,
+    // meterbuild.find({
+    //     buildingnamemeter: buildingName,
 
-    }).then((build) => {
-        if (build.length >= 1) {
-            console.log('ggrecive', build.length)
-            for (let l = 0; l < rooms.length; l++) {
-                for (let m = 0; m < build.length; m++) {
-                    for (let i = 0; i < build[m].floormeter.length; i++) {
-                        for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
-                            if (rooms[l] == build[m].floormeter[i].roommeter[j].dateroommeter) {
-                                build[m].floormeter[i].roommeter[j].meterstatus = 'ไม่มียอดค้างชำระ'
-                                build[m].floormeter[i].roommeter[j].waterstatus = 'ไม่มียอดค้างชำระ'
-                                build[m].floormeter[i].roommeter[j].statusprint = 'เคยพริ้น'
-                                build[m].save().then((suc) => {
-                                    console.log('res contract : ', suc)
-                                    res.send(suc)
-                                }, (e) => {
-                                    consoel.log('error contract :', e)
-                                    res.status(400).send(e)
-                                })
-                            }
-                        }
-                    }
-                }
-            }
-            res.send(build[0])
-        } else if (build.length == 0) {
-            res.status(400).send('sory not found is user')
-        }
-    }, (err) => {
-        res.status(400).send(err)
-    })
+    // }).then((build) => {
+    //     if (build.length >= 1) {
+    //         console.log('ggrecive', build.length)
+    //         for (let l = 0; l < rooms.length; l++) {
+    //             for (let m = 0; m < build.length; m++) {
+    //                 for (let i = 0; i < build[m].floormeter.length; i++) {
+    //                     for (let j = 0; j < build[m].floormeter[i].roommeter.length; j++) {
+    //                         if (rooms[l] == build[m].floormeter[i].roommeter[j].dateroommeter) {
+    //                             build[m].floormeter[i].roommeter[j].meterstatus = 'ไม่มียอดค้างชำระ'
+    //                             build[m].floormeter[i].roommeter[j].waterstatus = 'ไม่มียอดค้างชำระ'
+    //                             build[m].floormeter[i].roommeter[j].statusprint = 'เคยพริ้น'
+    //                             build[m].save().then((suc) => {
+    //                                 console.log('res contract : ', suc)
+    //                                 res.send(suc)
+    //                             }, (e) => {
+    //                                 consoel.log('error contract :', e)
+    //                                 res.status(400).send(e)
+    //                             })
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         res.send(build[0])
+    //     } else if (build.length == 0) {
+    //         res.status(400).send('sory not found is user')
+    //     }
+    // }, (err) => {
+    //     res.status(400).send(err)
+    // })
 
 })
 //render เเทบใบเสร็จรับเงินหน้าใหม่
