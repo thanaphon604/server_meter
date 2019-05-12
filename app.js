@@ -1326,6 +1326,7 @@ app.post('/postPrintpay', (req, res) => {
     let methodwater = req.body.methodwater
     let dates = req.body.Datameterbuilds
     let roomNumber = []
+    let j = 0
     rooms.forEach((e, i) => {
         roomNumber.push(e)
         // roomNumber.push(e.split(',')[1])
@@ -1391,26 +1392,26 @@ app.post('/postPrintpay', (req, res) => {
                     doc
                     // .text(`หน้า ${i + 1}`, 100, 80)
                     //.text(JSON.stringify(page), 100, 100)
-                    doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
+                    doc.fontSize(24).text(`ชื่อหอพัก ${stringData[j].buildingName}`)
                         .moveDown(0.1)
-                    doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
+                    doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[j].roomNumber}`)
                         .moveDown(0.1)
-                    doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
+                    doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[j].datemeter}`)
                     doc.underline(50, 149, 500, 27, { color: "black" })
 
                         .moveDown(0.1)
                     doc.fontSize(15).text(`              จำนวนเงินที่ต้องจ่าย`)
                         //doc.fontSize(15).text('sdsd', 280, 200, 50)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าเช่า         ${stringData[i].rent}`)
+                    doc.fontSize(15).text(`ค่าเช่า         ${stringData[j].rent}`)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าไฟฟ้า       ${stringData[i].meterTotal}`)
+                    doc.fontSize(15).text(`ค่าไฟฟ้า       ${stringData[j].meterTotal}`)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าน้ำ          ${stringData[i].waterTotal}`)
+                    doc.fontSize(15).text(`ค่าน้ำ          ${stringData[j].waterTotal}`)
                     doc.underline(50, 250, 500, 27, { color: "black" })
                         //.text(JSON.stringify(page), 100, 100)
                         .moveDown(1)
-                    doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
+                    doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[j].rent + stringData[j].meterTotal + stringData[j].waterTotal}   บาท`)
                         .moveDown(0.1)
                     doc.fontSize(15).text('ลงชื่อ.......................................................ผู้รับเงิน', {
                         align: 'center',
@@ -1430,25 +1431,25 @@ app.post('/postPrintpay', (req, res) => {
                         fontSize: '30'
                     })
                         .moveDown(0.25)
-                    doc.fontSize(24).text(`ชื่อหอพัก ${stringData[i].buildingName}`)
+                    doc.fontSize(24).text(`ชื่อหอพัก ${stringData[j].buildingName}`)
                         .moveDown(0.1)
-                    doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[i].roomNumber}`)
+                    doc.fontSize(24).text(`เลขที่ห้องพัก ${stringData[j].roomNumber}`)
                         .moveDown(0.1)
-                    doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[i].datemeter}`)
+                    doc.fontSize(24).text(`ประจำเดือนที่ ${stringData[j].datemeter}`)
                     doc.underline(50, 515, 500, 27, { color: "black" })
 
                         .moveDown(0.25)
                     doc.fontSize(15).text(`              จำนวนเงินที่ต้องจ่าย`)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าเช่า         ${stringData[i].rent}`)
+                    doc.fontSize(15).text(`ค่าเช่า         ${stringData[j].rent}`)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าไฟฟ้า       ${stringData[i].meterTotal}`)
+                    doc.fontSize(15).text(`ค่าไฟฟ้า       ${stringData[j].meterTotal}`)
                         .moveDown(0.1)
-                    doc.fontSize(15).text(`ค่าน้ำ          ${stringData[i].waterTotal}`)
+                    doc.fontSize(15).text(`ค่าน้ำ          ${stringData[j].waterTotal}`)
                     doc.underline(50, 603, 500, 27, { color: "black" })
                         //.text(JSON.stringify(page), 100, 100)
                         .moveDown(0.1)
-                    doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[i].rent + stringData[i].meterTotal + stringData[i].waterTotal}   บาท`)
+                    doc.fontSize(24).text(`รวมทั้งสิ้น  ${stringData[j].rent + stringData[j].meterTotal + stringData[j].waterTotal}   บาท`)
                         .moveDown(0.1)
                     doc.fontSize(15).text('ลงชื่อ.......................................................ผู้รับเงิน', {
                         align: 'center',
@@ -1462,7 +1463,7 @@ app.post('/postPrintpay', (req, res) => {
                         align: 'center',
                         fontSize: '30'
                     })
-
+                    j++
 
                     doc.addPage()
                 }
