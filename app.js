@@ -1552,7 +1552,7 @@ app.post('/outroom', (req, res) => {
   
 
     Building.find({
-        BuildingName: BuildingNameInput,
+        BuildingName: buildingName,
     }).then((build) => {
         if (build.length >= 1) {
             for (let i = 0; i < build[0].floor.length; i++) {
@@ -1563,7 +1563,7 @@ app.post('/outroom', (req, res) => {
                                 console.log('check user.length', build[0].floor[i].room[j].user.length)
                                 console.log('check user.length', k)
                                 let newUserdelete = new Userdelete({
-                                    BuildingNameAllow: BuildingNameInput,
+                                    BuildingNameAllow: buildingName,
                                     roomNumberAllow: roomNumberInput,
                                     personIDAllow: build[0].floor[i].room[j].user[k].personID,
                                     firstNameAllow: build[0].floor[i].room[j].user[k].firstName,
