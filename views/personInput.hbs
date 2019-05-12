@@ -1179,6 +1179,8 @@
                             //  document.getElementById("as").innerHTML = htmlStringmeterprint
                             console.log('sss',_dataNowmeter[0].methodwater)
                             console.log('sss',_dataNowmeter)
+                            var Datameterbuilds
+                            var methodwater
                             {{!-- var url = "https://electricitymeter.herokuapp.com/outroom";
                             var xhr = new XMLHttpRequest();
                             xhr.open("POST", url, true);
@@ -1197,7 +1199,8 @@
                                 }
                             };
                             var data = JSON.stringify({
-                                roomNumber: roomNumber, BuildingName: BuildingName, nowmeter: nowmeter, nowwater: nowwater, htmlStringmeterprint: htmlStringmeterprint
+                                roomNumber: roomNumber, BuildingName: BuildingName, nowmeter: nowmeter, nowwater: nowwater,
+                                Datameterbuilds:_dataNowmeter,methodwater:_dataNowmeter[0].methodwater
                             });
                             xhr.send(data);
                             return false --}}

@@ -1233,7 +1233,7 @@ app.post('/postPrint', (req, res) => {
                         .moveDown(0.1)
                     doc.fontSize(24).text(`ประจำเดือนที่ ${objData.datemeter}`)
                     doc.underline(50, 200, 500, 27, { color: "black" })
-            
+
                         .moveDown(0.25)
                     doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
                         //doc.fontSize(15).text('sdsd', 280, 200, 50)
@@ -1247,12 +1247,12 @@ app.post('/postPrint', (req, res) => {
                         //.text(JSON.stringify(page), 100, 100)
                         .moveDown(1)
                     doc.fontSize(24).text(`รวมทั้งสิ้น  ${objData.rent + objData.meterTotal + objData.waterTotal}   บาท`)
-            
+
                     doc.underline(0, 350, 620, 45, { color: "black" })
                     doc.underline(0, 350, 620, 45, { color: "black" })
                     doc.underline(0, 350, 620, 45, { color: "black" })
                         .moveDown(1)
-            
+
                     // =============บน
                     doc.fontSize(28).text('ใบเเจ้งหนี้(Invoice)', {
                         align: 'center',
@@ -1265,7 +1265,7 @@ app.post('/postPrint', (req, res) => {
                         .moveDown(0.1)
                     doc.fontSize(24).text(`ประจำเดือนที่ ${objData.datemeter}`)
                     doc.underline(50, 535, 500, 27, { color: "black" })
-            
+
                         .moveDown(0.25)
                     doc.fontSize(15).text(`           เลขมิเตอร์ก่อนหน้า เลขมิเตอร์ปัจจุบัน  จำนวนที่ใช้  ราคาต่อหน่วย/บาท  จำนวนเงินที่ต้องจ่าย`)
                         .moveDown(0.1)
@@ -1278,7 +1278,7 @@ app.post('/postPrint', (req, res) => {
                         //.text(JSON.stringify(page), 100, 100)
                         .moveDown(1)
                     doc.fontSize(24).text(`รวมทั้งสิ้น  ${objData.rent + objData.meterTotal + objData.waterTotal}   บาท`)
-            
+
                     doc.fontSize(15).text(`${objData.meter.beforusemeter}`, 180, 275)
                     doc.fontSize(15).text(`${objData.meter.usemeter}`, 260, 275)
                     doc.fontSize(15).text(`${objData.meter.usemetermonth}`, 320, 275)
@@ -1320,7 +1320,7 @@ app.post('/postPrint', (req, res) => {
 
 
     stringData.forEach((page, i) => {
-       
+
     })
     doc.end()
 
@@ -1538,23 +1538,23 @@ app.get('/printt', function (req, res) {
 });
 //ออกจากหอพัก
 app.post('/outroom', (req, res) => {
-
-    let BuildingNameInput = req.body.BuildingName
+    // let BuildingNameInput = req.body.BuildingName
+    let buildingName = req.body.BuildingName
     let roomNumberInput = req.body.roomNumber
     let nowmeterInput = req.body.nowmeter
     let nowwaterInput = req.body.nowwater
-    let dataprint = req.body.htmlStringmeterprint
+  //  let rooms = req.body.RoomPrint
+    let methodwater = req.body.methodwater
+    let dates = req.body.Datameterbuilds
+    
 
-    var pdf = require('html-pdf');
-    var options = { format: 'Letter' };
-    pdf.create('<html lang="en"><head><meta charset="UTF-8"></head><body>' + dataprint + '</body></html>', options).toFile('./files/lastinvoice.pdf', function (err, res) {
-        if (err) return console.log(err);
-    });
+
+  
 
     Building.find({
         BuildingName: BuildingNameInput,
     }).then((build) => {
-        if (build.length == 1) {
+        if (build.length >= 1) {
             for (let i = 0; i < build[0].floor.length; i++) {
                 for (let j = 0; j < build[0].floor[i].room.length; j++) {
                     if (roomNumberInput == build[0].floor[i].room[j].roomNumber) {
@@ -1603,321 +1603,7 @@ app.post('/outroom', (req, res) => {
                                 console.log('check user.length2', k)
                             }
                         }
-                        if (build[0].floor[i].room[j].user.length >= 1) {
-                            for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
-                                console.log('check user.length', build[0].floor[i].room[j].user.length)
-                                console.log('check user.length', k)
-                                let newUserdelete = new Userdelete({
-                                    BuildingNameAllow: BuildingNameInput,
-                                    roomNumberAllow: roomNumberInput,
-                                    personIDAllow: build[0].floor[i].room[j].user[k].personID,
-                                    firstNameAllow: build[0].floor[i].room[j].user[k].firstName,
-                                    lastNameAllow: build[0].floor[i].room[j].user[k].lastName,
-                                    birthdayAllow: build[0].floor[i].room[j].user[k].birthday,
-                                    phoneNumberAllow: build[0].floor[i].room[j].user[k].phoneNumber,
-                                    Li: build[0].floor[i].room[j].user[k].License,
-                                    ad: build[0].floor[i].room[j].user[k].address
-                                })
-                                // console.log(newUserdelete)
 
-                                newUserdelete.save().then((d) => {
-                                    res.send(d)
-                                }, (e) => {
-                                    console.log(e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('personid user ', build[0].floor[i].room[j].user[k].personID)
-                                Userroom.remove({ 'passworduser': build[0].floor[i].room[j].user[k].personID }, (err) => {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                    console.log('remove successfully.');
-                                })
-
-
-                                build[0].floor[i].room[j].user[k] = build[0].floor[i].room[j].user[k + 1]
-                                build[0].floor[i].room[j].user.pop()
-
-                                build[0].save().then((suc) => {
-                                    console.log('res person : ', suc)
-                                    //   res.send(suc)
-                                }, (e) => {
-                                    consoel.log('error person :', e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('check user.length2', k)
-                            }
-                        }
-                        if (build[0].floor[i].room[j].user.length >= 1) {
-                            for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
-                                console.log('check user.length', build[0].floor[i].room[j].user.length)
-                                console.log('check user.length', k)
-                                let newUserdelete = new Userdelete({
-                                    BuildingNameAllow: BuildingNameInput,
-                                    roomNumberAllow: roomNumberInput,
-                                    personIDAllow: build[0].floor[i].room[j].user[k].personID,
-                                    firstNameAllow: build[0].floor[i].room[j].user[k].firstName,
-                                    lastNameAllow: build[0].floor[i].room[j].user[k].lastName,
-                                    birthdayAllow: build[0].floor[i].room[j].user[k].birthday,
-                                    phoneNumberAllow: build[0].floor[i].room[j].user[k].phoneNumber,
-                                    Li: build[0].floor[i].room[j].user[k].License,
-                                    ad: build[0].floor[i].room[j].user[k].address
-                                })
-                                // console.log(newUserdelete)
-
-                                newUserdelete.save().then((d) => {
-                                    res.send(d)
-                                }, (e) => {
-                                    console.log(e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('personid user ', build[0].floor[i].room[j].user[k].personID)
-                                Userroom.remove({ 'passworduser': build[0].floor[i].room[j].user[k].personID }, (err) => {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                    console.log('remove successfully.');
-                                })
-
-
-                                build[0].floor[i].room[j].user[k] = build[0].floor[i].room[j].user[k + 1]
-                                build[0].floor[i].room[j].user.pop()
-
-                                build[0].save().then((suc) => {
-                                    console.log('res person : ', suc)
-                                    //   res.send(suc)
-                                }, (e) => {
-                                    consoel.log('error person :', e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('check user.length2', k)
-                            }
-                        }
-                        if (build[0].floor[i].room[j].user.length >= 1) {
-                            for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
-                                console.log('check user.length', build[0].floor[i].room[j].user.length)
-                                console.log('check user.length', k)
-                                let newUserdelete = new Userdelete({
-                                    BuildingNameAllow: BuildingNameInput,
-                                    roomNumberAllow: roomNumberInput,
-                                    personIDAllow: build[0].floor[i].room[j].user[k].personID,
-                                    firstNameAllow: build[0].floor[i].room[j].user[k].firstName,
-                                    lastNameAllow: build[0].floor[i].room[j].user[k].lastName,
-                                    birthdayAllow: build[0].floor[i].room[j].user[k].birthday,
-                                    phoneNumberAllow: build[0].floor[i].room[j].user[k].phoneNumber,
-                                    Li: build[0].floor[i].room[j].user[k].License,
-                                    ad: build[0].floor[i].room[j].user[k].address
-                                })
-                                // console.log(newUserdelete)
-
-                                newUserdelete.save().then((d) => {
-                                    res.send(d)
-                                }, (e) => {
-                                    console.log(e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('personid user ', build[0].floor[i].room[j].user[k].personID)
-                                Userroom.remove({ 'passworduser': build[0].floor[i].room[j].user[k].personID }, (err) => {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                    console.log('remove successfully.');
-                                })
-
-
-                                build[0].floor[i].room[j].user[k] = build[0].floor[i].room[j].user[k + 1]
-                                build[0].floor[i].room[j].user.pop()
-
-                                build[0].save().then((suc) => {
-                                    console.log('res person : ', suc)
-                                    //   res.send(suc)
-                                }, (e) => {
-                                    consoel.log('error person :', e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('check user.length2', k)
-                            }
-                        }
-                        if (build[0].floor[i].room[j].user.length >= 1) {
-                            for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
-                                console.log('check user.length', build[0].floor[i].room[j].user.length)
-                                console.log('check user.length', k)
-                                let newUserdelete = new Userdelete({
-                                    BuildingNameAllow: BuildingNameInput,
-                                    roomNumberAllow: roomNumberInput,
-                                    personIDAllow: build[0].floor[i].room[j].user[k].personID,
-                                    firstNameAllow: build[0].floor[i].room[j].user[k].firstName,
-                                    lastNameAllow: build[0].floor[i].room[j].user[k].lastName,
-                                    birthdayAllow: build[0].floor[i].room[j].user[k].birthday,
-                                    phoneNumberAllow: build[0].floor[i].room[j].user[k].phoneNumber,
-                                    Li: build[0].floor[i].room[j].user[k].License,
-                                    ad: build[0].floor[i].room[j].user[k].address
-                                })
-                                // console.log(newUserdelete)
-
-                                newUserdelete.save().then((d) => {
-                                    res.send(d)
-                                }, (e) => {
-                                    console.log(e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('personid user ', build[0].floor[i].room[j].user[k].personID)
-                                Userroom.remove({ 'passworduser': build[0].floor[i].room[j].user[k].personID }, (err) => {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                    console.log('remove successfully.');
-                                })
-
-
-                                build[0].floor[i].room[j].user[k] = build[0].floor[i].room[j].user[k + 1]
-                                build[0].floor[i].room[j].user.pop()
-
-                                build[0].save().then((suc) => {
-                                    console.log('res person : ', suc)
-                                    //   res.send(suc)
-                                }, (e) => {
-                                    consoel.log('error person :', e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('check user.length2', k)
-                            }
-                        }
-                        if (build[0].floor[i].room[j].user.length >= 1) {
-                            for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
-                                console.log('check user.length', build[0].floor[i].room[j].user.length)
-                                console.log('check user.length', k)
-                                let newUserdelete = new Userdelete({
-                                    BuildingNameAllow: BuildingNameInput,
-                                    roomNumberAllow: roomNumberInput,
-                                    personIDAllow: build[0].floor[i].room[j].user[k].personID,
-                                    firstNameAllow: build[0].floor[i].room[j].user[k].firstName,
-                                    lastNameAllow: build[0].floor[i].room[j].user[k].lastName,
-                                    birthdayAllow: build[0].floor[i].room[j].user[k].birthday,
-                                    phoneNumberAllow: build[0].floor[i].room[j].user[k].phoneNumber,
-                                    Li: build[0].floor[i].room[j].user[k].License,
-                                    ad: build[0].floor[i].room[j].user[k].address
-                                })
-                                // console.log(newUserdelete)
-
-                                newUserdelete.save().then((d) => {
-                                    res.send(d)
-                                }, (e) => {
-                                    console.log(e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('personid user ', build[0].floor[i].room[j].user[k].personID)
-                                Userroom.remove({ 'passworduser': build[0].floor[i].room[j].user[k].personID }, (err) => {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                    console.log('remove successfully.');
-                                })
-
-
-                                build[0].floor[i].room[j].user[k] = build[0].floor[i].room[j].user[k + 1]
-                                build[0].floor[i].room[j].user.pop()
-
-                                build[0].save().then((suc) => {
-                                    console.log('res person : ', suc)
-                                    //   res.send(suc)
-                                }, (e) => {
-                                    consoel.log('error person :', e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('check user.length2', k)
-                            }
-                        }
-                        if (build[0].floor[i].room[j].user.length >= 1) {
-                            for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
-                                console.log('check user.length', build[0].floor[i].room[j].user.length)
-                                console.log('check user.length', k)
-                                let newUserdelete = new Userdelete({
-                                    BuildingNameAllow: BuildingNameInput,
-                                    roomNumberAllow: roomNumberInput,
-                                    personIDAllow: build[0].floor[i].room[j].user[k].personID,
-                                    firstNameAllow: build[0].floor[i].room[j].user[k].firstName,
-                                    lastNameAllow: build[0].floor[i].room[j].user[k].lastName,
-                                    birthdayAllow: build[0].floor[i].room[j].user[k].birthday,
-                                    phoneNumberAllow: build[0].floor[i].room[j].user[k].phoneNumber,
-                                    Li: build[0].floor[i].room[j].user[k].License,
-                                    ad: build[0].floor[i].room[j].user[k].address
-                                })
-                                // console.log(newUserdelete)
-
-                                newUserdelete.save().then((d) => {
-                                    res.send(d)
-                                }, (e) => {
-                                    console.log(e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('personid user ', build[0].floor[i].room[j].user[k].personID)
-                                Userroom.remove({ 'passworduser': build[0].floor[i].room[j].user[k].personID }, (err) => {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                    console.log('remove successfully.');
-                                })
-
-
-                                build[0].floor[i].room[j].user[k] = build[0].floor[i].room[j].user[k + 1]
-                                build[0].floor[i].room[j].user.pop()
-
-                                build[0].save().then((suc) => {
-                                    console.log('res person : ', suc)
-                                    //   res.send(suc)
-                                }, (e) => {
-                                    consoel.log('error person :', e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('check user.length2', k)
-                            }
-                        }
-                        if (build[0].floor[i].room[j].user.length >= 1) {
-                            for (let k = 0; k < build[0].floor[i].room[j].user.length; k++) {
-                                console.log('check user.length', build[0].floor[i].room[j].user.length)
-                                console.log('check user.length', k)
-                                let newUserdelete = new Userdelete({
-                                    BuildingNameAllow: BuildingNameInput,
-                                    roomNumberAllow: roomNumberInput,
-                                    personIDAllow: build[0].floor[i].room[j].user[k].personID,
-                                    firstNameAllow: build[0].floor[i].room[j].user[k].firstName,
-                                    lastNameAllow: build[0].floor[i].room[j].user[k].lastName,
-                                    birthdayAllow: build[0].floor[i].room[j].user[k].birthday,
-                                    phoneNumberAllow: build[0].floor[i].room[j].user[k].phoneNumber,
-                                    Li: build[0].floor[i].room[j].user[k].License,
-                                    ad: build[0].floor[i].room[j].user[k].address
-                                })
-                                // console.log(newUserdelete)
-
-                                newUserdelete.save().then((d) => {
-                                    res.send(d)
-                                }, (e) => {
-                                    console.log(e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('personid user ', build[0].floor[i].room[j].user[k].personID)
-                                Userroom.remove({ 'passworduser': build[0].floor[i].room[j].user[k].personID }, (err) => {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                    console.log('remove successfully.');
-                                })
-
-
-                                build[0].floor[i].room[j].user[k] = build[0].floor[i].room[j].user[k + 1]
-                                build[0].floor[i].room[j].user.pop()
-
-                                build[0].save().then((suc) => {
-                                    console.log('res person : ', suc)
-                                    //   res.send(suc)
-                                }, (e) => {
-                                    consoel.log('error person :', e)
-                                    //    res.status(400).send(e)
-                                })
-                                console.log('check user.length2', k)
-                            }
-                        }
                         if (build[0].floor[i].room[j].user.length == 0) {
 
                             build[0].floor[i].room[j].contract = ""
