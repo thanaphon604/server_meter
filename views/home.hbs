@@ -1186,7 +1186,7 @@
 
                         for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
 
-                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น"&&parseInt(((_data.floor[i].room[j].contract).split('-')[0])) == parseInt(((Datameterbuilds[l].datemeter).split('-')[0]))) {
                                 while (cou < 1) {
                                     htmlStringmeterbuilds +=
                                         ' <div  class="row justify-content-md-center">'
