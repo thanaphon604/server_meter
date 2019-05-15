@@ -1185,8 +1185,15 @@
                     for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
 
                         for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
+                            let Dateyear = (_data.floor[i].room[j].contract).split('-')[0]
+                            let Datemonth = (_data.floor[i].room[j].contract).split('-')[1]
+                            let datebuild = Dateyear + "-" + Datemonth
+                            var date1 = new Date(datebuild)
+                            console.log('date', date1)
+                            var date2 = new Date((Datameterbuilds[l].datemeter))
+                            console.log('date2', date2)
                             if (_data.methodwater == "rentunit") {
-                                if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
+                                if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น" && date1 <= date2) {
                                     while (cou < 1) {
                                         htmlStringmeterbuilds +=
                                             ' <div  class="row justify-content-md-center">'
