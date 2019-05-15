@@ -1218,6 +1218,8 @@
                                     htmlStringmeterbuilds += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkboxmeter"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
                                     console.log('มิเตอร์ทำงาน1')
                                 }
+                                htmlStringmeterbuilds += '</table></div></div><br>'
+                                cou--
                             } else if (_data.methodwater == "rentmonth") {
                                 if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
                                     while (cou < 1) {
