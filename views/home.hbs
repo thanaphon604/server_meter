@@ -1193,30 +1193,32 @@
                                 console.log('date', date1)
                                 var date2 = new Date((Datameterbuilds[l].datemeter))
                                 console.log('date2', date2)
-                                if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
-                                    while (cou < 1) {
-                                        htmlStringmeterbuilds +=
-                                            ' <div  class="row justify-content-md-center">'
-                                            + ' <div class="divform">'
-                                            + '  <div class="row justify-content-center">'
-                                            + '   <div class="col-2 col-sm-2"><br>'
-                                            + '       <p class="h4">ประจำเดือนที่</p>'
-                                            + '   </div>'
-                                            + '   <div class="col-2 col-sm-2"><br>'
-                                            + '      <p id="Updatefloor">' + (Datameterbuilds[l].datemeter) + '</p>'
-                                            + '   </div>'
-                                            + '  </div>'
-                                            + '   <table class="table table-bordered" >'
-                                            + '  <thead>'
-                                            + '     <tr>'
-                                            + '     <th scope="col" style="background-color: grey ; height: 50px;"><input type="checkbox" value="' + (l + 1) + '" class="select_allmeter ' + (Datameterbuilds[l].datemeter) + '" id="select_allmeter" ></th>'
-                                            + ' <th scope="col" style="background-color: grey">หมายเลขห้อง</th>'
-                                            + '     </tr>'
-                                            + '  </thead>'
-                                        cou++
+                                if (date1 <= date2) {
+                                    if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
+                                        while (cou < 1) {
+                                            htmlStringmeterbuilds +=
+                                                ' <div  class="row justify-content-md-center">'
+                                                + ' <div class="divform">'
+                                                + '  <div class="row justify-content-center">'
+                                                + '   <div class="col-2 col-sm-2"><br>'
+                                                + '       <p class="h4">ประจำเดือนที่</p>'
+                                                + '   </div>'
+                                                + '   <div class="col-2 col-sm-2"><br>'
+                                                + '      <p id="Updatefloor">' + (Datameterbuilds[l].datemeter) + '</p>'
+                                                + '   </div>'
+                                                + '  </div>'
+                                                + '   <table class="table table-bordered" >'
+                                                + '  <thead>'
+                                                + '     <tr>'
+                                                + '     <th scope="col" style="background-color: grey ; height: 50px;"><input type="checkbox" value="' + (l + 1) + '" class="select_allmeter ' + (Datameterbuilds[l].datemeter) + '" id="select_allmeter" ></th>'
+                                                + ' <th scope="col" style="background-color: grey">หมายเลขห้อง</th>'
+                                                + '     </tr>'
+                                                + '  </thead>'
+                                            cou++
+                                        }
+                                        htmlStringmeterbuilds += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkboxmeter"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
+                                        console.log('มิเตอร์ทำงาน1')
                                     }
-                                    htmlStringmeterbuilds += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkboxmeter"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
-                                    console.log('มิเตอร์ทำงาน1')
                                 }
                             } else if (_data.methodwater == "rentmonth") {
                                 if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
