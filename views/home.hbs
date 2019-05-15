@@ -1211,9 +1211,9 @@
                                         + '  </thead>'
                                     cou++
                                 }
-                                htmlStringmeterbuilds += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkboxmeter"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
+                                htmlStringmeterbuilds += '<tbody> <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkboxmeter"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
                                 console.log('มิเตอร์ทำงาน1')
-                            } else if (_data.methodwater == "rentmonth") {
+                            } else if(_data.methodwater == "rentmonth") {
                                 if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น" && parseInt(((_data.floor[i].room[j].contract).split('-')[0])) <= parseInt(((Datameterbuilds[l].datemeter).split('-')[0]))) {
                                     while (cou < 1) {
                                         htmlStringmeterbuilds +=
@@ -1236,7 +1236,7 @@
                                             + '  </thead>'
                                         cou++
                                     }
-                                    htmlStringmeterbuilds += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkboxmeter"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
+                                    htmlStringmeterbuilds += '<tbody> <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkboxmeter"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
 
                                 }
                             }
