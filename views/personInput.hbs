@@ -545,11 +545,11 @@
                 
             }
             function typevalidDate() {
-                var today1 = new Date().toISOString().split('T')[0];
-                var everyday1 = new Date().toISOString()
+                var today2 = new Date().toISOString().split('T')[0];
+                var everyday2 = new Date().toISOString()
                 var nextWeekDate = new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-                document.getElementsByName("address")[0].setAttribute('min', everyday1);
-                document.getElementsByName("address")[0].setAttribute('max', today1)
+                document.getElementsByName("address")[0].setAttribute('min', everyday2);
+                document.getElementsByName("address")[0].setAttribute('max', today2)
             }
             //เช็คข้อความบัตรประชาชนกับเบอร์โทรศัพท์
             function autoTab2(obj, typeCheck) {
