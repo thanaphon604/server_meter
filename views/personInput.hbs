@@ -1241,7 +1241,7 @@
                 for (let i = 0; i < Datameterunit.length; i++) {
                     for (let j = 0; j < Datameterunit[0].floormeter[i].roommeter.length; j++) {
                         if (roomNumber == Datameterunit[0].floormeter[i].roommeter[j].roomNumbermeter) {
-                            if (Datameterunit[0].floormeter[i].roommeter[j].usemeter == 0 || Datameterunit[0].floormeter[i].roommeter[j].usemeter == undefined) {
+                            if (Datameterunit[0].floormeter[i].roommeter[j].usemeter == "" || Datameterunit[0].floormeter[i].roommeter[j].usemeter == undefined) {
                                 document.getElementById("meterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].beforusemeter
                                 document.getElementById("waterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].beforusewater
                                 console.log('ssssgdp', Datameterunit[0].floormeter[i].roommeter[j].beforusemeter)
