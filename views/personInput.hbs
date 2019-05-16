@@ -172,7 +172,8 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">วันเดือนปีเกิด</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" name="birthday" id="birthday" placeholder="วันเดือนปีเกิด">
+                                        <input type="date" class="form-control" name="birthday" id="birthday"
+                                            placeholder="วันเดือนปีเกิด">
                                     </div>
                                 </div>
 
@@ -534,7 +535,7 @@
 
             }
             validDate()
-           
+
             // set date ไม่ให้กรอกวันข้างหน้า
             function validDate() {
                 var today = new Date().toISOString().split('T')[0];
@@ -542,11 +543,11 @@
                 var nextWeekDate = new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
                 document.getElementsByName("contract")[0].setAttribute('min', everyday);
                 document.getElementsByName("contract")[0].setAttribute('max', today)
-                 document.getElementsByName("birthday")[0].setAttribute('min', everyday);
+                document.getElementsByName("birthday")[0].setAttribute('min', everyday);
                 document.getElementsByName("birthday")[0].setAttribute('max', today)
-                
+
             }
-           
+
             //เช็คข้อความบัตรประชาชนกับเบอร์โทรศัพท์
             function autoTab2(obj, typeCheck) {
                 if (typeCheck == 1) {
@@ -1240,9 +1241,16 @@
                 for (let i = 0; i < Datameterunit.length; i++) {
                     for (let j = 0; j < Datameterunit[0].floormeter[i].roommeter.length; j++) {
                         if (roomNumber == Datameterunit[0].floormeter[i].roommeter[j].roomNumbermeter) {
-                            document.getElementById("meterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].usemeter
-                            document.getElementById("waterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].usewater
-                            console.log('ssssgdp', Datameterunit[0].floormeter[i].roommeter[j].beforusemeter)
+                            if (Datameterunit[0].floormeter[i].roommeter[j].usemeter == 0 || Datameterunit[0].floormeter[i].roommeter[j].usemeter == undefined) {
+                                document.getElementById("meterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].beforusemeter
+                                document.getElementById("waterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].beforusewater
+                                console.log('ssssgdp', Datameterunit[0].floormeter[i].roommeter[j].beforusemeter)
+                            } else {
+                                document.getElementById("meterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].usemeter
+                                document.getElementById("waterbefor").innerHTML = Datameterunit[0].floormeter[i].roommeter[j].usewater
+                                console.log('ssssgdp', Datameterunit[0].floormeter[i].roommeter[j].beforusemeter)
+                            }
+
                         }
                     }
                 }
