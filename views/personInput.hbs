@@ -1197,7 +1197,13 @@
                             console.log('ssstester', _dataNowmeter)
                             console.log('ssstesternow', _dataNow)
                             console.log('ssstesterbefor', _databefor)
-                            
+                            var datasend
+                            if (_dataNow != "") {
+                                datasend = _dataNow
+                            } else {
+                                datasend = _databefor
+                            }
+
 
                             var Datameterbuilds
                             var methodwater
@@ -1220,7 +1226,7 @@
                             };
                             var data = JSON.stringify({
                                 roomNumber: roomNumber, BuildingName: BuildingName, nowmeter: nowmeter, nowwater: nowwater,
-                                Datameterbuilds: _dataNow, methodwater: _dataNowmeter[0].methodwater
+                                Datameterbuilds:  datasend, methodwater: _dataNowmeter[0].methodwater
                             });
                             xhr.send(data);
                             return false
