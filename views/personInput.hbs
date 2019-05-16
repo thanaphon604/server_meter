@@ -519,7 +519,7 @@
                     Request.onload = function () {
                         var Datameterbefor = JSON.parse(Request.responseText);
                         console.log('databefor_', Datameterbefor)
-
+                        _databefor = Datameterbefor
                         renderPostUnitMeter(Datameterunit, Datameterbefor)
 
 
@@ -1195,7 +1195,10 @@
                             //  document.getElementById("as").innerHTML = htmlStringmeterprint
                             console.log('ssstestdatamethod', _dataNowmeter[0].methodwater)
                             console.log('ssstester', _dataNowmeter)
-                            console.log('ssstester',_dataNow)
+                            console.log('ssstesternow', _dataNow)
+                            console.log('ssstesterbefor', _databefor)
+                            
+
                             var Datameterbuilds
                             var methodwater
                             var url = "https://electricitymeter.herokuapp.com/outroom";
