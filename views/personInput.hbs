@@ -934,7 +934,7 @@
                             var datecount = Datameterbuilds[l].datemeter
                             var date2 = new Date((datecount))
 
-                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น" && date1 <= date2 &&  _dataNowmeter[0].floor[i].room[j].user.length >=1) {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น" && date1 <= date2 && _dataNowmeter[0].floor[i].room[j].user.length >= 1) {
                                 //console.log('testdata',_dataNowmeter[l].floor[i].room[j].user.length)
                                 countroom = countroom + 1
 
@@ -977,6 +977,18 @@
                     var nowwater = document.getElementById('nowwater').value
                     var rentroom = document.getElementById("showrentroom").value
                     var countprint = 0
+                    var beformeter = document.getElementById('meterbefor').innerHTML
+                    var beforwater = document.getElementById('waterbefor').innerHTML
+                    beformeter = parseInt(beformeter)
+                    beforwater = parseInt(beforwater)
+                    if (nowmeter < beformeter) {
+                        alert('Fail Please input again')
+                        return false
+                    }
+                    if (nowwater < beforwater) {
+                        alert('Fail Please input again')
+                        return false
+                    }
                     console.log('rentroommmm', _dataNow)
                     let htmlStringmeterprint = ""
                     var r = confirm("Do you want to move out of the hostel?");
@@ -998,7 +1010,7 @@
                             }
                             /*
                             if (_dataNowmeter[0] == "rentunit") {
-
+ 
                                 for (let l = 0; l < _dataNow.length; l++) {
                                     for (let i = 0; i < _dataNow[l].floormeter.length; i++) {
                                         for (let j = 0; j < _dataNow[l].floormeter[i].roommeter.length; j++) {
@@ -1009,7 +1021,7 @@
                                                 }
                                                 countprint = countprint + countprint
                                                 for (let a = 0; a < 2; a++) {
-
+ 
                                                     htmlStringmeterprint +=
                                                         ' <div class="container">'
                                                         + '<div class="col-10" >'
@@ -1088,14 +1100,14 @@
                                                     htmlStringmeterprint += ' <hr style="border: 1px solid black;">'
                                                     htmlStringmeterprint += '<br>'
                                                 }
-
+ 
                                             }
-
+ 
                                         }
                                     }
                                 }
                             } else {
-
+ 
                                 for (let l = 0; l < _dataNow.length; l++) {
                                     for (let i = 0; i < _dataNow[l].floormeter.length; i++) {
                                         for (let j = 0; j < _dataNow[l].floormeter[i].roommeter.length; j++) {
@@ -1106,7 +1118,7 @@
                                                 }
                                                 countprint = countprint + countprint
                                                 for (let a = 0; a < 2; a++) {
-
+ 
                                                     htmlStringmeterprint +=
                                                         ' <div class="container">'
                                                         + '<div class="col-10" >'
@@ -1185,9 +1197,9 @@
                                                     htmlStringmeterprint += ' <hr style="border: 1px solid black;">'
                                                     htmlStringmeterprint += '<br>'
                                                 }
-
+ 
                                             }
-
+ 
                                         }
                                     }
                                 }
