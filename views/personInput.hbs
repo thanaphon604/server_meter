@@ -405,8 +405,8 @@
                 renderHTML(ourData);
                 makeClick(ourData);
                 _dataNowmeter = ourData
-                console.log('sss',_dataNowmeter)
-                console.log('sss',ourData)
+                console.log('sss', _dataNowmeter)
+                console.log('sss', ourData)
 
 
             }
@@ -919,9 +919,16 @@
                     for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
 
                         for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
-                            console.log('tester',_dataNowmeter[0].floor[i].room[j].user.length)
-                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น"&&_dataNowmeter[0].floor[i].room[j].user.length >=1 && parseInt(((_dataNowmeter[0].floor[i].room[j].contract).split('-')[0])) <= parseInt(((Datameterbuilds[l].datemeter).split('-')[0])) ) {
-                              //console.log('testdata',_dataNowmeter[l].floor[i].room[j].user.length)
+                            let Dateyear = ( _dataNowmeter[0].floor[i].room[j].contract).split('-')[0]
+                            let Datemonth = ( _dataNowmeter[0].floor[i].room[j].contract).split('-')[1]
+                            let datebuild = Dateyear + "-" + Datemonth
+                            var date1 = new Date(datebuild)
+                            //   console.log('date', date1)
+                            var datecount = Datameterbuilds[l].datemeter
+                            var date2 = new Date((datecount))
+                            console.log('tester', _dataNowmeter[0].floor[i].room[j].user.length)
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น" && date1 <= date2) {
+                                //console.log('testdata',_dataNowmeter[l].floor[i].room[j].user.length)
                                 countroom = countroom + 1
 
                                 htmlStringmeterbuilds +=
@@ -948,7 +955,7 @@
                     for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
 
                         for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
-                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น"&&_dataNowmeter[0].floor[i].room[j].user.length >=1 && parseInt(((_dataNowmeter[0].floor[i].room[j].contract).split('-')[0])) <= parseInt(((Datameterbuilds[l].datemeter).split('-')[0]))) {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น" && _dataNowmeter[0].floor[i].room[j].user.length >= 1 && parseInt(((_dataNowmeter[0].floor[i].room[j].contract).split('-')[0])) <= parseInt(((Datameterbuilds[l].datemeter).split('-')[0]))) {
                             }
                         }
                         htmlStringmeterbuilds += '</table></div></div>'
@@ -1179,11 +1186,11 @@
                                 }
                             } */
                             //  document.getElementById("as").innerHTML = htmlStringmeterprint
-                            console.log('sss',_dataNowmeter[0].methodwater)
-                            console.log('sss',_dataNowmeter)
+                            console.log('sss', _dataNowmeter[0].methodwater)
+                            console.log('sss', _dataNowmeter)
                             var Datameterbuilds
                             var methodwater
-                             var url = "https://electricitymeter.herokuapp.com/outroom";
+                            var url = "https://electricitymeter.herokuapp.com/outroom";
                             var xhr = new XMLHttpRequest();
                             xhr.open("POST", url, true);
                             xhr.setRequestHeader("Content-Type", "application/json");
@@ -1202,10 +1209,10 @@
                             };
                             var data = JSON.stringify({
                                 roomNumber: roomNumber, BuildingName: BuildingName, nowmeter: nowmeter, nowwater: nowwater,
-                                Datameterbuilds:_dataNow,methodwater:_dataNowmeter[0].methodwater
+                                Datameterbuilds: _dataNow, methodwater: _dataNowmeter[0].methodwater
                             });
                             xhr.send(data);
-                            return false 
+                            return false
 
                             //console.log('ใบเเจ้งหนี้', htmlStringmeterprint)
                         } else {
