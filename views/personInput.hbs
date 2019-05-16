@@ -934,7 +934,7 @@
                             var datecount = Datameterbuilds[l].datemeter
                             var date2 = new Date((datecount))
 
-                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น" && date1 <= date2 && _dataNowmeter[0].floor[i].room[j].user.length >=1) {
+                            if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น" && date1 <= date2) {
                                 //console.log('testdata',_dataNowmeter[l].floor[i].room[j].user.length)
                                 countroom = countroom + 1
 
@@ -962,7 +962,6 @@
                     for (let i = 0; i < Datameterbuilds[l].floormeter.length; i++) {
 
                         for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
-                         
                             if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].waterstatus == "ค้างชำระ" && Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter == roomNumber && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น" && _dataNowmeter[0].floor[i].room[j].user.length >= 1 && parseInt(((_dataNowmeter[0].floor[i].room[j].contract).split('-')[0])) <= parseInt(((Datameterbuilds[l].datemeter).split('-')[0]))) {
                             }
                         }
