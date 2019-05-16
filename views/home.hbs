@@ -1213,8 +1213,8 @@
                                             + '     <th scope="col" style="background-color: grey ; height: 50px;"><input type="checkbox" value="' + (l + 1) + '" class="select_allmeter ' + (Datameterbuilds[l].datemeter) + '" id="select_allmeter" ></th>'
                                             + ' <th scope="col" style="background-color: grey">หมายเลขห้อง</th>'
                                             + '     </tr>'
-                                            + '  </thead>'
-                                        cou++
+                                        htmlStringmeterbuilds += '  </thead>'
+                                        cou+1
                                     }
                                     htmlStringmeterbuilds += '<tbody > <tr><th scope="row"><input type="checkbox" name="meterRoom" class="checkboxmeter"value="' + (Datameterbuilds[l].datemeter + "," + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter) + '" /></th><td>' + Datameterbuilds[l].floormeter[i].roommeter[j].roomNumbermeter + '</th></tr></tbody> '
                                     console.log('มิเตอร์ทำงาน1')
