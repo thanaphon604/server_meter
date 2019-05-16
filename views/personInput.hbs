@@ -541,6 +541,8 @@
                 var nextWeekDate = new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
                 document.getElementsByName("contract")[0].setAttribute('min', everyday);
                 document.getElementsByName("contract")[0].setAttribute('max', today)
+                 document.getElementsByName("address")[0].setAttribute('min', everyday);
+                document.getElementsByName("address")[0].setAttribute('max', today)
             }
             //เช็คข้อความบัตรประชาชนกับเบอร์โทรศัพท์
             function autoTab2(obj, typeCheck) {
