@@ -1223,7 +1223,7 @@
                                     console.log('มิเตอร์ทำงาน1')
                                 }
                             } else if (_data.methodwater == "rentmonth") {
-                                if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น") {
+                                if (Datameterbuilds[l].floormeter[i].roommeter[j].meterstatus == "ค้างชำระ" && _data.floor[i].room[j].roomStatus == 'ไม่ว่าง' && Datameterbuilds[l].floormeter[i].roommeter[j].statusprint != "เคยพริ้น" && date1 <= date2) {
                                     while (cou < 1) {
                                         htmlStringmeterbuilds +=
                                             ' <div  class="row justify-content-md-center">'
