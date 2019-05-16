@@ -1187,7 +1187,7 @@
                         for (let j = 0; j < Datameterbuilds[l].floormeter[i].roommeter.length; j++) {
                             let Dateyear = (_data.floor[i].room[j].contract).split('-')[0]
                             let Datemonth = (_data.floor[i].room[j].contract).split('-')[1]
-                            let datebuild = Dateyear + "-" + Datemonth + "-01"
+                            let datebuild = Dateyear + "-" + Datemonth 
                             var date1 = new Date(datebuild)
                             //   console.log('date', date1)
                             var datecount = Datameterbuilds[l].datemeter + "-27"
