@@ -59,6 +59,12 @@ app.post('/createbuilding', (req, res) => {
 
     })
 })
+//logout
+app.post('/Logout', (req, res) => {
+    res.render('Loginadmin.hbs', {
+    
+    })
+})
 
 app.post('/postAdmin', (req, res) => {
     //console.log(JSON.stringify(req.body))
