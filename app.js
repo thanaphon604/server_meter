@@ -65,6 +65,11 @@ app.post('/Logout', (req, res) => {
     
     })
 })
+app.post('/Logoutuser', (req, res) => {
+    res.render('Loginuser.hbs', {
+    
+    })
+})
 
 app.post('/postAdmin', (req, res) => {
     //console.log(JSON.stringify(req.body))
