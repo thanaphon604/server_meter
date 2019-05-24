@@ -431,10 +431,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
               if (Dataanalysis[h].floormeter[i].roommeter[j].roomNumbermeter == _countuser) {
                 htmlstringuse += ''
                   + ' <tr>'
-                  + '    <td scope="row"> ' + Dataanalysis[h].datemeter + '</td>'
-                  + '     <td scope="row"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usemetermonth + '</td>'
-                  + '     <td scope="row"> ' + Dataanalysis[h].pricemeter + '</td>'
-                  + '     <td scope="row"> ' + (Dataanalysis[h].pricemeter * Dataanalysis[h].floormeter[i].roommeter[j].usemetermonth) + '</td>'
+                  + '    <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].datemeter + '</td>'
+                  + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usemetermonth + '</td>'
+                  + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricemeter + '</td>'
+                  + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricemeter * Dataanalysis[h].floormeter[i].roommeter[j].usemetermonth) + '</td>'
                   + '</tr>'
               }
             }
@@ -468,18 +468,18 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 if (_methodwater == 'rentunit') {
                   htmlstringuse += ''
                     + ' <tr>'
-                    + '    <td scope="row"> ' + Dataanalysis[h].datemeter + '</td>'
-                    + '     <td scope="row"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
-                    + '     <td scope="row"> ' + Dataanalysis[h].pricewater + '</td>'
-                    + '     <td scope="row"> ' + (Dataanalysis[h].pricewater * Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth) + '</td>'
+                    + '    <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].datemeter + '</td>'
+                    + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
+                    + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricewater + '</td>'
+                    + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricewater * Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth) + '</td>'
                     + '</tr>'
                 } else  {
                   htmlstringuse += ''
                     + ' <tr>'
-                    + '    <td scope="row"> ' + Dataanalysis[h].datemeter + '</td>'
-                    + '     <td scope="row"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
-                    + '     <td scope="row"> ' + Dataanalysis[h].pricewater + '</td>'
-                    + '     <td scope="row"> ' + (Dataanalysis[h].pricewater ) + '</td>'
+                    + '    <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].datemeter + '</td>'
+                    + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
+                    + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricewater + '</td>'
+                    + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricewater ) + '</td>'
                     + '</tr>'
                 }
               }
