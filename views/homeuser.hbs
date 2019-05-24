@@ -438,7 +438,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 let Datemonth = (_dateAd[0].floor[i].room[j].contract).split('-')[1]
                 let datebuild = Dateyear + "-" + Datemonth
                 var date1 = new Date(datebuild)
-                   console.log('date', date1)
+                console.log('date', date1)
                 var datecount = Dataanalysis[h].datemeter
                 var date2 = new Date((datecount))
                 //=====================
@@ -480,22 +480,35 @@ body {font-family: Arial, Helvetica, sans-serif;}
           for (let i = 0; i < Dataanalysis[h].floormeter.length; i++) {
             for (let j = 0; j < Dataanalysis[h].floormeter[i].roommeter.length; j++) {
               if (Dataanalysis[h].floormeter[i].roommeter[j].roomNumbermeter == _countuser) {
+                //=====================
+                let Dateyear = (_dateAd[0].floor[i].room[j].contract).split('-')[0]
+                let Datemonth = (_dateAd[0].floor[i].room[j].contract).split('-')[1]
+                let datebuild = Dateyear + "-" + Datemonth
+                var date1 = new Date(datebuild)
+                console.log('date', date1)
+                var datecount = Dataanalysis[h].datemeter
+                var date2 = new Date((datecount))
+                //=====================
                 if (_methodwater == 'rentunit') {
-                  htmlstringuse += ''
-                    + ' <tr>'
-                    + '    <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].datemeter + '</td>'
-                    + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
-                    + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricewater + '</td>'
-                    + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricewater * Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth) + '</td>'
-                    + '</tr>'
+                  if (date1 <= date2) {
+                    htmlstringuse += ''
+                      + ' <tr>'
+                      + '    <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].datemeter + '</td>'
+                      + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
+                      + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricewater + '</td>'
+                      + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricewater * Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth) + '</td>'
+                      + '</tr>'
+                  }
                 } else {
-                  htmlstringuse += ''
-                    + ' <tr>'
-                    + '    <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].datemeter + '</td>'
-                    + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
-                    + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricewater + '</td>'
-                    + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricewater) + '</td>'
-                    + '</tr>'
+                  if (date1 <= date2) {
+                    htmlstringuse += ''
+                      + ' <tr>'
+                      + '    <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].datemeter + '</td>'
+                      + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
+                      + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricewater + '</td>'
+                      + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricewater) + '</td>'
+                      + '</tr>'
+                  }
                 }
               }
             }
