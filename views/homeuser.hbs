@@ -168,7 +168,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
     </div>
-    <form class="form-inline my-2 my-lg-0 fixed-right" action="https://electricitymeter.herokuapp.com/Logoutuser" onsubmit="SubMit()" method="POST">
+    <form class="form-inline my-2 my-lg-0 fixed-right" action="https://electricitymeter.herokuapp.com/Logoutuser"
+      onsubmit="SubMit()" method="POST">
       <button style="margin-right:5%;" class="btn btn-outline-success my-2 my-sm-0" value="log out" type="submit">Log
         out</button>
     </form>
@@ -348,6 +349,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
       var data_admin = [];
       console.log('###################')
       console.log(data)
+      _dateAd = data
 
       var ourRequest = new XMLHttpRequest();
       ourRequest.open('GET', 'https://electricitymeter.herokuapp.com/getbuilduser/' + BuildingName)
@@ -412,6 +414,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
       //funtion หน้า 2 การใช้ไฟฟ้าในห้อง
       function renderusemeter(Dataanalysis, phoneNumber) {
+
+
         console.log(_countuser)
         var htmlstringuse = ''
         htmlstringuse += ''
@@ -429,13 +433,24 @@ body {font-family: Arial, Helvetica, sans-serif;}
           for (let i = 0; i < Dataanalysis[h].floormeter.length; i++) {
             for (let j = 0; j < Dataanalysis[h].floormeter[i].roommeter.length; j++) {
               if (Dataanalysis[h].floormeter[i].roommeter[j].roomNumbermeter == _countuser) {
-                htmlstringuse += ''
-                  + ' <tr>'
-                  + '    <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].datemeter + '</td>'
-                  + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usemetermonth + '</td>'
-                  + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricemeter + '</td>'
-                  + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricemeter * Dataanalysis[h].floormeter[i].roommeter[j].usemetermonth) + '</td>'
-                  + '</tr>'
+                //=====================
+                let Dateyear = (_dateAd.floor[i].room[j].contract).split('-')[0]
+                let Datemonth = (_dateAd.floor[i].room[j].contract).split('-')[1]
+                let datebuild = Dateyear + "-" + Datemonth
+                var date1 = new Date(datebuild)
+                //   console.log('date', date1)
+                var datecount = Datameterbuilds[h].datemeter
+                var date2 = new Date((datecount))
+                //=====================
+                if (date1 <= date2) {
+                  htmlstringuse += ''
+                    + ' <tr>'
+                    + '    <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].datemeter + '</td>'
+                    + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usemetermonth + '</td>'
+                    + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricemeter + '</td>'
+                    + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricemeter * Dataanalysis[h].floormeter[i].roommeter[j].usemetermonth) + '</td>'
+                    + '</tr>'
+                }
               }
             }
           }
@@ -447,7 +462,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
       }
       function renderusewater(Dataanalysis, phoneNumber) {
         console.log(_countuser)
-         console.log(_methodwater)
+        console.log(_methodwater)
 
         var htmlstringuse = ''
         htmlstringuse += ''
@@ -473,13 +488,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricewater + '</td>'
                     + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricewater * Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth) + '</td>'
                     + '</tr>'
-                } else  {
+                } else {
                   htmlstringuse += ''
                     + ' <tr>'
                     + '    <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].datemeter + '</td>'
                     + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].floormeter[i].roommeter[j].usewatermonth + '</td>'
                     + '     <td scope="row" style="text-align: right;"> ' + Dataanalysis[h].pricewater + '</td>'
-                    + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricewater ) + '</td>'
+                    + '     <td scope="row" style="text-align: right;"> ' + (Dataanalysis[h].pricewater) + '</td>'
                     + '</tr>'
                 }
               }
