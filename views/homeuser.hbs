@@ -434,8 +434,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
             for (let j = 0; j < Dataanalysis[h].floormeter[i].roommeter.length; j++) {
               if (Dataanalysis[h].floormeter[i].roommeter[j].roomNumbermeter == _countuser) {
                 //=====================
-                let Dateyear = (_dateAd.floor[i].room[j].contract).split('-')[0]
-                let Datemonth = (_dateAd.floor[i].room[j].contract).split('-')[1]
+                let Dateyear = (_dateAd[0].floor[i].room[j].contract).split('-')[0]
+                let Datemonth = (_dateAd[0].floor[i].room[j].contract).split('-')[1]
                 let datebuild = Dateyear + "-" + Datemonth
                 var date1 = new Date(datebuild)
                 //   console.log('date', date1)
