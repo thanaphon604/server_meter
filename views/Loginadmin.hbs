@@ -169,7 +169,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
     </div>
     <form class="form-inline my-2 my-lg-0 fixed-right">
-      
+
     </form>
   </nav>
   <nav>
@@ -282,7 +282,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 <div class="control-group">
                   <label class="control-label" for="phone">Phone number</label>
                   <div class="controls">
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" class="form-control" id="phone" name="phone" placeholder="">
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                      type="number" maxlength="10" class="form-control" id="phone" name="phone" placeholder="">
                   </div>
                 </div>
                 <br>
@@ -324,6 +325,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
     crossorigin="anonymous"></script>
   <script>
     $(document).ready(function () {
+      window.onhashchange = function () {
+        window.location.reload();
+      }
       // เมื่อเกิดเหตุการ submit form
       $('#reg').click(function () {
         // alert('submit   ')

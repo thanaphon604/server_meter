@@ -304,7 +304,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 }
                 divPost.insertAdjacentHTML('beforeend', htmlString);
             });
+            //
 
+            window.onhashchange = function () {
+                window.location.reload();
+            }
             $('#add').click(function () {
                 console.log('######')
                 if (document.getElementById('nameBuilding').value == "") {
@@ -331,8 +335,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 var Unitmeter = document.getElementById("unitmeter").value;
                 var Inputfloor = document.getElementById("inputfloor").value;
                 let floor = []
-                
-               
+
+
 
                 for (let i = 0; i < Inputfloor; i++) {
                     let f = $('#floor' + (i + 1)).val()
@@ -375,9 +379,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
                             payStatus: false,
                             roomNumber,
                             contract: '',
-                            
-                           
-                            
+
+
+
 
                         }
                         roomArrayPerFloor.push(roomData)
@@ -436,18 +440,18 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 var ourData = JSON.parse(ourRequest.responseText);
 
                 console.log('data : ', ourData)
-             //   gethomewater(ourData, BuildingName)
+                //   gethomewater(ourData, BuildingName)
                 return false;
             }
             ourRequest.send();
-          /*     function gethomewater(ourData, BuildingName) {
-                //console.log(ourData[0].methodwater)
-                if (ourData[0].methodwater == 'rentmonth') {
-                    window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
-                } else if (ourData[0].methodwater == 'rentunit') {
-                    window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
-                }
-            } */
+            /*     function gethomewater(ourData, BuildingName) {
+                  //console.log(ourData[0].methodwater)
+                  if (ourData[0].methodwater == 'rentmonth') {
+                      window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
+                  } else if (ourData[0].methodwater == 'rentunit') {
+                      window.location.href = 'https://electricitymeter.herokuapp.com/HOME?BuildingName=' + BuildingName
+                  }
+              } */
 
             /*  var url = "http://localhost:3000/getHome";
               var xhr = new XMLHttpRequest();
