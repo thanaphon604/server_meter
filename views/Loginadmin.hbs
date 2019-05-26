@@ -327,14 +327,15 @@ body {font-family: Arial, Helvetica, sans-serif;}
     
     $(document).ready(function () {
 
-      $(window).on('popstate', function () {
-
-                setTimeout(() => {
-                    console.log('ssssssssss')
-                    $(document.body).html("กรุณา Login")
-                }, 3000)
-            
-            });
+      $(window).bind("beforeunload",function(event){
+        var msg="ยืนยันการปิดหน้านี้?";
+        $(window).bind("unload",function(event){
+            event.stopImmediatePropagation();
+            // แทรก ajax code ลบ session หรืออื่น ๆ
+            alert("Bye Bye");
+        });
+        return msg;
+    });
       
       // เมื่อเกิดเหตุการ submit form
       $('#reg').click(function () {
