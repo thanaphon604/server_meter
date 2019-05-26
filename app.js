@@ -1398,9 +1398,9 @@ app.post('/postPrintpay', (req, res) => {
                     }
                     objData.pricemeter = pricemeter
                     objData.pricewater = pricewater
-                    objData.meterTotal = usemeter * pricemeter
+                    objData.meterTotal = usemetermonth * pricemeter
                     if (methodwater === 'rentunit') {
-                        objData.waterTotal = usewater * pricewater
+                        objData.waterTotal = usewatermonth * pricewater
                     } else {
                         objData.waterTotal = pricewater
                     }
