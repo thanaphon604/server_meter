@@ -324,10 +324,18 @@ body {font-family: Arial, Helvetica, sans-serif;}
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
   <script>
+    
     $(document).ready(function () {
+
       $(window).on('popstate', function () {
-        $(document.body).html("กรุณา Login")
-      });
+
+                setTimeout(() => {
+                    console.log('ssssssssss')
+                    $(document.body).html("กรุณา Login")
+                }, 3000)
+            
+            });
+      
       // เมื่อเกิดเหตุการ submit form
       $('#reg').click(function () {
         // alert('submit   ')
