@@ -244,13 +244,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
         $(document).ready(function () {
 
-            $(window).on('popstate', function () {
-
-                setTimeout(() => {
-                    console.log('ssssssssss')
-                    $(document.body).html("กรุณา Login")
-                }, 3000)
-            
+            $(window).unload(function(){
+               $(document.body).html("<p> PLEASE Login </p>")
             });
 
 
