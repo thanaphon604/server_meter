@@ -240,7 +240,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <script>
 
         function unloadFN() {
-            window.document.body.innerHTML = "<p>PLEASE Login!</p>"
+            cache.delete(request,{options}).then(function(true) {
+            //your cache entry has been deleted
+            });
         }
         
 
