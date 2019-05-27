@@ -386,11 +386,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
         if (document.getElementById('password').value == "" || obj != document.getElementById('password').value  ) {
-          document.getElementById("validationText").style.color = "red";
-          document.getElementById("validationText").innerHTML = 'password ไม่ตรงกัน ';
+          document.getElementById("validationTextpass").style.color = "red";
+          document.getElementById("validationTextpass").innerHTML = 'password ไม่ตรงกัน ';
         } else {
-          document.getElementById("validationText").style.color = "green";
-          document.getElementById("validationText").innerHTML = "password ตรงกัน";
+          document.getElementById("validationTextpass").style.color = "green";
+          document.getElementById("validationTextpass").innerHTML = "password ตรงกัน";
         }
       })
       function postData(newAdmin) {
