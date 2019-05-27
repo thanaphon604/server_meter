@@ -253,7 +253,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     <input type="password" class="form-control" id="password" name="password" placeholder="">
                     <!--   <p class="help-block">Password should be at least 4 characters</p>-->
                   </div>
-                   <div id="validationText"></div>
+                  <div id="validationText"></div>
                 </div>
 
                 <div class="control-group">
@@ -265,7 +265,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     <!--    <p class="help-block">Please confirm password</p>-->
                   </div>
                   <div id="validationTextpass"></div>
-                  
+
                 </div>
 
                 <div class="control-group">
@@ -288,6 +288,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                       type="number" maxlength="10" class="form-control" id="phone" name="phone" placeholder="">
                   </div>
+                  <div id="validationTextphone"></div>
                 </div>
                 <br>
                 <div class="control-group">
@@ -373,7 +374,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
         var obj = document.getElementById('password').value
 
 
-        if (document.getElementById('password').value == "" || obj.length <= 5 ) {
+        if (document.getElementById('password').value == "" || obj.length <= 5) {
           document.getElementById("validationText").style.color = "red";
           document.getElementById("validationText").innerHTML = 'กรุณากรอกอย่างน้อย 6 ตัวอักษร';
         } else {
@@ -381,16 +382,27 @@ body {font-family: Arial, Helvetica, sans-serif;}
           document.getElementById("validationText").innerHTML = "password สามารถใช้งานได้";
         }
       })
-       $('#password_confirm').on('input', function (e) {
+      $('#password_confirm').on('input', function (e) {
         var obj = document.getElementById('password_confirm').value
 
 
-        if (document.getElementById('password').value == "" || obj != document.getElementById('password').value  ) {
+        if (document.getElementById('password').value == "" || obj != document.getElementById('password').value) {
           document.getElementById("validationTextpass").style.color = "red";
           document.getElementById("validationTextpass").innerHTML = 'password ไม่ตรงกัน ';
         } else {
           document.getElementById("validationTextpass").style.color = "green";
           document.getElementById("validationTextpass").innerHTML = "password ตรงกัน";
+        }
+      })
+      $('#phone').on('input', function (e) {
+        var objp = document.getElementById('phoneNumber').value
+        console.log(objp)
+
+        if (document.getElementById('phone').value == "" || objp.length < 9) {
+          document.getElementById("validationTextphone").style.color = "red";
+          document.getElementById("validationTextphone").innerHTML = 'กรุณากรอกข้อมูลเฉพาะตัวเลข ';
+        } else {
+          document.getElementById("validationTextphone").innerHTML = "";
         }
       })
       function postData(newAdmin) {
