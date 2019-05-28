@@ -2405,15 +2405,15 @@
 
                     }
                 } else if (Datameternow != "" && Datameterbefor != "") {
-                    // alert('มีข้อมูลอดีตเเละปัจจุบัน')
-                    // 
+                    // alert('มีข้อมูลอดีตเเละปัจจุบันไฟฟ้า')
+                    
 
                     for (let k = 0; k < Datameternow.length; k++) {
                         console.log(Datameternow[k].datemeter)
                         htmlStringUnitMeter +=
                             '<div class="setmeter">'
                             + '<div id="clear" >'
-                        for (let i = 0; i < Datameterbefor[k].floormeter.length; i++) {
+                        for (let i = 0; i < _data.floor.length; i++) {
 
 
                             htmlStringUnitMeter +=
@@ -2441,7 +2441,7 @@
                                 + '     </tr>'
                                 + '  </thead>'
 
-                            for (let j = 0; j < Datameterbefor[k].floormeter[i].roommeter.length; j++) {
+                            for (let j = 0; j < _data.floor[i].room.length; j++) {
 
                                 htmlStringUnitMeter +=
 
