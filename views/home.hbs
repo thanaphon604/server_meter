@@ -2698,14 +2698,14 @@
                     }
                 } else if (Datameternow != "" && Datameterbefor != "") {
                     // alert('มีข้อมูลอดีตเเละปัจจุบัน')
-                    // 
+                     
 
                     for (let k = 0; k < Datameternow.length; k++) {
                         console.log(Datameternow[k].datemeter)
                         htmlStringwater +=
                             '<div class="setwater">'
                             + '<div id="clear" >'
-                        for (let i = 0; i < _data.floor.length; i++) {
+                        for (let i = 0; i < Datameternow[k].floormeter.length; i++) {
 
 
                             htmlStringwater +=
@@ -2733,7 +2733,7 @@
                                 + '     </tr>'
                                 + '  </thead>'
 
-                            for (let j = 0; j < _data.floor[i].room.length; j++) {
+                            for (let j = 0; j < Datameternow[k].floormeter[i].roommeter.length; j++) {
 
                                 htmlStringwater +=
 
