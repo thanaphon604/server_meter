@@ -139,12 +139,14 @@ app.get('/logoutsession', (req, res) => {
 
 })
 
-app.get('/logout', (req, res) => {
+app.post('/logout', (req, res) => {
     req.session.isLogin = false
     req.session.username = null
     req.session.role = null
+    
+    res.render('Loginadmin.hbs', {
 
-
+    })
 })
 
 app.get('/homebuild', (req, res) => {
