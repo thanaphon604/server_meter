@@ -30,8 +30,15 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+var expressSession = require('express-session'),
+var cookieParser = require('cookie-parser');
 
 app.use(bodyParser.json())
+
+app.use(cookieParser())
+app.use(expressSession({
+    secret: 'pop'
+}))
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
@@ -108,6 +115,8 @@ app.post('/signin', (req, res) => {
     let usernameInput = req.body.username
     let passwordInput = req.body.password
     //find หาusername password สำหรับ 
+    console.log('session : ', req.session.username)
+    console.log('sessions : ', req.session)
     Admin.find({
         username: usernameInput,
         password: passwordInput
@@ -2470,7 +2479,7 @@ app.post('/signinuser', (req, res) => {
     let usernameInput = req.body.usernameuser
     let passwordInput = req.body.passworduser
     let ggwpinput = req.body.ggwp
-    console.log('test', ggwpinput)
+
     //find หาusername password สำหรับ 
     Userroom.find({
         usernameuser: usernameInput,
