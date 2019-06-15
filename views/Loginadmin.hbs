@@ -341,7 +341,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
       xhr.open("POST", url, true);
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
+        if (xhr.status === 200) {
           console.log('res is', xhr.responseText)
           //alert('create user Successful ')
           // window.location.href = 'https://electricitymeter.herokuapp.com/Loginadmin'
@@ -351,7 +351,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
         }
       };
       
-      xhr.send({ username: user, password })
+      xhr.send(JSON.stringify({ username: user, password }))
     }
 
     function unloadFN() {
