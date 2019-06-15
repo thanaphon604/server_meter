@@ -202,12 +202,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
               {{!-- <form action="https://electricitymeter.herokuapp.com/signin" onsubmit="SubMit()" method="POST"> --}}
                 <div class="form-group">
                   <label for="exampleInputEmail1">Username</label>
-                  <input required name="username" type="text" class="form-control" id="exampleInputUsername"
+                  <input required name="username" type="text" class="form-control" id="userLogin"
                     placeholder="Enter Username">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
-                  <input required name="password" type="password" class="form-control" id="exampleInputPassword1"
+                  <input required name="password" type="password" class="form-control" id="passwordLogin"
                     placeholder="Password">
                 </div>
                 <hr>
@@ -332,6 +332,28 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
     function SubMit(){
       console.log('clicked')
+      var xhr = new XMLHttpRequest();
+      let url = 'https://electricitymeter.herokuapp.com/signin'
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+         
+          let user = document.getElementById('userLogin')
+          let password = document.getElementById('passwordLogin')
+
+          console.log("user is : ", user)
+          console.log('password is : ', password)
+          console.log('res is', xhr.responseText)
+          //alert('create user Successful ')
+          // window.location.href = 'https://electricitymeter.herokuapp.com/Loginadmin'
+        } else {
+          console.log('error : ', xhr.responseText)
+          //alert('can not create user! Pls try again.')
+        }
+      };
+      
+      xhr.send(JSON.stringify({ username: user, password }))
     }
 
     function unloadFN() {
