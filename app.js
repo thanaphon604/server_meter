@@ -69,12 +69,12 @@ app.post('/createbuilding', (req, res) => {
 //logout
 app.post('/Logout', (req, res) => {
     res.render('Loginadmin.hbs', {
-    
+
     })
 })
 app.post('/Logoutuser', (req, res) => {
     res.render('Loginuser.hbs', {
-    
+
     })
 })
 
@@ -143,8 +143,14 @@ app.get('/renderhomebuild', (req, res) => {
         res.status(400).send('pls login')
     }
     else {
-        res.render('homebuild.hbs', {
-            
+        Building.find({
+            adminAllow: req.session.username
+        }).then((doc) => {
+           
+            res.render('homebuild.hbs', {
+                username: req.session.username,
+                doc: encodeURI(JSON.stringify(doc))
+            })
         })
     }
 })
@@ -1601,7 +1607,7 @@ app.post('/outroom', (req, res) => {
     let roomNumberInput = req.body.roomNumber
     let nowmeterInput = req.body.nowmeter
     let nowwaterInput = req.body.nowwater
-  //  let rooms = req.body.RoomPrint
+    //  let rooms = req.body.RoomPrint
     let methodwater = req.body.methodwater
     let dates = req.body.Datameterbuilds
     //===================================
@@ -1614,7 +1620,7 @@ app.post('/outroom', (req, res) => {
     const doc = new PDFDocument()
     doc.pipe(fs.createWriteStream('s.pdf'))
 
-    
+
     let stringData = [] // ข้อมูลทุกห้อง-
     let stringData1 = [] // ข้อมูลทุกห้อง-
     console.log('#######')
@@ -1659,9 +1665,9 @@ app.post('/outroom', (req, res) => {
                     }
                     objData.pricemeter = pricemeter
                     objData.pricewater = pricewater
-                    objData.meterTotal = ((nowmeterInput-usemeter) * pricemeter)
+                    objData.meterTotal = ((nowmeterInput - usemeter) * pricemeter)
                     if (methodwater === 'rentunit') {
-                        objData.waterTotal = ((nowwaterInput-usewater) * pricewater)
+                        objData.waterTotal = ((nowwaterInput - usewater) * pricewater)
                     } else {
                         objData.waterTotal = pricewater
                     }
@@ -1742,26 +1748,26 @@ app.post('/outroom', (req, res) => {
 
                     doc.fontSize(15).text(`${objData.meter.usemeter}`, 180, 275)
                     doc.fontSize(15).text(`${nowmeterInput}`, 260, 275)
-                    doc.fontSize(15).text(`${nowmeterInput-objData.meter.usemeter}`, 320, 275)
+                    doc.fontSize(15).text(`${nowmeterInput - objData.meter.usemeter}`, 320, 275)
                     doc.fontSize(15).text(`${objData.pricemeter}`, 410, 275)
                     doc.fontSize(15).text(`${objData.meterTotal}`, 510, 275)
                     doc.fontSize(15).text(`${objData.water.usewater}`, 180, 298)
                     doc.fontSize(15).text(`${nowwaterInput}`, 260, 298)
-                    doc.fontSize(15).text(`${nowwaterInput-objData.water.usewater}`, 320, 298)
+                    doc.fontSize(15).text(`${nowwaterInput - objData.water.usewater}`, 320, 298)
                     doc.fontSize(15).text(`${objData.pricewater}`, 410, 298)
                     doc.fontSize(15).text(`${objData.waterTotal}`, 510, 298)
                     //===============2  ส่วน บนเเละล่าง
                     doc.fontSize(15).text(`${objData.meter.usemeter}`, 180, 603)
                     doc.fontSize(15).text(`${nowmeterInput}`, 260, 603)
-                    doc.fontSize(15).text(`${nowmeterInput-objData.meter.usemeter}`, 320, 603)
+                    doc.fontSize(15).text(`${nowmeterInput - objData.meter.usemeter}`, 320, 603)
                     doc.fontSize(15).text(`${objData.pricemeter}`, 410, 603)
                     doc.fontSize(15).text(`${objData.meterTotal}`, 510, 603)
                     doc.fontSize(15).text(`${objData.water.usewater}`, 180, 626)
                     doc.fontSize(15).text(`${nowwaterInput}`, 260, 626)
-                    doc.fontSize(15).text(`${nowwaterInput-objData.water.usewater}`, 320, 626)
+                    doc.fontSize(15).text(`${nowwaterInput - objData.water.usewater}`, 320, 626)
                     doc.fontSize(15).text(`${objData.pricewater}`, 410, 626)
                     doc.fontSize(15).text(`${objData.waterTotal}`, 510, 626)
-                   
+
                     doc.addPage()
 
                 }
@@ -1780,7 +1786,7 @@ app.post('/outroom', (req, res) => {
     res.send('done')
 
 
-  
+
 
     Building.find({
         BuildingName: buildingName,
