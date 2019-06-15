@@ -111,12 +111,37 @@ app.get('/getmeterbuild', (req, res) => {
     })
 })
 
+// มี 2 role = user, owner
+// หน้าที่เข้าได้ทัrole้งคู่
+// หน้าที่เข้าได้บาง role
+// หน้าที่ไม่มี role ก็เข้าได้
+app.get('/no-role', (req, res) => {
+    res.send('welcome')
+})
+
+app.get('/have-role', (req, res) => {
+    if (req.session.isLogin == false) {
+        res.status(400).send('pls login')
+    }
+    else {
+        res.send('welcome')
+    }
+})
+
+app.get('/admin', (req, res) => {
+
+})
+
+app.get('/logout', (req, res) => {
+    req.session.isLogin = false
+    req.session.username = null
+    req.session.role = null
+})
+
 app.post('/signin', (req, res) => {
     let usernameInput = req.body.username
     let passwordInput = req.body.password
     //find หาusername password สำหรับ 
-    console.log('session : ', req.session.username)
-    console.log('sessions : ', req.session)
     Admin.find({
         username: usernameInput,
         password: passwordInput
@@ -125,7 +150,9 @@ app.post('/signin', (req, res) => {
             Building.find({
                 adminAllow: req.body.username
             }).then((doc) => {
-                req.session.user = usernameInput
+                req.session.isLogin = true
+                req.session.username = usernameInput
+                req.session.role = 'owner' // owner, user
                 res.render('homebuild.hbs', {
                     username: usernameInput,
                     doc: encodeURI(JSON.stringify(doc))
