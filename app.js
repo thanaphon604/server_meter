@@ -36,7 +36,9 @@ var cookieParser = require('cookie-parser');
 app.use(bodyParser.json())
 
 app.use(cookieParser())
-app.use(expressSession())
+app.use(expressSession({
+    secret: 'pop'
+}))
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
@@ -123,6 +125,7 @@ app.post('/signin', (req, res) => {
             Building.find({
                 adminAllow: req.body.username
             }).then((doc) => {
+                req.session.user = usernameInput
                 res.render('homebuild.hbs', {
                     username: usernameInput,
                     doc: encodeURI(JSON.stringify(doc))
