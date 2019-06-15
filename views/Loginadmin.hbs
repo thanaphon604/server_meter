@@ -198,7 +198,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
             --}} -->
 
             <div class="divform">
-              <form action="https://electricitymeter.herokuapp.com/signin" onsubmit="SubMit()" method="POST">
+              <form>
+              {{!-- <form action="https://electricitymeter.herokuapp.com/signin" onsubmit="SubMit()" method="POST"> --}}
                 <div class="form-group">
                   <label for="exampleInputEmail1">Username</label>
                   <input required name="username" type="text" class="form-control" id="exampleInputUsername"
@@ -210,8 +211,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     placeholder="Password">
                 </div>
                 <hr>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <!-- <button type="button" onclick="SubMit()" class="btn btn-primary">Submit</button> -->
+                {{!-- <button type="submit" class="btn btn-primary">Submit</button> --}}
+                <button type="button" onclick="SubMit()" class="btn btn-primary">Submit</button>
               </form>
             </div>
           </div>
@@ -328,6 +329,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
   <script>
+
+    function SubMit(){
+      console.log('clicked')
+    }
 
     function unloadFN() {
 
