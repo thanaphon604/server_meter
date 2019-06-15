@@ -267,8 +267,6 @@ app.post('/Person', (req, res) => {
         res.status(400).send('pls login')
     }
     else {
-        res.send('welcome')
-
         Building.find({
             BuildingName: BuildingNameInput,
         }).then((doc) => {
