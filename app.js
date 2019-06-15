@@ -67,11 +67,11 @@ app.post('/createbuilding', (req, res) => {
     })
 })
 //logout
-app.post('/Logout', (req, res) => {
-    res.render('Loginadmin.hbs', {
+// app.post('/Logout', (req, res) => {
+//     res.render('Loginadmin.hbs', {
 
-    })
-})
+//     })
+// })
 app.post('/Logoutuser', (req, res) => {
     res.render('Loginuser.hbs', {
 
@@ -132,10 +132,20 @@ app.get('/admin', (req, res) => {
 
 })
 
+app.get('/logoutsession', (req, res) => {
+    req.session.isLogin = false
+    req.session.username = null
+    req.session.role = null
+
+})
+
 app.get('/logout', (req, res) => {
     req.session.isLogin = false
     req.session.username = null
     req.session.role = null
+    res.render('Loginadmin.hbs', {
+
+    })
 })
 
 app.get('/homebuild', (req, res) => {
@@ -146,7 +156,7 @@ app.get('/homebuild', (req, res) => {
         Building.find({
             adminAllow: req.session.username
         }).then((doc) => {
-           
+
             res.render('homebuild.hbs', {
                 username: req.session.username,
                 doc: encodeURI(JSON.stringify(doc))
@@ -253,29 +263,40 @@ app.post('/Person', (req, res) => {
     console.log(roomNumberInput)
     console.log('#########')
 
+    if (req.session.isLogin == false) {
+        res.status(400).send('pls login')
+    }
+    else {
+        res.send('welcome')
 
-    Building.find({
-        BuildingName: BuildingNameInput,
-    }).then((doc) => {
-        res.render('personInput.hbs', {
+        Building.find({
             BuildingName: BuildingNameInput,
-            room: roomInput,
-            roomNumber: roomNumberInput,
-            doc: encodeURI(JSON.stringify(doc))
+        }).then((doc) => {
+            res.render('personInput.hbs', {
+                BuildingName: BuildingNameInput,
+                room: roomInput,
+                roomNumber: roomNumberInput,
+                doc: encodeURI(JSON.stringify(doc))
+            })
         })
-    })
+    }
 })
 //run Home.hbs
 app.post('/HOME', (req, res) => {
-    let BuildingNameInput = req.body.BuildingName
-    Building.find({
-        BuildingName: BuildingNameInput,
-    }).then((doc) => {
-        res.render('home.hbs', {
+    if (req.session.isLogin == false) {
+        res.status(400).send('pls login')
+    }
+    else {
+        let BuildingNameInput = req.body.BuildingName
+        Building.find({
             BuildingName: BuildingNameInput,
-            doc: encodeURI(JSON.stringify(doc))
+        }).then((doc) => {
+            res.render('home.hbs', {
+                BuildingName: BuildingNameInput,
+                doc: encodeURI(JSON.stringify(doc))
+            })
         })
-    })
+    }
 })
 app.get('/getwater/:BuildingName', (req, res) => {
     Building.find({
