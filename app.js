@@ -138,7 +138,7 @@ app.get('/logout', (req, res) => {
     req.session.role = null
 })
 
-app.get('/renderhomebuild', (req, res) => {
+app.get('/homebuild', (req, res) => {
     if (req.session.isLogin == false) {
         res.status(400).send('pls login')
     }
