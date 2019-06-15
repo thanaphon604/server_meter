@@ -36,9 +36,7 @@ var cookieParser = require('cookie-parser');
 app.use(bodyParser.json())
 
 app.use(cookieParser())
-app.use(expressSession({
-    secret: 'pop'
-}))
+app.use(expressSession())
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
