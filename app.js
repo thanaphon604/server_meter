@@ -138,6 +138,16 @@ app.get('/logout', (req, res) => {
     req.session.role = null
 })
 
+app.get('/renderhomebuild', (req, res) => {
+    if (req.session.isLogin == false) {
+        res.status(400).send('pls login')
+    }
+    else {
+        res.render('homebuild.hbs', {
+            
+        })
+    }
+})
 app.post('/signin', (req, res) => {
     let usernameInput = req.body.username
     let passwordInput = req.body.password
