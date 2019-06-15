@@ -332,8 +332,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
     function SubMit(){
       console.log('clicked')
-      let user = document.getElementById('userLogin')
-      let password = document.getElementById('passwordLogin')
+      let user = document.getElementById('userLogin').value
+      let password = document.getElementById('passwordLogin').value
       console.log("user is : ", user)
       console.log('password is : ', password)
       var xhr = new XMLHttpRequest();
