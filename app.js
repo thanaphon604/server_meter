@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-var expressSession = require('express-session'),
+var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
 
 app.use(bodyParser.json())
